@@ -15,7 +15,7 @@ public fun tileIdToTile(id: Int): Tile {
     }
 }
 
-abstract class Tile(imageSource: String, id: Int) : ObjectBase(imageSource) {
+data abstract class Tile(imageSource: String, id: Int) : ObjectBase(imageSource) {
 
     val tileId = id
 
