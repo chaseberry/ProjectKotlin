@@ -12,7 +12,7 @@ class Frame : JFrame() {
     public var image: BufferedImage? = null;
 
     {
-        setSize(100, 100)
+        setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
 
     }
