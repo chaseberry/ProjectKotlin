@@ -3,19 +3,22 @@ package ChipsChallenge.UI
 import javax.swing.JFrame
 import java.awt.Graphics
 import java.awt.image.BufferedImage
+import ChipsChallenge.Engine.Engine
 
 /**
  * Created by chase on 2/25/15.
  */
-class Frame : JFrame() {
+class Frame(val engine: Engine) : JFrame() {
 
-    val keyListener = KeyListener();
+    val keyListener = KeyListener(this);
 
     {
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
         addKeyListener(keyListener)
     }
+
+    public var view: Viewport = Viewport(0, 0)
 
     public var image: BufferedImage? = null
         set(newImage) {
@@ -29,7 +32,13 @@ class Frame : JFrame() {
             repaint()
         }
 
-    public var view: Viewport = Viewport(0, 0)
+    public fun keyPressed(keyCode: Int) {
+        engine.keyPressed(keyCode)
+    }
+
+    fun keyReleased(keyCode: Int) {
+        engine.keyReleased(keyCode)
+    }
 
     override fun paint(graphics: Graphics) {
         super.paint(graphics)
@@ -38,5 +47,6 @@ class Frame : JFrame() {
         }
 
     }
+
 
 }
