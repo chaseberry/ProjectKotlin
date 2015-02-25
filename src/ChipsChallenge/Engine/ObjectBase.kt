@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage
  */
 abstract class ObjectBase(imageSource: String) {
 
-    public val image: BufferedImage = loadImage(imageSource, this)
+    public open val image: BufferedImage = loadImage(imageSource, this)
 
     public abstract fun onTick()
 

@@ -1,10 +1,18 @@
 package ChipsChallenge.Map
 
 import ChipsChallenge.Engine.ObjectBase
+import ChipsChallenge.Map.Tiles.Floor
 
 /**
  * Created by chase on 2/25/15.
  */
+
+public fun tileIdToTile(id: Int): Tile {
+    return when (id) {
+        0 -> Floor()
+        else -> Floor()
+    }
+}
 
 abstract class Tile(imageSource: String, id: Int) : ObjectBase(imageSource) {
 
