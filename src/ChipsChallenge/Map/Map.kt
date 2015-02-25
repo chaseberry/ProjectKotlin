@@ -17,12 +17,20 @@ data class Map internal (val map: Array<Array<Tile>>) : ObjectBase("") {
         get() {
             val img = BufferedImage(32 * 9, 32 * 9, BufferedImage.TYPE_INT_ARGB)
             val g = img.getGraphics()
-            //TODO finish
+            for ( x in 0..(map.size() - 1)) {
+                for (y in 0..(map[x].size() - 1)) {
+                    g.drawImage(map[x][y].image, x * 32, y * 32, null)
+                }
+            }
             return img
         }
 
     override fun onTick() {
-
+        for (x in map) {
+            for (tile in x) {
+                tile.onTick()
+            }
+        }
     }
 
 
