@@ -21,6 +21,7 @@ class Engine {
     val frame = Frame()
 
     val map = mapFromIds(Array(4, { x -> Array(4, { y -> if (x == 0 || x == 3 || y == 0 || y == 3) 1 else 0 }) }))
+    //Current test map is just a test
 
     public fun start() {
         frame.setVisible(true)

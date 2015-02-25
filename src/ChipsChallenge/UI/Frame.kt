@@ -9,9 +9,12 @@ import java.awt.image.BufferedImage
  */
 class Frame : JFrame() {
 
+    val keyListener = KeyListener();
+
     {
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+        addKeyListener(keyListener)
     }
 
     public var image: BufferedImage? = null
