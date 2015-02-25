@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage
  */
 
 fun map(x: Int, y: Int, mapIds: Array<Array<Int>>): Map {
-    return Map(Array(x, { Array(y, { tileIdToTile(it) }) }))
+    return Map(Array(x, { x -> Array(y, { y -> tileIdToTile(mapIds[x][y]) }) }))
 }
 
 data class Map internal (val map: Array<Array<Tile>>) : ObjectBase("") {
