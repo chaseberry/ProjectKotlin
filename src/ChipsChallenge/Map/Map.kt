@@ -7,11 +7,11 @@ import java.awt.image.BufferedImage
  * Created by chase on 2/25/15.
  */
 
-fun map(x: Int, y: Int, mapIds: Array<Array<Int>>): Map {
-    return Map(Array(x, { x -> Array(y, { y -> tileIdToTile(mapIds[x][y]) }) }))
+fun mapFromIds(mapIds: Array<Array<Int>>): Map {
+    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }))
 }
 
-data class Map internal (val map: Array<Array<Tile>>) : ObjectBase("") {
+data class Map internal (val map: Array<Array<Tile>>) : ObjectBase(null) {
 
     public override val image: BufferedImage
         get() {
