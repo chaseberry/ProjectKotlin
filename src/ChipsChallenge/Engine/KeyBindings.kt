@@ -6,10 +6,10 @@ package ChipsChallenge.Engine
 
 data class KeyBindings {
 
-    val KEY_CODE_UP = 0
-    val KEY_CODE_DOWN = 1
-    val KEY_CODE_LEFT = 2
-    val KEY_CODE_RIGHT = 3
+    val KEY_CODE_UP = 38
+    val KEY_CODE_DOWN = 40
+    val KEY_CODE_LEFT = 37
+    val KEY_CODE_RIGHT = 39
 
     var up = false
     var down = false

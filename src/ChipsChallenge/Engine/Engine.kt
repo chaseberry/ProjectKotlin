@@ -23,6 +23,8 @@ class Engine {
     val map = mapFromIds(Array(4, { x -> Array(4, { y -> if (x == 0 || x == 3 || y == 0 || y == 3) 1 else 0 }) }))
     //Current test map is just a test
 
+    val keyBindings = KeyBindings()
+
     public fun start() {
         frame.setVisible(true)
         frame.image = map.image
@@ -30,11 +32,11 @@ class Engine {
 
 
     public fun keyPressed(code: Int) {
-
+        keyBindings.keyPressed(code)
     }
 
     public fun keyReleased(code: Int) {
-
+        keyBindings.keyReleased(code)
     }
 
 }

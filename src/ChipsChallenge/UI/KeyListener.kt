@@ -12,7 +12,7 @@ class KeyListener(val frame: Frame) : java.awt.event.KeyListener {
         frame.keyPressed(e.getKeyCode())
     }
 
-    override fun keyReleased(e: KeyEvent?) {
+    override fun keyReleased(e: KeyEvent) {
         frame.keyReleased(e.getKeyCode())
     }
 
