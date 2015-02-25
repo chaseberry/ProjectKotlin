@@ -1,7 +1,7 @@
 package ChipsChallenge.Map
 
 import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Map.Tiles.Floor
+import ChipsChallenge.Map.Tiles.*
 
 /**
  * Created by chase on 2/25/15.
@@ -10,6 +10,7 @@ import ChipsChallenge.Map.Tiles.Floor
 public fun tileIdToTile(id: Int): Tile {
     return when (id) {
         0 -> Floor()
+        1 -> Wall()
         else -> Floor()
     }
 }

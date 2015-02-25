@@ -5,11 +5,7 @@ import ChipsChallenge.Map.Tile
 /**
  * Created by chase on 2/25/15.
  */
-
-class Floor : Tile("Floor.gif", 0) {
-
+class Wall() : Tile("Wall.gif", 1) {
     override fun onTick() {
-
     }
-
 }

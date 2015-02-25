@@ -17,11 +17,7 @@ data class Map internal (val map: Array<Array<Tile>>) : ObjectBase("") {
         get() {
             val img = BufferedImage(32 * 9, 32 * 9, BufferedImage.TYPE_INT_ARGB)
             val g = img.getGraphics()
-            for (x in map) {
-                for (tile in x) {
-
-                }
-            }
+            //TODO finish
             return img
         }
 
