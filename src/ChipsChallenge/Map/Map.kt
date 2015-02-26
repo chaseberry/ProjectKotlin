@@ -2,6 +2,7 @@ package ChipsChallenge.Map
 
 import ChipsChallenge.Engine.ObjectBase
 import java.awt.image.BufferedImage
+import ChipsChallenge.Engine.Engine
 
 /**
  * Created by chase on 2/25/15.
@@ -35,13 +36,14 @@ data class Map internal (val map: Array<Array<Tile>>) : ObjectBase(null) {
             return img
         }
 
-    override fun onTick() {
+    override fun onTick(engine: Engine) {
         for (x in map) {
             for (tile in x) {
-                tile.onTick()
+                tile.onTick(engine)
             }
         }
     }
+
 
 
 }

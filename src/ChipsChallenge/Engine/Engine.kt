@@ -8,6 +8,7 @@ import java.util.Timer
 import ChipsChallenge.Unit.Player
 import kotlin.properties.Delegates
 import java.net.URL
+import java.util.TimerTask
 
 /**
  * Created by chase on 2/25/15.
@@ -46,15 +47,18 @@ class Engine {
 
     val player = Player(7, 7)
 
+    val engine = this
+
     public fun start() {
         frame.setVisible(true)
         frame.image = buildFrameImage()
-        /*gameTimer.scheduleAtFixedRate(object : TimerTask() {
+        gameTimer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                map.onTick()
+                map.onTick(engine)
+                player.onTick(engine)
                 frame.image = map.image
             }
-        }, gameTime, gameTime)*/
+        }, gameTime, gameTime)
     }
 
     fun buildFrameImage(): BufferedImage {

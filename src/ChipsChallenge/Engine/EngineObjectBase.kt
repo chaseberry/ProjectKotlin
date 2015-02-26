@@ -5,6 +5,6 @@ package ChipsChallenge.Engine
  */
 trait EngineObjectBase {
 
-    public fun onTick()
+    public fun onTick(engine: Engine)
 
 }
