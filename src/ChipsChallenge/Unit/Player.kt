@@ -15,11 +15,11 @@ class Player(x: Int, y: Int) : UnitBase(x, y, "chip-south.gif") {
         if (currentMove == 0) {
             when (true) {
                 engine.keyBindings.up -> {
-                    
+                    moveUp(engine)
                     return;
                 }
                 engine.keyBindings.down -> {
-
+                    moveDown(engine)
                     return
                 }
                 engine.keyBindings.left -> {
@@ -31,6 +31,28 @@ class Player(x: Int, y: Int) : UnitBase(x, y, "chip-south.gif") {
                 }
             }
         }
+    }
+
+    fun move() {
+        currentMove = playerMoveSpeed
+    }
+
+    fun moveUp(engine: Engine) {
+        val tile = engine.map.getUp(x, y)
+        if (tile == null ) {
+            return
+        }
+        y -= 1
+        move()
+    }
+
+    fun moveDown(engine: Engine) {
+        val tile = engine.map.getDown(x, y)
+        if (tile == null ) {
+            return
+        }
+        y += 1
+        move()
     }
 
 }
