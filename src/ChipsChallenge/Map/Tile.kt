@@ -1,7 +1,8 @@
 package ChipsChallenge.Map
 
-import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.Map.Tiles.*
+import ChipsChallenge.Engine.loadImage
+import ChipsChallenge.Engine.EngineObjectBase
 
 /**
  * Created by chase on 2/25/15.
@@ -15,9 +16,10 @@ public fun tileIdToTile(id: Int): Tile {
     }
 }
 
-data abstract class Tile(imageSource: String, id: Int) : ObjectBase(imageSource) {
+data abstract class Tile(imageSource: String, id: Int) : EngineObjectBase {
 
     val tileId = id
+    val image = loadImage(imageSource)
 
     override fun equals(other: Any?): Boolean {
         if (other != null && other is Tile) {
