@@ -37,6 +37,7 @@ class Frame(val engine: Engine) : JFrame() {
 
     override fun paint(graphics: Graphics) {
         super.paint(graphics)
+        graphics.clearRect(0, 0, getWidth(), getHeight())
         if (image != null) {
             graphics.drawImage(image, getInsets().left, getInsets().top, null)
         }

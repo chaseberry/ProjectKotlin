@@ -45,7 +45,7 @@ class Engine {
 
     val gameTimer = Timer()
 
-    val player = Player(7, 7)
+    val player = Player(1, 1)
 
     val engine = this
 
@@ -56,7 +56,7 @@ class Engine {
             override fun run() {
                 map.onTick(engine)
                 player.onTick(engine)
-                frame.image = map.image
+                frame.image = buildFrameImage()
             }
         }, gameTime, gameTime)
     }
