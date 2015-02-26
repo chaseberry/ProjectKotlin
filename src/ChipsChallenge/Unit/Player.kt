@@ -2,8 +2,11 @@ package ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.Engine
+import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.Floor
 
 class Player(x: Int, y: Int) : UnitBase(x, y, "chip-south.gif") {
+
 
     val playerMoveSpeed = 5
     var currentMove = 0
@@ -39,7 +42,7 @@ class Player(x: Int, y: Int) : UnitBase(x, y, "chip-south.gif") {
 
     fun moveUp(engine: Engine) {
         val tile = engine.map.getUp(x, y)
-        if (tile == null ) {
+        if (tile == null || !canMoveToTile(tile)) {
             return
         }
         y -= 1
@@ -48,11 +51,15 @@ class Player(x: Int, y: Int) : UnitBase(x, y, "chip-south.gif") {
 
     fun moveDown(engine: Engine) {
         val tile = engine.map.getDown(x, y)
-        if (tile == null ) {
+        if (tile == null || !canMoveToTile(tile)) {
             return
         }
         y += 1
         move()
+    }
+
+    override fun canMoveToTile(tile: Tile): Boolean {
+        return tile == Floor()
     }
 
 }
