@@ -7,6 +7,6 @@ import java.awt.image.BufferedImage
  */
 abstract class ObjectBase(imageSource: String?) : EngineObjectBase {
 
-    public open val image: BufferedImage? = loadImage(imageSource, this)
+    public open val image: BufferedImage? = loadImage(imageSource)
 
 }

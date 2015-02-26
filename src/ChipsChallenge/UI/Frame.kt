@@ -13,6 +13,7 @@ class Frame(val engine: Engine) : JFrame() {
     val keyListener = KeyListener(this);
 
     {
+        pack()
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
         addKeyListener(keyListener)
@@ -22,12 +23,6 @@ class Frame(val engine: Engine) : JFrame() {
 
     public var image: BufferedImage? = null
         set(newImage) {
-            //TODO calc viewX and viewY for max sizes and stuff
-            /*
-            val raster = newImage?.getData(Rectangle(view.x * 32, view.y * 32, 32 * 9, 32 * 9))
-            val colorModel = ColorModel.getRGBdefault()
-            $image = BufferedImage(colorModel, raster?.createCompatibleWritableRaster(), false, null)
-            */
             $image = newImage
             repaint()
         }

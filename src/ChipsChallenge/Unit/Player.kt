@@ -6,7 +6,7 @@ import ChipsChallenge.Engine.UnitBase
  * Created by chase on 2/25/15.
  */
 
-class Player(x: Int, y: Int) : UnitBase(x, y, "") {
+class Player(x: Int, y: Int) : UnitBase(x, y, "chip-south.gif") {
 
     override fun onTick() {
     }

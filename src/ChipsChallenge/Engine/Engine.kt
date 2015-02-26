@@ -5,16 +5,30 @@ import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
 import ChipsChallenge.Map.mapFromIds
 import java.util.Timer
+import ChipsChallenge.Unit.Player
+import kotlin.properties.Delegates
+import java.net.URL
 
 /**
  * Created by chase on 2/25/15.
  */
+val fileUrl: String by Delegates.lazy {
+    var fileName = ""
+    for (filePart in (BaseObject() as java.lang.Object).getClass().getResource("").toString().split("/")) {
+        if (filePart == "ChipsChallenge") {
+            fileName += "$filePart/Images/"
+            break;
+        }
+        fileName += "$filePart/"
+    }
+    fileName
+}
 
-fun loadImage(imageSource: String?, parent: Any): BufferedImage? {
+fun loadImage(imageSource: String?): BufferedImage? {
     if (imageSource == null) {
         return null
     }
-    return ImageIO.read((parent as java.lang.Object).getClass().getResource("../../Images/$imageSource"));
+    return ImageIO.read(URL("$fileUrl$imageSource"));
 }
 
 class Engine {
@@ -23,16 +37,18 @@ class Engine {
 
     val frame = Frame(this)
 
-    val map = mapFromIds(Array(4, { x -> Array(4, { y -> if (x == 0 || x == 3 || y == 0 || y == 3) 1 else 0 }) }))
+    val map = mapFromIds(Array(9, { x -> Array(9, { y -> if (x == 0 || x == 8 || y == 0 || y == 8) 1 else 0 }) }))
     //Current test map is just a test
 
     val keyBindings = KeyBindings()
 
     val gameTimer = Timer()
 
+    val player = Player(0, 0)
+
     public fun start() {
         frame.setVisible(true)
-        frame.image = map.image
+        frame.image = buildFrameImage()
         /*gameTimer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 map.onTick()
@@ -41,6 +57,15 @@ class Engine {
         }, gameTime, gameTime)*/
     }
 
+    fun buildFrameImage(): BufferedImage {
+        val image = BufferedImage(9 * 32, 9 * 32, BufferedImage.TYPE_INT_ARGB)
+        val mapImage = map.image
+        val g = image.getGraphics()
+        val x = if (player.x < 5) 5 else (if (player.x > (map.x - 5)) (map.x - 5) else player.x)
+        val y = if (player.y < 5) 5 else (if (player.y > (map.y - 5)) (map.y - 5) else player.y)
+        g.drawImage(mapImage, (x - 5) * 32, (y - 5) * 32, null)
+        return image
+    }
 
     public fun keyPressed(code: Int) {
         keyBindings.keyPressed(code)

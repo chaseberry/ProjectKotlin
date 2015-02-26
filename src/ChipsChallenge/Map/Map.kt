@@ -13,6 +13,16 @@ fun mapFromIds(mapIds: Array<Array<Int>>): Map {
 
 data class Map internal (val map: Array<Array<Tile>>) : ObjectBase(null) {
 
+    public val x: Int
+        get() {
+            return map.size()
+        }
+
+    public val y: Int
+        get() {
+            return map[0].size()
+        }
+
     public override val image: BufferedImage
         get() {
             val img = BufferedImage(32 * 9, 32 * 9, BufferedImage.TYPE_INT_ARGB)
