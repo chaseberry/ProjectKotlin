@@ -9,6 +9,7 @@ import ChipsChallenge.Unit.Player
 import kotlin.properties.Delegates
 import java.net.URL
 import java.util.TimerTask
+import ChipsChallenge.Map.Point
 
 /**
  * Created by chase on 2/25/15.
@@ -38,14 +39,15 @@ class Engine {
 
     val frame = Frame(this)
 
-    val map = mapFromIds(Array(20, { x -> Array(20, { y -> if (x == 0 || x == 19 || y == 0 || y == 19) 1 else 0 }) }))
+    val map = mapFromIds(Array(20, { x -> Array(20, { y -> if (x == 0 || x == 19 || y == 0 || y == 19) 1 else 0 }) }),
+            Point(1, 1))
     //Current test map is just a test
 
     val keyBindings = KeyBindings()
 
     val gameTimer = Timer()
 
-    val player = Player(1, 1)
+    val player = Player(map.defaultPlayerLocation)
 
     val engine = this
 
@@ -65,11 +67,13 @@ class Engine {
         val image = BufferedImage(9 * 32, 9 * 32, BufferedImage.TYPE_INT_ARGB)
         val mapImage = map.image
         val g = image.getGraphics()
-        val x = if (player.x < 5) 5 else (if (player.x > (map.x - 4)) (map.x - 4) else player.x)
-        val y = if (player.y < 5) 5 else (if (player.y > (map.y - 4)) (map.y - 4) else player.y)
+        val x = if (player.location.x < 5) 5 else (if (player.location.x > (map.x - 4)) (map.x - 4) else player.location.x)
+        val y = if (player.location.y < 5) 5 else (if (player.location.y > (map.y - 4)) (map.y - 4) else player.location.y)
         g.drawImage(mapImage, (-(x - 5) * 32), (-(y - 5) * 32), null)
-        val playerX = if (player.x <= 4 ) player.x else if (player.x in (map.x - 4)..(map.x)) 9 - (map.x - player.x) else 4
-        val playerY = if (player.y <= 4 ) player.y else if (player.y in (map.y - 4)..(map.y)) 9 - (map.y - player.y) else 4
+        val playerX = if (player.location.x <= 4 ) player.location.x else
+            if (player.location.x in (map.x - 4)..(map.x)) 9 - (map.x - player.location.x) else 4
+        val playerY = if (player.location.y <= 4 ) player.location.y else
+            if (player.location.y in (map.y - 4)..(map.y)) 9 - (map.y - player.location.y) else 4
         g.drawImage(player.image, playerX * 32, playerY * 32, null)
         return image
     }

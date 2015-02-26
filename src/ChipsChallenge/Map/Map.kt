@@ -9,16 +9,16 @@ import kotlin.properties.Delegates
  * Created by chase on 2/25/15.
  */
 
-fun mapFromIds(mapIds: Array<Array<Int>>): Map {
-    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }))
+fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point): Map {
+    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart)
 }
 
-data class Map internal (val map: Array<Array<Tile>>) : ObjectBase(null) {
+data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation: Point) : ObjectBase(null) {
 
     public val x: Int by Delegates.lazy {
         map.size()
     }
-    
+
     public val y: Int by Delegates.lazy {
         map[0].size()
     }
@@ -35,32 +35,32 @@ data class Map internal (val map: Array<Array<Tile>>) : ObjectBase(null) {
             return img
         }
 
-    public fun getUp(curX: Int, curY: Int): Tile? {
-        if (curY == 0) {
+    public fun getUp(curLocation: Point): Tile? {
+        if (curLocation.y == 0) {
             return null;
         }
-        return map[curX][curY - 1]
+        return map[curLocation.x][curLocation.y - 1]
     }
 
-    public fun getDown(curX: Int, curY: Int): Tile? {
-        if (curY == (y - 1)) {
+    public fun getDown(curLocation: Point): Tile? {
+        if (curLocation.y == (y - 1)) {
             return null
         }
-        return map[curX][curY + 1]
+        return map[curLocation.x][curLocation.y + 1]
     }
 
-    public fun getLeft(curX: Int, curY: Int): Tile? {
-        if (curX == 0) {
+    public fun getLeft(curLocation: Point): Tile? {
+        if (curLocation.x == 0) {
             return null
         }
-        return map[curX - 1][curY]
+        return map[curLocation.x - 1][curLocation.y]
     }
 
-    public fun getRight(curX: Int, curY: Int): Tile? {
-        if (curX == (x - 1)) {
+    public fun getRight(curLocation: Point): Tile? {
+        if (curLocation.x == (x - 1)) {
             return null
         }
-        return map[curX + 1][curY]
+        return map[curLocation.x + 1][curLocation.y]
     }
 
     override fun onTick(engine: Engine) {

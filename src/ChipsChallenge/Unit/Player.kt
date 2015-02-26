@@ -4,9 +4,9 @@ import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Floor
+import ChipsChallenge.Map.Point
 
-class Player(x: Int, y: Int) : UnitBase(x, y, "chip-south.gif") {
-
+class Player(location: Point) : UnitBase(location, "chip-south.gif") {
 
     val playerMoveSpeed = 5
     var currentMove = 0
@@ -42,38 +42,38 @@ class Player(x: Int, y: Int) : UnitBase(x, y, "chip-south.gif") {
     }
 
     fun moveUp(engine: Engine) {
-        val tile = engine.map.getUp(x, y)
+        val tile = engine.map.getUp(location)
         if (tile == null || !canMoveToTile(tile)) {
             return
         }
-        y -= 1
+        location.y -= 1
         move()
     }
 
     fun moveDown(engine: Engine) {
-        val tile = engine.map.getDown(x, y)
+        val tile = engine.map.getDown(location)
         if (tile == null || !canMoveToTile(tile)) {
             return
         }
-        y += 1
+        location.y += 1
         move()
     }
 
     fun moveLeft(engine: Engine) {
-        val tile = engine.map.getLeft(x, y)
+        val tile = engine.map.getLeft(location)
         if (tile == null || !canMoveToTile(tile)) {
             return
         }
-        x -= 1
+        location.x -= 1
         move()
     }
 
     fun moveRight(engine: Engine) {
-        val tile = engine.map.getRight(x, y)
+        val tile = engine.map.getRight(location)
         if (tile == null || !canMoveToTile(tile)) {
             return
         }
-        x += 1
+        location.x += 1
         move()
     }
 
