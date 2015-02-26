@@ -68,8 +68,8 @@ class Engine {
         val x = if (player.x < 5) 5 else (if (player.x > (map.x - 4)) (map.x - 4) else player.x)
         val y = if (player.y < 5) 5 else (if (player.y > (map.y - 4)) (map.y - 4) else player.y)
         g.drawImage(mapImage, (-(x - 5) * 32), (-(y - 5) * 32), null)
-        val playerX = if (player.x <= 4 || player.x in (map.x - 4)..(map.x)) player.x else 5
-        val playerY = if (player.y <= 4 || player.y in (map.y - 4)..(map.y)) player.y else 5
+        val playerX = if (player.x <= 4 ) player.x else if (player.x in (map.x - 4)..(map.x)) 9 - (map.x - player.x) else 4
+        val playerY = if (player.y <= 4 ) player.y else if (player.y in (map.y - 4)..(map.y)) 9 - (map.y - player.y) else 4
         g.drawImage(player.image, playerX * 32, playerY * 32, null)
         return image
     }
