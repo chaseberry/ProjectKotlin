@@ -39,7 +39,7 @@ class Engine {
 
     val frame = Frame(this)
 
-    val map = mapFromIds(Array(20, { x -> Array(20, { y -> if (x == 0 || x == 19 || y == 0 || y == 19) 1 else 0 }) }),
+    val map = mapFromIds(Array(20, { x -> Array(20, { y -> if (x % 2 == 0 && 0 == y % 2 ) 1 else 0 }) }),
             Point(1, 1))
     //Current test map is just a test
 
@@ -67,9 +67,9 @@ class Engine {
         val image = BufferedImage(9 * 32, 9 * 32, BufferedImage.TYPE_INT_ARGB)
         val mapImage = map.image
         val g = image.getGraphics()
-        val x = if (player.location.x < 5) 5 else (if (player.location.x > (map.x - 4)) (map.x - 4) else player.location.x)
-        val y = if (player.location.y < 5) 5 else (if (player.location.y > (map.y - 4)) (map.y - 4) else player.location.y)
-        g.drawImage(mapImage, (-(x - 5) * 32), (-(y - 5) * 32), null)
+        val x = if (player.location.x <= 4) 4 else (if (player.location.x > (map.x - 5)) (map.x - 5) else player.location.x)
+        val y = if (player.location.y <= 4) 4 else (if (player.location.y > (map.y - 5)) (map.y - 5) else player.location.y)
+        g.drawImage(mapImage, (-(x - 4) * 32), (-(y - 4) * 32), null)
         val playerX = if (player.location.x <= 4 ) player.location.x else
             if (player.location.x in (map.x - 4)..(map.x)) 9 - (map.x - player.location.x) else 4
         val playerY = if (player.location.y <= 4 ) player.location.y else
