@@ -36,6 +36,34 @@ data class Map internal (val map: Array<Array<Tile>>) : ObjectBase(null) {
             return img
         }
 
+    public fun getUp(curX: Int, curY: Int): Tile? {
+        if (curY == 0) {
+            return null;
+        }
+        return map[curX][curY - 1]
+    }
+
+    public fun getDown(curX: Int, curY: Int): Tile? {
+        if (curY == (y - 1)) {
+            return null
+        }
+        return map[curX][curY + 1]
+    }
+
+    public fun getLeft(curX: Int, curY: Int): Tile? {
+        if (curX == 0) {
+            return null
+        }
+        return map[curX - 1][curY]
+    }
+
+    public fun getRight(curX: Int, curY: Int): Tile? {
+        if (curX == (x - 1)) {
+            return null
+        }
+        return map[curX + 1][curY]
+    }
+
     override fun onTick(engine: Engine) {
         for (x in map) {
             for (tile in x) {
@@ -43,7 +71,6 @@ data class Map internal (val map: Array<Array<Tile>>) : ObjectBase(null) {
             }
         }
     }
-
 
 
 }
