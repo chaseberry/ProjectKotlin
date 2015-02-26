@@ -44,7 +44,7 @@ class Engine {
 
     val gameTimer = Timer()
 
-    val player = Player(0, 0)
+    val player = Player(1, 1)
 
     public fun start() {
         frame.setVisible(true)
@@ -64,6 +64,7 @@ class Engine {
         val x = if (player.x < 5) 5 else (if (player.x > (map.x - 5)) (map.x - 5) else player.x)
         val y = if (player.y < 5) 5 else (if (player.y > (map.y - 5)) (map.y - 5) else player.y)
         g.drawImage(mapImage, (x - 5) * 32, (y - 5) * 32, null)
+        g.drawImage(player.image, (player.x * 32), (player.y * 32), null)
         return image
     }
 
