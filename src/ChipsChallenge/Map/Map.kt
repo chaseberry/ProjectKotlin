@@ -26,7 +26,7 @@ data class Map internal (val map: Array<Array<Tile>>) : ObjectBase(null) {
 
     public override val image: BufferedImage
         get() {
-            val img = BufferedImage(32 * 9, 32 * 9, BufferedImage.TYPE_INT_ARGB)
+            val img = BufferedImage(32 * x, 32 * y, BufferedImage.TYPE_INT_ARGB)
             val g = img.getGraphics()
             for ( x in 0..(map.size() - 1)) {
                 for (y in 0..(map[x].size() - 1)) {
