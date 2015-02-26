@@ -3,6 +3,7 @@ package ChipsChallenge.Map
 import ChipsChallenge.Engine.ObjectBase
 import java.awt.image.BufferedImage
 import ChipsChallenge.Engine.Engine
+import kotlin.properties.Delegates
 
 /**
  * Created by chase on 2/25/15.
@@ -14,15 +15,14 @@ fun mapFromIds(mapIds: Array<Array<Int>>): Map {
 
 data class Map internal (val map: Array<Array<Tile>>) : ObjectBase(null) {
 
-    public val x: Int
-        get() {
-            return map.size()
-        }
+    public val x: Int by Delegates.lazy {
+        map.size()
+    }
 
-    public val y: Int
-        get() {
-            return map[0].size()
-        }
+
+    public val y: Int by Delegates.lazy {
+        map[0].size()
+    }
 
     public override val image: BufferedImage
         get() {
