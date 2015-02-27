@@ -2,12 +2,13 @@ package ChipsChallenge.Engine
 
 import java.util.HashMap
 import ChipsChallenge.Map.Point
+import ChipsChallenge.Object.RedLock
 
 /**
  * Created by chase on 2/27/15.
  */
 
-class ObjectManager() {
+class ObjectManager(val engine: Engine) {
 
     val objects = HashMap<Point, ObjectBase>()
 
@@ -24,7 +25,11 @@ class ObjectManager() {
             return true
         }
 
-            
+        when (objects.get(newLocation)) {
+            is RedLock -> {
+
+            }
+        }
 
     }
 

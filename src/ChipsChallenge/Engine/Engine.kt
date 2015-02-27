@@ -54,7 +54,7 @@ class Engine {
 
     val movement = Movement(this)
 
-    val objectManager = ObjectManager()
+    val objectManager = ObjectManager(this)
 
     public fun start() {
         frame.setVisible(true)
