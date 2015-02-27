@@ -49,7 +49,10 @@ class Engine {
 
     val player = Player(map.defaultPlayerLocation)
 
+    //Done so this can be passed around in the onTick method
     val engine = this
+
+    val movement = Movement(this)
 
     public fun start() {
         frame.setVisible(true)

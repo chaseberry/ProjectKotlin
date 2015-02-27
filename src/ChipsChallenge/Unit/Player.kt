@@ -52,42 +52,34 @@ class Player(location: Point) : UnitBase(location) {
 
     fun moveUp(engine: Engine) {
         image = imageSet.get("up")
-        val tile = engine.map.getUp(location)
-        if (tile == null || !canMoveToTile(tile)) {
-            return
+        if (engine.movement.moveUp()) {
+            location.y -= 1
+            move()
         }
-        location.y -= 1
-        move()
     }
 
     fun moveDown(engine: Engine) {
         image = imageSet.get("down")
-        val tile = engine.map.getDown(location)
-        if (tile == null || !canMoveToTile(tile)) {
-            return
+        if (engine.movement.moveDown()) {
+            location.y += 1
+            move()
         }
-        location.y += 1
-        move()
     }
 
     fun moveLeft(engine: Engine) {
         image = imageSet.get("left")
-        val tile = engine.map.getLeft(location)
-        if (tile == null || !canMoveToTile(tile)) {
-            return
+        if (engine.movement.moveLeft()) {
+            location.x -= 1
+            move()
         }
-        location.x -= 1
-        move()
     }
 
     fun moveRight(engine: Engine) {
-        val tile = engine.map.getRight(location)
         image = imageSet.get("right")
-        if (tile == null || !canMoveToTile(tile)) {
-            return
+        if (engine.movement.moveRight()) {
+            location.x += 1
+            move()
         }
-        location.x += 1
-        move()
     }
 
     override fun canMoveToTile(tile: Tile): Boolean {
