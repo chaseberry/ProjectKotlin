@@ -26,6 +26,7 @@ class Editor(x: Int, y: Int) {
     val pallet = EditorPallet()
 
     fun start() {
+        frame.image = buildFrameImage()
         frame.setVisible(true)
     }
 
@@ -52,6 +53,7 @@ class Editor(x: Int, y: Int) {
             PalletStatus.TILE -> updateTile(viewport)
             PalletStatus.OBJECT -> updateObject(viewport)
         }
+        frame.image = buildFrameImage()
     }
 
     fun updateTile(viewport: Viewport) {
