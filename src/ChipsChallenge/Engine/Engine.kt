@@ -39,7 +39,7 @@ fun loadImage(imageSource: String?): BufferedImage? {
 
 class Engine {
 
-    val gameTime: Long = 20//==50 FPS
+    val gameTime: Long = 30//
 
     val frame = Frame(this)
 
@@ -76,9 +76,16 @@ class Engine {
         val image = BufferedImage(9 * 32, 9 * 32, BufferedImage.TYPE_INT_ARGB)
         val mapImage = map.image
         val g = image.getGraphics()
+
+        //Draw the map
         val x = if (player.location.x <= 4) 4 else (if (player.location.x > (map.x - 5)) (map.x - 5) else player.location.x)
         val y = if (player.location.y <= 4) 4 else (if (player.location.y > (map.y - 5)) (map.y - 5) else player.location.y)
         g.drawImage(mapImage, (-(x - 4) * 32), (-(y - 4) * 32), null)
+
+        //Draw objects
+
+
+        //Draw the player
         val playerX = if (player.location.x <= 4 ) player.location.x else
             if (player.location.x in (map.x - 4)..(map.x)) 9 - (map.x - player.location.x) else 4
         val playerY = if (player.location.y <= 4 ) player.location.y else
