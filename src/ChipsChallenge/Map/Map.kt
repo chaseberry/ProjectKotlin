@@ -10,15 +10,15 @@ import ChipsChallenge.UI.Viewport
  * Created by chase on 2/25/15.
  */
 
-fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point, engine: Engine): Map {
-    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart, engine, 0)
+fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point): Map {
+    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart, 0)
 }
 
 fun blankMap(x: Int, y: Int): Map {
-    return Map(Array(x) { Array(y) { tileIdToTile(0) } }, Point(0, 0), null, 0)
+    return Map(Array(x) { Array(y) { tileIdToTile(0) } }, Point(0, 0), 0)
 }
 
-data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation: Point, val engine: Engine?,
+data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation: Point,
                          var chipTotal: Int) : EngineObjectBase {
 
     val x: Int by Delegates.lazy {

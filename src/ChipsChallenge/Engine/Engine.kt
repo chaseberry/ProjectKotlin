@@ -45,7 +45,7 @@ class Engine {
     val frame = Frame(this)
 
     val map = mapFromIds(Array(20, { x -> Array(20, { y -> if (x == 0 || x == 19 || y == 0 || y == 19) 1 else 0 }) }),
-            Point(1, 1), this)
+            Point(1, 1))
     //Current test map is just a test
 
     val keyBindings = KeyBindings()

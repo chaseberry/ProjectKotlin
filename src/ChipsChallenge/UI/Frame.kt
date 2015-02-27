@@ -18,7 +18,7 @@ class Frame(val engine: Engine) : JFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
         addKeyListener(keyListener)
     }
-    
+
     public var image: BufferedImage? = null
         set(newImage) {
             $image = newImage
