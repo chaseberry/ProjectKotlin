@@ -24,7 +24,18 @@ class ObjectManager(val engine: Engine) {
             return true
         }
 
-        return objects.get(newLocation).interact(engine, direction)
+        val resolution = objects.get(newLocation).interact(engine, direction)
+        if (resolution == ObjectResolution.NOTHING) {
+            return false
+        }
+        if (resolution == ObjectResolution.REMOVE) {
+            objects.remove(newLocation)
+        }
+        //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
+        if (resolution == ObjectResolution.MOVE) {
+
+        }
+        return true
 
     }
 
