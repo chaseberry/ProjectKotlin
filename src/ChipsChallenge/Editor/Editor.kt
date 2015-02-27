@@ -4,12 +4,12 @@ import ChipsChallenge.Map.blankMap
 import java.awt.image.BufferedImage
 import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Map.Point
-import ChipsChallenge.UI.Viewport
 import ChipsChallenge.Engine.ObjectManager
 import ChipsChallenge.Engine.objectFromId
 import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.JSON.JSONArray
+import ChipsChallenge.Engine.loadImage
 
 /**
  * Created by chase on 2/27/15.
@@ -27,6 +27,8 @@ class Editor(x: Int, y: Int) {
     val currentCenter = Point(0, 0)
 
     val pallet = EditorPallet()
+
+    val playerImage = loadImage("chip-south.gif")
 
     fun start() {
         frame.image = buildFrameImage()
@@ -48,20 +50,24 @@ class Editor(x: Int, y: Int) {
             g.drawImage(obj.image, (obj.location.x - viewport.xStart) * 32, (obj.location.y - viewport.yStart) * 32, null)
         }
 
+        g.drawImage(playerImage, (map.defaultPlayerLocation.x - viewport.xStart) * 32,
+                (map.defaultPlayerLocation.y - viewport.yStart) * 32, null)
+
         return image
     }
 
     fun triggerUpdate() {
         val viewport = getViewport(currentCenter, map)
+        val tileLocation = mouseBindings.mouseLocation - Point(viewport.xStart, viewport.yStart)
         when (pallet.palletStatus) {
-            PalletStatus.TILE -> updateTile(viewport)
-            PalletStatus.OBJECT -> updateObject(viewport)
+            PalletStatus.TILE -> updateTile(tileLocation)
+            PalletStatus.OBJECT -> updateObject(tileLocation)
+            PalletStatus.PLAYER -> addPlayer(tileLocation)
         }
         frame.image = buildFrameImage()
     }
 
-    fun updateTile(viewport: Viewport) {
-        val tileLocation = mouseBindings.mouseLocation - Point(viewport.xStart, viewport.yStart)
+    fun updateTile(tileLocation: Point) {
         if (mouseBindings.mouseOne) {
             addTile(tileLocation)
         } else if (mouseBindings.mouseTwo) {
@@ -83,8 +89,7 @@ class Editor(x: Int, y: Int) {
         }
     }
 
-    fun updateObject(viewport: Viewport) {
-        val tileLocation = mouseBindings.mouseLocation - Point(viewport.xStart, viewport.yStart)
+    fun updateObject(tileLocation: Point) {
         if (mouseBindings.mouseOne) {
             addObject(tileLocation)
         } else if (mouseBindings.mouseTwo) {
@@ -101,6 +106,12 @@ class Editor(x: Int, y: Int) {
 
     fun removeObject(tileLocation: Point) {
         objects.objects.remove(tileLocation)
+    }
+
+    fun addPlayer(tileLocation: Point) {
+        if (mouseBindings.mouseOne) {
+            map.defaultPlayerLocation = tileLocation
+        }
     }
 
     fun generateSave(): String {
