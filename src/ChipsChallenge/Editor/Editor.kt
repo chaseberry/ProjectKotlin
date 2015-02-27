@@ -58,9 +58,24 @@ class Editor(x: Int, y: Int) {
 
     fun updateTile(viewport: Viewport) {
         val tileLocation = mouseBindings.mouseLocation - Point(viewport.xStart, viewport.yStart)
+        if (mouseBindings.mouseOne) {
+            addTile(tileLocation)
+        } else if (mouseBindings.mouseTwo) {
+            removeTile(tileLocation)
+        }
+    }
+
+    fun addTile(tileLocation: Point) {
         val tile = map.getTile(tileLocation)
         if (tile != pallet.currentTile) {
             map.setTile(tileLocation, pallet.currentTile)
+        }
+    }
+
+    fun removeTile(tileLocation: Point) {
+        val tile = map.getTile(tileLocation)
+        if (tile != pallet.deleteTile) {
+            map.setTile(tileLocation, pallet.deleteTile)
         }
     }
 

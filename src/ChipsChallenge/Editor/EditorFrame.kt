@@ -37,14 +37,16 @@ class EditorFrame(val editor: Editor) : JFrame() {
 
     val mouseMotionListener = object : MouseMotionListener {
         override fun mouseMoved(e: MouseEvent) {
-            editor.mouseBindings.mouseLocation.x = e.getX() / 32
-            editor.mouseBindings.mouseLocation.y = e.getY() / 32
-            if (editor.mouseBindings.mouseButtonIsPressed) {
-                editor.triggerUpdate()
-            }
+            editor.mouseBindings.mouseLocation.x = (e.getX() - getInsets().left) / 32
+            editor.mouseBindings.mouseLocation.y = (e.getY() - getInsets().top) / 32
         }
 
         override fun mouseDragged(e: MouseEvent) {
+            editor.mouseBindings.mouseLocation.x = (e.getX() - getInsets().left) / 32
+            editor.mouseBindings.mouseLocation.y = (e.getY() - getInsets().top) / 32
+            if (editor.mouseBindings.mouseButtonIsPressed) {
+                editor.triggerUpdate()
+            }
         }
 
     }

@@ -1,8 +1,8 @@
 package ChipsChallenge.Editor
 
-import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Engine.ObjectBase
+import ChipsChallenge.Map.Tiles.Wall
 
 /**
  * Created by chase on 2/27/15.
@@ -11,9 +11,11 @@ class EditorPallet {
 
     var palletStatus = PalletStatus.TILE
 
-    val currentTile: Tile = Floor()
+    val currentTile = Wall()
     val currentObject: ObjectBase? = null
 
+    val deleteTile = Floor()
+    val deleteObject: ObjectBase? = null
 
 }
 
