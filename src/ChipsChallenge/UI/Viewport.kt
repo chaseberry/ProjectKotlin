@@ -14,6 +14,12 @@ fun getViewport(playerLocation: Point, map: Map): Viewport {
     )
 }
 
+
+public fun pointInViewport(point: Point, viewport: Viewport): Boolean {
+    return point.x in viewport.xStart..viewport.xEnd && point.y in viewport.yStart..viewport.yEnd
+}
+
+
 data class Viewport internal (val xStart: Int, val yStart: Int) {
 
     val xEnd: Int
