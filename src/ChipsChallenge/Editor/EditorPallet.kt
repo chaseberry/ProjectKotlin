@@ -24,6 +24,13 @@ class EditorPallet : JFrame() {
         tabs.setLocation(getInsets().left, getInsets().top)
         tabs.add("Tiles", TilePanel(this))
         tabs.add("Objects", ObjectPanel(this))
+        tabs.addChangeListener() {
+            if (tabs.getSelectedIndex() == 0) {
+                palletStatus = PalletStatus.TILE
+            } else if (tabs.getSelectedIndex() == 1) {
+                palletStatus = PalletStatus.OBJECT
+            }
+        }
         add(tabs)
     }
 
