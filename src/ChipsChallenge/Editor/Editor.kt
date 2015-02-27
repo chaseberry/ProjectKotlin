@@ -28,6 +28,7 @@ class Editor(x: Int, y: Int) {
     fun start() {
         frame.image = buildFrameImage()
         frame.setVisible(true)
+        pallet.setVisible(true)
     }
 
     fun buildFrameImage(): BufferedImage {
