@@ -17,5 +17,8 @@ class Editor(x: Int, y: Int) {
         frame.setVisible(true)
     }
 
+    fun triggerUpdate() {
+
+    }
 
 }
