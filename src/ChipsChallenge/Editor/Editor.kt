@@ -18,5 +18,4 @@ class Editor(x: Int, y: Int) {
     }
 
 
-
 }

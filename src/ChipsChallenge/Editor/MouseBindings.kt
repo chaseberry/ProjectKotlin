@@ -1,5 +1,7 @@
 package ChipsChallenge.Editor
 
+import ChipsChallenge.Map.Point
+
 /**
  * Created by chase on 2/27/15.
  */
@@ -10,6 +12,8 @@ class MouseBindings() {
 
     var mouseOne = false
     var mouseTwo = false
+
+    val mouseLocation = Point(0, 0)
 
     fun mousePressed(keyCode: Int) {
         when (keyCode) {

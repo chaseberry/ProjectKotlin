@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage
 import java.awt.Graphics
 import java.awt.event.MouseListener
 import java.awt.event.MouseEvent
+import java.awt.event.MouseMotionListener
 
 /**
  * Created by chase on 2/27/15.
@@ -29,6 +30,17 @@ class EditorFrame(val editor: Editor) : JFrame() {
 
         override fun mouseClicked(e: MouseEvent) {
 
+        }
+
+    }
+
+    val mouseMotionListener = object : MouseMotionListener {
+        override fun mouseMoved(e: MouseEvent) {
+            editor.mouseBindings.mouseLocation.x = e.getX()
+            editor.mouseBindings.mouseLocation.y = e.getY()
+        }
+
+        override fun mouseDragged(e: MouseEvent) {
         }
 
     }
