@@ -14,8 +14,12 @@ fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point, engine: Engine): M
     return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart, engine, 0)
 }
 
-data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation: Point, val engine: Engine,
-                         val chipTotal: Int) : EngineObjectBase {
+fun blankMap(x: Int, y: Int): Map {
+    return Map(Array(x) { Array(y) { tileIdToTile(0) } }, Point(0, 0), null, 0)
+}
+
+data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation: Point, val engine: Engine?,
+                         var chipTotal: Int) : EngineObjectBase {
 
     val x: Int by Delegates.lazy {
         map.size()
