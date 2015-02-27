@@ -101,4 +101,8 @@ class Editor(x: Int, y: Int) {
         objects.objects.remove(tileLocation)
     }
 
+    fun generateSave():{
+        
+    }
+
 }

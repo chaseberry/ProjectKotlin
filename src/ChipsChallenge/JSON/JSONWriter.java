@@ -1,4 +1,4 @@
-package JSON;
+package ChipsChallenge.JSON;
 
 import java.io.IOException;
 import java.io.Writer;

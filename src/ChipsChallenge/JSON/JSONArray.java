@@ -1,4 +1,4 @@
-package JSON;
+package ChipsChallenge.JSON;
 
 /*
  Copyright (c) 2002 JSON.org
