@@ -79,6 +79,13 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
         return map[location.x][location.y]
     }
 
+    public fun setTile(location: Point, tile: Tile) {
+        if (location.x !in 0..(x - 1 ) || location.y !in 0..(y - 1)) {
+            return
+        }
+        map[location.x][location.y] = tile
+    }
+
     override fun onTick(engine: Engine) {
         for (x in map) {
             for (tile in x) {
