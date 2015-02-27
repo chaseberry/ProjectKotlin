@@ -121,7 +121,6 @@ class Editor(x: Int, y: Int) {
         }
         mapObj.put("objects", objArray)
 
-
         return mapObj.toString()
     }
 

@@ -9,6 +9,7 @@ import ChipsChallenge.Map.Tile
 import javax.swing.JTabbedPane
 import ChipsChallenge.Editor.PalletPanes.TilePanel
 import ChipsChallenge.Editor.PalletPanes.ObjectPanel
+import ChipsChallenge.Editor.PalletPanes.PlayerLocationPanel
 
 /**
  * Created by chase on 2/27/15.
@@ -24,11 +25,14 @@ class EditorPallet : JFrame() {
         tabs.setLocation(getInsets().left, getInsets().top)
         tabs.add("Tiles", TilePanel(this))
         tabs.add("Objects", ObjectPanel(this))
+        tabs.add("Player", PlayerLocationPanel(this))
         tabs.addChangeListener() {
             if (tabs.getSelectedIndex() == 0) {
                 palletStatus = PalletStatus.TILE
             } else if (tabs.getSelectedIndex() == 1) {
                 palletStatus = PalletStatus.OBJECT
+            } else if (tabs.getSelectedIndex() == 2) {
+                palletStatus = PalletStatus.PLAYER
             }
         }
         add(tabs)
