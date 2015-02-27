@@ -54,6 +54,8 @@ class Engine {
 
     val movement = Movement(this)
 
+    val objectManager = ObjectManager()
+
     public fun start() {
         frame.setVisible(true)
         frame.image = buildFrameImage()
