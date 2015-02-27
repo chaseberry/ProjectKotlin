@@ -44,7 +44,7 @@ class Engine {
     val frame = Frame(this)
 
     val map = mapFromIds(Array(20, { x -> Array(20, { y -> if (x % 2 == 0 && 0 == y % 2 ) 1 else 0 }) }),
-            Point(1, 1))
+            Point(1, 1), this)
     //Current test map is just a test
 
     val keyBindings = KeyBindings()
@@ -78,9 +78,7 @@ class Engine {
         val g = image.getGraphics()
 
         //Draw the map
-        val x = if (player.location.x <= 4) 4 else (if (player.location.x > (map.x - 5)) (map.x - 5) else player.location.x)
-        val y = if (player.location.y <= 4) 4 else (if (player.location.y > (map.y - 5)) (map.y - 5) else player.location.y)
-        g.drawImage(mapImage, (-(x - 4) * 32), (-(y - 4) * 32), null)
+        g.drawImage(mapImage, 0, 0, null)
 
         //Draw objects
 

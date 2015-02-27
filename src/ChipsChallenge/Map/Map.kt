@@ -4,16 +4,17 @@ import java.awt.image.BufferedImage
 import ChipsChallenge.Engine.Engine
 import kotlin.properties.Delegates
 import ChipsChallenge.Engine.EngineObjectBase
+import ChipsChallenge.UI.getViewport
 
 /**
  * Created by chase on 2/25/15.
  */
 
-fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point): Map {
-    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart)
+fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point, engine: Engine): Map {
+    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart, engine)
 }
 
-data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation: Point) : EngineObjectBase {
+data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation: Point, val engine: Engine) : EngineObjectBase {
 
     public val x: Int by Delegates.lazy {
         map.size()
@@ -25,12 +26,17 @@ data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation:
 
     public val image: BufferedImage
         get() {
-            val img = BufferedImage(32 * x, 32 * y, BufferedImage.TYPE_INT_ARGB)
+            val viewport = getViewport(engine.player.location, this)
+            val img = BufferedImage(32 * 9, 32 * 9, BufferedImage.TYPE_INT_ARGB)
             val g = img.getGraphics()
-            for ( x in 0..(map.size() - 1)) {
-                for (y in 0..(map[x].size() - 1)) {
-                    g.drawImage(map[x][y].image, x * 32, y * 32, null)
+            var xDraw = 0
+            for ( x in viewport.xStart..viewport.xEnd) {
+                var yDraw = 0
+                for (y in viewport.yStart..viewport.yEnd) {
+                    g.drawImage(map[x][y].image, xDraw * 32, yDraw * 32, null)
+                    yDraw++
                 }
+                xDraw++
             }
             return img
         }
