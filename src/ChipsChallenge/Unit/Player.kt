@@ -17,7 +17,7 @@ class Player(location: Point) : UnitBase(location) {
         image = imageSet.get("down")
     }
 
-    val playerMoveSpeed = 5
+    val playerMoveSpeed = 10
     var currentMove = 0
 
     override fun onTick(engine: Engine) {
