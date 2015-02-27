@@ -16,10 +16,8 @@ class Movement(val engine: Engine) {
         if (engine.map.getTile(newLocation) == null || !engine.player.canMoveToTile(engine.map.getTile(newLocation) as Tile)) {
             return false
         }
-
         
-
-        return true
+        return engine.objectManager.resolve(newLocation, direction)
     }
 
     public fun moveUp(): Boolean {

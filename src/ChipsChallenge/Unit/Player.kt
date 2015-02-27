@@ -19,7 +19,7 @@ class Player(location: Point) : UnitBase(location) {
 
     val inventory = PlayerInventory()
 
-    val playerMoveSpeed = 10
+    val playerMoveSpeed = 7
     var currentMove = 0
 
     override fun onTick(engine: Engine) {
