@@ -11,16 +11,17 @@ import ChipsChallenge.UI.Viewport
  */
 
 fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point, engine: Engine): Map {
-    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart, engine)
+    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart, engine, 0)
 }
 
-data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation: Point, val engine: Engine) : EngineObjectBase {
+data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation: Point, val engine: Engine,
+                         val chipTotal: Int) : EngineObjectBase {
 
-    public val x: Int by Delegates.lazy {
+    val x: Int by Delegates.lazy {
         map.size()
     }
 
-    public val y: Int by Delegates.lazy {
+    val y: Int by Delegates.lazy {
         map[0].size()
     }
 
