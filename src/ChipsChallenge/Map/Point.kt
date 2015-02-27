@@ -12,4 +12,8 @@ data class Point(var x: Int, var y: Int) {
         return false
     }
 
+    fun minus(point: Point): Point {
+        return Point(x - point.x, y - point.y)
+    }
+
 }

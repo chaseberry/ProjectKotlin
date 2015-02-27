@@ -37,8 +37,8 @@ class EditorFrame(val editor: Editor) : JFrame() {
 
     val mouseMotionListener = object : MouseMotionListener {
         override fun mouseMoved(e: MouseEvent) {
-            editor.mouseBindings.mouseLocation.x = e.getX()
-            editor.mouseBindings.mouseLocation.y = e.getY()
+            editor.mouseBindings.mouseLocation.x = e.getX() / 32
+            editor.mouseBindings.mouseLocation.y = e.getY() / 32
             editor.triggerUpdate()
         }
 
