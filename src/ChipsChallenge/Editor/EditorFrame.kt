@@ -3,16 +3,43 @@ package ChipsChallenge.Editor
 import javax.swing.JFrame
 import java.awt.image.BufferedImage
 import java.awt.Graphics
+import java.awt.event.MouseListener
+import java.awt.event.MouseEvent
 
 /**
  * Created by chase on 2/27/15.
  */
-class EditorFrame : JFrame() {
+class EditorFrame(val editor: Editor) : JFrame() {
+
+
+    val mouseListener = object : MouseListener {
+        override fun mousePressed(e: MouseEvent) {
+            editor.mouseBindings.mousePressed(e.getButton())
+        }
+
+        override fun mouseReleased(e: MouseEvent) {
+            editor.mouseBindings.mouseReleased(e.getButton())
+        }
+
+        override fun mouseEntered(e: MouseEvent) {
+        }
+
+        override fun mouseExited(e: MouseEvent) {
+        }
+
+        override fun mouseClicked(e: MouseEvent) {
+
+        }
+
+    }
+
     {
         pack()
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+        addMouseListener(mouseListener)
     }
+
 
     public var image: BufferedImage? = null
         set(newImage) {
@@ -28,4 +55,6 @@ class EditorFrame : JFrame() {
         }
 
     }
+
+
 }

@@ -1,4 +1,4 @@
-import ChipsChallenge.Engine.Engine
+import ChipsChallenge.Editor.Editor
 
 /**
  * Created by chase on 2/25/15.
@@ -6,5 +6,5 @@ import ChipsChallenge.Engine.Engine
 
 
 fun main(args: Array<String>) {
-    Engine().start()
+    Editor(5, 5).start()
 }
