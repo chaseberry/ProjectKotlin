@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage
 import ChipsChallenge.Engine.Engine
 import kotlin.properties.Delegates
 import ChipsChallenge.Engine.EngineObjectBase
-import ChipsChallenge.UI.getViewport
+import ChipsChallenge.UI.Viewport
 
 /**
  * Created by chase on 2/25/15.
@@ -24,22 +24,20 @@ data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation:
         map[0].size()
     }
 
-    public val image: BufferedImage
-        get() {
-            val viewport = getViewport(engine.player.location, this)
-            val img = BufferedImage(32 * 9, 32 * 9, BufferedImage.TYPE_INT_ARGB)
-            val g = img.getGraphics()
-            var xDraw = 0
-            for ( x in viewport.xStart..viewport.xEnd) {
-                var yDraw = 0
-                for (y in viewport.yStart..viewport.yEnd) {
-                    g.drawImage(map[x][y].image, xDraw * 32, yDraw * 32, null)
-                    yDraw++
-                }
-                xDraw++
+    public fun getImage(viewport: Viewport): BufferedImage {
+        val img = BufferedImage(32 * 9, 32 * 9, BufferedImage.TYPE_INT_ARGB)
+        val g = img.getGraphics()
+        var xDraw = 0
+        for ( x in viewport.xStart..viewport.xEnd) {
+            var yDraw = 0
+            for (y in viewport.yStart..viewport.yEnd) {
+                g.drawImage(map[x][y].image, xDraw * 32, yDraw * 32, null)
+                yDraw++
             }
-            return img
+            xDraw++
         }
+        return img
+    }
 
     public fun getUp(curLocation: Point): Tile? {
         if (curLocation.y == 0) {

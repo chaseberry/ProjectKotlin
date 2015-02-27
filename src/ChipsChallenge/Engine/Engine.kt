@@ -10,6 +10,7 @@ import kotlin.properties.Delegates
 import java.net.URL
 import java.util.TimerTask
 import ChipsChallenge.Map.Point
+import ChipsChallenge.UI.getViewport
 
 /**
  * Created by chase on 2/25/15.
@@ -74,7 +75,8 @@ class Engine {
 
     fun buildFrameImage(): BufferedImage {
         val image = BufferedImage(9 * 32, 9 * 32, BufferedImage.TYPE_INT_ARGB)
-        val mapImage = map.image
+        val viewport = getViewport(player.location, map)
+        val mapImage = map.getImage(viewport)
         val g = image.getGraphics()
 
         //Draw the map
