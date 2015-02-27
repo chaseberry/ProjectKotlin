@@ -2,10 +2,24 @@ package ChipsChallenge.Engine
 
 import java.awt.image.BufferedImage
 import ChipsChallenge.Map.Point
+import ChipsChallenge.Object.*
 
-/**
- * Created by chase on 2/25/15.
- */
+fun objectFromId(id: Int, location: Point): ObjectBase? {
+    when (id) {
+        0 -> Chip(location)
+        1 -> Socket(location)
+        2 -> BlueKey(location)
+        3 -> BlueLock(location)
+        4 -> RedKey(location)
+        5 -> RedLock(location)
+        6 -> YellowLock(location)
+        7 -> YellowKey(location)
+        8 -> GreenLock(location)
+        9 -> GreenKey(location)
+    }
+    return null
+}
+
 abstract class ObjectBase(var location: Point, imageSource: String?) : EngineObjectBase {
 
     public open val image: BufferedImage? = loadImage(imageSource)
