@@ -15,6 +15,11 @@ class MouseBindings() {
 
     val mouseLocation = Point(0, 0)
 
+    val mouseButtonIsPressed: Boolean
+        get() {
+            return mouseOne || mouseTwo
+        }
+
     fun mousePressed(keyCode: Int) {
         when (keyCode) {
             MOUSE_ONE -> mouseOne = true
