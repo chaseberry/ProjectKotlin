@@ -1,9 +1,9 @@
 package ChipsChallenge.Map
 
-import ChipsChallenge.Engine.ObjectBase
 import java.awt.image.BufferedImage
 import ChipsChallenge.Engine.Engine
 import kotlin.properties.Delegates
+import ChipsChallenge.Engine.EngineObjectBase
 
 /**
  * Created by chase on 2/25/15.
@@ -13,7 +13,7 @@ fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point): Map {
     return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart)
 }
 
-data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation: Point) : ObjectBase(null) {
+data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation: Point) : EngineObjectBase {
 
     public val x: Int by Delegates.lazy {
         map.size()
@@ -23,7 +23,7 @@ data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation:
         map[0].size()
     }
 
-    public override val image: BufferedImage
+    public val image: BufferedImage
         get() {
             val img = BufferedImage(32 * x, 32 * y, BufferedImage.TYPE_INT_ARGB)
             val g = img.getGraphics()
@@ -61,6 +61,13 @@ data class Map internal (val map: Array<Array<Tile>>, val defaultPlayerLocation:
             return null
         }
         return map[curLocation.x + 1][curLocation.y]
+    }
+
+    public fun getTile(location: Point): Tile? {
+        if (location.x !in 0..(x - 1 ) || location.y !in 0..(y - 1)) {
+            return null
+        }
+        return map[location.x][location.y]
     }
 
     override fun onTick(engine: Engine) {
