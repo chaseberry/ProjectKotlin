@@ -10,7 +10,7 @@ import ChipsChallenge.UI.pointInViewport
  * Created by chase on 2/27/15.
  */
 
-class ObjectManager(val engine: Engine) {
+class ObjectManager(val engine: Engine?) {
 
     val objects = HashMap<Point, ObjectBase>()
 
@@ -33,11 +33,14 @@ class ObjectManager(val engine: Engine) {
     }
 
     public fun resolve(newLocation: Point, direction: Direction): Boolean {
+        if (engine == null) {
+            return false
+        }
         if (!objects.containsKey(newLocation)) {
             return true
         }
 
-        val resolution = objects.get(newLocation).interact(engine, direction)
+        val resolution = objects.get(newLocation).interact(engine as Engine, direction)
         if (resolution == ObjectResolution.NOTHING) {
             return false
         }

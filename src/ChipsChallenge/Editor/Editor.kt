@@ -3,10 +3,11 @@ package ChipsChallenge.Editor
 import ChipsChallenge.Map.blankMap
 import java.awt.image.BufferedImage
 import ChipsChallenge.UI.getViewport
-import java.util.ArrayList
-import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.Map.Point
 import ChipsChallenge.UI.Viewport
+import ChipsChallenge.Engine.ObjectManager
+import ChipsChallenge.Engine.objectFromId
+import ChipsChallenge.Engine.ObjectBase
 
 /**
  * Created by chase on 2/27/15.
@@ -17,7 +18,7 @@ class Editor(x: Int, y: Int) {
 
     val frame = EditorFrame(this)
 
-    val objects = ArrayList<ObjectBase>()
+    val objects = ObjectManager(null)
 
     val mouseBindings = MouseBindings()
 
@@ -41,7 +42,7 @@ class Editor(x: Int, y: Int) {
         g.drawImage(mapImage, 0, 0, null)
 
         //Draw objects
-        for (obj in objects) {
+        for (obj in objects.objectsInViewport(viewport)) {
             g.drawImage(obj.image, (obj.location.x - viewport.xStart) * 32, (obj.location.y - viewport.yStart) * 32, null)
         }
 
@@ -81,7 +82,23 @@ class Editor(x: Int, y: Int) {
     }
 
     fun updateObject(viewport: Viewport) {
+        val tileLocation = mouseBindings.mouseLocation - Point(viewport.xStart, viewport.yStart)
+        if (mouseBindings.mouseOne) {
+            addObject(tileLocation)
+        } else if (mouseBindings.mouseTwo) {
+            removeObject(tileLocation)
+        }
+    }
 
+    fun addObject(tileLocation: Point) {
+        if (objects.objects.containsKey(tileLocation) || pallet.currentObject == null) {
+            return
+        }
+        objects.add((objectFromId((pallet.currentObject as ObjectBase).id, tileLocation) as ObjectBase), tileLocation)
+    }
+
+    fun removeObject(tileLocation: Point) {
+        objects.objects.remove(tileLocation)
     }
 
 }

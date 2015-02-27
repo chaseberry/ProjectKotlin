@@ -12,17 +12,15 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
         3 -> BlueLock(location)
         4 -> RedKey(location)
         5 -> RedLock(location)
-        6 -> YellowLock(location)
-        7 -> YellowKey(location)
-        8 -> GreenLock(location)
-        9 -> GreenKey(location)
+        6 -> YellowKey(location)
+        7 -> YellowLock(location)
+        8 -> GreenKey(location)
+        9 -> GreenLock(location)
         else -> null
     }
 }
 
-abstract class ObjectBase(var location: Point, imageSource: String?) : EngineObjectBase {
-
-    public open val image: BufferedImage? = loadImage(imageSource)
+data abstract class ObjectBase(val id: Int, var location: Point, val image: BufferedImage) : EngineObjectBase {
 
     abstract fun interact(engine: Engine, direction: Direction): ObjectResolution
 
