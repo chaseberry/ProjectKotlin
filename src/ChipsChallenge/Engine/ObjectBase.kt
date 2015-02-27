@@ -10,6 +10,6 @@ abstract class ObjectBase(var location: Point, imageSource: String?) : EngineObj
 
     public open val image: BufferedImage? = loadImage(imageSource)
 
-    abstract fun interact(engine: Engine): Boolean
+    abstract fun interact(engine: Engine, direction: Direction): Boolean
 
 }

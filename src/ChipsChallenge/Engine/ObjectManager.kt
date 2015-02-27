@@ -2,7 +2,6 @@ package ChipsChallenge.Engine
 
 import java.util.HashMap
 import ChipsChallenge.Map.Point
-import ChipsChallenge.Object.RedLock
 
 /**
  * Created by chase on 2/27/15.
@@ -20,16 +19,12 @@ class ObjectManager(val engine: Engine) {
         return objects.containsKey(location)
     }
 
-    public fun resolve(curLocation: Point, newLocation: Point): Boolean {
+    public fun resolve(newLocation: Point, direction: Direction): Boolean {
         if (!objects.containsKey(newLocation)) {
             return true
         }
 
-        when (objects.get(newLocation)) {
-            is RedLock -> {
-
-            }
-        }
+        return objects.get(newLocation).interact(engine, direction)
 
     }
 

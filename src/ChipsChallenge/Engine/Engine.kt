@@ -26,6 +26,10 @@ val fileUrl: String by Delegates.lazy {
     fileName
 }
 
+public enum class Direction {
+    UP; DOWN; LEFT; RIGHT
+}
+
 fun loadImage(imageSource: String?): BufferedImage? {
     if (imageSource == null) {
         return null
