@@ -17,6 +17,8 @@ class Player(location: Point) : UnitBase(location) {
         image = imageSet.get("down")
     }
 
+    val inventory = PlayerInventory()
+
     val playerMoveSpeed = 10
     var currentMove = 0
 
