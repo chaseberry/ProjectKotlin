@@ -64,6 +64,7 @@ class Engine {
     public fun start() {
         frame.setVisible(true)
         frame.image = buildFrameImage()
+        
         gameTimer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 map.onTick(engine)
@@ -83,6 +84,10 @@ class Engine {
         g.drawImage(mapImage, 0, 0, null)
 
         //Draw objects
+        val objs = objectManager.objectsInViewport(viewport)
+        for (obj in objs) {
+            g.drawImage(obj.image, (obj.location.x - viewport.xStart) * 32, (obj.location.y - viewport.yStart) * 32, null)
+        }
 
         //Draw the player
         val playerX = if (player.location.x <= 4 ) player.location.x else
