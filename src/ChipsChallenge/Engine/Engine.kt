@@ -84,7 +84,6 @@ class Engine {
 
         //Draw objects
 
-
         //Draw the player
         val playerX = if (player.location.x <= 4 ) player.location.x else
             if (player.location.x in (map.x - 4)..(map.x)) 9 - (map.x - player.location.x) else 4
