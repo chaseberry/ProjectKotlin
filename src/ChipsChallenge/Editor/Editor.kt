@@ -8,6 +8,8 @@ import ChipsChallenge.UI.Viewport
 import ChipsChallenge.Engine.ObjectManager
 import ChipsChallenge.Engine.objectFromId
 import ChipsChallenge.Engine.ObjectBase
+import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.JSON.JSONArray
 
 /**
  * Created by chase on 2/27/15.
@@ -101,8 +103,26 @@ class Editor(x: Int, y: Int) {
         objects.objects.remove(tileLocation)
     }
 
-    fun generateSave():{
+    fun generateSave(): String {
+        val mapObj = JSONObject()
+        val mapArray = JSONArray()
+        for (x in map.map) {
+            val mapSection = JSONArray()
+            for (tile in x) {
+                mapSection.put(tile.tileId)
+            }
+            mapArray.put(mapSection)
+        }
+        mapObj.put("tileMap", mapArray)
+
+        val objArray = JSONArray()
+        for (obj in objects.objects.values()) {
+            objArray.put(JSONObject().put("id", obj.id).put("location", JSONArray().put(obj.location.x).put(obj.location.y)))
+        }
+        mapObj.put("objects", objArray)
+
         
+        return mapObj.toString()
     }
 
 }
