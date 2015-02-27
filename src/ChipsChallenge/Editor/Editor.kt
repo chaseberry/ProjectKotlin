@@ -6,6 +6,7 @@ import ChipsChallenge.UI.getViewport
 import java.util.ArrayList
 import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.Map.Point
+import ChipsChallenge.UI.Viewport
 
 /**
  * Created by chase on 2/27/15.
@@ -21,6 +22,8 @@ class Editor(x: Int, y: Int) {
     val mouseBindings = MouseBindings()
 
     val currentCenter = Point(0, 0)
+
+    val pallet = EditorPallet()
 
     fun start() {
         frame.setVisible(true)
@@ -44,7 +47,20 @@ class Editor(x: Int, y: Int) {
     }
 
     fun triggerUpdate() {
-        val tile = map.getTile(mouseBindings.mouseLocation - currentCenter)
+        val viewport = getViewport(currentCenter, map)
+        when (pallet.palletStatus) {
+            PalletStatus.TILE -> updateTile(viewport)
+            PalletStatus.OBJECT -> updateObject(viewport)
+        }
+    }
+
+    fun updateTile(viewport: Viewport) {
+        val tile = map.getTile(mouseBindings.mouseLocation - Point(viewport.xStart, viewport.yStart))
+
+    }
+
+    fun updateObject(viewport: Viewport) {
+
     }
 
 }
