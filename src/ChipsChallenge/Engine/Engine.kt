@@ -11,9 +11,6 @@ import java.net.URL
 import java.util.TimerTask
 import ChipsChallenge.Map.Point
 import ChipsChallenge.UI.getViewport
-import ChipsChallenge.Object.RedLock
-import ChipsChallenge.Object.YellowLock
-import ChipsChallenge.Object.RedKey
 
 /**
  * Created by chase on 2/25/15.
@@ -65,9 +62,6 @@ class Engine {
     val objectManager = ObjectManager(this)
 
     public fun start() {
-        objectManager.add(RedLock(Point(2, 2)), Point(2, 2))
-        objectManager.add(YellowLock(Point(10, 10)), Point(10, 10))
-        objectManager.add(RedKey(Point(3, 3)), Point(3, 3))
         frame.setVisible(true)
         frame.image = buildFrameImage()
 
