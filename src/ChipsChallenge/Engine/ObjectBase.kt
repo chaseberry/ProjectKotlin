@@ -5,7 +5,7 @@ import ChipsChallenge.Map.Point
 import ChipsChallenge.Object.*
 
 fun objectFromId(id: Int, location: Point): ObjectBase? {
-    when (id) {
+    return when (id) {
         0 -> Chip(location)
         1 -> Socket(location)
         2 -> BlueKey(location)
@@ -16,8 +16,8 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
         7 -> YellowKey(location)
         8 -> GreenLock(location)
         9 -> GreenKey(location)
+        else -> null
     }
-    return null
 }
 
 abstract class ObjectBase(var location: Point, imageSource: String?) : EngineObjectBase {

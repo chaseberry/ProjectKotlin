@@ -21,7 +21,9 @@ class ObjectPanel(val editorPallet: EditorPallet) : JPanel() {
         setLayout(null)
         setSize(buttons.size() % gridSize * 32, buttons.size() / gridSize * 32)
         for (z in 0..buttons.size() - 1) {
-            add(createButton(buttons[z] as ObjectBase, z))
+            if (buttons[z] != null) {
+                add(createButton(buttons[z] as ObjectBase, z))
+            }
         }
         setVisible(true)
     }
