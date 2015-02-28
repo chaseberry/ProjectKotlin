@@ -96,7 +96,7 @@ class EditorFrame(val editor: Editor) : JFrame() {
 
     override fun paint(graphics: Graphics) {
         super.paint(graphics)
-        graphics.clearRect(0, 0, getWidth(), getHeight())
+        graphics.clearRect(0, 0, 9 * 32, 9 * 32)
         if (image != null) {
             graphics.drawImage(image, getInsets().left, getInsets().top, null)
         }
