@@ -2,12 +2,9 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.UI.Frame
 import java.awt.image.BufferedImage
-import javax.imageio.ImageIO
 import ChipsChallenge.Map.mapFromIds
 import java.util.Timer
 import ChipsChallenge.Unit.Player
-import kotlin.properties.Delegates
-import java.net.URL
 import java.util.TimerTask
 import ChipsChallenge.Map.Point
 import ChipsChallenge.UI.getViewport
@@ -17,27 +14,10 @@ import ChipsChallenge.Map.Tiles.Finish
 /**
  * Created by chase on 2/25/15.
  */
-val fileUrl: String by Delegates.lazy {
-    var fileName = ""
-    for (filePart in (BaseObject() as java.lang.Object).getClass().getResource("").toString().split("/")) {
-        if (filePart == "ChipsChallenge") {
-            fileName += "$filePart/Images/"
-            break;
-        }
-        fileName += "$filePart/"
-    }
-    fileName
-}
+
 
 public enum class Direction {
     UP; DOWN; LEFT; RIGHT
-}
-
-fun loadImage(imageSource: String?): BufferedImage? {
-    if (imageSource == null) {
-        return null
-    }
-    return ImageIO.read(URL("$fileUrl$imageSource"));
 }
 
 class Engine {
