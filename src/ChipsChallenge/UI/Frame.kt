@@ -4,6 +4,7 @@ import javax.swing.JFrame
 import java.awt.Graphics
 import java.awt.image.BufferedImage
 import ChipsChallenge.Engine.Engine
+import javax.swing.WindowConstants
 
 /**
  * Created by chase on 2/25/15.
@@ -15,7 +16,7 @@ class Frame(val engine: Engine) : JFrame() {
     {
         pack()
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE)
         addKeyListener(keyListener)
     }
 

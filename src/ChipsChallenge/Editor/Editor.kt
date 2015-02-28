@@ -11,6 +11,11 @@ import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.Engine.loadImage
 import ChipsChallenge.Engine.KeyBindings
+import javax.swing.JFileChooser
+import javax.swing.filechooser.FileFilter
+import java.io.File
+import java.io.BufferedWriter
+import java.io.FileWriter
 
 /**
  * Created by chase on 2/27/15.
@@ -118,7 +123,29 @@ class Editor(x: Int, y: Int) {
     }
 
     fun save() {
-        println(generateSave())
+        val saveData = generateSave()
+        val fileChooser = JFileChooser()
+        fileChooser.setFileFilter(object : FileFilter() {
+            override fun accept(f: File?): Boolean {
+                return f != null && f.extension == ".ccl"
+            }
+
+            override fun getDescription(): String? {
+                return "Chips Challenge Level"
+            }
+
+        })
+        fileChooser.showSaveDialog(null)
+        var file = fileChooser.getSelectedFile()
+        if (file == null) {
+            //ERROR
+        }
+        if (file.extension != "ccl") {
+            file = File("${file.getPath()}.ccl")
+        }
+        val writer = BufferedWriter(FileWriter(file))
+        writer.write(saveData)
+        writer.close()
     }
 
     fun generateSave(): String {
@@ -136,7 +163,7 @@ class Editor(x: Int, y: Int) {
         for (obj in objects.objects.values()) {
             objArray.put(JSONObject().put("id", obj.id).put("location", JSONArray().put(obj.location.x).put(obj.location.y)))
         }
-        
+
         mapObj.put("tileMap", mapArray)
         mapObj.put("objects", objArray)
         mapObj.put("playerStartLocation", JSONArray().put(map.defaultPlayerLocation.x).put(map.defaultPlayerLocation.y))

@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionListener
 import java.awt.event.KeyListener
 import java.awt.event.KeyEvent
 import javax.swing.JButton
+import javax.swing.WindowConstants
 
 /**
  * Created by chase on 2/27/15.
@@ -73,7 +74,7 @@ class EditorFrame(val editor: Editor) : JFrame() {
     {
         pack()
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 10) + getInsets().bottom)
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE)
         addMouseListener(mouseListener)
         addMouseMotionListener(mouseMotionListener)
         addKeyListener(keyListener)
