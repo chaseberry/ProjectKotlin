@@ -117,6 +117,10 @@ class Editor(x: Int, y: Int) {
         }
     }
 
+    fun save() {
+        
+    }
+
     fun generateSave(): String {
         val mapObj = JSONObject()
         val mapArray = JSONArray()

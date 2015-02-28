@@ -11,6 +11,8 @@ import java.net.URL
 import java.util.TimerTask
 import ChipsChallenge.Map.Point
 import ChipsChallenge.UI.getViewport
+import ChipsChallenge.Map.Tiles.Water
+import ChipsChallenge.Map.Tiles.Finish
 
 /**
  * Created by chase on 2/25/15.
@@ -70,8 +72,29 @@ class Engine {
                 map.onTick(engine)
                 player.onTick(engine)
                 frame.image = buildFrameImage()
+                checkCollisions()
             }
         }, gameTime, gameTime)
+    }
+
+    fun checkCollisions() {
+        val tile = map.getTile(player.location)
+        when (tile) {
+            Water() -> if (!player.inventory.hasFlippers) lose()
+            Finish() -> win()
+        }
+    }
+
+    fun lose() {
+        gameOver()
+    }
+
+    fun win() {
+
+    }
+
+    fun gameOver() {
+        gameTimer.cancel()
     }
 
     fun buildFrameImage(): BufferedImage {
