@@ -10,12 +10,14 @@ import java.awt.event.KeyListener
 import java.awt.event.KeyEvent
 import javax.swing.JButton
 import javax.swing.WindowConstants
+import javax.swing.JTextField
 
 /**
  * Created by chase on 2/27/15.
  */
 class EditorFrame(val editor: Editor) : JFrame() {
 
+    val chipCountTextField = JTextField()
 
     val mouseListener = object : MouseListener {
         override fun mousePressed(e: MouseEvent) {
@@ -85,6 +87,12 @@ class EditorFrame(val editor: Editor) : JFrame() {
         saveButton.setSize(64, 32)
         saveButton.addActionListener { editor.save() }
         add(saveButton)
+
+        chipCountTextField.setSize(64, 32)
+        chipCountTextField.setLocation(100, 32 * 9)
+        chipCountTextField.setToolTipText("Number of chips required to open the socket")
+
+        add(chipCountTextField)
     }
 
 

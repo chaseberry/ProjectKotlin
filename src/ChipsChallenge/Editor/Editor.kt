@@ -167,6 +167,11 @@ class Editor(x: Int, y: Int) {
         mapObj.put("tileMap", mapArray)
         mapObj.put("objects", objArray)
         mapObj.put("playerStartLocation", JSONArray().put(map.defaultPlayerLocation.x).put(map.defaultPlayerLocation.y))
+        try {
+            mapObj.put("chipCount", Integer.parseInt(frame.chipCountTextField.getText()))
+        } catch(e: NumberFormatException) {
+            mapObj.put("chipCount", 0)
+        }
         return mapObj.toString()
     }
 
