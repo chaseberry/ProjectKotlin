@@ -196,7 +196,7 @@ class Editor(x: Int, y: Int) {
         } catch(e: Exception) {
 
         }
-        Engine(map, ArrayList(objects.objects.values())).start()
+        Engine(map.copy(), ArrayList(objects.objects.values())).start()
     }
 
 }

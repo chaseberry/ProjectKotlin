@@ -29,7 +29,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>) {
 
     val gameTimer = Timer()
 
-    val player = Player(map.defaultPlayerLocation)
+    val player = Player(map.defaultPlayerLocation.copy())
 
     //Done so this can be passed around in the onTick method
     val engine = this
@@ -69,7 +69,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>) {
     }
 
     fun win() {
-
+        gameOver()
     }
 
     fun gameOver() {
