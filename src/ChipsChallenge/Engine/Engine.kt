@@ -2,32 +2,24 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.UI.Frame
 import java.awt.image.BufferedImage
-import ChipsChallenge.Map.mapFromIds
 import java.util.Timer
 import ChipsChallenge.Unit.Player
 import java.util.TimerTask
-import ChipsChallenge.Map.Point
 import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.Tiles.Finish
-
-/**
- * Created by chase on 2/25/15.
- */
-
+import ChipsChallenge.Map.Map
 
 public enum class Direction {
     UP; DOWN; LEFT; RIGHT
 }
 
-class Engine {
+class Engine(val map: Map) {
 
-    val gameTime: Long = 30//
+    val gameTime: Long = 30
 
     val frame = Frame(this)
 
-    val map = mapFromIds(Array(20, { x -> Array(20, { y -> if (x == 0 || x == 19 || y == 0 || y == 19) 1 else 0 }) }),
-            Point(1, 1))
     //Current test map is just a test
 
     val keyBindings = KeyBindings()
