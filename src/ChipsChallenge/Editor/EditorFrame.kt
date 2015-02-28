@@ -81,12 +81,20 @@ class EditorFrame(val editor: Editor) : JFrame() {
         addMouseMotionListener(mouseMotionListener)
         addKeyListener(keyListener)
         setLayout(null)
+        setFocusable(true)
+        requestFocus()
 
         val saveButton = JButton("Save!")
         saveButton.setLocation(15, 32 * 9)
         saveButton.setSize(64, 32)
         saveButton.addActionListener { editor.save() }
         add(saveButton)
+
+        val testButton = JButton("Test!")
+        testButton.setLocation(175, 32 * 9)
+        testButton.setSize(64, 32)
+        testButton.addActionListener { editor.testMap() }
+        add(testButton)
 
         chipCountTextField.setSize(64, 32)
         chipCountTextField.setLocation(100, 32 * 9)

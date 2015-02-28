@@ -16,6 +16,8 @@ import javax.swing.filechooser.FileFilter
 import java.io.File
 import java.io.BufferedWriter
 import java.io.FileWriter
+import ChipsChallenge.Engine.Engine
+import java.util.ArrayList
 
 /**
  * Created by chase on 2/27/15.
@@ -186,6 +188,15 @@ class Editor(x: Int, y: Int) {
             keyBindings.right -> if (currentCenter.x != (map.x - 1)) currentCenter.x++
         }
         frame.image = buildFrameImage()
+    }
+
+    fun testMap() {
+        try {
+            map.chipTotal = Integer.parseInt(frame.chipCountTextField.getText())
+        } catch(e: Exception) {
+
+        }
+        Engine(map, ArrayList(objects.objects.values())).start()
     }
 
 }
