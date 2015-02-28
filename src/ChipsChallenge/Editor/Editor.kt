@@ -143,6 +143,9 @@ class Editor(x: Int, y: Int) {
         if (file.extension != "ccl") {
             file = File("${file.getPath()}.ccl")
         }
+        if (!file.exists()) {
+            file.createNewFile()
+        }
         val writer = BufferedWriter(FileWriter(file))
         writer.write(saveData)
         writer.close()

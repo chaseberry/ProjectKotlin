@@ -9,18 +9,21 @@ import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.Tiles.Finish
 import ChipsChallenge.Map.Map
+import java.util.ArrayList
 
 public enum class Direction {
     UP; DOWN; LEFT; RIGHT
 }
 
-class Engine(val map: Map) {
+class Engine(val map: Map, objects: ArrayList<ObjectBase>) {
 
     val gameTime: Long = 30
 
     val frame = Frame(this)
 
     //Current test map is just a test
+
+    val objectManager = ObjectManager(this)
 
     val keyBindings = KeyBindings()
 
@@ -31,9 +34,13 @@ class Engine(val map: Map) {
     //Done so this can be passed around in the onTick method
     val engine = this
 
-    val movement = Movement(this)
+    val movement = Movement(this);
 
-    val objectManager = ObjectManager(this)
+    {
+        for (obj in objects) {
+            objectManager.add(obj, obj.location)
+        }
+    }
 
     public fun start() {
         frame.setVisible(true)

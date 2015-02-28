@@ -5,6 +5,7 @@ import ChipsChallenge.Engine.Engine
 import kotlin.properties.Delegates
 import ChipsChallenge.Engine.EngineObjectBase
 import ChipsChallenge.UI.Viewport
+import ChipsChallenge.JSON.JSONObject
 
 /**
  * Created by chase on 2/25/15.
@@ -16,6 +17,31 @@ fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point): Map {
 
 fun blankMap(x: Int, y: Int): Map {
     return Map(Array(x) { Array(y) { tileIdToTile(0) } }, Point(0, 0), 0)
+}
+
+fun mapFromFile(json: String): Map? {
+    try {
+        val mapData = JSONObject(json)
+        val mapArray = mapData.getJSONArray("tileMap")
+        val tileArray = Array(mapArray.length()) { x ->
+            Array(mapArray.getJSONArray(x).length()) { y ->
+                tileIdToTile(
+                        mapArray.getJSONArray(x).getInt(y)
+                )
+            }
+        }
+
+        val defaultLocation = Point(mapData.getJSONArray("playerStartLocation").getInt(0),
+                mapData.getJSONArray("playerStartLocation").getInt(1))
+
+        val chipCount = mapData.getInt("chipData")
+
+        return Map(tileArray, defaultLocation, chipCount)
+
+    } catch(except: Exception) {
+        return null
+    }
+
 }
 
 data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation: Point,
