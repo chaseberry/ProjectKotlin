@@ -19,9 +19,8 @@ fun blankMap(x: Int, y: Int): Map {
     return Map(Array(x) { Array(y) { tileIdToTile(0) } }, Point(0, 0), 0)
 }
 
-fun mapFromFile(json: String): Map? {
+fun mapFromFile(mapData: JSONObject): Map? {
     try {
-        val mapData = JSONObject(json)
         val mapArray = mapData.getJSONArray("tileMap")
         val tileArray = Array(mapArray.length()) { x ->
             Array(mapArray.getJSONArray(x).length()) { y ->

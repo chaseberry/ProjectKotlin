@@ -10,9 +10,40 @@ import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.Tiles.Finish
 import ChipsChallenge.Map.Map
 import java.util.ArrayList
+import java.io.File
+import java.io.FileReader
+import java.io.BufferedReader
+import ChipsChallenge.Map.mapFromFile
+import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Map.Point
 
 public enum class Direction {
     UP; DOWN; LEFT; RIGHT
+}
+
+fun engineFromFile(file: File): Engine? {
+
+    try {
+        val reader = BufferedReader(FileReader(file))
+        val fileContents = reader.readLine()
+        reader.close()
+        val levelData = JSONObject(fileContents)
+        val map = mapFromFile(levelData)
+        val objs = levelData.getJSONArray("objects")
+        val objects = ArrayList<ObjectBase>(objs.length())
+        for (z in 0..objs.length() - 1) {
+            val obj = objs.getJSONObject(z)
+            objects.add(objectFromId(obj.getInt("id"), Point(obj.getJSONArray("location").getInt(0), obj.getJSONArray("location").getInt(1))))
+        }
+        if (map == null) {
+            return null
+        }
+        return Engine(map, objects)
+    } catch(e: Exception) {
+
+    }
+
+    return null
 }
 
 class Engine(val map: Map, objects: ArrayList<ObjectBase>) {
