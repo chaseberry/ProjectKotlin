@@ -61,7 +61,7 @@ class Editor(x: Int, y: Int) {
 
     fun triggerUpdate() {
         val viewport = getViewport(currentCenter, map)
-        val tileLocation = Point(mouseBindings.mouseLocation.x - viewport.xStart, mouseBindings.mouseLocation.y + viewport.yStart)
+        val tileLocation = mouseBindings.mouseLocation + Point(viewport.xStart, viewport.yStart)
         when (pallet.palletStatus) {
             PalletStatus.TILE -> updateTile(tileLocation)
             PalletStatus.OBJECT -> updateObject(tileLocation)
