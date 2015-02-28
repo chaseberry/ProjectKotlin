@@ -33,11 +33,12 @@ fun mapFromFile(mapData: JSONObject): Map? {
         val defaultLocation = Point(mapData.getJSONArray("playerStartLocation").getInt(0),
                 mapData.getJSONArray("playerStartLocation").getInt(1))
 
-        val chipCount = mapData.getInt("chipData")
+        val chipCount = mapData.getInt("chipCount")
 
         return Map(tileArray, defaultLocation, chipCount)
 
     } catch(except: Exception) {
+        except.printStackTrace()
         return null
     }
 

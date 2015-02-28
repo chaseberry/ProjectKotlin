@@ -1,4 +1,6 @@
-import ChipsChallenge.Editor.Editor
+import ChipsChallenge.Engine.engineFromFile
+import ChipsChallenge.Engine.loadLevel
+import java.net.URL
 
 /**
  * Created by chase on 2/25/15.
@@ -6,5 +8,10 @@ import ChipsChallenge.Editor.Editor
 
 
 fun main(args: Array<String>) {
-    Editor(15, 14).start()
+    val engine = engineFromFile((loadLevel("level1")))
+    if (engine != null) {
+        print("notnull")
+        engine.start()
+    }
+    println("null")
 }

@@ -16,13 +16,13 @@ import java.io.BufferedReader
 import ChipsChallenge.Map.mapFromFile
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Point
+import java.net.URI
 
 public enum class Direction {
     UP; DOWN; LEFT; RIGHT
 }
 
 fun engineFromFile(file: File): Engine? {
-
     try {
         val reader = BufferedReader(FileReader(file))
         val fileContents = reader.readLine()
@@ -40,10 +40,14 @@ fun engineFromFile(file: File): Engine? {
         }
         return Engine(map, objects)
     } catch(e: Exception) {
-
+        e.printStackTrace()
     }
 
     return null
+}
+
+fun loadLevel(name: String): File {
+    return File(URI(fileUrl + "Levels/${name}.ccl"))
 }
 
 class Engine(val map: Map, objects: ArrayList<ObjectBase>) {

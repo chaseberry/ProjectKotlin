@@ -13,7 +13,7 @@ val fileUrl: String by Delegates.lazy {
     var fileName = ""
     for (filePart in (BaseObject() as java.lang.Object).getClass().getResource("").toString().split("/")) {
         if (filePart == "ChipsChallenge") {
-            fileName += "$filePart/Images/"
+            fileName += "$filePart/"
             break;
         }
         fileName += "$filePart/"
@@ -26,7 +26,7 @@ fun loadImage(imageSource: String?): BufferedImage? {
     if (imageSource == null) {
         return null
     }
-    return ImageIO.read(URL("$fileUrl$imageSource"));
+    return ImageIO.read(URL("${fileUrl}Images/$imageSource"));
 }
 
 val floorImage: BufferedImage by Delegates.lazy {
