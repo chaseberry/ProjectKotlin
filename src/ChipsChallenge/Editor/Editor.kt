@@ -10,6 +10,7 @@ import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.Engine.loadImage
+import ChipsChallenge.Engine.KeyBindings
 
 /**
  * Created by chase on 2/27/15.
@@ -29,6 +30,8 @@ class Editor(x: Int, y: Int) {
     val pallet = EditorPallet()
 
     val playerImage = loadImage("chip-south.gif")
+
+    val keyBindings = KeyBindings()
 
     fun start() {
         frame.image = buildFrameImage()
@@ -133,6 +136,16 @@ class Editor(x: Int, y: Int) {
         mapObj.put("objects", objArray)
 
         return mapObj.toString()
+    }
+
+    fun triggerScreenMove() {
+        when {
+            keyBindings.up -> if (currentCenter.y != 0 ) currentCenter.y--
+            keyBindings.down -> if (currentCenter.y != (map.y - 1) ) currentCenter.y++
+            keyBindings.left -> if (currentCenter.x != 0) currentCenter.x--
+            keyBindings.right -> if (currentCenter.x != (map.x - 1)) currentCenter.x++
+        }
+        frame.image = buildFrameImage()
     }
 
 }

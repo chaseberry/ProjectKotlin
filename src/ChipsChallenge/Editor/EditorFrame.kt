@@ -6,6 +6,8 @@ import java.awt.Graphics
 import java.awt.event.MouseListener
 import java.awt.event.MouseEvent
 import java.awt.event.MouseMotionListener
+import java.awt.event.KeyListener
+import java.awt.event.KeyEvent
 
 /**
  * Created by chase on 2/27/15.
@@ -51,12 +53,29 @@ class EditorFrame(val editor: Editor) : JFrame() {
 
     }
 
+    val keyListener = object : KeyListener {
+        override fun keyPressed(e: KeyEvent) {
+            editor.keyBindings.keyPressed(e.getKeyCode())
+            editor.triggerScreenMove()
+        }
+
+        override fun keyReleased(e: KeyEvent) {
+            editor.keyBindings.keyReleased(e.getKeyCode())
+        }
+
+        override fun keyTyped(e: KeyEvent) {
+
+        }
+
+    }
+
     {
         pack()
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
         addMouseListener(mouseListener)
         addMouseMotionListener(mouseMotionListener)
+        addKeyListener(keyListener)
     }
 
 

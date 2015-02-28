@@ -16,6 +16,11 @@ data class KeyBindings {
     var left = false
     var right = false
 
+    val isKeyPressed: Boolean
+        get() {
+            return up || down || left || right
+        }
+
     public fun keyPressed(keyCode: Int) {
         when (keyCode) {
             KEY_CODE_UP -> up = true

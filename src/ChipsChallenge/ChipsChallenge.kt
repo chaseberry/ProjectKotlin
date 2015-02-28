@@ -6,5 +6,5 @@ import ChipsChallenge.Editor.Editor
 
 
 fun main(args: Array<String>) {
-    Editor(5, 5).start()
+    Editor(15, 15).start()
 }
