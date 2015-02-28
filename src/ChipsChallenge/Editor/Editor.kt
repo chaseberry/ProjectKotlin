@@ -118,7 +118,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun save() {
-        
+        println(generateSave())
     }
 
     fun generateSave(): String {
@@ -138,7 +138,7 @@ class Editor(x: Int, y: Int) {
             objArray.put(JSONObject().put("id", obj.id).put("location", JSONArray().put(obj.location.x).put(obj.location.y)))
         }
         mapObj.put("objects", objArray)
-
+        mapObj.put("playerStartLocation", JSONArray().put(map.defaultPlayerLocation.x).put(map.defaultPlayerLocation.y))
         return mapObj.toString()
     }
 

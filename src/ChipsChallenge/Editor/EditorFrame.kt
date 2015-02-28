@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent
 import java.awt.event.MouseMotionListener
 import java.awt.event.KeyListener
 import java.awt.event.KeyEvent
+import javax.swing.JButton
 
 /**
  * Created by chase on 2/27/15.
@@ -71,11 +72,18 @@ class EditorFrame(val editor: Editor) : JFrame() {
 
     {
         pack()
-        setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
+        setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 10) + getInsets().bottom)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
         addMouseListener(mouseListener)
         addMouseMotionListener(mouseMotionListener)
         addKeyListener(keyListener)
+        setLayout(null)
+
+        val saveButton = JButton("Save!")
+        saveButton.setLocation(15, 32 * 9)
+        saveButton.setSize(64, 32)
+        saveButton.addActionListener { editor.save() }
+        add(saveButton)
     }
 
 
@@ -91,7 +99,6 @@ class EditorFrame(val editor: Editor) : JFrame() {
         if (image != null) {
             graphics.drawImage(image, getInsets().left, getInsets().top, null)
         }
-
     }
 
 
