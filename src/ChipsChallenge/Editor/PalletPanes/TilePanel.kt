@@ -14,11 +14,10 @@ import ChipsChallenge.Editor.PalletStatus
 class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
     val buttons = Array(5) { tileIdToTile(it) };
-    val gridSize = 5
 
     {
         setLayout(null)
-        setSize(buttons.size() % gridSize * 32, buttons.size() / gridSize * 32)
+        setSize(buttons.size() % editorPallet.gridSize * 32, buttons.size() / editorPallet.gridSize * 32)
         for (z in 0..buttons.size() - 1) {
             add(createButton(buttons[z], z))
         }
@@ -27,7 +26,7 @@ class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
     fun createButton(tile: Tile, x: Int): JButton {
         val button = JButton()
-        button.setLocation((x % gridSize) * 32, (x / gridSize) * 32)
+        button.setLocation((x % editorPallet.gridSize) * 32, (x / editorPallet.gridSize) * 32)
         button.setSize(32, 32)
         button.setContentAreaFilled(false)
         button.setBorder(null)

@@ -15,11 +15,10 @@ import ChipsChallenge.Editor.PalletStatus
 class ObjectPanel(val editorPallet: EditorPallet) : JPanel() {
 
     val buttons = Array(11) { objectFromId(it, Point(0, 0)) };
-    val gridSize = 5
 
     {
         setLayout(null)
-        setSize(buttons.size() % gridSize * 32, buttons.size() / gridSize * 32)
+        setSize(buttons.size() % editorPallet.gridSize * 32, buttons.size() / editorPallet.gridSize * 32)
         for (z in 0..buttons.size() - 1) {
             if (buttons[z] != null) {
                 add(createButton(buttons[z] as ObjectBase, z))
@@ -30,7 +29,7 @@ class ObjectPanel(val editorPallet: EditorPallet) : JPanel() {
 
     fun createButton(obj: ObjectBase, x: Int): JButton {
         val button = JButton()
-        button.setLocation((x % gridSize) * 32, (x / gridSize) * 32)
+        button.setLocation((x % editorPallet.gridSize) * 32, (x / editorPallet.gridSize) * 32)
         button.setSize(32, 32)
         button.setContentAreaFilled(false)
         button.setBorder(null)
