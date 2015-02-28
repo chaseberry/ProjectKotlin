@@ -1,0 +1,35 @@
+TODO
+
+Add Enemies:
+    Tank
+    PinkBall
+    Teeth
+    Bug
+    centipede
+    Fireball
+    Glider
+    Walker
+    Blob
+    Paramecium
+
+Finish adding tiles
+    Specifically Ice/Directional things
+    Fire
+    Gravel
+    Thief
+    Floors with blockers
+
+Add Boot Objects
+
+Add Block object
+
+Add Cloner object
+
+Add bomb object
+
+Beartrap
+
+Teleporter
+
+Add logic for Hint
+
