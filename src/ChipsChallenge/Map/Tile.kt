@@ -12,6 +12,8 @@ public fun tileIdToTile(id: Int): Tile {
     return when (id) {
         0 -> Floor()
         1 -> Wall()
+        2 -> Finish()
+        3 -> Help()
         else -> Wall()
     }
 }

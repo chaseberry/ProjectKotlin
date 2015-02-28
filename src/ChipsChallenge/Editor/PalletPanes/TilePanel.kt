@@ -13,7 +13,7 @@ import ChipsChallenge.Editor.PalletStatus
  */
 class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(2) { tileIdToTile(it) };
+    val buttons = Array(4) { tileIdToTile(it) };
     val gridSize = 5
 
     {
