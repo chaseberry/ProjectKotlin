@@ -131,12 +131,13 @@ class Editor(x: Int, y: Int) {
             }
             mapArray.put(mapSection)
         }
-        mapObj.put("tileMap", mapArray)
 
         val objArray = JSONArray()
         for (obj in objects.objects.values()) {
             objArray.put(JSONObject().put("id", obj.id).put("location", JSONArray().put(obj.location.x).put(obj.location.y)))
         }
+        
+        mapObj.put("tileMap", mapArray)
         mapObj.put("objects", objArray)
         mapObj.put("playerStartLocation", JSONArray().put(map.defaultPlayerLocation.x).put(map.defaultPlayerLocation.y))
         return mapObj.toString()
