@@ -7,6 +7,7 @@ import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Engine.ObjectResolution
 import ChipsChallenge.Engine.yellowLockImage
 import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Unit.Player
 
 /**
  * Created by chase on 2/27/15.
@@ -18,7 +19,7 @@ class YellowLock(location: Point) : ObjectBase(7, location, yellowLockImage) {
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
-        if (engine.player.inventory.yellowKeys > 0) {
+        if (interactor is Player && engine.player.inventory.yellowKeys > 0) {
             engine.player.inventory.yellowKeys--
             return ObjectResolution.REMOVE
         }
