@@ -48,3 +48,47 @@ val finishImage: BufferedImage by Delegates.lazy {
 val helpImage: BufferedImage by Delegates.lazy {
     loadImage("hint.gif") as BufferedImage
 }
+
+val blueKeyImage: BufferedImage by Delegates.lazy {
+    loadImage("blue_key.gif") as BufferedImage
+}
+
+val redKeyImage: BufferedImage by Delegates.lazy {
+    loadImage("red_key.gif") as BufferedImage
+}
+
+val yellowKeyImage: BufferedImage by Delegates.lazy {
+    loadImage("yellow_key.gif") as BufferedImage
+}
+
+val greenKeyImage: BufferedImage by Delegates.lazy {
+    loadImage("green_key.gif") as BufferedImage
+}
+
+val blueKLockImage: BufferedImage by Delegates.lazy {
+    loadImage("blue_lock.gif") as BufferedImage
+}
+
+val redLockImage: BufferedImage by Delegates.lazy {
+    loadImage("red_lock.gif") as BufferedImage
+}
+
+val yellowLockImage: BufferedImage by Delegates.lazy {
+    loadImage("yellow_lock.gif") as BufferedImage
+}
+
+val greenLockImage: BufferedImage by Delegates.lazy {
+    loadImage("green_lock.gif") as BufferedImage
+}
+
+val chipImage: BufferedImage by Delegates.lazy {
+    loadImage("chip.gif") as BufferedImage
+}
+
+val dirtImage: BufferedImage by Delegates.lazy {
+    loadImage("dirt.gif") as BufferedImage
+}
+
+val socketImage: BufferedImage by Delegates.lazy {
+    loadImage("socket.gif") as BufferedImage
+}

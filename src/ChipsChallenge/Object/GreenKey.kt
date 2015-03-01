@@ -5,13 +5,12 @@ import ChipsChallenge.Map.Point
 import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Engine.ObjectResolution
-import ChipsChallenge.Engine.loadImage
-import java.awt.image.BufferedImage
+import ChipsChallenge.Engine.greenKeyImage
 
 /**
  * Created by chase on 2/27/15.
  */
-class GreenKey(location: Point) : ObjectBase(8, location, loadImage("green_key.gif") as BufferedImage) {
+class GreenKey(location: Point) : ObjectBase(8, location, greenKeyImage) {
 
     override fun interact(engine: Engine, direction: Direction): ObjectResolution {
         engine.player.inventory.hasGreenKey = true

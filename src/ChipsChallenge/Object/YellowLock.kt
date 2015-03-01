@@ -5,13 +5,12 @@ import ChipsChallenge.Map.Point
 import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Engine.ObjectResolution
-import ChipsChallenge.Engine.loadImage
-import java.awt.image.BufferedImage
+import ChipsChallenge.Engine.yellowLockImage
 
 /**
  * Created by chase on 2/27/15.
  */
-class YellowLock(location: Point) : ObjectBase(7, location, loadImage("yellow_lock.gif") as BufferedImage) {
+class YellowLock(location: Point) : ObjectBase(7, location, yellowLockImage) {
 
     override fun onTick(engine: Engine) {
 
