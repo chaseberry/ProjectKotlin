@@ -54,7 +54,7 @@ class Player(location: Point) : UnitBase(location) {
 
     fun moveUp(engine: Engine) {
         image = imageSet.get("up")
-        if (engine.movement.moveUp()) {
+        if (engine.movement.moveUp(this)) {
             location.y -= 1
             move()
         }
@@ -62,7 +62,7 @@ class Player(location: Point) : UnitBase(location) {
 
     fun moveDown(engine: Engine) {
         image = imageSet.get("down")
-        if (engine.movement.moveDown()) {
+        if (engine.movement.moveDown(this)) {
             location.y += 1
             move()
         }
@@ -70,7 +70,7 @@ class Player(location: Point) : UnitBase(location) {
 
     fun moveLeft(engine: Engine) {
         image = imageSet.get("left")
-        if (engine.movement.moveLeft()) {
+        if (engine.movement.moveLeft(this)) {
             location.x -= 1
             move()
         }
@@ -78,7 +78,7 @@ class Player(location: Point) : UnitBase(location) {
 
     fun moveRight(engine: Engine) {
         image = imageSet.get("right")
-        if (engine.movement.moveRight()) {
+        if (engine.movement.moveRight(this)) {
             location.x += 1
             move()
         }

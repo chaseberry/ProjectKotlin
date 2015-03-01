@@ -8,12 +8,13 @@ import ChipsChallenge.Engine.ObjectResolution
 import ChipsChallenge.Engine.loadImage
 import java.awt.image.BufferedImage
 import ChipsChallenge.Engine.yellowKeyImage
+import ChipsChallenge.Engine.UnitBase
 
 /**
  * Created by chase on 2/27/15.
  */
 class YellowKey(location: Point) : ObjectBase(6, location, yellowKeyImage) {
-    override fun interact(engine: Engine, direction: Direction): ObjectResolution {
+    override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         engine.player.inventory.yellowKeys++
         return ObjectResolution.REMOVE
     }

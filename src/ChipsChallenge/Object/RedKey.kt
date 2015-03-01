@@ -8,13 +8,14 @@ import ChipsChallenge.Engine.ObjectResolution
 import ChipsChallenge.Engine.loadImage
 import java.awt.image.BufferedImage
 import ChipsChallenge.Engine.redKeyImage
+import ChipsChallenge.Engine.UnitBase
 
 /**
  * Created by chase on 2/27/15.
  */
 class RedKey(location: Point) : ObjectBase(4, location, redKeyImage) {
 
-    override fun interact(engine: Engine, direction: Direction): ObjectResolution {
+    override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         engine.player.inventory.redKeys++
         return ObjectResolution.REMOVE
     }

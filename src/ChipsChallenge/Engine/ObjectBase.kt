@@ -23,7 +23,7 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
 
 data abstract class ObjectBase(val id: Int, var location: Point, val image: BufferedImage) : EngineObjectBase {
 
-    abstract fun interact(engine: Engine, direction: Direction): ObjectResolution
+    abstract fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution
 
 }
 
@@ -31,4 +31,5 @@ public enum class ObjectResolution {
     MOVE
     REMOVE
     NOTHING
+    PASSOVER
 }

@@ -32,7 +32,7 @@ class ObjectManager(val engine: Engine?) {
         return objs
     }
 
-    public fun resolve(newLocation: Point, direction: Direction): Boolean {
+    public fun resolve(newLocation: Point, direction: Direction, interactor: UnitBase): Boolean {
         if (engine == null) {
             return false
         }
@@ -40,7 +40,7 @@ class ObjectManager(val engine: Engine?) {
             return true
         }
 
-        val resolution = objects.get(newLocation).interact(engine as Engine, direction)
+        val resolution = objects.get(newLocation).interact(engine as Engine, direction, interactor)
         if (resolution == ObjectResolution.NOTHING) {
             return false
         }
