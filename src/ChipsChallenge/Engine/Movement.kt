@@ -2,6 +2,7 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.Map.Point
 import ChipsChallenge.Map.Tile
+import ChipsChallenge.Object.BearTrap
 
 /**
  * Created by chase on 2/26/15.
@@ -14,6 +15,10 @@ class Movement(val engine: Engine) {
      */
     fun move(newLocation: Point, direction: Direction, interactor: UnitBase): Boolean {
         if (engine.map.getTile(newLocation) == null || !interactor.canMoveToTile(engine.map.getTile(newLocation) as Tile)) {
+            return false
+        }
+        val obj = engine.objectManager.objects.get(interactor.location)
+        if (obj != null && obj is BearTrap) {
             return false
         }
 

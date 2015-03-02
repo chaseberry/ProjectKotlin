@@ -5,12 +5,14 @@ import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.ObjectResolution
+import ChipsChallenge.Engine.Triggerable
+import java.util.ArrayList
 import ChipsChallenge.Engine.greenButtonImage
 
 /**
  * Created by chase on 3/2/15.
  */
-class GreenButton(location: Point) : Button(12, location, greenButtonImage) {
+class GreenButton(location: Point) : Button(12, location, greenButtonImage, ArrayList<Triggerable>()) {
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         return ObjectResolution.TRIGGER
     }

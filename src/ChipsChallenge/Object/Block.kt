@@ -59,7 +59,7 @@ class Block(location: Point) : ObjectBase(11, location, blockImage) {
     fun canMoveToLocation(engine: Engine, location: Point): Boolean {
         val tile = engine.map.getTile(location)
         val objectInSpace = engine.objectManager.objects.get(location)
-        if (objectInSpace != null && objectInSpace !is Button) {
+        if (objectInSpace != null && objectInSpace !is Button && objectInSpace !is BearTrap || objectUnder is BearTrap) {
             return false
         }
 

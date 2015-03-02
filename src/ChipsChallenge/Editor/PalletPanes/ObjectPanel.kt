@@ -14,7 +14,7 @@ import ChipsChallenge.Editor.PalletStatus
  */
 class ObjectPanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(13) { objectFromId(it, Point(0, 0)) };
+    val buttons = Array(15) { objectFromId(it, Point(0, 0)) };
 
     {
         setLayout(null)

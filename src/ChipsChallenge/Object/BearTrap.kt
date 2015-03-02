@@ -18,7 +18,7 @@ class BearTrap(location: Point) : ObjectBase(14, location, bearTrapImage), Trigg
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
-        return ObjectResolution.STUCK
+        return ObjectResolution.PASSOVER
     }
 
     override fun onTick(engine: Engine) {

@@ -19,6 +19,8 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
         10 -> Dirt(location)
         11 -> Block(location)
         12 -> GreenButton(location)
+        13 -> BrownButton(location)
+        14 -> BearTrap(location)
         else -> null
     }
 }
@@ -35,5 +37,4 @@ public enum class ObjectResolution {
     NOTHING
     PASSOVER
     TRIGGER
-    STUCK
 }
