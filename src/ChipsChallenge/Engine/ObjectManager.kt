@@ -41,7 +41,7 @@ class ObjectManager(val engine: Engine?) {
     public fun objectsInViewport(viewport: Viewport): ArrayList<ObjectBase> {
         val objs = ArrayList<ObjectBase>()
         for ((key, value) in objects) {
-            if (pointInViewport(key, viewport)) {
+            if (pointInViewport(key, viewport) && value != null) {
                 objs.add(value.headObject)
             }
         }
@@ -60,7 +60,11 @@ class ObjectManager(val engine: Engine?) {
         //DO NOTHING
         //else do all resolutions
 
+
+        val tail = ArrayList<ObjectBase>()
+
         for (obj in objects.get(newLocation)) {
+            tail.add(obj)
             //Bug where removed objects cause a skip in control of objects
             val resolution = obj.interact(engine, direction, interactor)
             println("objId: ${obj.id}, resolution: $resolution")
@@ -68,11 +72,11 @@ class ObjectManager(val engine: Engine?) {
                 return false
             }
             if (resolution == ObjectResolution.REMOVE) {
-                remove(obj, newLocation)
+                tail.remove(obj)
             }
             //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
             if (resolution == ObjectResolution.MOVE) {
-                remove(obj, newLocation)
+                tail.remove(obj)
                 val newObjLocation = when (direction) {
                     Direction.UP -> newLocation.copy(y = newLocation.y - 1)
                     Direction.DOWN -> newLocation.copy(y = newLocation.y + 1)
@@ -89,6 +93,8 @@ class ObjectManager(val engine: Engine?) {
                 }
             }
         }
+
+        objects.put(newLocation, locationListFromArrayList(tail))
 
         return true
     }
