@@ -19,6 +19,7 @@ import java.io.FileWriter
 import ChipsChallenge.Engine.Engine
 import java.util.ArrayList
 import ChipsChallenge.Map.mapFromIds
+import ChipsChallenge.Object.Block
 
 /**
  * Created by chase on 2/27/15.
@@ -110,9 +111,13 @@ class Editor(x: Int, y: Int) {
 
     fun addObject(tileLocation: Point) {
         if (objects.objects.containsKey(tileLocation) || pallet.currentObject == null) {
+            val obj = objects.objects.get(tileLocation)
+            if (obj is Block) {
+                obj.cover(objectFromId(pallet.currentObject!!.id, tileLocation)!!)
+            }
             return
         }
-        objects.add((objectFromId((pallet.currentObject as ObjectBase).id, tileLocation) as ObjectBase), tileLocation)
+        objects.add((objectFromId((pallet.currentObject!!).id, tileLocation)!!), tileLocation)
     }
 
     fun removeObject(tileLocation: Point) {
@@ -199,7 +204,12 @@ class Editor(x: Int, y: Int) {
         }
         val objs = ArrayList<ObjectBase>(objects.objects.size())
         for (obj in objects.objects.values()) {
-            objs.add(objectFromId(obj.id, obj.location))//Clone? Copy doesn't work because abstract stuff
+            val newObj = objectFromId(obj.id, obj.location)
+            if (newObj is Block && (obj as Block).objectUnder != null) {
+                println("Added objUnder")
+                newObj.cover(objectFromId((obj as Block).objectUnder!!.id, newObj.location)!!)
+            }
+            objs.add(newObj)//Clone? Copy doesn't work because abstract stuff
         }
         Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation, map.chipTotal), objs).start()
     }

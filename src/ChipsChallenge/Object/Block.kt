@@ -17,6 +17,8 @@ class Block(location: Point) : ObjectBase(11, location, blockImage) {
 
     val blockedIds = (0..11)
 
+    var objectUnder: ObjectBase? = null
+
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         if (interactor !is Player) {
             return ObjectResolution.NOTHING
@@ -39,12 +41,28 @@ class Block(location: Point) : ObjectBase(11, location, blockImage) {
     override fun onTick(engine: Engine) {
     }
 
+    fun cover(obj: ObjectBase): Boolean {
+        if (objectUnder != null) {
+            return false
+        }
+        objectUnder = obj
+        objectUnder!!.location = location.copy()
+        return true
+    }
+
+    fun unCover(): ObjectBase? {
+        val objUnder = objectUnder
+        objectUnder = null
+        return objUnder
+    }
+
     fun canMoveToLocation(engine: Engine, location: Point): Boolean {
         val tile = engine.map.getTile(location)
         val objectInSpace = engine.objectManager.objects.get(location)
         if (objectInSpace != null && objectInSpace.id in blockedIds) {
             return false
         }
+
         return (tile is Floor || tile is Water)
     }
 
