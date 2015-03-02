@@ -41,9 +41,13 @@ class Block(location: Point) : ObjectBase(11, location, blockImage) {
 
     fun canMoveToLocation(engine: Engine, location: Point): Boolean {
         val tile = engine.map.getTile(location)
-        val objectInSpace = engine.objectManager.objects.get(location)
-        if (objectInSpace != null && objectInSpace.id in blockedIds) {
-            return false
+        val objList = engine.objectManager.objects.get(location)
+        if (objList != null) {
+            for (objectInSpace in objList) {
+                if (objectInSpace.id in blockedIds) {
+                    return false
+                }
+            }
         }
         return (tile is Floor || tile is Water)
     }

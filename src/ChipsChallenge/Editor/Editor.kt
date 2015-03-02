@@ -168,9 +168,7 @@ class Editor(x: Int, y: Int) {
 
         val objArray = JSONArray()
         for (objList in objects.objects.values()) {
-            for (obj in objList) {
-                objArray.put(JSONObject().put("id", obj.id).put("location", JSONArray().put(obj.location.x).put(obj.location.y)))
-            }
+            objArray.put(objList.saveObject)
         }
 
         mapObj.put("tileMap", mapArray)
@@ -206,7 +204,7 @@ class Editor(x: Int, y: Int) {
                     (objList.headObject).location) as ObjectBase)
             if (objList.tailObjects != null) {
                 for (obj in objList.tailObjects as ArrayList) {
-                    objLocList.add(obj)
+                    objLocList.add(objectFromId(obj.id, obj.location))
                 }
             }
             objs.add(objLocList)//Clone? Copy doesn't work because abstract stuff
