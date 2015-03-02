@@ -40,7 +40,7 @@ class ObjectManager(val engine: Engine?) {
             return true
         }
 
-        val resolution = objects.get(newLocation).interact(engine as Engine, direction, interactor)
+        val resolution = objects.get(newLocation).interact(engine, direction, interactor)
         if (resolution == ObjectResolution.NOTHING) {
             return false
         }
@@ -49,10 +49,18 @@ class ObjectManager(val engine: Engine?) {
         }
         //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
         if (resolution == ObjectResolution.MOVE) {
+            val obj = objects.remove(newLocation)
+            val newObjLocation = when (direction) {
+                Direction.UP -> newLocation.copy(y = newLocation.y - 1)
+                Direction.DOWN -> newLocation.copy(y = newLocation.y + 1)
+                Direction.LEFT -> newLocation.copy(x = newLocation.x - 1)
+                Direction.RIGHT -> newLocation.copy(x = newLocation.x + 1)
 
+            }
+            obj.location = newObjLocation
+            objects.put(newObjLocation, obj)
         }
         return true
-
+        
     }
-
 }

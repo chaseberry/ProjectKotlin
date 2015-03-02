@@ -17,6 +17,7 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
         8 -> GreenKey(location)
         9 -> GreenLock(location)
         10 -> Dirt(location)
+        11 -> Block(location)
         else -> null
     }
 }

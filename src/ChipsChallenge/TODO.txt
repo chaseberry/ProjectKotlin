@@ -1,5 +1,7 @@
 TODO
 
+Change how object manager works to allow for multiple objects per tile
+
 Add Enemies:
     Tank
     PinkBall
