@@ -19,6 +19,7 @@ import java.io.FileWriter
 import ChipsChallenge.Engine.Engine
 import java.util.ArrayList
 import ChipsChallenge.Map.mapFromIds
+import ChipsChallenge.Engine.ObjectLocationList
 
 /**
  * Created by chase on 2/27/15.
@@ -166,8 +167,10 @@ class Editor(x: Int, y: Int) {
         }
 
         val objArray = JSONArray()
-        for (obj in objects.objects.values()) {
-            objArray.put(JSONObject().put("id", obj.id).put("location", JSONArray().put(obj.location.x).put(obj.location.y)))
+        for (objList in objects.objects.values()) {
+            for (obj in objList) {
+                objArray.put(JSONObject().put("id", obj.id).put("location", JSONArray().put(obj.location.x).put(obj.location.y)))
+            }
         }
 
         mapObj.put("tileMap", mapArray)
@@ -197,9 +200,16 @@ class Editor(x: Int, y: Int) {
         } catch(e: Exception) {
 
         }
-        val objs = ArrayList<ObjectBase>(objects.objects.size())
-        for (obj in objects.objects.values()) {
-            objs.add(objectFromId(obj.id, obj.location))//Clone? Copy doesn't work because abstract stuff
+        val objs = ArrayList<ObjectLocationList>(objects.objects.size())
+        for (objList in objects.objects.values()) {
+            val objLocList = ObjectLocationList(objectFromId((objList.headObject).id,
+                    (objList.headObject).location) as ObjectBase)
+            if (objList.tailObjects != null) {
+                for (obj in objList.tailObjects as ArrayList) {
+                    objLocList.add(obj)
+                }
+            }
+            objs.add(objLocList)//Clone? Copy doesn't work because abstract stuff
         }
         Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation), objs).start()
     }

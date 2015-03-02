@@ -1,6 +1,5 @@
 package ChipsChallenge.Engine
 
-import java.util.HashMap
 import ChipsChallenge.Map.Point
 import ChipsChallenge.UI.Viewport
 import java.util.ArrayList
@@ -8,6 +7,7 @@ import ChipsChallenge.UI.pointInViewport
 import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Object.Dirt
+import java.util.HashMap
 
 /**
  * Created by chase on 2/27/15.
@@ -15,10 +15,23 @@ import ChipsChallenge.Object.Dirt
 
 class ObjectManager(val engine: Engine?) {
 
-    val objects = HashMap<Point, ObjectBase>()
+    val objects = HashMap<Point, ObjectLocationList>()
 
-    public fun add(obj: ObjectBase, location: Point) {
-        objects.put(location, obj)
+    fun add(obj: ObjectBase, location: Point) {
+        if (objects.contains(location)) {
+            objects.get(location).add(obj)
+        } else {
+            objects.put(location, ObjectLocationList(obj))
+        }
+    }
+
+
+    fun remove(obj: ObjectBase, newLocation: Point) {
+        if (objects.get(newLocation).size() == 1) {
+            objects.remove(newLocation)
+        } else {
+            objects.get(newLocation).remove(obj)
+        }
     }
 
     public fun isObjectAt(location: Point): Boolean {
@@ -29,7 +42,7 @@ class ObjectManager(val engine: Engine?) {
         val objs = ArrayList<ObjectBase>()
         for ((key, value) in objects) {
             if (pointInViewport(key, viewport)) {
-                objs.add(value)
+                objs.add(value.headObject)
             }
         }
         return objs
@@ -42,33 +55,39 @@ class ObjectManager(val engine: Engine?) {
         if (!objects.containsKey(newLocation)) {
             return true
         }
-
-        val resolution = objects.get(newLocation).interact(engine, direction, interactor)
-        if (resolution == ObjectResolution.NOTHING) {
-            return false
-        }
-        if (resolution == ObjectResolution.REMOVE) {
-            objects.remove(newLocation)
-        }
-        //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
-        if (resolution == ObjectResolution.MOVE) {
-            val obj = objects.remove(newLocation)
-            val newObjLocation = when (direction) {
-                Direction.UP -> newLocation.copy(y = newLocation.y - 1)
-                Direction.DOWN -> newLocation.copy(y = newLocation.y + 1)
-                Direction.LEFT -> newLocation.copy(x = newLocation.x - 1)
-                Direction.RIGHT -> newLocation.copy(x = newLocation.x + 1)
-
+        //Check all resolutions
+        //if ANY resolution is NOTHING
+        //DO NOTHING
+        //else do all resolutions
+        for (obj in objects.get(newLocation)) {
+            val resolution = obj.interact(engine, direction, interactor)
+            if (resolution == ObjectResolution.NOTHING) {
+                return false
             }
-            if (engine.map.getTile(newObjLocation) is Water) {
-                engine.map.setTile(newObjLocation, Floor())
-                objects.put(newObjLocation, Dirt(newObjLocation))
-            } else {
-                obj.location = newObjLocation
-                objects.put(newObjLocation, obj)
+            if (resolution == ObjectResolution.REMOVE) {
+                remove(obj, newLocation)
+            }
+            //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
+            if (resolution == ObjectResolution.MOVE) {
+                remove(obj, newLocation)
+                val newObjLocation = when (direction) {
+                    Direction.UP -> newLocation.copy(y = newLocation.y - 1)
+                    Direction.DOWN -> newLocation.copy(y = newLocation.y + 1)
+                    Direction.LEFT -> newLocation.copy(x = newLocation.x - 1)
+                    Direction.RIGHT -> newLocation.copy(x = newLocation.x + 1)
+
+                }
+                if (engine.map.getTile(newObjLocation) is Water) {
+                    engine.map.setTile(newObjLocation, Floor())
+                    add(Dirt(newObjLocation), newObjLocation)
+                } else {
+                    obj.location = newObjLocation
+                    add(obj, newObjLocation)
+                }
             }
         }
         return true
-
     }
+
+
 }
