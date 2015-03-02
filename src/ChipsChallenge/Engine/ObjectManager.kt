@@ -5,6 +5,9 @@ import ChipsChallenge.Map.Point
 import ChipsChallenge.UI.Viewport
 import java.util.ArrayList
 import ChipsChallenge.UI.pointInViewport
+import ChipsChallenge.Map.Tiles.Water
+import ChipsChallenge.Map.Tiles.Floor
+import ChipsChallenge.Object.Dirt
 
 /**
  * Created by chase on 2/27/15.
@@ -57,10 +60,15 @@ class ObjectManager(val engine: Engine?) {
                 Direction.RIGHT -> newLocation.copy(x = newLocation.x + 1)
 
             }
-            obj.location = newObjLocation
-            objects.put(newObjLocation, obj)
+            if (engine.map.getTile(newObjLocation) is Water) {
+                engine.map.setTile(newObjLocation, Floor())
+                objects.put(newObjLocation, Dirt(newObjLocation))
+            } else {
+                obj.location = newObjLocation
+                objects.put(newObjLocation, obj)
+            }
         }
         return true
-        
+
     }
 }

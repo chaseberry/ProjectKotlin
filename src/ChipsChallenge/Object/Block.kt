@@ -15,7 +15,7 @@ import ChipsChallenge.Map.Tiles.*
  */
 class Block(location: Point) : ObjectBase(11, location, blockImage) {
 
-    val blockedIds = 0..11
+    val blockedIds = (0..11)
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         if (interactor !is Player) {
