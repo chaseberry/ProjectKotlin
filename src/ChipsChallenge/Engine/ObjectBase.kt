@@ -35,4 +35,5 @@ public enum class ObjectResolution {
     NOTHING
     PASSOVER
     TRIGGER
+    STUCK
 }

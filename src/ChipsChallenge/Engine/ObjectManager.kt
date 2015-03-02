@@ -21,8 +21,7 @@ class ObjectManager(val engine: Engine?) {
     fun add(obj: ObjectBase, location: Point) {
         objects.put(location, obj)
     }
-
-
+    
     fun remove(newLocation: Point) {
         if (objects.containsKey(newLocation)) {
             objects.remove(newLocation)
