@@ -24,6 +24,11 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
     }
 }
 
+fun objectFromJson(obj: JSONObject): ObjectBase? {
+    val locArray = obj.getJSONArray("location")
+    return objectFromId(obj.getInt("id"), Point(locArray.getInt(0), locArray.getInt(1)))
+}
+
 data abstract class ObjectBase(val id: Int, var location: Point, val image: BufferedImage) : EngineObjectBase {
 
     val saveObject: JSONObject
