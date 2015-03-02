@@ -15,22 +15,16 @@ import java.util.HashMap
 
 class ObjectManager(val engine: Engine?) {
 
-    val objects = HashMap<Point, ObjectLocationList>()
+    val objects = HashMap<Point, ObjectBase>()
 
     fun add(obj: ObjectBase, location: Point) {
-        if (objects.contains(location)) {
-            objects.get(location).add(obj)
-        } else {
-            objects.put(location, ObjectLocationList(obj))
-        }
+        objects.put(location, obj)
     }
 
 
     fun remove(obj: ObjectBase, newLocation: Point) {
-        if (objects.get(newLocation).size() == 1) {
+        if (objects.containsKey(newLocation)) {
             objects.remove(newLocation)
-        } else {
-            objects.get(newLocation).remove(obj)
         }
     }
 
@@ -42,7 +36,7 @@ class ObjectManager(val engine: Engine?) {
         val objs = ArrayList<ObjectBase>()
         for ((key, value) in objects) {
             if (pointInViewport(key, viewport)) {
-                objs.add(value.headObject)
+                objs.add(value)
             }
         }
         return objs
@@ -55,37 +49,34 @@ class ObjectManager(val engine: Engine?) {
         if (!objects.containsKey(newLocation)) {
             return true
         }
-        //Check all resolutions
-        //if ANY resolution is NOTHING
-        //DO NOTHING
-        //else do all resolutions
-        for (obj in objects.get(newLocation)) {
-            val resolution = obj.interact(engine, direction, interactor)
-            if (resolution == ObjectResolution.NOTHING) {
-                return false
-            }
-            if (resolution == ObjectResolution.REMOVE) {
-                remove(obj, newLocation)
-            }
-            //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
-            if (resolution == ObjectResolution.MOVE) {
-                remove(obj, newLocation)
-                val newObjLocation = when (direction) {
-                    Direction.UP -> newLocation.copy(y = newLocation.y - 1)
-                    Direction.DOWN -> newLocation.copy(y = newLocation.y + 1)
-                    Direction.LEFT -> newLocation.copy(x = newLocation.x - 1)
-                    Direction.RIGHT -> newLocation.copy(x = newLocation.x + 1)
 
-                }
-                if (engine.map.getTile(newObjLocation) is Water) {
-                    engine.map.setTile(newObjLocation, Floor())
-                    add(Dirt(newObjLocation), newObjLocation)
-                } else {
-                    obj.location = newObjLocation
-                    add(obj, newObjLocation)
-                }
+        val obj = objects.get(newLocation)
+        val resolution = obj.interact(engine, direction, interactor)
+        if (resolution == ObjectResolution.NOTHING) {
+            return false
+        }
+        if (resolution == ObjectResolution.REMOVE) {
+            remove(obj, newLocation)
+        }
+        //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
+        if (resolution == ObjectResolution.MOVE) {
+            remove(obj, newLocation)
+            val newObjLocation = when (direction) {
+                Direction.UP -> newLocation.copy(y = newLocation.y - 1)
+                Direction.DOWN -> newLocation.copy(y = newLocation.y + 1)
+                Direction.LEFT -> newLocation.copy(x = newLocation.x - 1)
+                Direction.RIGHT -> newLocation.copy(x = newLocation.x + 1)
+
+            }
+            if (engine.map.getTile(newObjLocation) is Water) {
+                engine.map.setTile(newObjLocation, Floor())
+                add(Dirt(newObjLocation), newObjLocation)
+            } else {
+                obj.location = newObjLocation
+                add(obj, newObjLocation)
             }
         }
+
         return true
     }
 

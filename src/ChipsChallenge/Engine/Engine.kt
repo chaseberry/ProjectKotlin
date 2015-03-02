@@ -50,7 +50,7 @@ fun loadLevel(name: String): File {
     return File(URI(fileUrl + "Levels/${name}.ccl"))
 }
 
-class Engine(val map: Map, objects: ArrayList<ObjectLocationList>) {
+class Engine(val map: Map, objects: ArrayList<ObjectBase>) {
 
     val gameTime: Long = 30
 
@@ -73,7 +73,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectLocationList>) {
 
     {
         for (obj in objects) {
-            objectManager.objects.put(obj.headObject.location, obj)
+            objectManager.objects.put(obj.location, obj)
         }
     }
 

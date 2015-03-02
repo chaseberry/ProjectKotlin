@@ -11,8 +11,8 @@ import ChipsChallenge.JSON.JSONObject
  * Created by chase on 2/25/15.
  */
 
-fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point): Map {
-    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart, 0)
+fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point, chipTotal: Int): Map {
+    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart, chipTotal)
 }
 
 fun blankMap(x: Int, y: Int): Map {
