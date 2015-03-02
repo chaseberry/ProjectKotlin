@@ -8,7 +8,6 @@ import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.ObjectResolution
 import ChipsChallenge.Unit.Player
-import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.*
 
 /**
@@ -16,21 +15,21 @@ import ChipsChallenge.Map.Tiles.*
  */
 class Block(location: Point) : ObjectBase(11, location, blockImage) {
 
+    val blockedIds = 0..11
+
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         if (interactor !is Player) {
             return ObjectResolution.NOTHING
         }
 
-        val targetTile = when (direction) {
-            Direction.UP -> engine.map.getUp(location)
-            Direction.DOWN -> engine.map.getDown(location)
-            Direction.LEFT -> engine.map.getLeft(location)
-            Direction.RIGHT -> engine.map.getRight(location)
+        val targetLocation = when (direction) {
+            Direction.UP -> location.copy(y = location.y - 1)
+            Direction.DOWN -> location.copy(y = location.y + 1)
+            Direction.LEFT -> location.copy(x = location.x - 1)
+            Direction.RIGHT -> location.copy(x = location.x + 1)
         }
-        if (targetTile == null) {
-            return ObjectResolution.NOTHING
-        }
-        if (canMoveToTile(targetTile)) {
+        //Blocks can't be on most Objects
+        if (canMoveToLocation(engine, targetLocation)) {
             return ObjectResolution.MOVE
         }
 
@@ -40,7 +39,12 @@ class Block(location: Point) : ObjectBase(11, location, blockImage) {
     override fun onTick(engine: Engine) {
     }
 
-    fun canMoveToTile(tile: Tile): Boolean {
+    fun canMoveToLocation(engine: Engine, location: Point): Boolean {
+        val tile = engine.map.getTile(location)
+        val objectInSpace = engine.objectManager.objects.get(location)
+        if (objectInSpace != null && objectInSpace.id in blockedIds) {
+            return false
+        }
         return (tile is Floor || tile is Water)
     }
 
