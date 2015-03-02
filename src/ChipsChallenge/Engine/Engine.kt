@@ -15,6 +15,7 @@ import java.io.FileReader
 import java.io.BufferedReader
 import ChipsChallenge.Map.mapFromFile
 import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Map.Point
 import java.net.URI
 
 public enum class Direction {
@@ -29,19 +30,10 @@ fun engineFromFile(file: File): Engine? {
         val levelData = JSONObject(fileContents)
         val map = mapFromFile(levelData)
         val objs = levelData.getJSONArray("objects")
-        val objects = ArrayList<ObjectLocationList>(objs.length())
+        val objects = ArrayList<ObjectBase>(objs.length())
         for (z in 0..objs.length() - 1) {
             val obj = objs.getJSONObject(z)
-            val headObj = objectFromJson(obj.getJSONObject("head"))
-            if (headObj == null) {
-                continue
-            }
-            val list = ObjectLocationList(headObj)
-            val tail = obj.getJSONArray("tail")
-            for (z in 0..tail.length()) {
-                list.add(objectFromJson(tail.getJSONObject(z)!!))
-            }
-            objects.add(list)
+            objects.add(objectFromId(obj.getInt("id"), Point(obj.getJSONArray("location").getInt(0), obj.getJSONArray("location").getInt(1))))
         }
         if (map == null) {
             return null

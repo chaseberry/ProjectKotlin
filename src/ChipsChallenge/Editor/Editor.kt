@@ -110,7 +110,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun addObject(tileLocation: Point) {
-        if (pallet.currentObject == null) {
+        if (objects.objects.containsKey(tileLocation) || pallet.currentObject == null) {
             return
         }
         objects.add((objectFromId((pallet.currentObject as ObjectBase).id, tileLocation) as ObjectBase), tileLocation)
@@ -168,7 +168,9 @@ class Editor(x: Int, y: Int) {
 
         val objArray = JSONArray()
         for (objList in objects.objects.values()) {
-            objArray.put(objList.saveObject)
+            for (obj in objList) {
+                objArray.put(JSONObject().put("id", obj.id).put("location", JSONArray().put(obj.location.x).put(obj.location.y)))
+            }
         }
 
         mapObj.put("tileMap", mapArray)
@@ -204,12 +206,12 @@ class Editor(x: Int, y: Int) {
                     (objList.headObject).location) as ObjectBase)
             if (objList.tailObjects != null) {
                 for (obj in objList.tailObjects as ArrayList) {
-                    objLocList.add(objectFromId(obj.id, obj.location))
+                    objLocList.add(obj)
                 }
             }
             objs.add(objLocList)//Clone? Copy doesn't work because abstract stuff
         }
-        Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation, map.chipTotal), objs).start()
+        Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation), objs).start()
     }
 
 }
