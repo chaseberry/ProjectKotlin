@@ -196,7 +196,11 @@ class Editor(x: Int, y: Int) {
         } catch(e: Exception) {
 
         }
-        Engine(map.copy(), ArrayList(objects.objects.values())).start()
+        val objs = ArrayList<ObjectBase>(objects.objects.size())
+        for (obj in objects.objects.values()) {
+            objs.add(objectFromId(obj.id, obj.location))//Clone? Copy doesn't work because abstract stuff
+        }
+        Engine(map.copy(), objs).start()
     }
 
 }
