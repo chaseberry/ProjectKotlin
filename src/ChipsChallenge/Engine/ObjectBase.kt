@@ -18,6 +18,7 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
         9 -> GreenLock(location)
         10 -> Dirt(location)
         11 -> Block(location)
+        12 -> GreenButton(location)
         else -> null
     }
 }
@@ -33,4 +34,5 @@ public enum class ObjectResolution {
     REMOVE
     NOTHING
     PASSOVER
+    TRIGGER
 }

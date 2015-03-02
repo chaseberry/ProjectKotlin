@@ -60,10 +60,12 @@ class ObjectManager(val engine: Engine?) {
                 if (!resolveObject(obj.objectUnder!!, direction, interactor)) {
                     return false
                 } else {
+                    add(obj.objectUnder!!, obj.location)
                     obj.objectUnder = null
                 }
+            } else {
+                remove(obj.location)
             }
-            remove(obj.location)
             val newObjLocation = when (direction) {
                 Direction.UP -> obj.location.copy(y = obj.location.y - 1)
                 Direction.DOWN -> obj.location.copy(y = obj.location.y + 1)
@@ -76,6 +78,9 @@ class ObjectManager(val engine: Engine?) {
                 add(Dirt(newObjLocation), newObjLocation)
             } else {
                 obj.location = newObjLocation
+                if (objects.get(newObjLocation) != null) {
+                    obj.cover(objects.get(newObjLocation))
+                }
                 add(obj, newObjLocation)
             }
         }

@@ -96,3 +96,7 @@ val socketImage: BufferedImage by Delegates.lazy {
 val blockImage: BufferedImage by Delegates.lazy {
     loadImage("block.gif") as BufferedImage
 }
+
+val greenButtonImage: BufferedImage by Delegates.lazy {
+    loadImage("green_button.gif") as BufferedImage
+}
