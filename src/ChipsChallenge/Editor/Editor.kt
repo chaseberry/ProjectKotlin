@@ -209,7 +209,7 @@ class Editor(x: Int, y: Int) {
             }
             objs.add(objLocList)//Clone? Copy doesn't work because abstract stuff
         }
-        Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation), objs).start()
+        Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation, map.chipTotal), objs).start()
     }
 
 }
