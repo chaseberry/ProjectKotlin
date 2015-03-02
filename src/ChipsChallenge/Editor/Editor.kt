@@ -110,7 +110,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun addObject(tileLocation: Point) {
-        if (objects.objects.containsKey(tileLocation) || pallet.currentObject == null) {
+        if (pallet.currentObject == null) {
             return
         }
         objects.add((objectFromId((pallet.currentObject as ObjectBase).id, tileLocation) as ObjectBase), tileLocation)
