@@ -48,7 +48,6 @@ class ObjectManager(val engine: Engine?) {
             return false
         }
         val resolution = obj.interact(engine, direction, interactor)
-        println(resolution)
         if (resolution == ObjectResolution.NOTHING) {
             return false
         }

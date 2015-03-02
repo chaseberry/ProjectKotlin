@@ -206,7 +206,6 @@ class Editor(x: Int, y: Int) {
         for (obj in objects.objects.values()) {
             val newObj = objectFromId(obj.id, obj.location)
             if (newObj is Block && (obj as Block).objectUnder != null) {
-                println("Added objUnder")
                 newObj.cover(objectFromId((obj as Block).objectUnder!!.id, newObj.location)!!)
             }
             objs.add(newObj)//Clone? Copy doesn't work because abstract stuff
