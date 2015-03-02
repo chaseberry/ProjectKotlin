@@ -59,8 +59,11 @@ class ObjectManager(val engine: Engine?) {
         //if ANY resolution is NOTHING
         //DO NOTHING
         //else do all resolutions
+
         for (obj in objects.get(newLocation)) {
+            //Bug where removed objects cause a skip in control of objects
             val resolution = obj.interact(engine, direction, interactor)
+            println("objId: ${obj.id}, resolution: $resolution")
             if (resolution == ObjectResolution.NOTHING) {
                 return false
             }
@@ -86,6 +89,7 @@ class ObjectManager(val engine: Engine?) {
                 }
             }
         }
+
         return true
     }
 
