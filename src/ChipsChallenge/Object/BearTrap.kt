@@ -12,9 +12,14 @@ import ChipsChallenge.Engine.Triggerable
 /**
  * Created by chase on 3/2/15.
  */
-class BearTrap(location: Point) : ObjectBase(14, location, bearTrapImage), Triggerable {
-    override fun onTrigger() {
+class BearTrap(location: Point, var isActive: Boolean = true) : ObjectBase(14, location, bearTrapImage), Triggerable {
 
+    override fun onTrigger() {
+        isActive = false
+    }
+
+    override fun offTrigger() {
+        isActive = true
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {

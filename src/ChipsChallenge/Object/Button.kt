@@ -16,4 +16,8 @@ abstract class Button(id: Int, location: Point, image: BufferedImage,
         targets.forEach { it.onTrigger() }
     }
 
+    fun offTrigger() {
+        targets.forEach { it.offTrigger() }
+    }
+
 }

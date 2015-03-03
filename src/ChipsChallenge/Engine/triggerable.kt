@@ -7,4 +7,6 @@ trait Triggerable {
 
     fun onTrigger()
 
+    fun offTrigger()
+
 }

@@ -9,6 +9,7 @@ import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Object.Dirt
 import java.util.HashMap
 import ChipsChallenge.Object.Block
+import ChipsChallenge.Object.Button
 
 /**
  * Created by chase on 2/27/15.
@@ -21,7 +22,7 @@ class ObjectManager(val engine: Engine?) {
     fun add(obj: ObjectBase, location: Point) {
         objects.put(location, obj)
     }
-    
+
     fun remove(newLocation: Point) {
         if (objects.containsKey(newLocation)) {
             objects.remove(newLocation)
@@ -53,6 +54,9 @@ class ObjectManager(val engine: Engine?) {
         if (resolution == ObjectResolution.REMOVE) {
             remove(obj.location)
         }
+        if (resolution == ObjectResolution.TRIGGER) {
+            (obj as Button).trigger()
+        }
         //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
         if (resolution == ObjectResolution.MOVE && obj is Block) {
             if (obj.objectUnder != null) {
@@ -60,6 +64,9 @@ class ObjectManager(val engine: Engine?) {
                     return false
                 } else {
                     add(obj.objectUnder!!, obj.location)
+                    if (obj.objectUnder is Button) {
+                        (obj.objectUnder as Button).offTrigger()
+                    }
                     obj.objectUnder = null
                 }
             } else {
@@ -70,7 +77,6 @@ class ObjectManager(val engine: Engine?) {
                 Direction.DOWN -> obj.location.copy(y = obj.location.y + 1)
                 Direction.LEFT -> obj.location.copy(x = obj.location.x - 1)
                 Direction.RIGHT -> obj.location.copy(x = obj.location.x + 1)
-
             }
             if (engine.map.getTile(newObjLocation) is Water) {
                 engine.map.setTile(newObjLocation, Floor())
