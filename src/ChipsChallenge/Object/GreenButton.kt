@@ -12,7 +12,7 @@ import ChipsChallenge.Engine.greenButtonImage
 /**
  * Created by chase on 3/2/15.
  */
-class GreenButton(location: Point) : Button(12, location, greenButtonImage, ArrayList<Triggerable>()) {
+class GreenButton(location: Point) : Button(12, location, greenButtonImage, null) {
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         return ObjectResolution.TRIGGER
     }

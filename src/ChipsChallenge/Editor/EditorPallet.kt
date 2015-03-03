@@ -49,8 +49,13 @@ class EditorPallet : JFrame() {
     val deleteTile: Tile = Floor()
     val deleteObject: ObjectBase? = null
 
+    var buttonObject: ObjectBase? = null
+
 }
 
 public enum class PalletStatus {
-    TILE; OBJECT; PLAYER;
+    TILE
+    OBJECT
+    PLAYER
+    TRIGGER
 }

@@ -20,6 +20,9 @@ import ChipsChallenge.Engine.Engine
 import java.util.ArrayList
 import ChipsChallenge.Map.mapFromIds
 import ChipsChallenge.Object.Block
+import ChipsChallenge.Object.BrownButton
+import ChipsChallenge.Object.Button
+import ChipsChallenge.Engine.Triggerable
 
 /**
  * Created by chase on 2/27/15.
@@ -75,6 +78,7 @@ class Editor(x: Int, y: Int) {
             PalletStatus.TILE -> updateTile(tileLocation)
             PalletStatus.OBJECT -> updateObject(tileLocation)
             PalletStatus.PLAYER -> addPlayer(tileLocation)
+            PalletStatus.TRIGGER -> applyTrigger(tileLocation)
         }
         frame.image = buildFrameImage()
     }
@@ -117,11 +121,26 @@ class Editor(x: Int, y: Int) {
             }
             return
         }
-        objects.add((objectFromId((pallet.currentObject!!).id, tileLocation)!!), tileLocation)
+        val obj = (objectFromId((pallet.currentObject!!).id, tileLocation)!!)
+        objects.add(obj, tileLocation)
+        if (pallet.currentObject is BrownButton) {
+            pallet.palletStatus = PalletStatus.TRIGGER
+            pallet.buttonObject = obj
+        }
     }
 
     fun removeObject(tileLocation: Point) {
         objects.objects.remove(tileLocation)
+    }
+
+    fun applyTrigger(tileLocation: Point) {
+        var triggeredObject = objects.objects.get(tileLocation)
+        pallet.palletStatus = PalletStatus.OBJECT
+        if (triggeredObject == null || triggeredObject !is Triggerable) {
+            return
+        }
+        (pallet.buttonObject as Button).target = (triggeredObject as Triggerable)
+        println((pallet.buttonObject as Button).target)
     }
 
     fun addPlayer(tileLocation: Point) {
@@ -207,6 +226,9 @@ class Editor(x: Int, y: Int) {
             val newObj = objectFromId(obj.id, obj.location)
             if (newObj is Block && (obj as Block).objectUnder != null) {
                 newObj.cover(objectFromId((obj as Block).objectUnder!!.id, newObj.location)!!)
+            }
+            if (newObj is Button) {
+                newObj.target = (obj as Button).target
             }
             objs.add(newObj)//Clone? Copy doesn't work because abstract stuff
         }

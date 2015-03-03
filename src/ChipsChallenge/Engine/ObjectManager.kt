@@ -63,11 +63,7 @@ class ObjectManager(val engine: Engine?) {
                 if (!resolveObject(obj.objectUnder!!, direction, interactor)) {
                     return false
                 } else {
-                    add(obj.objectUnder!!, obj.location)
-                    if (obj.objectUnder is Button) {
-                        (obj.objectUnder as Button).offTrigger()
-                    }
-                    obj.objectUnder = null
+                    add(obj.unCover()!!, obj.location)
                 }
             } else {
                 remove(obj.location)

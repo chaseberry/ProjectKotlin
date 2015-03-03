@@ -47,6 +47,9 @@ class Block(location: Point) : ObjectBase(11, location, blockImage) {
         }
         objectUnder = obj
         objectUnder!!.location = location.copy()
+        if (obj is Button) {
+            obj.trigger()
+        }
         return true
     }
 
@@ -61,6 +64,8 @@ class Block(location: Point) : ObjectBase(11, location, blockImage) {
         val objectInSpace = engine.objectManager.objects.get(location)
         if (objectInSpace != null && objectInSpace !is Button && objectInSpace !is BearTrap ||
                 (objectUnder is BearTrap && (objectUnder as BearTrap).isActive)) {
+            println((objectUnder as BearTrap).isActive)
+            println(objectUnder!!.hashCode())
             return false
         }
 

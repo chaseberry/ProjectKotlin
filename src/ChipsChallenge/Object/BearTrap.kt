@@ -16,10 +16,14 @@ class BearTrap(location: Point, var isActive: Boolean = true) : ObjectBase(14, l
 
     override fun onTrigger() {
         isActive = false
+        println("bear trap deactivated")
+        println(hashCode())
+        println(isActive)
     }
 
     override fun offTrigger() {
         isActive = true
+        println("bear trap activated")
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
