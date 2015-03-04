@@ -23,10 +23,11 @@ class ObjectManager(val engine: Engine?) {
         objects.put(location, obj)
     }
 
-    fun remove(newLocation: Point) {
+    fun remove(newLocation: Point): ObjectBase? {
         if (objects.containsKey(newLocation)) {
-            objects.remove(newLocation)
+            return objects.remove(newLocation)
         }
+        return null
     }
 
     public fun isObjectAt(location: Point): Boolean {
@@ -85,6 +86,7 @@ class ObjectManager(val engine: Engine?) {
                 add(obj, newObjLocation)
             }
         }
+
         return true
     }
 
@@ -100,5 +102,26 @@ class ObjectManager(val engine: Engine?) {
 
     }
 
+    fun clone(): ObjectManager {
+        val objManager = ObjectManager(engine)
+
+        for ((key, value) in objects) {
+            val newObj = objectFromId(value.id, key)!!
+            if (newObj is Block && (value as Block).objectUnder != null) {
+                newObj.cover(objectFromId((value as Block).objectUnder!!.id, key)!!)
+            }
+            if (value is Button && value.target != null) {
+                (newObj as Button).target = value.target!!.clone()
+            }
+            objManager.add(newObj, key)
+        }
+
+        for (obj in objManager.objects.values()) {
+            if (obj is Button && obj.target != null) {
+                objManager.add(obj.target as ObjectBase, (obj.target as ObjectBase).location)
+            }
+        }
+        return objManager
+    }
 
 }

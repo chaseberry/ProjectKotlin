@@ -9,4 +9,6 @@ trait Triggerable {
 
     fun offTrigger()
 
+    fun clone(): Triggerable
+
 }

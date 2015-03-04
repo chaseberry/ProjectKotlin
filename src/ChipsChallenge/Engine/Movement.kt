@@ -26,6 +26,7 @@ class Movement(val engine: Engine) {
         if (canMove && engine.objectManager.objects.get(interactor.location) is Button) {
             (engine.objectManager.objects.get(interactor.location) as Button).offTrigger()
         }
+
         return canMove
     }
 

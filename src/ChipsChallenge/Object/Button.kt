@@ -13,14 +13,12 @@ abstract class Button(id: Int, location: Point, image: BufferedImage,
 
     fun trigger() {
         if (target != null) {
-            println("Triggered")
             target!!.onTrigger()
         }
     }
 
     fun offTrigger() {
         if (target != null) {
-            println("Off Triggered")
             target!!.offTrigger()
         }
     }

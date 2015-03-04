@@ -6,7 +6,6 @@ import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Map.Point
 import ChipsChallenge.Engine.ObjectManager
 import ChipsChallenge.Engine.objectFromId
-import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.Engine.loadImage
@@ -17,12 +16,12 @@ import java.io.File
 import java.io.BufferedWriter
 import java.io.FileWriter
 import ChipsChallenge.Engine.Engine
-import java.util.ArrayList
 import ChipsChallenge.Map.mapFromIds
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.BrownButton
 import ChipsChallenge.Object.Button
 import ChipsChallenge.Engine.Triggerable
+import java.util.ArrayList
 
 /**
  * Created by chase on 2/27/15.
@@ -221,18 +220,9 @@ class Editor(x: Int, y: Int) {
         } catch(e: Exception) {
 
         }
-        val objs = ArrayList<ObjectBase>(objects.objects.size())
-        for (obj in objects.objects.values()) {
-            val newObj = objectFromId(obj.id, obj.location)
-            if (newObj is Block && (obj as Block).objectUnder != null) {
-                newObj.cover(objectFromId((obj as Block).objectUnder!!.id, newObj.location)!!)
-            }
-            if (newObj is Button) {
-                newObj.target = (obj as Button).target
-            }
-            objs.add(newObj)//Clone? Copy doesn't work because abstract stuff
-        }
-        Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation, map.chipTotal), objs).start()
+        val objs = objects.clone()
+        Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation, map.chipTotal),
+                ArrayList(objs.objects.values())).start()
     }
 
 }

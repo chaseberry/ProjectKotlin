@@ -8,6 +8,7 @@ import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.ObjectResolution
 import ChipsChallenge.Engine.Triggerable
+import ChipsChallenge.Engine.objectFromId
 
 /**
  * Created by chase on 3/2/15.
@@ -16,14 +17,14 @@ class BearTrap(location: Point, var isActive: Boolean = true) : ObjectBase(14, l
 
     override fun onTrigger() {
         isActive = false
-        println("bear trap deactivated")
-        println(hashCode())
-        println(isActive)
     }
 
     override fun offTrigger() {
         isActive = true
-        println("bear trap activated")
+    }
+
+    override fun clone(): Triggerable {
+        return objectFromId(id, location) as Triggerable
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {

@@ -15,8 +15,6 @@ import ChipsChallenge.Map.Tiles.*
  */
 class Block(location: Point) : ObjectBase(11, location, blockImage) {
 
-    val blockedIds = (0..11)
-
     var objectUnder: ObjectBase? = null
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
@@ -64,8 +62,6 @@ class Block(location: Point) : ObjectBase(11, location, blockImage) {
         val objectInSpace = engine.objectManager.objects.get(location)
         if (objectInSpace != null && objectInSpace !is Button && objectInSpace !is BearTrap ||
                 (objectUnder is BearTrap && (objectUnder as BearTrap).isActive)) {
-            println((objectUnder as BearTrap).isActive)
-            println(objectUnder!!.hashCode())
             return false
         }
 
