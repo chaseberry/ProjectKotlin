@@ -8,6 +8,7 @@ import java.util.HashMap
 /**
  * Created by chase on 2/25/15.
  */
+
 abstract class UnitBase(var location: Point) : EngineObjectBase {
 
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()

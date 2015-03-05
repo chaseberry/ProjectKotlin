@@ -108,3 +108,7 @@ val brownButtonImage: BufferedImage by Delegates.lazy {
 val bearTrapImage: BufferedImage by Delegates.lazy {
     loadImage("beartrap.gif") as BufferedImage
 }
+
+val pinkBallImage: BufferedImage by Delegates.lazy {
+    loadImage("ball.gif") as BufferedImage
+}

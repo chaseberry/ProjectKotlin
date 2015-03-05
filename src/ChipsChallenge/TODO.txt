@@ -20,13 +20,9 @@ Finish adding tiles
 
 Add Boot Objects
 
-Add Block object
-
 Add Cloner object
 
 Add bomb object
-
-Beartrap
 
 Teleporter
 
