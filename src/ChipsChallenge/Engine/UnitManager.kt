@@ -35,7 +35,7 @@ class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), EngineObjectBase
         val units = UnitManager(engine)
 
         forEach {
-            units.add(unitFromId(it.id, it.location, (it as PinkBall).direction))
+            units.add(unitFromId(it.id, it.location.copy(), (it as PinkBall).direction))
         }
 
         return units

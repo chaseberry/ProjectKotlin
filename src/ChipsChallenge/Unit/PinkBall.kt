@@ -21,11 +21,7 @@ class PinkBall(var direction: Direction, location: Point) : UnitBase(0, location
     var currentMove = 5
 
     override fun canMoveToTile(tile: Tile): Boolean {
-        val canMove = tile is Floor
-        if (!canMove) {
-            swapDirection()
-        }
-        return canMove
+        return tile is Floor
     }
 
     override fun onTick(engine: Engine) {
@@ -63,6 +59,8 @@ class PinkBall(var direction: Direction, location: Point) : UnitBase(0, location
         if (engine.movement.moveUp(this)) {
             location.y -= 1
             move()
+        } else {
+            swapDirection()
         }
     }
 
@@ -70,6 +68,8 @@ class PinkBall(var direction: Direction, location: Point) : UnitBase(0, location
         if (engine.movement.moveDown(this)) {
             location.y += 1
             move()
+        } else {
+            swapDirection()
         }
     }
 
@@ -77,6 +77,8 @@ class PinkBall(var direction: Direction, location: Point) : UnitBase(0, location
         if (engine.movement.moveLeft(this)) {
             location.x -= 1
             move()
+        } else {
+            swapDirection()
         }
     }
 
@@ -84,6 +86,8 @@ class PinkBall(var direction: Direction, location: Point) : UnitBase(0, location
         if (engine.movement.moveRight(this)) {
             location.x += 1
             move()
+        } else {
+            swapDirection()
         }
     }
 

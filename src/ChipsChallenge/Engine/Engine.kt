@@ -19,7 +19,10 @@ import ChipsChallenge.Map.Point
 import java.net.URI
 
 public enum class Direction {
-    UP; DOWN; LEFT; RIGHT
+    UP
+    DOWN
+    LEFT
+    RIGHT
 }
 
 fun engineFromFile(file: File): Engine? {
@@ -102,6 +105,9 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
         when (tile) {
             Water() -> if (!player.inventory.hasFlippers) lose()
             Finish() -> win()
+        }
+        if (unitManager.isUnitOnPoint(player.location)) {
+            lose()
         }
     }
 
