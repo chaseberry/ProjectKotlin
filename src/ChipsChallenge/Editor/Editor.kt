@@ -78,8 +78,25 @@ class Editor(x: Int, y: Int) {
             PalletStatus.OBJECT -> updateObject(tileLocation)
             PalletStatus.PLAYER -> addPlayer(tileLocation)
             PalletStatus.TRIGGER -> applyTrigger(tileLocation)
+            PalletStatus.UNIT -> updateUnit(tileLocation)
         }
         frame.image = buildFrameImage()
+    }
+
+    fun updateUnit(tileLocation: Point) {
+        if (mouseBindings.mouseOne) {
+            addUnit(tileLocation)
+        } else if (mouseBindings.mouseTwo) {
+            removeUnit(tileLocation)
+        }
+    }
+
+    fun addUnit(tileLocation: Point) {
+
+    }
+
+    fun removeUnit(tileLocation: Point) {
+
     }
 
     fun updateTile(tileLocation: Point) {

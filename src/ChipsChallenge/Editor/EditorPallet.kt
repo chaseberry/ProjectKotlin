@@ -10,6 +10,8 @@ import javax.swing.JTabbedPane
 import ChipsChallenge.Editor.PalletPanes.TilePanel
 import ChipsChallenge.Editor.PalletPanes.ObjectPanel
 import ChipsChallenge.Editor.PalletPanes.PlayerLocationPanel
+import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Editor.PalletPanes.UnitPanel
 
 /**
  * Created by chase on 2/27/15.
@@ -29,6 +31,7 @@ class EditorPallet : JFrame() {
         tabs.add("Tiles", TilePanel(this))
         tabs.add("Objects", ObjectPanel(this))
         tabs.add("Player", PlayerLocationPanel(this))
+        tabs.add("Enemies", UnitPanel(this))
         tabs.addChangeListener() {
             if (tabs.getSelectedIndex() == 0) {
                 palletStatus = PalletStatus.TILE
@@ -36,6 +39,8 @@ class EditorPallet : JFrame() {
                 palletStatus = PalletStatus.OBJECT
             } else if (tabs.getSelectedIndex() == 2) {
                 palletStatus = PalletStatus.PLAYER
+            } else if (tabs.getSelectedIndex() == 3) {
+                palletStatus = PalletStatus.UNIT
             }
         }
         add(tabs)
@@ -45,9 +50,11 @@ class EditorPallet : JFrame() {
 
     var currentTile: Tile = Wall()
     var currentObject: ObjectBase? = null
+    var currentUnit: UnitBase? = null
 
     val deleteTile: Tile = Floor()
     val deleteObject: ObjectBase? = null
+    val deleteUnit: UnitBase? = null
 
     var buttonObject: ObjectBase? = null
 
@@ -58,4 +65,5 @@ public enum class PalletStatus {
     OBJECT
     PLAYER
     TRIGGER
+    UNIT
 }
