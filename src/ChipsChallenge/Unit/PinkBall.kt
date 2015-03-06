@@ -11,7 +11,7 @@ import ChipsChallenge.Map.Tiles.Floor
 /**
  * Created by chase on 3/5/15.
  */
-class PinkBall(var direction: Direction, location: Point) : UnitBase(1, location) {
+class PinkBall(var direction: Direction, location: Point) : UnitBase(0, location) {
 
     {
         image = pinkBallImage

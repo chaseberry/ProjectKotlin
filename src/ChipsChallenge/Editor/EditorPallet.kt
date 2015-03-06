@@ -50,7 +50,7 @@ class EditorPallet : JFrame() {
 
     var currentTile: Tile = Wall()
     var currentObject: ObjectBase? = null
-    var currentUnit: UnitBase? = null
+    var currentUnit: UnitBase? = null//Not changing!
 
     val deleteTile: Tile = Floor()
 

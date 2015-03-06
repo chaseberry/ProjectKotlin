@@ -99,6 +99,7 @@ class Editor(x: Int, y: Int) {
 
     fun addUnit(tileLocation: Point) {
         if (!unitManager.isUnitOnPoint(tileLocation)) {
+            println("Added")
             unitManager.add(unitFromId(pallet.currentUnit!!.id, tileLocation, Direction.UP))
         }
     }
@@ -106,6 +107,7 @@ class Editor(x: Int, y: Int) {
     fun removeUnit(tileLocation: Point) {
         val index = unitManager.unitOnPointIndex(tileLocation)
         if (index != null) {
+            unitManager.remove(index)
         }
     }
 
