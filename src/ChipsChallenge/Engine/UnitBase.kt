@@ -11,10 +11,10 @@ import ChipsChallenge.Unit.PinkBall
  */
 
 fun unitFromId(id: Int, location: Point, direction: Direction): UnitBase? {
-    when (id) {
+    return when (id) {
         0 -> PinkBall(direction, location)
+        else -> null
     }
-    return null
 }
 
 abstract class UnitBase(val id: Int, var location: Point) : EngineObjectBase {

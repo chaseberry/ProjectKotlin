@@ -13,12 +13,14 @@ class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), EngineObjectBase
     }
 
     fun isUnitOnPoint(location: Point): Boolean {
-        forEach { if (it.location == location) return true }
+        forEach {
+            if (it != null && it.location == location) return true
+        }
         return false
     }
 
     fun unitOnPointIndex(location: Point): Int? {
-        forEachIndexed {(i, unitBase) -> if (unitBase.location == location) return i }
+        forEachIndexed {(i, unitBase) -> if (unitBase != null && unitBase.location == location) return i }
         return null;
     }
 
