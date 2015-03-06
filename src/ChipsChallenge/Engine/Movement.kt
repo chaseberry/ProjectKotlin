@@ -1,6 +1,6 @@
 package ChipsChallenge.Engine
 
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Object.BearTrap
 import ChipsChallenge.Object.Button

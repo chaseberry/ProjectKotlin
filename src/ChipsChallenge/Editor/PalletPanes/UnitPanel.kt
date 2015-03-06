@@ -6,7 +6,7 @@ import javax.swing.ImageIcon
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
 import ChipsChallenge.Engine.unitFromId
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Engine.UnitBase
 

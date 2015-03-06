@@ -2,7 +2,7 @@ package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Engine.ObjectResolution
 import ChipsChallenge.Engine.redLockImage

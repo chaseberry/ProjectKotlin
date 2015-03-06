@@ -1,6 +1,6 @@
 package ChipsChallenge.UI
 
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Map.Map
 
 /**

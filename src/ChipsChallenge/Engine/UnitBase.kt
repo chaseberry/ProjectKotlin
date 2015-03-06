@@ -2,9 +2,9 @@ package ChipsChallenge.Engine
 
 import java.awt.image.BufferedImage
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Point
 import java.util.HashMap
 import ChipsChallenge.Unit.PinkBall
+import ChipsChallenge.JSON.JSONObject
 
 /**
  * Created by chase on 2/25/15.
@@ -24,5 +24,12 @@ abstract class UnitBase(val id: Int, var location: Point) : EngineObjectBase {
     var image: BufferedImage? = null
 
     abstract fun canMoveToTile(tile: Tile): Boolean
+
+    override fun getSaveObject(): JSONObject {
+        val obj = JSONObject()
+        obj.put("location", location.saveObject)
+        obj.put("id", id)
+        return obj
+    }
 
 }

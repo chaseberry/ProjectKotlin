@@ -15,7 +15,7 @@ import java.io.FileReader
 import java.io.BufferedReader
 import ChipsChallenge.Map.mapFromFile
 import ChipsChallenge.JSON.JSONObject
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import java.net.URI
 
 public enum class Direction {

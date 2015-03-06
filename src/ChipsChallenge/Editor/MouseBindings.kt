@@ -1,6 +1,6 @@
 package ChipsChallenge.Editor
 
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 
 /**
  * Created by chase on 2/27/15.

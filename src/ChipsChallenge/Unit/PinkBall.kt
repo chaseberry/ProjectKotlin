@@ -1,7 +1,7 @@
 package ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Engine.pinkBallImage

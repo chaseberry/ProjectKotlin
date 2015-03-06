@@ -1,6 +1,6 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Engine.UnitBase

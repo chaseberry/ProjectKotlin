@@ -1,6 +1,6 @@
 package ChipsChallenge.Engine
 
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.UI.Viewport
 import java.util.ArrayList
 import ChipsChallenge.UI.pointInViewport

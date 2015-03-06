@@ -5,7 +5,7 @@ import javax.swing.JButton
 import javax.swing.ImageIcon
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Engine.objectFromId
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.Editor.PalletStatus
 

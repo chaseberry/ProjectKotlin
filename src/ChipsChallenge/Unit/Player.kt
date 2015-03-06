@@ -3,7 +3,7 @@ package ChipsChallenge.Unit
 import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.loadImage
 import ChipsChallenge.Map.Tiles.Wall
 

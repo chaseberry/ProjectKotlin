@@ -1,7 +1,7 @@
 package ChipsChallenge.Engine
 
 import java.awt.image.BufferedImage
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Object.*
 
 fun objectFromId(id: Int, location: Point): ObjectBase? {

@@ -2,7 +2,7 @@ package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.ObjectBase
 import java.awt.image.BufferedImage
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.Triggerable
 
 /**

@@ -6,6 +6,7 @@ import kotlin.properties.Delegates
 import ChipsChallenge.Engine.EngineObjectBase
 import ChipsChallenge.UI.Viewport
 import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Engine.Point
 
 /**
  * Created by chase on 2/25/15.

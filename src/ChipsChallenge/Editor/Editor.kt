@@ -3,7 +3,7 @@ package ChipsChallenge.Editor
 import ChipsChallenge.Map.blankMap
 import java.awt.image.BufferedImage
 import ChipsChallenge.UI.getViewport
-import ChipsChallenge.Map.Point
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.ObjectManager
 import ChipsChallenge.Engine.objectFromId
 import ChipsChallenge.JSON.JSONObject
