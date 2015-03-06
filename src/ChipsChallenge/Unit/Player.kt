@@ -47,4 +47,24 @@ class Player(location: Point) : UnitBase(-1, location) {
         return tile != Wall()
     }
 
+    override fun moveUp(engine: Engine) {
+        image = imageSet.get("up")
+        super.moveUp(engine)
+    }
+
+    override fun moveDown(engine: Engine) {
+        image = imageSet.get("down")
+        super.moveDown(engine)
+    }
+
+    override fun moveLeft(engine: Engine) {
+        image = imageSet.get("left")
+        super.moveLeft(engine)
+    }
+
+    override fun moveRight(engine: Engine) {
+        image = imageSet.get("right")
+        super.moveRight(engine)
+    }
+
 }
