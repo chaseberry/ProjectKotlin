@@ -90,7 +90,6 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
             override fun run() {
                 map.onTick(engine)
                 player.onTick(engine)
-                println("Ticked")
                 unitManager.onTick(engine)
                 frame.image = buildFrameImage()
                 checkCollisions()
