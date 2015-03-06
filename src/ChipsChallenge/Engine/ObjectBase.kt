@@ -25,6 +25,15 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
     }
 }
 
+fun objectFromJSON(obj: JSONObject): ObjectBase? {
+    try {
+        return objectFromId(obj.getInt("id"), pointFromJson(obj.getJSONObject("location"))!!)
+    } catch(except: Exception) {
+
+    }
+    return null
+}
+
 data abstract class ObjectBase(val id: Int, var location: Point, val image: BufferedImage) : EngineObjectBase {
 
     abstract fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution

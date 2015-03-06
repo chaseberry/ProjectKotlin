@@ -23,7 +23,7 @@ fun blankMap(x: Int, y: Int): Map {
 
 fun mapFromFile(mapData: JSONObject): Map? {
     try {
-        val mapArray = mapData.getJSONArray("tileMap")
+        val mapArray = mapData.getJSONArray("map")
         val tileArray = Array(mapArray.length()) { x ->
             Array(mapArray.getJSONArray(x).length()) { y ->
                 tileIdToTile(

@@ -44,13 +44,19 @@ fun engineFromFile(file: File): Engine? {
         val objs = levelData.getJSONArray("objects")
         val objects = ArrayList<ObjectBase>(objs.length())
         for (z in 0..objs.length() - 1) {
-            val obj = objs.getJSONObject(z)
-            objects.add(objectFromId(obj.getInt("id"), Point(obj.getJSONArray("location").getInt(0), obj.getJSONArray("location").getInt(1))))
+            //TODO null check
+            objects.add(objectFromJSON(objs.getJSONObject(z)))
+        }
+        val uns = levelData.getJSONArray("units")
+        val units = ArrayList<UnitBase>(uns.length())
+        for ( z in 0..uns.length() - 1) {
+            //TODO null check
+            units.add(unitFromJson(uns.getJSONObject(z)))
         }
         if (map == null) {
             return null
         }
-        return Engine(map, objects, ArrayList<UnitBase>())
+        return Engine(map, objects, units)
     } catch(e: Exception) {
         e.printStackTrace()
     }
