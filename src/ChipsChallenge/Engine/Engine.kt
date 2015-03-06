@@ -132,6 +132,10 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
             g.drawImage(obj.image, (obj.location.x - viewport.xStart) * 32, (obj.location.y - viewport.yStart) * 32, null)
         }
 
+        for (unit in unitManager.unitsInViewPort(viewport)) {
+            g.drawImage(unit.image, (unit.location.x - viewport.xStart) * 32, (unit.location.y - viewport.yStart) * 32, null)
+        }
+
         //Draw the player
         val playerX = if (player.location.x <= 4 ) player.location.x else
             if (player.location.x in (map.x - 4)..(map.x)) 9 - (map.x - player.location.x) else 4
