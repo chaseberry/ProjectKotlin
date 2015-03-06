@@ -7,6 +7,7 @@ import ChipsChallenge.Engine.EngineObjectBase
 import ChipsChallenge.UI.Viewport
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Engine.Point
+import ChipsChallenge.JSON.JSONArray
 
 /**
  * Created by chase on 2/25/15.
@@ -47,6 +48,18 @@ fun mapFromFile(mapData: JSONObject): Map? {
 
 data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation: Point,
                          var chipTotal: Int) : EngineObjectBase {
+
+    override fun getSaveObject(): JSONObject {
+        val mapArray = JSONArray()
+        for (x in map) {
+            val mapSection = JSONArray()
+            for (tile in x) {
+                mapSection.put(tile.tileId)
+            }
+            mapArray.put(mapSection)
+        }
+        return JSONObject().put("map", mapArray)
+    }
 
     val x: Int by Delegates.lazy {
         map.size()

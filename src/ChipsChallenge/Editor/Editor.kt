@@ -6,7 +6,6 @@ import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.ObjectManager
 import ChipsChallenge.Engine.objectFromId
-import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.Engine.loadImage
 import ChipsChallenge.Engine.KeyBindings
@@ -230,30 +229,22 @@ class Editor(x: Int, y: Int) {
     }
 
     fun generateSave(): String {
-        val mapObj = JSONObject()
-        val mapArray = JSONArray()
-        for (x in map.map) {
-            val mapSection = JSONArray()
-            for (tile in x) {
-                mapSection.put(tile.tileId)
-            }
-            mapArray.put(mapSection)
-        }
+        val saveObj = map.getSaveObject()
 
         val objArray = JSONArray()
         for (obj in objects.objects.values()) {
-            objArray.put(JSONObject().put("id", obj.id).put("location", JSONArray().put(obj.location.x).put(obj.location.y)))
+            objArray.put(obj.getSaveObject())
         }
 
-        mapObj.put("tileMap", mapArray)
-        mapObj.put("objects", objArray)
-        mapObj.put("playerStartLocation", JSONArray().put(map.defaultPlayerLocation.x).put(map.defaultPlayerLocation.y))
+        saveObj.put("units", unitManager.getSaveObject().get("units"))
+        saveObj.put("objects", objArray)
+        saveObj.put("playerStartLocation", JSONArray().put(map.defaultPlayerLocation.x).put(map.defaultPlayerLocation.y))
         try {
-            mapObj.put("chipCount", Integer.parseInt(frame.chipCountTextField.getText()))
+            saveObj.put("chipCount", Integer.parseInt(frame.chipCountTextField.getText()))
         } catch(e: NumberFormatException) {
-            mapObj.put("chipCount", 0)
+            saveObj.put("chipCount", 0)
         }
-        return mapObj.toString()
+        return saveObj.toString()
     }
 
     fun triggerScreenMove() {

@@ -1,15 +1,25 @@
 package ChipsChallenge.Engine
 
 import java.util.ArrayList
-import ChipsChallenge.Engine.Point
 import ChipsChallenge.UI.pointInViewport
 import ChipsChallenge.UI.Viewport
 import ChipsChallenge.Unit.DirectionalUnit
+import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.JSON.JSONArray
 
 /**
  * Created by chase on 3/5/15.
  */
 class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), EngineObjectBase {
+
+    override fun getSaveObject(): JSONObject {
+        val unitArray = JSONArray()
+
+        forEach { unit ->
+            unitArray.put(unit.getSaveObject())
+        }
+        return JSONObject().put("units", unitArray)
+    }
 
     override fun onTick(engine: Engine) {
         forEach { it.onTick(engine) }

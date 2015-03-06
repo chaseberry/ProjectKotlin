@@ -1,8 +1,8 @@
 package ChipsChallenge.Engine
 
 import java.awt.image.BufferedImage
-import ChipsChallenge.Engine.Point
 import ChipsChallenge.Object.*
+import ChipsChallenge.JSON.JSONObject
 
 fun objectFromId(id: Int, location: Point): ObjectBase? {
     return when (id) {
@@ -28,6 +28,13 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
 data abstract class ObjectBase(val id: Int, var location: Point, val image: BufferedImage) : EngineObjectBase {
 
     abstract fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution
+
+    override fun getSaveObject(): JSONObject {
+        val obj = JSONObject()
+        obj.put("id", id)
+        obj.put("location", location.saveObject)
+        return obj
+    }
 
 }
 
