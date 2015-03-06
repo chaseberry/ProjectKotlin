@@ -31,22 +31,22 @@ class Movement(val engine: Engine) {
     }
 
     public fun moveUp(interactor: UnitBase): Boolean {
-        return move(Point(engine.player.location.x, engine.player.location.y - 1), Direction.UP, interactor)
+        return move(Point(interactor.location.x, interactor.location.y - 1), Direction.UP, interactor)
 
     }
 
     public fun moveDown(interactor: UnitBase): Boolean {
-        return move(Point(engine.player.location.x, engine.player.location.y + 1), Direction.DOWN, interactor)
+        return move(Point(interactor.location.x, interactor.location.y + 1), Direction.DOWN, interactor)
 
     }
 
     public fun moveLeft(interactor: UnitBase): Boolean {
-        return move(Point(engine.player.location.x - 1, engine.player.location.y), Direction.LEFT, interactor)
+        return move(Point(interactor.location.x - 1, interactor.location.y), Direction.LEFT, interactor)
 
     }
 
     public fun moveRight(interactor: UnitBase): Boolean {
-        return move(Point(engine.player.location.x + 1, engine.player.location.y), Direction.RIGHT, interactor)
+        return move(Point(interactor.location.x + 1, interactor.location.y), Direction.RIGHT, interactor)
     }
 
 }
