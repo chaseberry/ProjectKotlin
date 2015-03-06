@@ -87,7 +87,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
     //Done so this can be passed around in the onTick method
     val engine = this
 
-    val movement = Movement(this);
+    val movement = Movement(this)
 
     val unitManager = UnitManager(this);
 

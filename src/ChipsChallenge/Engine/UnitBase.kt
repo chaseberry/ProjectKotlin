@@ -5,6 +5,7 @@ import ChipsChallenge.Map.Tile
 import java.util.HashMap
 import ChipsChallenge.Unit.PinkBall
 import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Unit.Bug
 
 /**
  * Created by chase on 2/25/15.
@@ -13,6 +14,7 @@ import ChipsChallenge.JSON.JSONObject
 fun unitFromId(id: Int, location: Point, direction: Direction): UnitBase? {
     return when (id) {
         0 -> PinkBall(direction, location)
+        1 -> Bug(direction, location)
         else -> null
     }
 }

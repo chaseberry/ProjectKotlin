@@ -15,7 +15,7 @@ import ChipsChallenge.Engine.UnitBase
  */
 class UnitPanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(1) { unitFromId(it, Point(0, 0), Direction.UP) };
+    val buttons = Array(2) { unitFromId(it, Point(0, 0), Direction.UP) };
 
     {
         setLayout(null)
