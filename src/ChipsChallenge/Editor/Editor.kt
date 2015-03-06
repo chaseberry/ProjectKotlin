@@ -70,6 +70,10 @@ class Editor(x: Int, y: Int) {
             g.drawImage(obj.image, (obj.location.x - viewport.xStart) * 32, (obj.location.y - viewport.yStart) * 32, null)
         }
 
+        for (unit in unitManager.unitsInViewPort(viewport)) {
+            g.drawImage(unit.image, (unit.location.x - viewport.xStart) * 32, (unit.location.y - viewport.yStart) * 32, null)
+        }
+
         g.drawImage(playerImage, (map.defaultPlayerLocation.x - viewport.xStart) * 32,
                 (map.defaultPlayerLocation.y - viewport.yStart) * 32, null)
 
@@ -99,7 +103,6 @@ class Editor(x: Int, y: Int) {
 
     fun addUnit(tileLocation: Point) {
         if (!unitManager.isUnitOnPoint(tileLocation)) {
-            println("Added")
             unitManager.add(unitFromId(pallet.currentUnit!!.id, tileLocation, Direction.UP))
         }
     }
