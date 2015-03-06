@@ -2,7 +2,6 @@ package ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Map.Point
-import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Engine.pinkBallImage
@@ -11,7 +10,7 @@ import ChipsChallenge.Map.Tiles.Floor
 /**
  * Created by chase on 3/5/15.
  */
-class PinkBall(var direction: Direction, location: Point) : UnitBase(0, location) {
+class PinkBall(direction: Direction, location: Point) : DirectionalUnit(0, location, direction) {
 
     {
         image = pinkBallImage

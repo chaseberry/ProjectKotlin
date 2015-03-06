@@ -25,6 +25,7 @@ import java.util.ArrayList
 import ChipsChallenge.Engine.UnitManager
 import ChipsChallenge.Engine.unitFromId
 import ChipsChallenge.Engine.Direction
+import ChipsChallenge.Unit.DirectionalUnit
 
 /**
  * Created by chase on 2/27/15.
@@ -101,8 +102,13 @@ class Editor(x: Int, y: Int) {
     }
 
     fun addUnit(tileLocation: Point) {
-        if (!unitManager.isUnitOnPoint(tileLocation)) {
+        val unit = unitManager.unitOnPoint(tileLocation)
+        if (unit == null) {
             unitManager.add(unitFromId(pallet.currentUnit!!.id, tileLocation, Direction.UP))
+            return
+        }
+        if (unit is DirectionalUnit) {
+            unit.rotateDirection()
         }
     }
 

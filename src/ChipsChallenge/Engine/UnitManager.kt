@@ -4,7 +4,7 @@ import java.util.ArrayList
 import ChipsChallenge.Map.Point
 import ChipsChallenge.UI.pointInViewport
 import ChipsChallenge.UI.Viewport
-import ChipsChallenge.Unit.PinkBall
+import ChipsChallenge.Unit.DirectionalUnit
 
 /**
  * Created by chase on 3/5/15.
@@ -31,11 +31,21 @@ class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), EngineObjectBase
         return units
     }
 
+    fun unitOnPoint(location: Point): UnitBase? {
+        forEach { if (it.location == location) return it }
+        return null
+    }
+
     override fun clone(): UnitManager {
         val units = UnitManager(engine)
 
         forEach {
-            units.add(unitFromId(it.id, it.location.copy(), (it as PinkBall).direction))
+            units.add(unitFromId(it.id, it.location.copy(), if (it is DirectionalUnit) {
+                it.direction
+            } else {
+                Direction.UP
+            }
+            ))
         }
 
         return units
