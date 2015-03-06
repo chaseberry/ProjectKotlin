@@ -25,6 +25,7 @@ import java.util.ArrayList
 import ChipsChallenge.Engine.UnitManager
 import ChipsChallenge.Engine.unitFromId
 import ChipsChallenge.Engine.Direction
+import ChipsChallenge.Engine.UnitBase
 
 /**
  * Created by chase on 2/27/15.
@@ -248,7 +249,7 @@ class Editor(x: Int, y: Int) {
         }
         val objs = objects.clone()
         Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation, map.chipTotal),
-                ArrayList(objs.objects.values())).start()
+                ArrayList(objs.objects.values()), ArrayList<UnitBase>()).start()
     }
 
 }
