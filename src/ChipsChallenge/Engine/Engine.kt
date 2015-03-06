@@ -50,7 +50,7 @@ fun loadLevel(name: String): File {
     return File(URI(fileUrl + "Levels/${name}.ccl"))
 }
 
-class Engine(val map: Map, objects: ArrayList<ObjectBase>) {
+class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<UnitBase>) {
 
     val gameTime: Long = 30
 
@@ -71,10 +71,15 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>) {
 
     val movement = Movement(this);
 
+    val unitManager = UnitManager(this);
+
     {
         for (obj in objects) {
             objectManager.objects.put(obj.location, obj)
         }
+
+        unitManager.addAll(units)
+
     }
 
     public fun start() {
@@ -85,6 +90,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>) {
             override fun run() {
                 map.onTick(engine)
                 player.onTick(engine)
+                unitManager.onTick(engine)
                 frame.image = buildFrameImage()
                 checkCollisions()
             }
