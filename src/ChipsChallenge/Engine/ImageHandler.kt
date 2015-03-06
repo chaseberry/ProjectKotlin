@@ -112,3 +112,19 @@ val bearTrapImage: BufferedImage by Delegates.lazy {
 val pinkBallImage: BufferedImage by Delegates.lazy {
     loadImage("ball.gif") as BufferedImage
 }
+
+val upArrowImage: BufferedImage by Delegates.lazy {
+    loadImage("up_arrow.gif") as BufferedImage
+}
+
+val leftArrowImage: BufferedImage by Delegates.lazy {
+    loadImage("left_arrow.gif") as BufferedImage
+}
+
+val downArrowImage: BufferedImage by Delegates.lazy {
+    loadImage("down_arrow.gif") as BufferedImage
+}
+
+val rightArrowImage: BufferedImage by Delegates.lazy {
+    loadImage("right_arrow.gif") as BufferedImage
+}

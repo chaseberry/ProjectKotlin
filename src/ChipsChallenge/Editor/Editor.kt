@@ -26,6 +26,10 @@ import ChipsChallenge.Engine.UnitManager
 import ChipsChallenge.Engine.unitFromId
 import ChipsChallenge.Engine.Direction
 import ChipsChallenge.Unit.DirectionalUnit
+import ChipsChallenge.Engine.upArrowImage
+import ChipsChallenge.Engine.downArrowImage
+import ChipsChallenge.Engine.leftArrowImage
+import ChipsChallenge.Engine.rightArrowImage
 
 /**
  * Created by chase on 2/27/15.
@@ -72,6 +76,17 @@ class Editor(x: Int, y: Int) {
 
         for (unit in unitManager.unitsInViewPort(viewport)) {
             g.drawImage(unit.image, (unit.location.x - viewport.xStart) * 32, (unit.location.y - viewport.yStart) * 32, null)
+            if (unit is DirectionalUnit) {
+                g.drawImage(
+                        when (unit.direction) {
+                            Direction.UP -> upArrowImage
+                            Direction.DOWN -> downArrowImage
+                            Direction.LEFT -> leftArrowImage
+                            Direction.RIGHT -> rightArrowImage
+                        }, (unit.location.x - viewport.xStart) * 32, (unit.location.y - viewport.yStart) * 32, null
+                )
+
+            }
         }
 
         g.drawImage(playerImage, (map.defaultPlayerLocation.x - viewport.xStart) * 32,
