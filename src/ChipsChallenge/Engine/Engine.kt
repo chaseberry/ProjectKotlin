@@ -15,7 +15,6 @@ import java.io.FileReader
 import java.io.BufferedReader
 import ChipsChallenge.Map.mapFromFile
 import ChipsChallenge.JSON.JSONObject
-import ChipsChallenge.Engine.Point
 import java.net.URI
 
 public enum class Direction {
@@ -23,6 +22,16 @@ public enum class Direction {
     DOWN
     LEFT
     RIGHT
+}
+
+fun directionFromString(str: String?): Direction {
+    return when (str) {
+        "UP" -> Direction.UP
+        "DOWN" -> Direction.DOWN
+        "LEFT" -> Direction.LEFT
+        "RIGHT" -> Direction.RIGHT
+        else -> Direction.UP
+    }
 }
 
 fun engineFromFile(file: File): Engine? {

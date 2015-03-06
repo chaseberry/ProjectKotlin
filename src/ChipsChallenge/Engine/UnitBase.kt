@@ -17,6 +17,15 @@ fun unitFromId(id: Int, location: Point, direction: Direction): UnitBase? {
     }
 }
 
+fun unitFromJson(obj: JSONObject): UnitBase? {
+    try {
+        return unitFromId(obj.getInt("id"), pointFromJson(obj.getJSONObject("location"))!!,
+                directionFromString(obj.getString("direction")))
+    } catch(except: Exception) {
+        return null
+    }
+}
+
 abstract class UnitBase(val id: Int, var location: Point) : EngineObjectBase {
 
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()
