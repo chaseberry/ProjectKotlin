@@ -17,7 +17,7 @@ fun unitFromId(id: Int, location: Point, direction: Direction): UnitBase? {
     return null
 }
 
-abstract class UnitBase(var location: Point) : EngineObjectBase {
+abstract class UnitBase(val id: Int, var location: Point) : EngineObjectBase {
 
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()
 

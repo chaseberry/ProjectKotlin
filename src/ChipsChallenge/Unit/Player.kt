@@ -7,7 +7,7 @@ import ChipsChallenge.Map.Point
 import ChipsChallenge.Engine.loadImage
 import ChipsChallenge.Map.Tiles.Wall
 
-class Player(location: Point) : UnitBase(location) {
+class Player(location: Point) : UnitBase(-1, location) {
 
     {
         imageSet.put("up", loadImage("chip-north.gif"))

@@ -53,8 +53,6 @@ class EditorPallet : JFrame() {
     var currentUnit: UnitBase? = null
 
     val deleteTile: Tile = Floor()
-    val deleteObject: ObjectBase? = null
-    val deleteUnit: UnitBase? = null
 
     var buttonObject: ObjectBase? = null
 

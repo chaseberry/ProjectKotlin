@@ -38,7 +38,7 @@ fun engineFromFile(file: File): Engine? {
         if (map == null) {
             return null
         }
-        return Engine(map, objects)
+        return Engine(map, objects, ArrayList<UnitBase>())
     } catch(e: Exception) {
         e.printStackTrace()
     }

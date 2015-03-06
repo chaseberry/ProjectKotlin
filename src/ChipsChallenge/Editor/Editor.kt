@@ -22,6 +22,9 @@ import ChipsChallenge.Object.BrownButton
 import ChipsChallenge.Object.Button
 import ChipsChallenge.Engine.Triggerable
 import java.util.ArrayList
+import ChipsChallenge.Engine.UnitManager
+import ChipsChallenge.Engine.unitFromId
+import ChipsChallenge.Engine.Direction
 
 /**
  * Created by chase on 2/27/15.
@@ -43,6 +46,8 @@ class Editor(x: Int, y: Int) {
     val playerImage = loadImage("chip-south.gif")
 
     val keyBindings = KeyBindings()
+
+    val unitManager = UnitManager(null)
 
     fun start() {
         frame.image = buildFrameImage()
@@ -92,11 +97,15 @@ class Editor(x: Int, y: Int) {
     }
 
     fun addUnit(tileLocation: Point) {
-
+        if (!unitManager.isUnitOnPoint(tileLocation)) {
+            unitManager.add(unitFromId(pallet.currentUnit!!.id, tileLocation, Direction.UP))
+        }
     }
 
     fun removeUnit(tileLocation: Point) {
-
+        val index = unitManager.unitOnPointIndex(tileLocation)
+        if (index != null) {
+        }
     }
 
     fun updateTile(tileLocation: Point) {
