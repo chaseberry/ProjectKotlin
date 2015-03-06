@@ -26,7 +26,7 @@ fun unitFromJson(obj: JSONObject): UnitBase? {
     }
 }
 
-abstract class UnitBase(val id: Int, var location: Point) : EngineObjectBase {
+abstract class UnitBase(val id: Int, var location: Point, val moveSpeed: Int = 5, var currentMove: Int = 5) : EngineObjectBase {
 
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()
 
@@ -40,5 +40,49 @@ abstract class UnitBase(val id: Int, var location: Point) : EngineObjectBase {
         obj.put("id", id)
         return obj
     }
+
+    override fun onTick(engine: Engine) {
+        if (currentMove > 0) {
+            currentMove -= 1
+        }
+
+    }
+
+    fun move() {
+        currentMove = moveSpeed
+    }
+
+    open fun moveUp(engine: Engine) {
+        image = imageSet.get("up")
+        if (engine.movement.moveUp(this)) {
+            location.y -= 1
+            move()
+        }
+    }
+
+    open fun moveDown(engine: Engine) {
+        image = imageSet.get("down")
+        if (engine.movement.moveDown(this)) {
+            location.y += 1
+            move()
+        }
+    }
+
+    open fun moveLeft(engine: Engine) {
+        image = imageSet.get("left")
+        if (engine.movement.moveLeft(this)) {
+            location.x -= 1
+            move()
+        }
+    }
+
+    open fun moveRight(engine: Engine) {
+        image = imageSet.get("right")
+        if (engine.movement.moveRight(this)) {
+            location.x += 1
+            move()
+        }
+    }
+
 
 }

@@ -19,13 +19,8 @@ class Player(location: Point) : UnitBase(-1, location) {
 
     val inventory = PlayerInventory()
 
-    val playerMoveSpeed = 5
-    var currentMove = 0
-
     override fun onTick(engine: Engine) {
-        if (currentMove > 0) {
-            currentMove -= 1
-        }
+        super.onTick(engine)
         if (currentMove == 0) {
             when (true) {
                 engine.keyBindings.up -> {
@@ -45,42 +40,6 @@ class Player(location: Point) : UnitBase(-1, location) {
                     return
                 }
             }
-        }
-    }
-
-    fun move() {
-        currentMove = playerMoveSpeed
-    }
-
-    fun moveUp(engine: Engine) {
-        image = imageSet.get("up")
-        if (engine.movement.moveUp(this)) {
-            location.y -= 1
-            move()
-        }
-    }
-
-    fun moveDown(engine: Engine) {
-        image = imageSet.get("down")
-        if (engine.movement.moveDown(this)) {
-            location.y += 1
-            move()
-        }
-    }
-
-    fun moveLeft(engine: Engine) {
-        image = imageSet.get("left")
-        if (engine.movement.moveLeft(this)) {
-            location.x -= 1
-            move()
-        }
-    }
-
-    fun moveRight(engine: Engine) {
-        image = imageSet.get("right")
-        if (engine.movement.moveRight(this)) {
-            location.x += 1
-            move()
         }
     }
 
