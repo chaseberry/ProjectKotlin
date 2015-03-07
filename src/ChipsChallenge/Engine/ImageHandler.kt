@@ -128,3 +128,19 @@ val downArrowImage: BufferedImage by Delegates.lazy {
 val rightArrowImage: BufferedImage by Delegates.lazy {
     loadImage("right_arrow.gif") as BufferedImage
 }
+
+val bugUpImage: BufferedImage by Delegates.lazy {
+    loadImage("bug-up.gif") as BufferedImage
+}
+
+val bugDownImage: BufferedImage by Delegates.lazy {
+    loadImage("bug-down.gif") as BufferedImage
+}
+
+val bugLeftImage: BufferedImage by Delegates.lazy {
+    loadImage("bug-left.gif") as BufferedImage
+}
+
+val bugRightImage: BufferedImage by Delegates.lazy {
+    loadImage("bug-right.gif") as BufferedImage
+}

@@ -7,11 +7,19 @@ import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.Map
+import ChipsChallenge.Engine.bugUpImage
+import ChipsChallenge.Engine.bugDownImage
+import ChipsChallenge.Engine.bugRightImage
+import ChipsChallenge.Engine.bugLeftImage
 
 /**
  * Created by chase on 3/6/15.
  */
 class Bug(direction: Direction, location: Point) : DirectionalUnit(1, location, direction) {
+
+    {
+        image = bugUpImage
+    }
 
     override fun changeDirection() {
         direction = getLeftOfCurrent()
@@ -39,6 +47,8 @@ class Bug(direction: Direction, location: Point) : DirectionalUnit(1, location, 
                 }
             }
         }
+        println(direction)
+        setImage()
         super.onTick(engine)
     }
 
@@ -64,8 +74,8 @@ class Bug(direction: Direction, location: Point) : DirectionalUnit(1, location, 
         return when (direction) {
             Direction.UP -> map.getUp(location)
             Direction.LEFT -> map.getLeft(location)
-            Direction.DOWN -> map.getRight(location)
-            Direction.RIGHT -> map.getDown(location)
+            Direction.DOWN -> map.getDown(location)
+            Direction.RIGHT -> map.getRight(location)
         }
     }
 
@@ -105,5 +115,12 @@ class Bug(direction: Direction, location: Point) : DirectionalUnit(1, location, 
         }
     }
 
-
+    fun setImage() {
+        image = when (direction) {
+            Direction.UP -> bugUpImage
+            Direction.LEFT -> bugLeftImage
+            Direction.RIGHT -> bugRightImage
+            Direction.DOWN -> bugDownImage
+        }
+    }
 }
