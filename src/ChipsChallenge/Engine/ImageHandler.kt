@@ -148,3 +148,19 @@ val bugRightImage: BufferedImage by Delegates.lazy {
 val fireImage: BufferedImage by Delegates.lazy {
     loadImage("fire.gif") as BufferedImage
 }
+
+val suctionBootImage: BufferedImage by Delegates.lazy {
+    loadImage("suction.gif") as BufferedImage
+}
+
+val iceSkatesImage: BufferedImage by Delegates.lazy {
+    loadImage("skate.gif") as BufferedImage
+}
+
+val flippersImage: BufferedImage by Delegates.lazy {
+    loadImage("flipper.gif") as BufferedImage
+}
+
+val fireBootImage: BufferedImage by Delegates.lazy {
+    loadImage("fireboots.gif") as BufferedImage
+}

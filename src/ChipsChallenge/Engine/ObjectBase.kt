@@ -21,6 +21,10 @@ fun objectFromId(id: Int, location: Point): ObjectBase? {
         12 -> GreenButton(location)
         13 -> BrownButton(location)
         14 -> BearTrap(location)
+        15 -> FireBoot(location)
+        16 -> Flipper(location)
+        17 -> IceSkate(location)
+        18 -> SuctionBoot(location)
         else -> null
     }
 }
