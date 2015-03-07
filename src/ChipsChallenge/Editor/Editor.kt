@@ -166,7 +166,7 @@ class Editor(x: Int, y: Int) {
     fun addObject(tileLocation: Point) {
         if (objects.objects.containsKey(tileLocation) || pallet.currentObject == null) {
             val obj = objects.objects.get(tileLocation)
-            if (obj is Block) {
+            if (obj is Block && pallet.currentObject !is Block) {
                 obj.cover(objectFromId(pallet.currentObject!!.id, tileLocation)!!)
             }
             return
