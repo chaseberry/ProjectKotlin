@@ -22,7 +22,6 @@ class Bug(direction: Direction, location: Point) : DirectionalUnit(1, location, 
     }
 
     override fun changeDirection() {
-        direction = getLeftOfCurrent()
     }
 
     override fun canMoveToTile(tile: Tile): Boolean {
@@ -30,25 +29,26 @@ class Bug(direction: Direction, location: Point) : DirectionalUnit(1, location, 
     }
 
     override fun onTick(engine: Engine) {
-        var newTile = getTileLeftOfCurrent(engine.map)
-        if (newTile != null && canMoveToTile(newTile!!)) {
-            direction = getLeftOfCurrent()
-        } else {
-            newTile = getTileAheadOfCurrent(engine.map)
-            if (newTile == null || !canMoveToTile(newTile!!)) {
-                newTile = getTileRightOfCurrent(engine.map)
-                if (newTile != null && canMoveToTile(newTile!!)) {
-                    direction = getRightOfCurrent()
-                } else {
-                    newTile = getTileBehindCurrent(engine.map)
+        if (currentMove == 1) {
+            var newTile = getTileLeftOfCurrent(engine.map)
+            if (newTile != null && canMoveToTile(newTile!!)) {
+                direction = getLeftOfCurrent()
+            } else {
+                newTile = getTileAheadOfCurrent(engine.map)
+                if (newTile == null || !canMoveToTile(newTile!!)) {
+                    newTile = getTileRightOfCurrent(engine.map)
                     if (newTile != null && canMoveToTile(newTile!!)) {
-                        direction = getBehindOfCurrent()
+                        direction = getRightOfCurrent()
+                    } else {
+                        newTile = getTileBehindCurrent(engine.map)
+                        if (newTile != null && canMoveToTile(newTile!!)) {
+                            direction = getBehindOfCurrent()
+                        }
                     }
                 }
             }
+            setImage()
         }
-        println(direction)
-        setImage()
         super.onTick(engine)
     }
 
