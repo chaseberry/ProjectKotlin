@@ -1,4 +1,7 @@
 TODO
+
+**BUG WITH BLOCKS**
+
 Add Enemies:
     Tank
     Teeth
