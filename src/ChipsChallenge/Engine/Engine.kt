@@ -16,6 +16,7 @@ import java.io.BufferedReader
 import ChipsChallenge.Map.mapFromFile
 import ChipsChallenge.JSON.JSONObject
 import java.net.URI
+import ChipsChallenge.Map.Tiles.Fire
 
 public enum class Direction {
     UP
@@ -118,8 +119,9 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
     fun checkCollisions() {
         val tile = map.getTile(player.location)
         when (tile) {
-            Water() -> if (!player.inventory.hasFlippers) lose()
-            Finish() -> win()
+            is Water -> if (!player.inventory.hasFlippers) lose()
+            is Fire -> if (!player.inventory.hasFireBoots) lose()
+            is Finish -> win()
         }
         if (unitManager.isUnitOnPoint(player.location)) {
             lose()

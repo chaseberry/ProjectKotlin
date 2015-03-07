@@ -144,3 +144,7 @@ val bugLeftImage: BufferedImage by Delegates.lazy {
 val bugRightImage: BufferedImage by Delegates.lazy {
     loadImage("bug-right.gif") as BufferedImage
 }
+
+val fireImage: BufferedImage by Delegates.lazy {
+    loadImage("fire.gif") as BufferedImage
+}
