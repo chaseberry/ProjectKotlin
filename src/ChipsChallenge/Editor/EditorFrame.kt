@@ -21,6 +21,7 @@ class EditorFrame(val editor: Editor) : JFrame() {
 
     val mouseListener = object : MouseListener {
         override fun mousePressed(e: MouseEvent) {
+            requestFocus()
             editor.mouseBindings.mousePressed(e.getButton())
             editor.triggerUpdate()
         }
@@ -59,6 +60,7 @@ class EditorFrame(val editor: Editor) : JFrame() {
 
     val keyListener = object : KeyListener {
         override fun keyPressed(e: KeyEvent) {
+            requestFocus()
             editor.keyBindings.keyPressed(e.getKeyCode())
             editor.triggerScreenMove()
         }
