@@ -16,6 +16,7 @@ public fun tileIdToTile(id: Int): Tile {
         2 -> Finish()
         3 -> Help()
         4 -> Water()
+        5 -> Fire()
         else -> Wall()
     }
 }

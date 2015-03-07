@@ -10,7 +10,6 @@ import ChipsChallenge.Engine.Engine
 class Fire : Tile(fireImage, 5) {
 
     override fun onTick(engine: Engine) {
-        throw UnsupportedOperationException()
     }
 
 }
