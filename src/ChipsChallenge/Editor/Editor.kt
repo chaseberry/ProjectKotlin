@@ -236,7 +236,7 @@ class Editor(x: Int, y: Int) {
             objArray.put(obj.getSaveObject())
         }
 
-        saveObj.put("units", unitManager.getSaveObject().get("units"))
+        saveObj.put("units", unitManager.getSaveObject())
         saveObj.put("objects", objArray)
         saveObj.put("playerStartLocation", JSONArray().put(map.defaultPlayerLocation.x).put(map.defaultPlayerLocation.y))
         try {

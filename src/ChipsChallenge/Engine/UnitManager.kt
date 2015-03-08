@@ -4,7 +4,6 @@ import java.util.ArrayList
 import ChipsChallenge.UI.pointInViewport
 import ChipsChallenge.UI.Viewport
 import ChipsChallenge.Unit.DirectionalUnit
-import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.JSON.JSONArray
 
 /**
@@ -12,13 +11,13 @@ import ChipsChallenge.JSON.JSONArray
  */
 class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), Tickable {
 
-    override fun getSaveObject(): JSONObject {
+    fun getSaveObject(): JSONArray {
         val unitArray = JSONArray()
 
         forEach { unit ->
             unitArray.put(unit.getSaveObject())
         }
-        return JSONObject().put("units", unitArray)
+        return unitArray
     }
 
     override fun onTick(engine: Engine) {
