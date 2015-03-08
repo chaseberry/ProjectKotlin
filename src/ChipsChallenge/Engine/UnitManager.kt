@@ -10,7 +10,7 @@ import ChipsChallenge.JSON.JSONArray
 /**
  * Created by chase on 3/5/15.
  */
-class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), EngineObjectBase {
+class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), Tickable {
 
     override fun getSaveObject(): JSONObject {
         val unitArray = JSONArray()

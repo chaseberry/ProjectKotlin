@@ -1,6 +1,5 @@
 package ChipsChallenge.Engine
 
-import ChipsChallenge.Engine.Point
 import ChipsChallenge.UI.Viewport
 import java.util.ArrayList
 import ChipsChallenge.UI.pointInViewport
@@ -76,7 +75,7 @@ class ObjectManager(val engine: Engine?) {
                 Direction.RIGHT -> obj.location.copy(x = obj.location.x + 1)
             }
             if (engine.map.getTile(newObjLocation) is Water) {
-                engine.map.setTile(newObjLocation, Floor())
+                engine.map.setTile(newObjLocation, Floor(Point(0, 0)))
                 add(Dirt(newObjLocation), newObjLocation)
             } else {
                 obj.location = newObjLocation

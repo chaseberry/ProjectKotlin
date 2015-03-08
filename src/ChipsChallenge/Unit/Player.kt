@@ -44,7 +44,7 @@ class Player(location: Point) : UnitBase(-1, location) {
     }
 
     override fun canMoveToTile(tile: Tile): Boolean {
-        return tile != Wall()
+        return tile !is Wall
     }
 
     override fun moveUp(engine: Engine) {

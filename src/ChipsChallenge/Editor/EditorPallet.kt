@@ -12,6 +12,7 @@ import ChipsChallenge.Editor.PalletPanes.ObjectPanel
 import ChipsChallenge.Editor.PalletPanes.PlayerLocationPanel
 import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Editor.PalletPanes.UnitPanel
+import ChipsChallenge.Engine.Point
 
 /**
  * Created by chase on 2/27/15.
@@ -48,11 +49,11 @@ class EditorPallet : JFrame() {
 
     var palletStatus = PalletStatus.TILE
 
-    var currentTile: Tile = Wall()
+    var currentTile: Tile = Wall(Point(0, 0))
     var currentObject: ObjectBase? = null
     var currentUnit: UnitBase? = null//Not changing!
 
-    val deleteTile: Tile = Floor()
+    val deleteTile: Tile = Floor(Point(0, 0))
 
     var buttonObject: ObjectBase? = null
 

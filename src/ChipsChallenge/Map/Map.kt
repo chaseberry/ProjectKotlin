@@ -14,11 +14,11 @@ import ChipsChallenge.JSON.JSONArray
  */
 
 fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point, chipTotal: Int): Map {
-    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y]) }) }), playerStart, chipTotal)
+    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y], Point(x, y)) }) }), playerStart, chipTotal)
 }
 
 fun blankMap(x: Int, y: Int): Map {
-    return Map(Array(x) { Array(y) { tileIdToTile(0) } }, Point(0, 0), 0)
+    return Map(Array(x) { Array(y) { tileIdToTile(0, Point(x, y)) } }, Point(0, 0), 0)
 }
 
 fun mapFromFile(mapData: JSONObject): Map? {
@@ -27,7 +27,8 @@ fun mapFromFile(mapData: JSONObject): Map? {
         val tileArray = Array(mapArray.length()) { x ->
             Array(mapArray.getJSONArray(x).length()) { y ->
                 tileIdToTile(
-                        mapArray.getJSONArray(x).getInt(y)
+                        mapArray.getJSONArray(x).getInt(y),
+                        Point(x, y)
                 )
             }
         }
@@ -47,7 +48,7 @@ fun mapFromFile(mapData: JSONObject): Map? {
 }
 
 data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation: Point,
-                         var chipTotal: Int) : EngineObjectBase {
+                         var chipTotal: Int) : EngineObjectBase(Point(0, 0)) {
 
     override fun getSaveObject(): JSONObject {
         val mapArray = JSONArray()

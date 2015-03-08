@@ -7,13 +7,14 @@ import ChipsChallenge.Map.Tile
 import javax.swing.ImageIcon
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
+import ChipsChallenge.Engine.Point
 
 /**
  * Created by chase on 2/27/15.
  */
 class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(6) { tileIdToTile(it) };
+    val buttons = Array(6) { tileIdToTile(it, Point(0, 0)) };
 
     {
         setLayout(null)
