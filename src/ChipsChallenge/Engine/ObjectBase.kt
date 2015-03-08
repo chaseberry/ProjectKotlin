@@ -38,7 +38,7 @@ fun objectFromJSON(obj: JSONObject): ObjectBase? {
     return null
 }
 
-data abstract class ObjectBase(val id: Int, var location: Point, val image: BufferedImage) : EngineObjectBase {
+data abstract class ObjectBase(val id: Int, location: Point, val image: BufferedImage) : EngineObjectBase(location) {
 
     abstract fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution
 

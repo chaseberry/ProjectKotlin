@@ -5,10 +5,10 @@ import ChipsChallenge.JSON.JSONObject
 /**
  * Created by chase on 2/25/15.
  */
-trait EngineObjectBase {
+abstract class EngineObjectBase(var location: Point) {
 
-    public fun onTick(engine: Engine)
+    abstract fun onTick(engine: Engine)
 
-    fun getSaveObject(): JSONObject
+    abstract fun getSaveObject(): JSONObject
 
 }

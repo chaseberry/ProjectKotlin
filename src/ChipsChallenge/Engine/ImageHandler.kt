@@ -49,6 +49,10 @@ val helpImage: BufferedImage by Delegates.lazy {
     loadImage("hint.gif") as BufferedImage
 }
 
+val iceImage: BufferedImage by Delegates.lazy {
+    loadImage("ice.gif") as BufferedImage
+}
+
 val blueKeyImage: BufferedImage by Delegates.lazy {
     loadImage("blue_key.gif") as BufferedImage
 }

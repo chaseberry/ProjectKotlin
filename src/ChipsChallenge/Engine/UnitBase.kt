@@ -28,7 +28,7 @@ fun unitFromJson(obj: JSONObject): UnitBase? {
     }
 }
 
-abstract class UnitBase(val id: Int, var location: Point, val moveSpeed: Int = 5, var currentMove: Int = 5) : EngineObjectBase {
+abstract class UnitBase(val id: Int, location: Point, val moveSpeed: Int = 5, var currentMove: Int = 5) : EngineObjectBase(location) {
 
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()
 
