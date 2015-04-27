@@ -1,10 +1,10 @@
 package ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.UnitBase
-import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.Direction
-import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Engine.Engine
+import ChipsChallenge.Engine.Point
+import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.JSON.JSONObject
 
 /**
  * Created by chase on 3/6/15.

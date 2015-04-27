@@ -7,8 +7,6 @@ import ChipsChallenge.JSON.JSONObject
  */
 abstract class EngineObjectBase(var location: Point) : Tickable {
 
-    var forcedDirection: Direction? = null
-
     abstract fun getSaveObject(): JSONObject
 
 }

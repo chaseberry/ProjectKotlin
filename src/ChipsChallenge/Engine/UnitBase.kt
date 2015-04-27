@@ -2,7 +2,6 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Ice
 import ChipsChallenge.Unit.Bug
 import ChipsChallenge.Unit.PinkBall
 import java.awt.image.BufferedImage
@@ -49,19 +48,10 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
         if (currentMove > 0) {
             currentMove -= 1
         }
-        if (forcedDirection != null && currentMove == 0) {
-            when (forcedDirection) {
-
-            }
-
-        }
     }
 
     fun move(direction: Direction, engine: Engine) {
         currentMove = moveSpeed
-        if (engine.map.getTile(location) is Ice) {
-            forcedDirection = direction
-        }
     }
 
     open fun moveUp(engine: Engine) {
