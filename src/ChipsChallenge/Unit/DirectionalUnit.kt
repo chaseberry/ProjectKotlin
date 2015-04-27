@@ -54,7 +54,7 @@ abstract class DirectionalUnit(id: Int, location: Point, var direction: Directio
     override fun moveUp(engine: Engine) {
         if (engine.movement.moveUp(this)) {
             location.y -= 1
-            move()
+            move(Direction.UP, engine)
         } else {
             changeDirection()
         }
@@ -63,7 +63,7 @@ abstract class DirectionalUnit(id: Int, location: Point, var direction: Directio
     override fun moveDown(engine: Engine) {
         if (engine.movement.moveDown(this)) {
             location.y += 1
-            move()
+            move(Direction.DOWN, engine)
         } else {
             changeDirection()
         }
@@ -72,7 +72,7 @@ abstract class DirectionalUnit(id: Int, location: Point, var direction: Directio
     override fun moveLeft(engine: Engine) {
         if (engine.movement.moveLeft(this)) {
             location.x -= 1
-            move()
+            move(Direction.LEFT, engine)
         } else {
             changeDirection()
         }
@@ -81,7 +81,7 @@ abstract class DirectionalUnit(id: Int, location: Point, var direction: Directio
     override fun moveRight(engine: Engine) {
         if (engine.movement.moveRight(this)) {
             location.x += 1
-            move()
+            move(Direction.RIGHT, engine)
         } else {
             changeDirection()
         }

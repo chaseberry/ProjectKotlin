@@ -1,10 +1,10 @@
 package ChipsChallenge.Engine
 
-import java.util.ArrayList
-import ChipsChallenge.UI.pointInViewport
-import ChipsChallenge.UI.Viewport
-import ChipsChallenge.Unit.DirectionalUnit
 import ChipsChallenge.JSON.JSONArray
+import ChipsChallenge.UI.Viewport
+import ChipsChallenge.UI.pointInViewport
+import ChipsChallenge.Unit.DirectionalUnit
+import java.util.ArrayList
 
 /**
  * Created by chase on 3/5/15.
@@ -49,7 +49,7 @@ class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), Tickable {
         val units = UnitManager(engine)
 
         forEach {
-            units.add(unitFromId(it.id, it.location.copy(), if (it is DirectionalUnit) {
+            units.add(unitFromId(it.typeId, it.location.copy(), if (it is DirectionalUnit) {
                 it.direction
             } else {
                 Direction.UP

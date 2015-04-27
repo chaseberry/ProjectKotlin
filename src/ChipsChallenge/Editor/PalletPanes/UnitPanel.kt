@@ -17,7 +17,7 @@ class UnitPanel(val editorPallet: EditorPallet) : JPanel() {
 
     val buttons = Array(2) { unitFromId(it, Point(0, 0), Direction.UP) };
 
-    {
+    init {
         setLayout(null)
         setSize(buttons.size() % editorPallet.gridSize * 32, buttons.size() / editorPallet.gridSize * 32)
         for (z in 0..buttons.size() - 1) {

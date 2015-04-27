@@ -105,9 +105,9 @@ class ObjectManager(val engine: Engine?) {
         val objManager = ObjectManager(engine)
 
         for ((key, value) in objects) {
-            val newObj = objectFromId(value.id, key)!!
+            val newObj = objectFromId(value.typeId, key)!!
             if (newObj is Block && (value as Block).objectUnder != null) {
-                newObj.cover(objectFromId((value as Block).objectUnder!!.id, key)!!)
+                newObj.cover(objectFromId((value as Block).objectUnder!!.typeId, key)!!)
             }
             if (value is Button && value.target != null) {
                 (newObj as Button).target = value.target!!.clone()

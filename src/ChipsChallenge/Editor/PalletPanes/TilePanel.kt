@@ -14,9 +14,9 @@ import ChipsChallenge.Engine.Point
  */
 class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(6) { tileIdToTile(it, Point(0, 0)) };
+    val buttons = Array(7) { tileIdToTile(it, Point(0, 0)) };
 
-    {
+    init {
         setLayout(null)
         setSize(buttons.size() % editorPallet.gridSize * 32, buttons.size() / editorPallet.gridSize * 32)
         for (z in 0..buttons.size() - 1) {

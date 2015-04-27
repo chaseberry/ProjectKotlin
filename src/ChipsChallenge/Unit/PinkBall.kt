@@ -11,7 +11,7 @@ import ChipsChallenge.Map.Tiles.Floor
  */
 class PinkBall(direction: Direction, location: Point) : DirectionalUnit(0, location, direction) {
 
-    {
+    init {
         image = pinkBallImage
     }
 

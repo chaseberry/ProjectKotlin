@@ -9,7 +9,7 @@ import ChipsChallenge.Map.Tiles.Wall
 
 class Player(location: Point) : UnitBase(-1, location) {
 
-    {
+    init {
         imageSet.put("up", loadImage("chip-north.gif"))
         imageSet.put("down", loadImage("chip-south.gif"))
         imageSet.put("left", loadImage("chip-west.gif"))
@@ -21,6 +21,9 @@ class Player(location: Point) : UnitBase(-1, location) {
 
     override fun onTick(engine: Engine) {
         super.onTick(engine)
+        if (forcedDirection == null) {
+            return
+        }
         if (currentMove == 0) {
             when (true) {
                 engine.keyBindings.up -> {

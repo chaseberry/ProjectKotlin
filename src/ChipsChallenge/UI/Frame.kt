@@ -13,7 +13,7 @@ class Frame(val engine: Engine) : JFrame() {
 
     val keyListener = KeyListener(this);
 
-    {
+    init {
         pack()
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE)

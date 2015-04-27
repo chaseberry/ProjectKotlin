@@ -1,34 +1,21 @@
 package ChipsChallenge.Editor
 
-import ChipsChallenge.Map.blankMap
-import java.awt.image.BufferedImage
-import ChipsChallenge.UI.getViewport
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.ObjectManager
-import ChipsChallenge.Engine.objectFromId
+import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONArray
-import ChipsChallenge.Engine.loadImage
-import ChipsChallenge.Engine.KeyBindings
-import javax.swing.JFileChooser
-import javax.swing.filechooser.FileFilter
-import java.io.File
-import java.io.BufferedWriter
-import java.io.FileWriter
-import ChipsChallenge.Engine.Engine
+import ChipsChallenge.Map.blankMap
 import ChipsChallenge.Map.mapFromIds
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.BrownButton
 import ChipsChallenge.Object.Button
-import ChipsChallenge.Engine.Triggerable
-import java.util.ArrayList
-import ChipsChallenge.Engine.UnitManager
-import ChipsChallenge.Engine.unitFromId
-import ChipsChallenge.Engine.Direction
+import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Unit.DirectionalUnit
-import ChipsChallenge.Engine.upArrowImage
-import ChipsChallenge.Engine.downArrowImage
-import ChipsChallenge.Engine.leftArrowImage
-import ChipsChallenge.Engine.rightArrowImage
+import java.awt.image.BufferedImage
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
+import java.util.ArrayList
+import javax.swing.JFileChooser
+import javax.swing.filechooser.FileFilter
 
 /**
  * Created by chase on 2/27/15.
@@ -118,7 +105,7 @@ class Editor(x: Int, y: Int) {
     fun addUnit(tileLocation: Point) {
         val unit = unitManager.unitOnPoint(tileLocation)
         if (unit == null) {
-            unitManager.add(unitFromId(pallet.currentUnit!!.id, tileLocation, Direction.UP))
+            unitManager.add(unitFromId(pallet.currentUnit!!.typeId, tileLocation, Direction.UP))
             return
         }
         if (unit is DirectionalUnit) {
@@ -167,11 +154,11 @@ class Editor(x: Int, y: Int) {
         if (objects.objects.containsKey(tileLocation) || pallet.currentObject == null) {
             val obj = objects.objects.get(tileLocation)
             if (obj is Block && pallet.currentObject !is Block) {
-                obj.cover(objectFromId(pallet.currentObject!!.id, tileLocation)!!)
+                obj.cover(objectFromId(pallet.currentObject!!.typeId, tileLocation)!!)
             }
             return
         }
-        val obj = (objectFromId((pallet.currentObject!!).id, tileLocation)!!)
+        val obj = (objectFromId((pallet.currentObject!!).typeId, tileLocation)!!)
         objects.add(obj, tileLocation)
         if (pallet.currentObject is BrownButton) {
             pallet.palletStatus = PalletStatus.TRIGGER

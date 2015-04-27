@@ -17,7 +17,7 @@ import ChipsChallenge.Engine.bugLeftImage
  */
 class Bug(direction: Direction, location: Point) : DirectionalUnit(1, location, direction) {
 
-    {
+    init {
         image = bugUpImage
     }
 

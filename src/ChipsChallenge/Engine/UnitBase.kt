@@ -1,11 +1,12 @@
 package ChipsChallenge.Engine
 
-import java.awt.image.BufferedImage
-import ChipsChallenge.Map.Tile
-import java.util.HashMap
-import ChipsChallenge.Unit.PinkBall
 import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.Ice
 import ChipsChallenge.Unit.Bug
+import ChipsChallenge.Unit.PinkBall
+import java.awt.image.BufferedImage
+import java.util.HashMap
 
 /**
  * Created by chase on 2/25/15.
@@ -28,7 +29,8 @@ fun unitFromJson(obj: JSONObject): UnitBase? {
     }
 }
 
-abstract class UnitBase(val id: Int, location: Point, val moveSpeed: Int = 5, var currentMove: Int = 5) : EngineObjectBase(location) {
+abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5, var currentMove: Int = 5,
+                        val uniqueId: Id = Id(IdType.UNIT)) : EngineObjectBase(location) {
 
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()
 
@@ -39,7 +41,7 @@ abstract class UnitBase(val id: Int, location: Point, val moveSpeed: Int = 5, va
     override fun getSaveObject(): JSONObject {
         val obj = JSONObject()
         obj.put("location", location.saveObject)
-        obj.put("id", id)
+        obj.put("id", typeId)
         return obj
     }
 
@@ -47,37 +49,46 @@ abstract class UnitBase(val id: Int, location: Point, val moveSpeed: Int = 5, va
         if (currentMove > 0) {
             currentMove -= 1
         }
+        if (forcedDirection != null && currentMove == 0) {
+            when (forcedDirection) {
+
+            }
+
+        }
     }
 
-    fun move() {
+    fun move(direction: Direction, engine: Engine) {
         currentMove = moveSpeed
+        if (engine.map.getTile(location) is Ice) {
+            forcedDirection = direction
+        }
     }
 
     open fun moveUp(engine: Engine) {
         if (engine.movement.moveUp(this)) {
             location.y -= 1
-            move()
+            move(Direction.UP, engine)
         }
     }
 
     open fun moveDown(engine: Engine) {
         if (engine.movement.moveDown(this)) {
             location.y += 1
-            move()
+            move(Direction.DOWN, engine)
         }
     }
 
     open fun moveLeft(engine: Engine) {
         if (engine.movement.moveLeft(this)) {
             location.x -= 1
-            move()
+            move(Direction.LEFT, engine)
         }
     }
 
     open fun moveRight(engine: Engine) {
         if (engine.movement.moveRight(this)) {
             location.x += 1
-            move()
+            move(Direction.RIGHT, engine)
         }
     }
 

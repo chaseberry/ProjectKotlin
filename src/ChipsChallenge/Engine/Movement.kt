@@ -1,6 +1,5 @@
 package ChipsChallenge.Engine
 
-import ChipsChallenge.Engine.Point
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Object.BearTrap
 import ChipsChallenge.Object.Button
@@ -15,7 +14,8 @@ class Movement(val engine: Engine) {
      *
      */
     fun move(newLocation: Point, direction: Direction, interactor: UnitBase): Boolean {
-        if (engine.map.getTile(newLocation) == null || !interactor.canMoveToTile(engine.map.getTile(newLocation) as Tile)) {
+        if (engine.map.getTile(newLocation) == null
+                || !interactor.canMoveToTile(engine.map.getTile(newLocation) as Tile)) {
             return false
         }
         val obj = engine.objectManager.objects.get(interactor.location)

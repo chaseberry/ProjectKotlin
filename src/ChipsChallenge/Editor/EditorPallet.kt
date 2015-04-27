@@ -1,18 +1,18 @@
 package ChipsChallenge.Editor
 
-import ChipsChallenge.Map.Tiles.Floor
-import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Map.Tiles.Wall
-import javax.swing.JFrame
-import javax.swing.WindowConstants
-import ChipsChallenge.Map.Tile
-import javax.swing.JTabbedPane
-import ChipsChallenge.Editor.PalletPanes.TilePanel
 import ChipsChallenge.Editor.PalletPanes.ObjectPanel
 import ChipsChallenge.Editor.PalletPanes.PlayerLocationPanel
-import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Editor.PalletPanes.TilePanel
 import ChipsChallenge.Editor.PalletPanes.UnitPanel
+import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.Engine.Point
+import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.Floor
+import ChipsChallenge.Map.Tiles.Wall
+import javax.swing.JFrame
+import javax.swing.JTabbedPane
+import javax.swing.WindowConstants
 
 /**
  * Created by chase on 2/27/15.
@@ -21,7 +21,7 @@ class EditorPallet : JFrame() {
 
     val gridSize = 6
 
-    {
+    init {
         pack()
         setSize(getInsets().left + (32 * 6) + getInsets().right + 32, getInsets().top + (32 * 5) + getInsets().bottom + 32)
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE)

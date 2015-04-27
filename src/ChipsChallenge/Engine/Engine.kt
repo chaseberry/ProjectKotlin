@@ -92,7 +92,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
 
     val unitManager = UnitManager(this);
 
-    {
+    init {
         for (obj in objects) {
             objectManager.objects.put(obj.location, obj)
         }

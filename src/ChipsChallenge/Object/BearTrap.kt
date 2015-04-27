@@ -24,7 +24,7 @@ class BearTrap(location: Point, var isActive: Boolean = true) : ObjectBase(14, l
     }
 
     override fun clone(): Triggerable {
-        return objectFromId(id, location) as Triggerable
+        return objectFromId(typeId, location) as Triggerable
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {

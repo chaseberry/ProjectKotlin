@@ -12,7 +12,7 @@ import ChipsChallenge.Engine.loadImage
  */
 class PlayerLocationPanel(val editorPallet: EditorPallet) : JPanel() {
 
-    {
+    init {
         setLayout(null)
         setSize(32, 32)
         add(createButton())

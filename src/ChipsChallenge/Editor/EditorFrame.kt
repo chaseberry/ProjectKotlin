@@ -75,7 +75,7 @@ class EditorFrame(val editor: Editor) : JFrame() {
 
     }
 
-    {
+    init {
         pack()
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 10) + getInsets().bottom)
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE)
