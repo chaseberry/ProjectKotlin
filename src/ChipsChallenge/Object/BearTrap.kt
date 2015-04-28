@@ -5,17 +5,17 @@ import ChipsChallenge.Engine.*
 /**
  * Created by chase on 3/2/15.
  */
-class BearTrap(location: Point, var isActive: Boolean = true, uniqueId: Id) : ObjectBase(BEAR_TRAP_TYPE_ID, location, bearTrapImage, uniqueId), Triggerable {
+class BearTrap(location: Point, var isActive: Boolean = false, uniqueId: Id) : ObjectBase(BEAR_TRAP_TYPE_ID, location, bearTrapImage, uniqueId), Triggerable {
 
     constructor(location: Point) : this(location, true, Id(IdType.OBJECT)) {
     }
 
     override fun onTrigger() {
-        isActive = false
+        isActive = true
     }
 
     override fun offTrigger() {
-        isActive = true
+        isActive = false
     }
 
     override fun clone(): Triggerable {

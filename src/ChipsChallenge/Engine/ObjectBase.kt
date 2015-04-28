@@ -50,12 +50,32 @@ fun objectFromId(typeId: Int, location: Point): ObjectBase? {
 }
 
 fun objectFromJSON(obj: JSONObject): ObjectBase? {
-    try {
-        return objectFromId(obj.getInt("id"), pointFromJson(obj.getJSONObject("location"))!!)
-    } catch(except: Exception) {
+    val typeId = obj.getInt("typeId")
+    val location = pointFromJson(obj.getJSONObject("location"))
+    val id = idFromJson(obj.getJSONObject("id"))
 
+    return when (typeId) {
+        CHIP_TYPE_ID -> Chip(location, id)
+        SOCKET_TYPE_ID -> Socket(location, id)
+        BLUE_KEY_TYPE_ID -> BlueKey(location, id)
+        BLUE_LOCK_TYPE_ID -> BlueLock(location, id)
+        RED_KEY_TYPE_ID -> RedKey(location, id)
+        RED_LOCK_TYPE_ID -> RedLock(location, id)
+        YELLOW_KEY_TYPE_ID -> YellowKey(location, id)
+        YELLOW_LOCK_TYPE_ID -> YellowLock(location, id)
+        GREEN_KEY_TYPE_ID -> GreenKey(location, id)
+        GREEN_LOCK_TYPE_ID -> GreenLock(location, id)
+        DIRT_TYPE_ID -> Dirt(location, id)
+        BLOCK_TYPE_ID -> Block(location, id)
+        GREEN_BUTTON_TYPE_ID -> GreenButton(location, id)
+        BROWN_BUTTON_TYPE_ID -> BrownButton(location, id)
+        BEAR_TRAP_TYPE_ID -> BearTrap(location, false, id)
+        FIRE_BOOT_TYPE_ID -> FireBoot(location, id)
+        FLIPPER_TYPE_ID -> Flipper(location, id)
+        ICE_SKATE_TYPE_ID -> IceSkate(location, id)
+        SUCTION_BOOT_TYPE_ID -> SuctionBoot(location, id)
+        else -> null
     }
-    return null
 }
 
 data abstract class ObjectBase(val typeId: Int, location: Point, val image: BufferedImage,
@@ -65,8 +85,9 @@ data abstract class ObjectBase(val typeId: Int, location: Point, val image: Buff
 
     override fun getSaveObject(): JSONObject {
         val obj = JSONObject()
-        obj.put("id", typeId)
+        obj.put("typeId", typeId)
         obj.put("location", location.saveObject)
+        obj.put("id", uniqueId.getJson())
         return obj
     }
 

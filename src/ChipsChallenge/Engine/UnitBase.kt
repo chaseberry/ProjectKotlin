@@ -26,7 +26,7 @@ fun unitFromId(id: Int, location: Point, direction: Direction = Direction.UP): U
 fun unitFromJson(obj: JSONObject): UnitBase? {
     val typeId = obj.getInt("typeId")
     val location = pointFromJson(obj.getJSONObject("location"))
-    val direction = directionFromString(obj.getString("direction"))
+    val direction = directionFromString(obj.getString("direction"))//Might not always be here, specifically for teeth/blob
     val uniqueId = idFromJson(obj.getJSONObject("id"))
     val moveSpeed = obj.getInt("moveSpeed")
     return when (typeId) {
