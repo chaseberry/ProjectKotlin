@@ -1,18 +1,15 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.ObjectResolution
-import ChipsChallenge.Engine.yellowLockImage
-import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Engine.*
 import ChipsChallenge.Unit.Player
 
 /**
  * Created by chase on 2/27/15.
  */
-class YellowLock(location: Point) : ObjectBase(7, location, yellowLockImage) {
+class YellowLock(location: Point, uniqueId: Id) : ObjectBase(YELLOW_LOCK_TYPE_ID, location, yellowLockImage, uniqueId) {
+
+    constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
+    }
 
     override fun onTick(engine: Engine) {
 

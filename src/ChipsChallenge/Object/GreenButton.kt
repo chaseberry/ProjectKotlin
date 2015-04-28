@@ -1,18 +1,15 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.UnitBase
-import ChipsChallenge.Engine.ObjectResolution
-import ChipsChallenge.Engine.Triggerable
-import java.util.ArrayList
-import ChipsChallenge.Engine.greenButtonImage
+import ChipsChallenge.Engine.*
 
 /**
  * Created by chase on 3/2/15.
  */
-class GreenButton(location: Point) : Button(12, location, greenButtonImage, null) {
+class GreenButton(location: Point, uniqueId: Id) : Button(GREEN_BUTTON_TYPE_ID, location, greenButtonImage, null, uniqueId) {
+
+    constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
+    }
+
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         return ObjectResolution.TRIGGER
     }

@@ -1,19 +1,14 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.ObjectResolution
-import ChipsChallenge.Engine.loadImage
-import java.awt.image.BufferedImage
-import ChipsChallenge.Engine.redKeyImage
-import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Engine.*
 
 /**
  * Created by chase on 2/27/15.
  */
-class RedKey(location: Point) : ObjectBase(4, location, redKeyImage) {
+class RedKey(location: Point, uniqueId: Id) : ObjectBase(RED_KEY_TYPE_ID, location, redKeyImage, uniqueId) {
+
+    constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
+    }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         engine.player.inventory.redKeys++

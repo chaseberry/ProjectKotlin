@@ -1,13 +1,14 @@
 package ChipsChallenge.Map
 
-import java.awt.image.BufferedImage
 import ChipsChallenge.Engine.Engine
-import kotlin.properties.Delegates
 import ChipsChallenge.Engine.EngineObjectBase
-import ChipsChallenge.UI.Viewport
-import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Engine.Id
 import ChipsChallenge.Engine.Point
 import ChipsChallenge.JSON.JSONArray
+import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.UI.Viewport
+import java.awt.image.BufferedImage
+import kotlin.properties.Delegates
 
 /**
  * Created by chase on 2/25/15.
@@ -70,6 +71,7 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
         map[0].size()
     }
 
+
     public fun getImage(viewport: Viewport): BufferedImage {
         val img = BufferedImage(32 * 9, 32 * 9, BufferedImage.TYPE_INT_ARGB)
         val g = img.getGraphics()
@@ -83,6 +85,11 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
             xDraw++
         }
         return img
+    }
+
+    public fun getById(id: Id): Tile? {
+        map.forEach { it.forEach { if ( it.uniqueId == id) return it } }
+        return null
     }
 
     public fun getUp(curLocation: Point): Tile? {

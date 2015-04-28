@@ -1,18 +1,16 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.ObjectResolution
-import ChipsChallenge.Engine.dirtImage
-import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Engine.*
 import ChipsChallenge.Unit.Player
 
 /**
  * Created by chase on 2/28/15.
  */
-class Dirt(location: Point) : ObjectBase(10, location, dirtImage) {
+class Dirt(location: Point, uniqueId: Id) : ObjectBase(DIRT_TYPE_ID, location, dirtImage, uniqueId) {
+
+    constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
+    }
+
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         if (interactor is Player) {
             return ObjectResolution.REMOVE

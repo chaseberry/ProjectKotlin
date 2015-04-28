@@ -1,19 +1,17 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Engine.blockImage
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.UnitBase
-import ChipsChallenge.Engine.ObjectResolution
+import ChipsChallenge.Engine.*
+import ChipsChallenge.Map.Tiles.Floor
+import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Unit.Player
-import ChipsChallenge.Map.Tiles.*
 
 /**
  * Created by chase on 3/1/15.
  */
-class Block(location: Point) : ObjectBase(11, location, blockImage) {
+class Block(location: Point, uniqueId: Id) : ObjectBase(BLOCK_TYPE_ID, location, blockImage, uniqueId) {
+
+    constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
+    }
 
     var objectUnder: ObjectBase? = null
 

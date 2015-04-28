@@ -116,6 +116,14 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
         }, gameTime, gameTime)
     }
 
+    fun getEngineObjectBase(id: Id): EngineObjectBase? {
+        return when (id.type) {
+            IdType.UNIT -> unitManager.getById(id)
+            IdType.OBJECT -> objectManager.getById(id)
+            IdType.TILE -> map.getById(id)
+        }
+    }
+
     fun checkCollisions() {
         val tile = map.getTile(player.location)
         when (tile) {

@@ -1,19 +1,14 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Engine.bearTrapImage
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.UnitBase
-import ChipsChallenge.Engine.ObjectResolution
-import ChipsChallenge.Engine.Triggerable
-import ChipsChallenge.Engine.objectFromId
+import ChipsChallenge.Engine.*
 
 /**
  * Created by chase on 3/2/15.
  */
-class BearTrap(location: Point, var isActive: Boolean = true) : ObjectBase(14, location, bearTrapImage), Triggerable {
+class BearTrap(location: Point, var isActive: Boolean = true, uniqueId: Id) : ObjectBase(BEAR_TRAP_TYPE_ID, location, bearTrapImage, uniqueId), Triggerable {
+
+    constructor(location: Point) : this(location, true, Id(IdType.OBJECT)) {
+    }
 
     override fun onTrigger() {
         isActive = false

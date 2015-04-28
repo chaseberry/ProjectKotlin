@@ -20,9 +20,11 @@ fun idFromJson(obj: JSONObject): Id {
     return Id(idTypeFromInt(obj.getInt("type")), obj.getInt("id"))
 }
 
-val counter: Int by CounterDelegate();
+val uCounter: Int by CounterDelegate();
+val oCounter: Int by CounterDelegate();
+val tCounter: Int by CounterDelegate();
 
-data class Id(val type: IdType, val id: Int = counter) {
+data class Id(val type: IdType, val id: Int = if (type == IdType.UNIT) uCounter else if (type == IdType.OBJECT) oCounter else tCounter) {
 
     override fun equals(other: Any?): Boolean {
         if (other is Id) {

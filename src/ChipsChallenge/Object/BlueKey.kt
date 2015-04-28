@@ -1,17 +1,14 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.ObjectResolution
-import ChipsChallenge.Engine.blueKeyImage
-import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Engine.*
 
 /**
  * Created by chase on 2/27/15.
  */
-class BlueKey(location: Point) : ObjectBase(2, location, blueKeyImage) {
+class BlueKey(location: Point, uniqueId: Id) : ObjectBase(BLUE_KEY_TYPE_ID, location, blueKeyImage, uniqueId) {
+
+    constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
+    }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         engine.player.inventory.blueKeys++

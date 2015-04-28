@@ -1,25 +1,32 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Engine.ObjectBase
+import ChipsChallenge.Engine.*
 import java.awt.image.BufferedImage
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.Triggerable
 
 /**
  * Created by chase on 3/2/15.
  */
-abstract class Button(id: Int, location: Point, image: BufferedImage,
-                      var target: Triggerable?) : ObjectBase(id, location, image) {
+abstract class Button(typeId: Int, location: Point, image: BufferedImage,
+                      var target: Id?, uniqueId: Id) : ObjectBase(typeId, location, image, uniqueId) {
 
-    fun trigger() {
-        if (target != null) {
-            target!!.onTrigger()
+    var triggered = false
+
+    fun trigger(engine: Engine) {
+        if (!triggered && target != null) {
+            val tgt = engine.getEngineObjectBase(target!!)
+            if (tgt != null && tgt is Triggerable) {
+                triggered = true
+                tgt.onTrigger()
+            }
         }
     }
 
-    fun offTrigger() {
-        if (target != null) {
-            target!!.offTrigger()
+    fun offTrigger(engine: Engine) {
+        if (triggered && target != null) {
+            val tgt = engine.getEngineObjectBase(target!!)
+            if (tgt != null && tgt is Triggerable) {
+                tgt.offTrigger()
+            }
         }
     }
 

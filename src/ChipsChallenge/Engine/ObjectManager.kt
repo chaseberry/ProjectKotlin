@@ -1,14 +1,14 @@
 package ChipsChallenge.Engine
 
-import ChipsChallenge.UI.Viewport
-import java.util.ArrayList
-import ChipsChallenge.UI.pointInViewport
-import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.Tiles.Floor
-import ChipsChallenge.Object.Dirt
-import java.util.HashMap
+import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
+import ChipsChallenge.Object.Dirt
+import ChipsChallenge.UI.Viewport
+import ChipsChallenge.UI.pointInViewport
+import java.util.ArrayList
+import java.util.HashMap
 
 /**
  * Created by chase on 2/27/15.
@@ -26,6 +26,11 @@ class ObjectManager(val engine: Engine?) {
         if (objects.containsKey(newLocation)) {
             return objects.remove(newLocation)
         }
+        return null
+    }
+
+    fun getById(id: Id): ObjectBase? {
+        objects.forEach { if (it.value.uniqueId == id) return it.value }
         return null
     }
 
@@ -109,8 +114,8 @@ class ObjectManager(val engine: Engine?) {
             if (newObj is Block && (value as Block).objectUnder != null) {
                 newObj.cover(objectFromId((value as Block).objectUnder!!.typeId, key)!!)
             }
-            if (value is Button && value.target != null) {
-                (newObj as Button).target = value.target!!.clone()
+            if (value is Button) {
+                (newObj as Button).target = value.target
             }
             objManager.add(newObj, key)
         }

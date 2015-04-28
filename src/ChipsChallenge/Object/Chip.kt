@@ -1,18 +1,13 @@
 package ChipsChallenge.Object
 
-import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.ObjectResolution
-import ChipsChallenge.Engine.chipImage
-import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Engine.*
 import ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 2/27/15.
- */
-class Chip(location: Point) : ObjectBase(0, location, chipImage) {
+class Chip(location: Point, uniqueId: Id) : ObjectBase(CHIP_TYPE_ID, location, chipImage, uniqueId) {
+
+    constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
+        
+    }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         if (interactor is Player) {

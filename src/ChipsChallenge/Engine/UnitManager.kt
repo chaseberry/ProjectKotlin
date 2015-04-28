@@ -24,6 +24,11 @@ class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), Tickable {
         forEach { it.onTick(engine) }
     }
 
+    fun getById(id: Id): UnitBase? {
+        forEach { if (it.uniqueId == id) return it }
+        return null
+    }
+
     fun isUnitOnPoint(location: Point): Boolean {
         forEach { if (it != null && it.location == location) return true }
         return false
