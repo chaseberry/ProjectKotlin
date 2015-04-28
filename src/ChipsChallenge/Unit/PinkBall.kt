@@ -1,15 +1,18 @@
 package ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.Point
+import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Engine.pinkBallImage
 import ChipsChallenge.Map.Tiles.Floor
 
-/**
- * Created by chase on 3/5/15.
- */
-class PinkBall(direction: Direction, location: Point) : DirectionalUnit(0, location, direction) {
+val PINK_BALL_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
+val PINK_BALL_TYPE_ID = 0
+
+class PinkBall(location: Point, direction: Direction, moveSpeed: Int,
+               uniqueId: Id) : DirectionalUnit(PINK_BALL_TYPE_ID, location, direction, moveSpeed, uniqueId) {
+
+    constructor(location: Point, direction: Direction) : this(location, direction,
+            PINK_BALL_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
+    }
 
     init {
         image = pinkBallImage

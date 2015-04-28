@@ -140,8 +140,6 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
         gameTimer.cancel()
     }
 
-    fun
-
     fun buildFrameImage(): BufferedImage {
         val image = BufferedImage(9 * 32, 9 * 32, BufferedImage.TYPE_INT_ARGB)
         val viewport = getViewport(player.location, map)

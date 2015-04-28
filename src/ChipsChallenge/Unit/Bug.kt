@@ -1,21 +1,20 @@
 package ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.Direction
+import ChipsChallenge.Engine.*
+import ChipsChallenge.Map.Map
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Map.Tiles.Water
-import ChipsChallenge.Map.Map
-import ChipsChallenge.Engine.bugUpImage
-import ChipsChallenge.Engine.bugDownImage
-import ChipsChallenge.Engine.bugRightImage
-import ChipsChallenge.Engine.bugLeftImage
 
-/**
- * Created by chase on 3/6/15.
- */
-class Bug(direction: Direction, location: Point) : DirectionalUnit(1, location, direction) {
+val BUG_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
+val BUG_TYPE_ID = 1
+
+class Bug(location: Point, direction: Direction, moveSpeed: Int,
+          uniqueId: Id) : DirectionalUnit(BUG_TYPE_ID, location, direction, moveSpeed, uniqueId) {
+
+    constructor(location: Point, direction: Direction) : this(location, direction,
+            BUG_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
+    }
 
     init {
         image = bugUpImage

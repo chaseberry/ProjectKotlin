@@ -2,7 +2,9 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
+import ChipsChallenge.Unit.BUG_TYPE_ID
 import ChipsChallenge.Unit.Bug
+import ChipsChallenge.Unit.PINK_BALL_TYPE_ID
 import ChipsChallenge.Unit.PinkBall
 import java.awt.image.BufferedImage
 import java.util.HashMap
@@ -11,25 +13,33 @@ import java.util.HashMap
  * Created by chase on 2/25/15.
  */
 
-fun unitFromId(id: Int, location: Point, direction: Direction): UnitBase? {
+val DEFAULT_MOVE_SPEED = 5
+
+fun unitFromId(id: Int, location: Point, direction: Direction = Direction.UP): UnitBase? {
     return when (id) {
-        0 -> PinkBall(direction, location)
-        1 -> Bug(direction, location)
+        0 -> PinkBall(location, direction)
+        1 -> Bug(location, direction)
         else -> null
     }
 }
 
 fun unitFromJson(obj: JSONObject): UnitBase? {
-    try {
-        return unitFromId(obj.getInt("id"), pointFromJson(obj.getJSONObject("location"))!!,
-                directionFromString(obj.getString("direction")))
-    } catch(except: Exception) {
-        return null
+    val typeId = obj.getInt("typeId")
+    val location = pointFromJson(obj.getJSONObject("location"))
+    val direction = directionFromString(obj.getString("direction"))
+    val uniqueId = idFromJson(obj.getJSONObject("id"))
+    val moveSpeed = obj.getInt("moveSpeed")
+    return when (typeId) {
+        PINK_BALL_TYPE_ID -> PinkBall(location, direction, moveSpeed, uniqueId)
+        BUG_TYPE_ID -> Bug(location, direction, moveSpeed, uniqueId)
+        else -> null
     }
 }
 
-abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5, var currentMove: Int = 5,
+abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5,
                         val uniqueId: Id = Id(IdType.UNIT)) : EngineObjectBase(location) {
+
+    var currentMove: Int = moveSpeed
 
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()
 
@@ -40,7 +50,9 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
     override fun getSaveObject(): JSONObject {
         val obj = JSONObject()
         obj.put("location", location.saveObject)
-        obj.put("id", typeId)
+        obj.put("typeId", typeId)
+        obj.put("id", uniqueId.getJson())
+        obj.put("moveSpeed", moveSpeed)
         return obj
     }
 

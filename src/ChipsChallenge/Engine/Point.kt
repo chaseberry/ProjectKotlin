@@ -2,17 +2,8 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 
-/**
- * Created by chase on 2/26/15.
- */
-
-fun pointFromJson(obj: JSONObject): Point? {
-    try {
-        return Point(obj.getInt("x"), obj.getInt("y"))
-    } catch(except: Exception) {
-
-    }
-    return null
+fun pointFromJson(obj: JSONObject): Point {
+    return Point(obj.getInt("x"), obj.getInt("y"))
 }
 
 data class Point(var x: Int, var y: Int) {

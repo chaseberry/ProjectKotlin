@@ -1,15 +1,15 @@
 package ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.Direction
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONObject
 
-/**
- * Created by chase on 3/6/15.
- */
-abstract class DirectionalUnit(id: Int, location: Point, var direction: Direction) : UnitBase(id, location) {
+abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Direction, moveSpeed: Int,
+                               uniqueId: Id) : UnitBase(typeId, location, moveSpeed, uniqueId) {
+
+    constructor(typeId: Int, location: Point, direction: Direction, moveSpeed: Int) :
+    this(typeId, location, direction, moveSpeed, Id(IdType.UNIT)) {
+
+    }
 
     override fun onTick(engine: Engine) {
         super.onTick(engine)
