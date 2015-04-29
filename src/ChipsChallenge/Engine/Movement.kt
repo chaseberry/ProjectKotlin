@@ -2,6 +2,7 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Ice
+import ChipsChallenge.Unit.DirectionalUnit
 
 /**
  * Created by chase on 2/26/15.
@@ -37,6 +38,11 @@ class Movement(val engine: Engine) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
         }
+
+        if (interactor is DirectionalUnit) {
+            interactor.direction = interactor.forcedDirection as Direction
+        }
+
         if (targetTile !is Ice) {
             interactor.forcedDirection = null
         }

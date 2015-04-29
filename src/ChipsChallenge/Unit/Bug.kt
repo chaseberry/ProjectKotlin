@@ -4,6 +4,7 @@ import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Map
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Floor
+import ChipsChallenge.Map.Tiles.Ice
 import ChipsChallenge.Map.Tiles.Water
 
 val BUG_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
@@ -24,7 +25,7 @@ class Bug(location: Point, direction: Direction, moveSpeed: Int,
     }
 
     override fun canMoveToTile(tile: Tile): Boolean {
-        return tile is Floor || tile is Water
+        return tile is Floor || tile is Water || tile is Ice
     }
 
     override fun onTick(engine: Engine) {
