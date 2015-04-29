@@ -19,7 +19,7 @@ class BearTrap(location: Point, var isActive: Boolean = false, uniqueId: Id) : O
     }
 
     override fun canInteractorMove(engine: Engine, interactor: UnitBase): Boolean {
-        return !isActive // if the trap is active nothing can move
+        return isActive // if the trap is active nothing can move
     }
 
     override fun clone(): Triggerable {
