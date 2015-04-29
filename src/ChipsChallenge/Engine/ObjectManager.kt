@@ -59,16 +59,13 @@ class ObjectManager(val engine: Engine?) {
         if (resolution == ObjectResolution.REMOVE) {
             remove(obj.location)
         }
-        if (resolution == ObjectResolution.TRIGGER) {
-            (obj as Button).trigger(engine)
-        }
         //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
         if (resolution == ObjectResolution.MOVE && obj is Block) {
             if (obj.objectUnder != null) {
                 if (!resolveObject(obj.objectUnder!!, direction, interactor)) {
                     return false
                 } else {
-                    add(obj.unCover()!!, obj.location)
+                    add(obj.unCover(engine)!!, obj.location)
                 }
             } else {
                 remove(obj.location)
@@ -110,9 +107,10 @@ class ObjectManager(val engine: Engine?) {
         val objManager = ObjectManager(engine)
 
         for ((key, value) in objects) {
-            val newObj = objectFromId(value.typeId, key)!!
+            val newObj = objectFromTypeIdWithId(value.typeId, key, value.uniqueId.copy())!!
             if (newObj is Block && (value as Block).objectUnder != null) {
-                newObj.cover(objectFromId((value as Block).objectUnder!!.typeId, key)!!, engine)
+                val objUnder = (value as Block).objectUnder!!
+                newObj.cover(objectFromTypeIdWithId(objUnder.typeId, key, objUnder.uniqueId.copy())!!, engine)
             }
             if (value is Button) {
                 (newObj as Button).target = value.target
@@ -120,11 +118,6 @@ class ObjectManager(val engine: Engine?) {
             objManager.add(newObj, key)
         }
 
-        for (obj in objManager.objects.values()) {
-            if (obj is Button && obj.target != null) {
-                objManager.add(obj.target as ObjectBase, (obj.target as ObjectBase).location)
-            }
-        }
         return objManager
     }
 

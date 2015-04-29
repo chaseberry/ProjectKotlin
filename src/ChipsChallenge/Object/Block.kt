@@ -49,9 +49,12 @@ class Block(location: Point, uniqueId: Id) : ObjectBase(BLOCK_TYPE_ID, location,
         return true
     }
 
-    fun unCover(): ObjectBase? {
+    fun unCover(engine: Engine): ObjectBase? {
         val objUnder = objectUnder
         objectUnder = null
+        if (objUnder != null && objUnder is Button) {
+            objUnder.offTrigger(engine)
+        }
         return objUnder
     }
 

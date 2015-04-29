@@ -154,11 +154,11 @@ class Editor(x: Int, y: Int) {
         if (objects.objects.containsKey(tileLocation) || pallet.currentObject == null) {
             val obj = objects.objects.get(tileLocation)
             if (obj is Block && pallet.currentObject !is Block) {
-                obj.cover(objectFromId(pallet.currentObject!!.typeId, tileLocation)!!, null)
+                obj.cover(objectFromTypeId(pallet.currentObject!!.typeId, tileLocation)!!, null)
             }
             return
         }
-        val obj = (objectFromId((pallet.currentObject!!).typeId, tileLocation)!!)
+        val obj = (objectFromTypeId((pallet.currentObject!!).typeId, tileLocation)!!)
         objects.add(obj, tileLocation)
         if (pallet.currentObject is BrownButton) {
             pallet.palletStatus = PalletStatus.TRIGGER

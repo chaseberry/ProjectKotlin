@@ -24,7 +24,7 @@ val FLIPPER_TYPE_ID = 16
 val ICE_SKATE_TYPE_ID = 17
 val SUCTION_BOOT_TYPE_ID = 18
 
-fun objectFromId(typeId: Int, location: Point): ObjectBase? {
+fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
     return when (typeId) {
         CHIP_TYPE_ID -> Chip(location)
         SOCKET_TYPE_ID -> Socket(location)
@@ -49,11 +49,7 @@ fun objectFromId(typeId: Int, location: Point): ObjectBase? {
     }
 }
 
-fun objectFromJSON(obj: JSONObject): ObjectBase? {
-    val typeId = obj.getInt("typeId")
-    val location = pointFromJson(obj.getJSONObject("location"))
-    val id = idFromJson(obj.getJSONObject("id"))
-
+fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id): ObjectBase? {
     return when (typeId) {
         CHIP_TYPE_ID -> Chip(location, id)
         SOCKET_TYPE_ID -> Socket(location, id)
@@ -78,12 +74,22 @@ fun objectFromJSON(obj: JSONObject): ObjectBase? {
     }
 }
 
+fun objectFromJSON(obj: JSONObject): ObjectBase? {
+    val typeId = obj.getInt("typeId")
+    val location = pointFromJson(obj.getJSONObject("location"))
+    val id = idFromJson(obj.getJSONObject("id"))
+    return objectFromTypeIdWithId(typeId, location, id)
+}
+
 data abstract class ObjectBase(val typeId: Int, location: Point, val image: BufferedImage,
                                val uniqueId: Id) : EngineObjectBase(location) {
 
     abstract fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution
 
 
+    /**
+     * Can the interactor move off of this object
+     */
     open fun canInteractorMove(engine: Engine, interactor: UnitBase): Boolean {
         return true
     }

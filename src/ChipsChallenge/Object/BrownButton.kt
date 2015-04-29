@@ -11,7 +11,7 @@ class BrownButton(location: Point, uniqueId: Id) : Button(BROWN_BUTTON_TYPE_ID, 
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
-        return ObjectResolution.TRIGGER
+        return ObjectResolution.PASSOVER
     }
 
     override fun onTick(engine: Engine) {

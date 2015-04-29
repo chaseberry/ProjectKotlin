@@ -25,6 +25,7 @@ abstract class Button(typeId: Int, location: Point, image: BufferedImage,
         if (triggered && target != null) {
             val tgt = engine.getEngineObjectBase(target!!)
             if (tgt != null && tgt is Triggerable) {
+                triggered = false
                 tgt.offTrigger()
             }
         }

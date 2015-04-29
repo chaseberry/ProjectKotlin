@@ -1,7 +1,5 @@
 package ChipsChallenge.Engine
 
-import ChipsChallenge.Object.Button
-
 /**
  * Created by chase on 2/26/15.
  */
@@ -17,15 +15,10 @@ class Movement(val engine: Engine) {
             return false
         }
         val obj = engine.objectManager.objects.get(interactor.location)
-        if (obj != null && obj.canInteractorMove(engine, interactor)) {
+        if (obj != null && !obj.canInteractorMove(engine, interactor)) {
             return false
         }
-        val canMove = engine.objectManager.resolve(newLocation, direction, interactor)
-        if (canMove && engine.objectManager.objects.get(interactor.location) is Button) {
-            (engine.objectManager.objects.get(interactor.location) as Button).offTrigger(engine)
-        }
-
-        return canMove
+        return engine.objectManager.resolve(newLocation, direction, interactor)
     }
 
     public fun moveUp(interactor: UnitBase): Boolean {

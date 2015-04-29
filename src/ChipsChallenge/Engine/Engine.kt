@@ -6,6 +6,7 @@ import ChipsChallenge.Map.Tiles.Finish
 import ChipsChallenge.Map.Tiles.Fire
 import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.mapFromJSON
+import ChipsChallenge.Object.Button
 import ChipsChallenge.UI.Frame
 import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Unit.Player
@@ -125,6 +126,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
     }
 
     fun checkCollisions() {
+        //check win/lose conditions
         val tile = map.getTile(player.location)
         when (tile) {
             is Water -> if (!player.inventory.hasFlippers) lose()
@@ -133,6 +135,16 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
         }
         if (unitManager.isUnitOnPoint(player.location)) {
             lose()
+        }
+        objectManager.objects.forEach {
+            if (it.getValue() is Button) {
+                if (player.location == it.getKey() || unitManager.isUnitOnPoint(it.getKey())) {
+                    (it.getValue() as Button).trigger(this)
+                } else {
+                    (it.getValue() as Button).offTrigger(this)
+                }
+            }
+
         }
     }
 

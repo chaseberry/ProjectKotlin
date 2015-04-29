@@ -23,7 +23,7 @@ class BearTrap(location: Point, var isActive: Boolean = false, uniqueId: Id) : O
     }
 
     override fun clone(): Triggerable {
-        return objectFromId(typeId, location) as Triggerable
+        return objectFromTypeId(typeId, location) as Triggerable
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
