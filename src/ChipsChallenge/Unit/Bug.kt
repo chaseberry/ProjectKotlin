@@ -28,6 +28,7 @@ class Bug(location: Point, direction: Direction, moveSpeed: Int,
     }
 
     override fun onTick(engine: Engine) {
+        //Calculate the new direction
         if (currentMove == 1) {
             var newTile = getTileLeftOfCurrent(engine.map)
             if (newTile != null && canMoveToTile(newTile!!)) {

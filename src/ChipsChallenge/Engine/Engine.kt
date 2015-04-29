@@ -36,6 +36,15 @@ fun directionFromString(str: String?): Direction {
     }
 }
 
+fun flipDirection(direction: Direction): Direction {
+    return when (direction) {
+        Direction.UP -> Direction.DOWN
+        Direction.DOWN -> Direction.UP
+        Direction.LEFT -> Direction.RIGHT
+        Direction.RIGHT -> Direction.LEFT
+    }
+}
+
 fun engineFromFile(file: File): Engine? {
     try {
         val reader = BufferedReader(FileReader(file))

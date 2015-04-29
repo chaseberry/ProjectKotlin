@@ -2,6 +2,7 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.Ice
 import ChipsChallenge.Unit.BUG_TYPE_ID
 import ChipsChallenge.Unit.Bug
 import ChipsChallenge.Unit.PINK_BALL_TYPE_ID
@@ -39,6 +40,8 @@ fun unitFromJson(obj: JSONObject): UnitBase? {
 abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5,
                         val uniqueId: Id = Id(IdType.UNIT)) : EngineObjectBase(location) {
 
+    var forcedDirection: Direction? = null
+
     var currentMove: Int = moveSpeed
 
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()
@@ -60,10 +63,23 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
         if (currentMove > 0) {
             currentMove -= 1
         }
+        if (currentMove == 0 && engine.map.getTile(location) is Ice && forcedDirection != null) {
+            when (forcedDirection) {
+                Direction.UP -> moveUp(engine)
+                Direction.DOWN -> moveDown(engine)
+                Direction.LEFT -> moveLeft(engine)
+                Direction.RIGHT -> moveRight(engine)
+            }
+        }
     }
 
     fun move(direction: Direction, engine: Engine) {
         currentMove = moveSpeed
+        if (engine.map.getTile(location) is Ice) {
+            forcedDirection = direction
+        } else {
+            forcedDirection = null
+        }
     }
 
     open fun moveUp(engine: Engine) {

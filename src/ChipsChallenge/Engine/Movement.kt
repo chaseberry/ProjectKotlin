@@ -1,5 +1,8 @@
 package ChipsChallenge.Engine
 
+import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.Ice
+
 /**
  * Created by chase on 2/26/15.
  */
@@ -11,6 +14,9 @@ class Movement(val engine: Engine) {
      */
     fun move(newLocation: Point, direction: Direction, interactor: UnitBase): Boolean {
         val targetTile = engine.map.getTile(newLocation)
+        if (interactor.forcedDirection != null) {
+            return moveIce(newLocation, direction, interactor, targetTile)
+        }
         if (targetTile == null || !interactor.canMoveToTile(targetTile)) {
             return false
         }
@@ -19,6 +25,22 @@ class Movement(val engine: Engine) {
             return false
         }
         return engine.objectManager.resolve(newLocation, direction, interactor)
+    }
+
+    fun moveIce(newLocation: Point, direction: Direction, interactor: UnitBase, targetTile: Tile?): Boolean {
+        if (targetTile == null || !interactor.canMoveToTile(targetTile)) {
+            interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
+            return false
+        }
+        val obj = engine.objectManager.objects.get(interactor.location)
+        if (obj != null && !obj.canInteractorMove(engine, interactor)) {
+            interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
+            return false
+        }
+        if (targetTile !is Ice) {
+            interactor.forcedDirection = null
+        }
+        return true
     }
 
     public fun moveUp(interactor: UnitBase): Boolean {

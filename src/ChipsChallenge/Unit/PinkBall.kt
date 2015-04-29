@@ -2,7 +2,7 @@ package ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Floor
+import ChipsChallenge.Map.Tiles.Wall
 
 val PINK_BALL_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val PINK_BALL_TYPE_ID = 0
@@ -19,7 +19,7 @@ class PinkBall(location: Point, direction: Direction, moveSpeed: Int,
     }
 
     override fun canMoveToTile(tile: Tile): Boolean {
-        return tile is Floor
+        return tile !is Wall
     }
 
     override fun changeDirection() {
