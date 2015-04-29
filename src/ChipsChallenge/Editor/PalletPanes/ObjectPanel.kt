@@ -1,13 +1,13 @@
 package ChipsChallenge.Editor.PalletPanes
 
-import javax.swing.JPanel
-import javax.swing.JButton
-import javax.swing.ImageIcon
 import ChipsChallenge.Editor.EditorPallet
-import ChipsChallenge.Engine.objectFromId
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.Editor.PalletStatus
+import ChipsChallenge.Engine.ObjectBase
+import ChipsChallenge.Engine.Point
+import ChipsChallenge.Engine.objectFromTypeId
+import javax.swing.ImageIcon
+import javax.swing.JButton
+import javax.swing.JPanel
 
 /**
  * Created by chase on 2/27/15.
