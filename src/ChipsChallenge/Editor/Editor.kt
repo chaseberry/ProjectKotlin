@@ -154,7 +154,7 @@ class Editor(x: Int, y: Int) {
         if (objects.objects.containsKey(tileLocation) || pallet.currentObject == null) {
             val obj = objects.objects.get(tileLocation)
             if (obj is Block && pallet.currentObject !is Block) {
-                obj.cover(objectFromId(pallet.currentObject!!.typeId, tileLocation)!!)
+                obj.cover(objectFromId(pallet.currentObject!!.typeId, tileLocation)!!, null)
             }
             return
         }
@@ -176,7 +176,7 @@ class Editor(x: Int, y: Int) {
         if (triggeredObject == null || triggeredObject !is Triggerable) {
             return
         }
-        (pallet.buttonObject as Button).target = (triggeredObject as Triggerable)
+        (pallet.buttonObject as Button).target = triggeredObject.uniqueId
         println((pallet.buttonObject as Button).target)
     }
 

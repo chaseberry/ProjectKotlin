@@ -22,13 +22,13 @@ fun blankMap(x: Int, y: Int): Map {
     return Map(Array(x) { Array(y) { tileIdToTile(0, Point(x, y)) } }, Point(0, 0), 0)
 }
 
-fun mapFromFile(mapData: JSONObject): Map? {
+fun mapFromJSON(mapData: JSONObject): Map? {
     try {
         val mapArray = mapData.getJSONArray("map")
         val tileArray = Array(mapArray.length()) { x ->
             Array(mapArray.getJSONArray(x).length()) { y ->
-                tileIdToTile(
-                        mapArray.getJSONArray(x).getInt(y),
+                tileFromJson(
+                        mapArray.getJSONArray(x).getJSONObject(y),
                         Point(x, y)
                 )
             }
@@ -56,7 +56,7 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
         for (x in map) {
             val mapSection = JSONArray()
             for (tile in x) {
-                mapSection.put(tile.tileId)
+                mapSection.put(tile.getSaveObject())
             }
             mapArray.put(mapSection)
         }

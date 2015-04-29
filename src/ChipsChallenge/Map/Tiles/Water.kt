@@ -1,14 +1,18 @@
 package ChipsChallenge.Map.Tiles
 
+import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.waterImage
-import ChipsChallenge.Engine.Point
+import ChipsChallenge.Map.WATER_TYPE_ID
 
 /**
  * Created by chase on 2/28/15.
  */
-class Water(location: Point) : Tile(waterImage, 4, location) {
+class Water(location: Point, uniqueId: Id) : Tile(waterImage, WATER_TYPE_ID, location, uniqueId) {
+
+    constructor(location: Point) : this(location, Id(IdType.TILE)) {
+
+    }
+
     override fun onTick(engine: Engine) {
 
     }

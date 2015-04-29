@@ -1,14 +1,18 @@
 package ChipsChallenge.Map.Tiles
 
+import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.wallImage
-import ChipsChallenge.Engine.Point
+import ChipsChallenge.Map.WALL_TYPE_ID
 
 /**
  * Created by chase on 2/25/15.
  */
-class Wall(location:Point) : Tile(wallImage, 1, location) {
+class Wall(location: Point, uniqueId: Id) : Tile(wallImage, WALL_TYPE_ID, location, uniqueId) {
+
+    constructor(location: Point) : this(location, Id(IdType.TILE)) {
+
+    }
+
     override fun onTick(engine: Engine) {
     }
 }

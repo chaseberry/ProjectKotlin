@@ -5,7 +5,7 @@ import ChipsChallenge.Map.Map
 import ChipsChallenge.Map.Tiles.Finish
 import ChipsChallenge.Map.Tiles.Fire
 import ChipsChallenge.Map.Tiles.Water
-import ChipsChallenge.Map.mapFromFile
+import ChipsChallenge.Map.mapFromJSON
 import ChipsChallenge.UI.Frame
 import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Unit.Player
@@ -41,7 +41,7 @@ fun engineFromFile(file: File): Engine? {
         val fileContents = reader.readLine()
         reader.close()
         val levelData = JSONObject(fileContents)
-        val map = mapFromFile(levelData)
+        val map = mapFromJSON(levelData)
         val objs = levelData.getJSONArray("objects")
         val objects = ArrayList<ObjectBase>(objs.length())
         for (z in 0..objs.length() - 1) {

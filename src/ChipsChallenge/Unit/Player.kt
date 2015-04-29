@@ -1,10 +1,10 @@
 package ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Map.Tile
 import ChipsChallenge.Engine.Point
+import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.loadImage
+import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Wall
 
 class Player(location: Point) : UnitBase(-1, location) {
@@ -21,9 +21,6 @@ class Player(location: Point) : UnitBase(-1, location) {
 
     override fun onTick(engine: Engine) {
         super.onTick(engine)
-        if (forcedDirection == null) {
-            return
-        }
         if (currentMove == 0) {
             when (true) {
                 engine.keyBindings.up -> {

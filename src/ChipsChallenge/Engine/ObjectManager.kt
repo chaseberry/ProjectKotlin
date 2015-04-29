@@ -60,7 +60,7 @@ class ObjectManager(val engine: Engine?) {
             remove(obj.location)
         }
         if (resolution == ObjectResolution.TRIGGER) {
-            (obj as Button).trigger()
+            (obj as Button).trigger(engine)
         }
         //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
         if (resolution == ObjectResolution.MOVE && obj is Block) {
@@ -85,7 +85,7 @@ class ObjectManager(val engine: Engine?) {
             } else {
                 obj.location = newObjLocation
                 if (objects.get(newObjLocation) != null) {
-                    obj.cover(objects.get(newObjLocation))
+                    obj.cover(objects.get(newObjLocation), engine)
                 }
                 add(obj, newObjLocation)
             }
@@ -112,7 +112,7 @@ class ObjectManager(val engine: Engine?) {
         for ((key, value) in objects) {
             val newObj = objectFromId(value.typeId, key)!!
             if (newObj is Block && (value as Block).objectUnder != null) {
-                newObj.cover(objectFromId((value as Block).objectUnder!!.typeId, key)!!)
+                newObj.cover(objectFromId((value as Block).objectUnder!!.typeId, key)!!, engine)
             }
             if (value is Button) {
                 (newObj as Button).target = value.target

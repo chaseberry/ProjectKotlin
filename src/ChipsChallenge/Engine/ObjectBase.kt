@@ -83,6 +83,11 @@ data abstract class ObjectBase(val typeId: Int, location: Point, val image: Buff
 
     abstract fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution
 
+
+    open fun canInteractorMove(engine: Engine, interactor: UnitBase): Boolean {
+        return true
+    }
+
     override fun getSaveObject(): JSONObject {
         val obj = JSONObject()
         obj.put("typeId", typeId)
@@ -90,6 +95,7 @@ data abstract class ObjectBase(val typeId: Int, location: Point, val image: Buff
         obj.put("id", uniqueId.getJson())
         return obj
     }
+
 
 }
 

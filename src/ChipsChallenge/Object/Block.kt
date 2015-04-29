@@ -37,14 +37,14 @@ class Block(location: Point, uniqueId: Id) : ObjectBase(BLOCK_TYPE_ID, location,
     override fun onTick(engine: Engine) {
     }
 
-    fun cover(obj: ObjectBase): Boolean {
+    fun cover(obj: ObjectBase, engine: Engine?): Boolean {
         if (objectUnder != null) {
             return false
         }
         objectUnder = obj
         objectUnder!!.location = location.copy()
-        if (obj is Button) {
-            obj.trigger()
+        if (engine != null && obj is Button) {
+            obj.trigger(engine)
         }
         return true
     }

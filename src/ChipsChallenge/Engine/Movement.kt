@@ -1,7 +1,5 @@
 package ChipsChallenge.Engine
 
-import ChipsChallenge.Map.Tile
-import ChipsChallenge.Object.BearTrap
 import ChipsChallenge.Object.Button
 
 /**
@@ -14,17 +12,17 @@ class Movement(val engine: Engine) {
      *
      */
     fun move(newLocation: Point, direction: Direction, interactor: UnitBase): Boolean {
-        if (engine.map.getTile(newLocation) == null
-                || !interactor.canMoveToTile(engine.map.getTile(newLocation) as Tile)) {
+        val targetTile = engine.map.getTile(newLocation)
+        if (targetTile == null || !interactor.canMoveToTile(targetTile)) {
             return false
         }
         val obj = engine.objectManager.objects.get(interactor.location)
-        if (obj != null && obj is BearTrap && obj.isActive) {
+        if (obj != null && obj.canInteractorMove(engine, interactor)) {
             return false
         }
         val canMove = engine.objectManager.resolve(newLocation, direction, interactor)
         if (canMove && engine.objectManager.objects.get(interactor.location) is Button) {
-            (engine.objectManager.objects.get(interactor.location) as Button).offTrigger()
+            (engine.objectManager.objects.get(interactor.location) as Button).offTrigger(engine)
         }
 
         return canMove
