@@ -105,7 +105,6 @@ class ObjectManager(val engine: Engine?) {
 
     fun clone(): ObjectManager {
         val objManager = ObjectManager(engine)
-
         for ((key, value) in objects) {
             val newObj = objectFromTypeIdWithId(value.typeId, key, value.uniqueId.copy())!!
             if (newObj is Block && (value as Block).objectUnder != null) {

@@ -1,6 +1,7 @@
 package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
+import ChipsChallenge.JSON.JSONObject
 import java.awt.image.BufferedImage
 
 /**
@@ -10,6 +11,12 @@ abstract class Button(typeId: Int, location: Point, image: BufferedImage,
                       var target: Id?, uniqueId: Id) : ObjectBase(typeId, location, image, uniqueId) {
 
     var triggered = false
+
+    override fun getSaveObject(): JSONObject {
+        val obj = super.getSaveObject()
+        obj.put("targetId", if (target != null) target!!.getJson() else null)
+        return obj
+    }
 
     fun trigger(engine: Engine) {
         if (!triggered && target != null) {
