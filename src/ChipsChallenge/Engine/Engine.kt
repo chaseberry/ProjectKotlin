@@ -120,6 +120,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
                 map.onTick(engine)
                 player.onTick(engine)
                 unitManager.onTick(engine)
+                objectManager.onTick(engine)
                 frame.image = buildFrameImage()
                 checkCollisions()
             }

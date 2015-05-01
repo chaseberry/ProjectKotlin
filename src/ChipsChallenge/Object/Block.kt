@@ -1,6 +1,7 @@
 package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
+import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Map.Tiles.Wall
 import ChipsChallenge.Unit.Player
 
@@ -8,6 +9,10 @@ import ChipsChallenge.Unit.Player
  * Created by chase on 3/1/15.
  */
 class Block(location: Point, uniqueId: Id) : ObjectBase(BLOCK_TYPE_ID, location, blockImage, uniqueId) {
+
+    var currentMove = 5
+    val moveSpeed = 5
+    var forcedDirection: Direction? = null
 
     constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
     }
@@ -34,6 +39,14 @@ class Block(location: Point, uniqueId: Id) : ObjectBase(BLOCK_TYPE_ID, location,
     }
 
     override fun onTick(engine: Engine) {
+        if (forcedDirection != null) {
+            currentMove--
+            if (currentMove == 0) {
+                moveOnIce(engine)
+                currentMove = moveSpeed
+
+            }
+        }
     }
 
     fun cover(obj: ObjectBase, engine: Engine?): Boolean {
@@ -66,6 +79,37 @@ class Block(location: Point, uniqueId: Id) : ObjectBase(BLOCK_TYPE_ID, location,
         }
 
         return tile !is Wall
+    }
+
+    private fun moveOnIce(engine: Engine) {
+        val targetTile = engine.map.getTile(when (forcedDirection) {
+            Direction.UP -> location.copy(y = location.y - 1)
+            Direction.DOWN -> location.copy(y = location.y + 1)
+            Direction.LEFT -> location.copy(x = location.x - 1)
+            Direction.RIGHT -> location.copy(x = location.x + 1)
+            else -> location
+        })
+        if (targetTile == null || !canMoveToLocation(engine, targetTile.location)) {
+            forcedDirection = flipDirection(forcedDirection as Direction)
+            return
+        }
+        val obj = engine.objectManager.objects.get(targetTile)
+        if (obj != null ) {
+            return
+        }
+        when (forcedDirection) {
+            Direction.UP -> engine.objectManager.forceMoveUp(this)
+            Direction.DOWN -> engine.objectManager.forceMoveDown(this)
+            Direction.LEFT -> engine.objectManager.forceMoveLeft(this)
+            Direction.RIGHT -> engine.objectManager.forceMoveRight(this)
+        }//Forced the location change
+
+        val tile = engine.map.getTile(location)
+        if (tile is IceBase) {
+            forcedDirection = tile.getNewDirection(forcedDirection as Direction)
+        } else {
+            forcedDirection = null
+        }
     }
 
 }

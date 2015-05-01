@@ -1,6 +1,7 @@
 package ChipsChallenge.Engine
 
 import ChipsChallenge.Map.Tiles.Floor
+import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
@@ -14,7 +15,13 @@ import java.util.HashMap
  * Created by chase on 2/27/15.
  */
 
-class ObjectManager(val engine: Engine?) {
+class ObjectManager(val engine: Engine?) : Tickable {
+
+    override fun onTick(engine: Engine) {
+        val array = objects.values()
+        array.forEach { it.onTick(engine) }
+
+    }
 
     val objects = HashMap<Point, ObjectBase>()
 
@@ -85,6 +92,9 @@ class ObjectManager(val engine: Engine?) {
                     obj.cover(objects.get(newObjLocation), engine)
                 }
                 add(obj, newObjLocation)
+                if (engine.map.getTile(newObjLocation) is IceBase) {
+                    obj.forcedDirection = direction
+                }
             }
         }
 
@@ -118,6 +128,28 @@ class ObjectManager(val engine: Engine?) {
         }
 
         return objManager
+    }
+
+    fun forceMoveUp(obj: ObjectBase) {
+        forceMove(obj, obj.location, obj.location.copy(y = obj.location.y - 1))
+    }
+
+    fun forceMoveDown(obj: ObjectBase) {
+        forceMove(obj, obj.location, obj.location.copy(y = obj.location.y + 1))
+    }
+
+    fun forceMoveLeft(obj: ObjectBase) {
+        forceMove(obj, obj.location, obj.location.copy(x = obj.location.x - 1))
+    }
+
+    fun forceMoveRight(obj: ObjectBase) {
+        forceMove(obj, obj.location, obj.location.copy(x = obj.location.x + 1))
+    }
+
+    fun forceMove(obj: ObjectBase, oldLocation: Point, location: Point) {
+        obj.location = location
+        objects.remove(oldLocation)
+        objects.put(location, obj)
     }
 
 }
