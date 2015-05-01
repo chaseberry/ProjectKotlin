@@ -6,6 +6,7 @@ import ChipsChallenge.Map.Tiles.Finish
 import ChipsChallenge.Map.Tiles.Fire
 import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.mapFromJSON
+import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
 import ChipsChallenge.UI.Frame
 import ChipsChallenge.UI.getViewport
@@ -139,14 +140,27 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
         //check win/lose conditions
         val tile = map.getTile(player.location)
         when (tile) {
-            is Water -> if (!player.inventory.hasFlippers) lose()
-            is Fire -> if (!player.inventory.hasFireBoots) lose()
-            is Finish -> win()
+            is Water -> if (!player.inventory.hasFlippers) {
+                lose(); return
+            }
+            is Fire -> if (!player.inventory.hasFireBoots) {
+                lose(); return
+            }
+            is Finish -> {
+                win(); return
+            }
         }
         if (unitManager.isUnitOnPoint(player.location)) {
             lose()
+            return
         }
         objectManager.objects.forEach {
+            if (it.getKey() == player.location) {
+                if (it.getValue() is Block) {
+                    lose()
+                    return
+                }
+            }
             if (it.getValue() is Button) {
                 if (player.location == it.getKey() || unitManager.isUnitOnPoint(it.getKey())) {
                     (it.getValue() as Button).trigger(this)
