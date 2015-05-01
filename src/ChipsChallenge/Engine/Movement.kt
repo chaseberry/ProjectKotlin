@@ -29,13 +29,17 @@ class Movement(val engine: Engine) {
     }
 
     fun moveIce(newLocation: Point, direction: Direction, interactor: UnitBase, targetTile: Tile?): Boolean {
-        val currentTile = engine.map.getTile(interactor.location)
         if (targetTile == null || !interactor.canMoveToTile(targetTile)) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
         }
-        val obj = engine.objectManager.objects.get(interactor.location)
+        val obj = engine.objectManager.objects.get(newLocation)
         if (obj != null && !obj.canInteractorMove(engine, interactor)) {
+            interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
+            return false
+        }
+
+        if (obj != null && engine.objectManager.resolve(newLocation, direction, interactor)) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
         }
