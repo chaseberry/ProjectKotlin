@@ -1,8 +1,7 @@
 package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Tiles.Floor
-import ChipsChallenge.Map.Tiles.Water
+import ChipsChallenge.Map.Tiles.Wall
 import ChipsChallenge.Unit.Player
 
 /**
@@ -62,11 +61,11 @@ class Block(location: Point, uniqueId: Id) : ObjectBase(BLOCK_TYPE_ID, location,
         val tile = engine.map.getTile(location)
         val objectInSpace = engine.objectManager.objects.get(location)
         if (objectInSpace != null && objectInSpace !is Button && objectInSpace !is BearTrap ||
-                (objectUnder is BearTrap && (objectUnder as BearTrap).isActive)) {
+                (objectUnder is BearTrap && !(objectUnder as BearTrap).isActive)) {
             return false
         }
 
-        return (tile is Floor || tile is Water)
+        return tile !is Wall
     }
 
 }
