@@ -114,7 +114,7 @@ class Bug(location: Point, direction: Direction, moveSpeed: Int,
         }
     }
 
-    fun setImage() {
+    override fun setImage() {
         image = when (direction) {
             Direction.UP -> bugUpImage
             Direction.LEFT -> bugLeftImage

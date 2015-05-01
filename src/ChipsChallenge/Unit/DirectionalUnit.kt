@@ -35,6 +35,8 @@ abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Dire
         }
     }
 
+    abstract fun setImage()
+
     fun rotateDirection() {
         direction = when (direction) {
             Direction.UP -> Direction.RIGHT

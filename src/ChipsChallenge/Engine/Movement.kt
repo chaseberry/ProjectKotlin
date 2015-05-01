@@ -50,6 +50,7 @@ class Movement(val engine: Engine) {
         //Updated direction of a directional unit
         if (interactor is DirectionalUnit) {
             interactor.direction = interactor.forcedDirection as Direction
+            interactor.setImage()
         }
 
         if (targetTile !is IceBase) {
