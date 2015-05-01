@@ -22,25 +22,25 @@ class Bug(location: Point, direction: Direction, moveSpeed: Int,
     override fun changeDirection() {
     }
 
-    override fun canMoveToTile(tile: Tile): Boolean {
-        return super.canMoveToTile(tile) && tile !is Fire
+    override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
+        return super.canMoveToTile(tile, ) && tile !is Fire
     }
 
     override fun onTick(engine: Engine) {
         //Calculate the new direction
         if (currentMove == 1) {
             var newTile = getTileLeftOfCurrent(engine.map)
-            if (newTile != null && canMoveToTile(newTile!!)) {
+            if (newTile != null && canMoveToTile(newTile!!, )) {
                 direction = getLeftOfCurrent()
             } else {
                 newTile = getTileAheadOfCurrent(engine.map)
-                if (newTile == null || !canMoveToTile(newTile!!)) {
+                if (newTile == null || !canMoveToTile(newTile!!, )) {
                     newTile = getTileRightOfCurrent(engine.map)
-                    if (newTile != null && canMoveToTile(newTile!!)) {
+                    if (newTile != null && canMoveToTile(newTile!!, )) {
                         direction = getRightOfCurrent()
                     } else {
                         newTile = getTileBehindCurrent(engine.map)
-                        if (newTile != null && canMoveToTile(newTile!!)) {
+                        if (newTile != null && canMoveToTile(newTile!!, )) {
                             direction = getBehindOfCurrent()
                         }
                     }

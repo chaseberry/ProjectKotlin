@@ -18,7 +18,7 @@ class Movement(val engine: Engine) {
         if (interactor.forcedDirection != null) {
             return moveIce(newLocation, direction, interactor, targetTile)
         }
-        if (targetTile == null || !interactor.canMoveToTile(targetTile)) {
+        if (targetTile == null || !interactor.canMoveToTile(targetTile, direction)) {
             return false
         }
         val obj = engine.objectManager.objects.get(interactor.location)
@@ -29,20 +29,25 @@ class Movement(val engine: Engine) {
     }
 
     fun moveIce(newLocation: Point, direction: Direction, interactor: UnitBase, targetTile: Tile?): Boolean {
-        if (targetTile == null || !interactor.canMoveToTile(targetTile)) {
+
+        //Can they move to the next tile? (IE is it a wall)
+        if (targetTile == null || !interactor.canMoveToTile(targetTile, direction)) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
         }
+        //Is user on some object that they cannot move off of
         val obj = engine.objectManager.objects.get(interactor.location)
         if (obj != null && !obj.canInteractorMove(engine, interactor)) {
             return false
         }
 
+        //Is there an object in the next location? Is it resolved?
         if (obj != null && !engine.objectManager.resolve(newLocation, direction, interactor)) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
         }
 
+        //Updated direction of a directional unit
         if (interactor is DirectionalUnit) {
             interactor.direction = interactor.forcedDirection as Direction
         }

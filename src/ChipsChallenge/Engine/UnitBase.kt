@@ -46,7 +46,7 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
 
     var image: BufferedImage? = null
 
-    open fun canMoveToTile(tile: Tile): Boolean {
+    open fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
         return tile !is Wall
     }
 
