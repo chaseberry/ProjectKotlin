@@ -33,9 +33,8 @@ class Movement(val engine: Engine) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
         }
-        val obj = engine.objectManager.objects.get(newLocation)
+        val obj = engine.objectManager.objects.get(interactor.location)
         if (obj != null && !obj.canInteractorMove(engine, interactor)) {
-            interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
         }
 
