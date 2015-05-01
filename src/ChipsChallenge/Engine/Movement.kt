@@ -39,7 +39,7 @@ class Movement(val engine: Engine) {
             return false
         }
 
-        if (obj != null && engine.objectManager.resolve(newLocation, direction, interactor)) {
+        if (obj != null && !engine.objectManager.resolve(newLocation, direction, interactor)) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
         }
