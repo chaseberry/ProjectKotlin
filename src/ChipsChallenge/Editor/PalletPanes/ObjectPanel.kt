@@ -2,9 +2,7 @@ package ChipsChallenge.Editor.PalletPanes
 
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
-import ChipsChallenge.Engine.ObjectBase
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.objectFromTypeId
+import ChipsChallenge.Engine.*
 import javax.swing.ImageIcon
 import javax.swing.JButton
 import javax.swing.JPanel
@@ -14,7 +12,7 @@ import javax.swing.JPanel
  */
 class ObjectPanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(19) { objectFromTypeId(it, Point(0, 0)) };
+    val buttons = Array(19) { objectFromTypeIdWithId(it, Point(0, 0), Id(IdType.OBJECT, -1)) };
 
     init {
         setLayout(null)

@@ -2,7 +2,8 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Ice
+import ChipsChallenge.Map.Tiles.IceBase
+import ChipsChallenge.Map.Tiles.Wall
 import ChipsChallenge.Unit.BUG_TYPE_ID
 import ChipsChallenge.Unit.Bug
 import ChipsChallenge.Unit.PINK_BALL_TYPE_ID
@@ -48,7 +49,9 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
 
     var image: BufferedImage? = null
 
-    abstract fun canMoveToTile(tile: Tile): Boolean
+    open fun canMoveToTile(tile: Tile): Boolean {
+        return tile !is Wall
+    }
 
     override fun getSaveObject(): JSONObject {
         val obj = JSONObject()
@@ -63,7 +66,7 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
         if (currentMove > 0) {
             currentMove -= 1
         }
-        if (currentMove == 0 && engine.map.getTile(location) is Ice && forcedDirection != null) {
+        if (currentMove == 0 && engine.map.getTile(location) is IceBase && forcedDirection != null) {
             when (forcedDirection) {
                 Direction.UP -> moveUp(engine)
                 Direction.DOWN -> moveDown(engine)
@@ -75,8 +78,9 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
 
     fun move(direction: Direction, engine: Engine) {
         currentMove = moveSpeed
-        if (engine.map.getTile(location) is Ice) {
-            forcedDirection = direction
+        val currentTile = engine.map.getTile(location)
+        if (currentTile is IceBase) {
+            forcedDirection = currentTile.getNewDirection(direction)
         } else {
             forcedDirection = null
         }

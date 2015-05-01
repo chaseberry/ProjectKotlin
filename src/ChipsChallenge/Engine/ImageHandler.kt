@@ -1,9 +1,9 @@
 package ChipsChallenge.Engine
 
-import kotlin.properties.Delegates
 import java.awt.image.BufferedImage
-import javax.imageio.ImageIO
 import java.net.URL
+import javax.imageio.ImageIO
+import kotlin.properties.Delegates
 
 /**
  * Created by chase on 2/28/15.
@@ -51,6 +51,22 @@ val helpImage: BufferedImage by Delegates.lazy {
 
 val iceImage: BufferedImage by Delegates.lazy {
     loadImage("ice.gif") as BufferedImage
+}
+
+val iceLeftUpImage: BufferedImage by Delegates.lazy {
+    loadImage("curve-4-ice.gif") as BufferedImage
+}
+
+val iceRightUpImage: BufferedImage by Delegates.lazy {
+    loadImage("curve-3-ice.gif") as BufferedImage
+}
+
+val iceLeftDownImage: BufferedImage by Delegates.lazy {
+    loadImage("curve-1-ice.gif") as BufferedImage
+}
+
+val iceRightDownImage: BufferedImage by Delegates.lazy {
+    loadImage("curve-2-ice.gif") as BufferedImage
 }
 
 val blueKeyImage: BufferedImage by Delegates.lazy {

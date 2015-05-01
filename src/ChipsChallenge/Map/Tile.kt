@@ -15,6 +15,10 @@ val HELP_TYPE_ID = 3
 val WATER_TYPE_ID = 4
 val FIRE_TYPE_ID = 5
 val ICE_TYPE_ID = 6
+val ICE_CORNER_LEFT_UP_ID = 7
+val ICE_CORNER_RIGHT_UP_ID = 8
+val ICE_CORNER_LEFT_DOWN_ID = 9
+val ICE_CORNER_RIGHT_DOWN_ID = 10
 
 public fun tileIdToTile(typeId: Int, location: Point): Tile {
     return when (typeId) {
@@ -25,6 +29,10 @@ public fun tileIdToTile(typeId: Int, location: Point): Tile {
         WATER_TYPE_ID -> Water(location)
         FIRE_TYPE_ID -> Fire(location)
         ICE_TYPE_ID -> Ice(location)
+        ICE_CORNER_LEFT_UP_ID -> IceCorner(ICE_CORNER_LEFT_UP_ID, location)
+        ICE_CORNER_LEFT_DOWN_ID -> IceCorner(ICE_CORNER_LEFT_DOWN_ID, location)
+        ICE_CORNER_RIGHT_UP_ID -> IceCorner(ICE_CORNER_RIGHT_UP_ID, location)
+        ICE_CORNER_RIGHT_DOWN_ID -> IceCorner(ICE_CORNER_RIGHT_DOWN_ID, location)
         else -> Wall(location)
     }
 }
@@ -42,6 +50,10 @@ public fun tileFromJson(obj: JSONObject, location: Point): Tile {
         WATER_TYPE_ID -> Water(location, id)
         FIRE_TYPE_ID -> Fire(location, id)
         ICE_TYPE_ID -> Ice(location, id)
+        ICE_CORNER_LEFT_UP_ID -> IceCorner(ICE_CORNER_LEFT_UP_ID, location, id)
+        ICE_CORNER_LEFT_DOWN_ID -> IceCorner(ICE_CORNER_LEFT_DOWN_ID, location, id)
+        ICE_CORNER_RIGHT_UP_ID -> IceCorner(ICE_CORNER_RIGHT_UP_ID, location, id)
+        ICE_CORNER_RIGHT_DOWN_ID -> IceCorner(ICE_CORNER_RIGHT_DOWN_ID, location, id)
         else -> Wall(location)
     }
 }

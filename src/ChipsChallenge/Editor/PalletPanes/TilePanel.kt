@@ -1,20 +1,20 @@
 package ChipsChallenge.Editor.PalletPanes
 
-import javax.swing.JPanel
-import ChipsChallenge.Map.tileIdToTile
-import javax.swing.JButton
-import ChipsChallenge.Map.Tile
-import javax.swing.ImageIcon
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
 import ChipsChallenge.Engine.Point
+import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.tileIdToTile
+import javax.swing.ImageIcon
+import javax.swing.JButton
+import javax.swing.JPanel
 
 /**
  * Created by chase on 2/27/15.
  */
 class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(7) { tileIdToTile(it, Point(0, 0)) };
+    val buttons = Array(11) { tileIdToTile(it, Point(0, 0)) };
 
     init {
         setLayout(null)

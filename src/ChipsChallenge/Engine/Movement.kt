@@ -1,7 +1,7 @@
 package ChipsChallenge.Engine
 
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Ice
+import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Unit.DirectionalUnit
 
 /**
@@ -29,6 +29,7 @@ class Movement(val engine: Engine) {
     }
 
     fun moveIce(newLocation: Point, direction: Direction, interactor: UnitBase, targetTile: Tile?): Boolean {
+        val currentTile = engine.map.getTile(interactor.location)
         if (targetTile == null || !interactor.canMoveToTile(targetTile)) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
@@ -43,7 +44,7 @@ class Movement(val engine: Engine) {
             interactor.direction = interactor.forcedDirection as Direction
         }
 
-        if (targetTile !is Ice) {
+        if (targetTile !is IceBase) {
             interactor.forcedDirection = null
         }
         return true

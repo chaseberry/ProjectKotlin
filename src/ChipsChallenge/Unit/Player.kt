@@ -4,8 +4,6 @@ import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.loadImage
-import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Wall
 
 class Player(location: Point) : UnitBase(-1, location) {
 
@@ -41,10 +39,6 @@ class Player(location: Point) : UnitBase(-1, location) {
                 }
             }
         }
-    }
-
-    override fun canMoveToTile(tile: Tile): Boolean {
-        return tile !is Wall
     }
 
     override fun moveUp(engine: Engine) {
