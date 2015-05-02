@@ -108,7 +108,6 @@ class ObjectManager(val engine: Engine?) : Tickable {
         if (!objects.containsKey(newLocation)) {
             return true
         }
-
         return resolveObject(objects.get(newLocation), direction, interactor)
 
     }

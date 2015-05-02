@@ -42,7 +42,7 @@ class Movement(val engine: Engine) {
         }
 
         //Is there an object in the next location? Is it resolved?
-        if (obj != null && !engine.objectManager.resolve(newLocation, direction, interactor)) {
+        if (!engine.objectManager.resolve(newLocation, direction, interactor)) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             return false
         }
