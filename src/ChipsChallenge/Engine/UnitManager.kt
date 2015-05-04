@@ -30,8 +30,7 @@ class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), Tickable {
     }
 
     fun isUnitOnPoint(location: Point): Boolean {
-        forEach { if (it != null && it.location == location) return true }
-        return false
+        return unitOnPoint(location) != null
     }
 
     fun unitOnPointIndex(location: Point): Int? {

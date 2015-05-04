@@ -160,10 +160,24 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
 
             }
         }
+
+        unitManager.forEach {
+            val tile = map.getTile(it.location)
+            if (tile != null && tile is Teleport && !tile.arriving) {
+                val newTeleport = map.findNextTeleport(tile)
+                if (newTeleport != null) {
+                    it.location = newTeleport.location.copy()
+                    tile.arriving = false
+                    newTeleport.arriving = true
+                }
+            }
+        }
+
         if (unitManager.isUnitOnPoint(player.location)) {
             lose()
             return
         }
+
         objectManager.objects.forEach {
             val location = it.getKey()
             val obj = it.getValue()
@@ -172,11 +186,9 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
                 val waterTile = engine.map.getTile(location)!!
                 engine.map.setTile(location, Floor(location, waterTile.uniqueId))
             }
-            if (location == player.location) {
-                if (it.getValue() is Block) {
-                    lose()
-                    return
-                }
+            if (location == player.location && obj is Block) {
+                lose()
+                return
             }
             if (it.getValue() is Button) {
                 if (player.location == it.getKey() || unitManager.isUnitOnPoint(it.getKey())) {

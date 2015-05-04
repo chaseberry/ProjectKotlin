@@ -11,12 +11,13 @@ class Teleport(location: Point, uniqueId: Id) : Tile(teleportImage, TELEPORT_TYP
 
     var arriving = false
 
+    //TODO implement teleporting or objects(Blocks)
     constructor(location: Point) : this(location, Id(IdType.TILE)) {
 
     }
 
     override fun onTick(engine: Engine) {
-        if (engine.player.location != location) {
+        if (arriving && engine.player.location != location && !engine.unitManager.isUnitOnPoint(location)) {
             arriving = false
         }
     }
