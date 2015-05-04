@@ -149,10 +149,15 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
                 win(); return
             }
             is Teleport -> {
-                val newTeleport = map.findNextTeleport(tile)
-                if (newTeleport != null) {
-                    player.location = newTeleport.location.copy()
+                if (!tile.arriving) {
+                    val newTeleport = map.findNextTeleport(tile)
+                    if (newTeleport != null) {
+                        player.location = newTeleport.location.copy()
+                        tile.arriving = false
+                        newTeleport.arriving = true
+                    }
                 }
+
             }
         }
         if (unitManager.isUnitOnPoint(player.location)) {

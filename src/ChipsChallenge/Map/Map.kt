@@ -143,7 +143,7 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
         }
     }
 
-    fun findNextTeleport(entrance: Teleport): Tile? {
+    fun findNextTeleport(entrance: Teleport): Teleport? {
         //start at teleports point, go from location.x->0 then --y until 0,0
         //go from map.x -1 , map.y -1 until back to entrance.location
         for (v in entrance.location.y downTo 0) {
@@ -152,7 +152,7 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
                     continue
                 }
                 if (map[z][v] is Teleport) {
-                    return map[z][v]
+                    return map[z][v] as Teleport
                 }
             }
         }
@@ -162,7 +162,7 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
                     continue
                 }
                 if (map[z][v] is Teleport) {
-                    return map[z][v]
+                    return map[z][v] as Teleport
                 }
             }
         }

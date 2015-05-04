@@ -9,12 +9,16 @@ import ChipsChallenge.Map.Tile
  */
 class Teleport(location: Point, uniqueId: Id) : Tile(teleportImage, TELEPORT_TYPE_ID, location, uniqueId) {
 
+    var arriving = false
+
     constructor(location: Point) : this(location, Id(IdType.TILE)) {
 
     }
 
     override fun onTick(engine: Engine) {
-
+        if (engine.player.location != location) {
+            arriving = false
+        }
     }
 
 }
