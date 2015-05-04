@@ -73,6 +73,10 @@ val teleportImage: BufferedImage by Delegates.lazy {
     loadImage("teleporter.gif") as BufferedImage
 }
 
+val gravelImage: BufferedImage by Delegates.lazy {
+    loadImage("gravel.gif") as BufferedImage
+}
+
 val blueKeyImage: BufferedImage by Delegates.lazy {
     loadImage("blue_key.gif") as BufferedImage
 }

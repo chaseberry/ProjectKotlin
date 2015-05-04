@@ -1,6 +1,8 @@
 package ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.*
+import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.Gravel
 
 val PINK_BALL_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val PINK_BALL_TYPE_ID = 0
@@ -18,6 +20,10 @@ class PinkBall(location: Point, direction: Direction, moveSpeed: Int,
 
     init {
         image = pinkBallImage
+    }
+
+    override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
+        return super.canMoveToTile(tile, direction) && tile !is Gravel
     }
 
     override fun changeDirection() {
