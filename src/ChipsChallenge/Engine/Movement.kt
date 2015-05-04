@@ -33,6 +33,13 @@ class Movement(val engine: Engine) {
         //Can they move to the next tile? (IE is it a wall)
         if (targetTile == null || !interactor.canMoveToTile(targetTile, direction)) {
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
+            when (interactor.forcedDirection) {
+                Direction.UP -> interactor.moveUp(engine)
+                Direction.DOWN -> interactor.moveDown(engine)
+                Direction.LEFT -> interactor.moveLeft(engine)
+                Direction.RIGHT -> interactor.moveRight(engine)
+            }
+            //newLocation here is wrong
             return false
         }
         //Is user on some object that they cannot move off of

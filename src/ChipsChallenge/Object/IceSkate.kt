@@ -20,7 +20,6 @@ class IceSkate(location: Point, uniqueId: Id) : ObjectBase(ICE_SKATE_TYPE_ID, lo
     }
 
     override fun onTick(engine: Engine) {
-        throw UnsupportedOperationException()
     }
 
 }
