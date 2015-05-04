@@ -2,10 +2,7 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Map
-import ChipsChallenge.Map.Tiles.Finish
-import ChipsChallenge.Map.Tiles.Fire
-import ChipsChallenge.Map.Tiles.Floor
-import ChipsChallenge.Map.Tiles.Water
+import ChipsChallenge.Map.Tiles.*
 import ChipsChallenge.Map.mapFromJSON
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
@@ -150,6 +147,12 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
             }
             is Finish -> {
                 win(); return
+            }
+            is Teleport -> {
+                val newTeleport = map.findNextTeleport(tile)
+                if (newTeleport != null) {
+                    player.location = newTeleport.location.copy()
+                }
             }
         }
         if (unitManager.isUnitOnPoint(player.location)) {

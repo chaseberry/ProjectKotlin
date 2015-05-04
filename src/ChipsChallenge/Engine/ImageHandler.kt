@@ -69,6 +69,10 @@ val iceRightDownImage: BufferedImage by Delegates.lazy {
     loadImage("curve-2-ice.gif") as BufferedImage
 }
 
+val teleportImage: BufferedImage by Delegates.lazy {
+    loadImage("teleporter.gif") as BufferedImage
+}
+
 val blueKeyImage: BufferedImage by Delegates.lazy {
     loadImage("blue_key.gif") as BufferedImage
 }

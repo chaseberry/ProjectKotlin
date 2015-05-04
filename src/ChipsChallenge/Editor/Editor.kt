@@ -130,14 +130,20 @@ class Editor(x: Int, y: Int) {
 
     fun addTile(tileLocation: Point) {
         val tile = map.getTile(tileLocation)
-        if (tile != pallet.currentTile) {
+        if (tile == null) {
+            return
+        }
+        if (!tile.typeEquals(pallet.currentTile)) {
             map.setTile(tileLocation, pallet.currentTile)
         }
     }
 
     fun removeTile(tileLocation: Point) {
         val tile = map.getTile(tileLocation)
-        if (tile != pallet.deleteTile) {
+        if (tile == null) {
+            return
+        }
+        if (!tile.typeEquals(pallet.deleteTile)) {
             map.setTile(tileLocation, pallet.deleteTile)
         }
     }

@@ -19,6 +19,7 @@ val ICE_CORNER_LEFT_UP_ID = 7
 val ICE_CORNER_RIGHT_UP_ID = 8
 val ICE_CORNER_LEFT_DOWN_ID = 9
 val ICE_CORNER_RIGHT_DOWN_ID = 10
+val TELEPORT_TYPE_ID = 11
 
 public fun tileIdToTile(typeId: Int, location: Point): Tile {
     return when (typeId) {
@@ -33,6 +34,7 @@ public fun tileIdToTile(typeId: Int, location: Point): Tile {
         ICE_CORNER_LEFT_DOWN_ID -> IceCorner(ICE_CORNER_LEFT_DOWN_ID, location)
         ICE_CORNER_RIGHT_UP_ID -> IceCorner(ICE_CORNER_RIGHT_UP_ID, location)
         ICE_CORNER_RIGHT_DOWN_ID -> IceCorner(ICE_CORNER_RIGHT_DOWN_ID, location)
+        TELEPORT_TYPE_ID -> Teleport(location)
         else -> Wall(location)
     }
 }
@@ -54,6 +56,7 @@ public fun tileFromJson(obj: JSONObject, location: Point): Tile {
         ICE_CORNER_LEFT_DOWN_ID -> IceCorner(ICE_CORNER_LEFT_DOWN_ID, location, id)
         ICE_CORNER_RIGHT_UP_ID -> IceCorner(ICE_CORNER_RIGHT_UP_ID, location, id)
         ICE_CORNER_RIGHT_DOWN_ID -> IceCorner(ICE_CORNER_RIGHT_DOWN_ID, location, id)
+        TELEPORT_TYPE_ID -> Teleport(location, id)
         else -> Wall(location)
     }
 }
@@ -61,9 +64,13 @@ public fun tileFromJson(obj: JSONObject, location: Point): Tile {
 data abstract class Tile(val image: BufferedImage, val  tileId: Int, location: Point,
                          val uniqueId: Id) : EngineObjectBase(location) {
 
+    fun typeEquals(tile: Tile): Boolean {
+        return tile.tileId == tileId
+    }
+
     override fun equals(other: Any?): Boolean {
         if (other != null && other is Tile) {
-            return other.tileId == tileId
+            return other.tileId == tileId && other.uniqueId == uniqueId
         }
         return false;
     }

@@ -6,6 +6,7 @@ import ChipsChallenge.Engine.Id
 import ChipsChallenge.Engine.Point
 import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Map.Tiles.Teleport
 import ChipsChallenge.UI.Viewport
 import java.awt.image.BufferedImage
 import kotlin.properties.Delegates
@@ -142,5 +143,30 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
         }
     }
 
+    fun findNextTeleport(entrance: Teleport): Tile? {
+        //start at teleports point, go from location.x->0 then --y until 0,0
+        //go from map.x -1 , map.y -1 until back to entrance.location
+        for (v in entrance.location.y downTo 0) {
+            for (z in entrance.location.x downTo 0) {
+                if (map[z][v] == entrance) {
+                    continue
+                }
+                if (map[z][v] is Teleport) {
+                    return map[z][v]
+                }
+            }
+        }
+        for (v in (y - 1) downTo entrance.location.y) {
+            for (z in (x - 1) downTo entrance.location.x) {
+                if (map[z][v] == entrance) {
+                    continue
+                }
+                if (map[z][v] is Teleport) {
+                    return map[z][v]
+                }
+            }
+        }
+        return null
+    }
 
 }
