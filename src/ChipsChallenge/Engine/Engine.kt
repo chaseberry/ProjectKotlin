@@ -4,10 +4,12 @@ import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Map
 import ChipsChallenge.Map.Tiles.Finish
 import ChipsChallenge.Map.Tiles.Fire
+import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.mapFromJSON
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
+import ChipsChallenge.Object.Dirt
 import ChipsChallenge.UI.Frame
 import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Unit.Player
@@ -155,7 +157,14 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
             return
         }
         objectManager.objects.forEach {
-            if (it.getKey() == player.location) {
+            val location = it.getKey()
+            val obj = it.getValue()
+            if (obj is Block && engine.map.getTile(location) is Water) {
+                objectManager.objects.put(location, Dirt(location, obj.uniqueId))
+                val waterTile = engine.map.getTile(location)!!
+                engine.map.setTile(location, Floor(location, waterTile.uniqueId))
+            }
+            if (location == player.location) {
                 if (it.getValue() is Block) {
                     lose()
                     return

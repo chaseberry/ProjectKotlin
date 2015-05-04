@@ -1,11 +1,8 @@
 package ChipsChallenge.Engine
 
-import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Map.Tiles.IceBase
-import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
-import ChipsChallenge.Object.Dirt
 import ChipsChallenge.UI.Viewport
 import ChipsChallenge.UI.pointInViewport
 import java.util.ArrayList
@@ -18,7 +15,7 @@ import java.util.HashMap
 class ObjectManager(val engine: Engine?) : Tickable {
 
     override fun onTick(engine: Engine) {
-        val array = objects.values()
+        val array = ArrayList<EngineObjectBase>(objects.values())
         array.forEach { it.onTick(engine) }
 
     }
@@ -83,19 +80,15 @@ class ObjectManager(val engine: Engine?) : Tickable {
                 Direction.LEFT -> obj.location.copy(x = obj.location.x - 1)
                 Direction.RIGHT -> obj.location.copy(x = obj.location.x + 1)
             }
-            if (engine.map.getTile(newObjLocation) is Water) {
-                engine.map.setTile(newObjLocation, Floor(Point(0, 0)))
-                add(Dirt(newObjLocation), newObjLocation)
-            } else {
-                obj.location = newObjLocation
-                if (objects.get(newObjLocation) != null) {
-                    obj.cover(objects.get(newObjLocation), engine)
-                }
-                add(obj, newObjLocation)
-                if (engine.map.getTile(newObjLocation) is IceBase) {
-                    obj.forcedDirection = direction
-                }
+            obj.location = newObjLocation
+            if (objects.get(newObjLocation) != null) {
+                obj.cover(objects.get(newObjLocation), engine)
             }
+            add(obj, newObjLocation)
+            if (engine.map.getTile(newObjLocation) is IceBase) {
+                obj.forcedDirection = direction
+            }
+
         }
 
         return true
