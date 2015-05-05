@@ -7,6 +7,7 @@ import ChipsChallenge.Engine.loadImage
 
 class Player(location: Point) : UnitBase(-1, location) {
 
+
     init {
         imageSet.put("up", loadImage("chip-north.gif"))
         imageSet.put("down", loadImage("chip-south.gif"))
@@ -59,6 +60,14 @@ class Player(location: Point) : UnitBase(-1, location) {
     override fun moveRight(engine: Engine) {
         image = imageSet.get("right")
         super.moveRight(engine)
+    }
+
+    override fun canSurviveInWater(): Boolean {
+        return inventory.hasFlippers
+    }
+
+    override fun canSurviveInFire(): Boolean {
+        return inventory.hasFireBoots
     }
 
 }

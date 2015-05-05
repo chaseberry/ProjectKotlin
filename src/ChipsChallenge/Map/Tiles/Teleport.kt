@@ -9,17 +9,24 @@ import ChipsChallenge.Map.Tile
  */
 class Teleport(location: Point, uniqueId: Id) : Tile(teleportImage, TELEPORT_TYPE_ID, location, uniqueId) {
 
+    override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
+        arriving = true
+        engine.teleport(interactor, direction, this)
+    }
+
+    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
+        arriving = false
+    }
+
     var arriving = false
 
-    //TODO implement teleporting or objects(Blocks)
+    //TODO implement teleporting for objects(Blocks)
     constructor(location: Point) : this(location, Id(IdType.TILE)) {
 
     }
 
     override fun onTick(engine: Engine) {
-        if (arriving && engine.player.location != location && !engine.unitManager.isUnitOnPoint(location)) {
-            arriving = false
-        }
+
     }
 
 }

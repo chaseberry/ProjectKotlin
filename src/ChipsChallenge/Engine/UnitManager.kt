@@ -24,6 +24,10 @@ class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), Tickable {
         forEach { it.onTick(engine) }
     }
 
+    fun kill(unit: UnitBase) {
+        remove(unit)
+    }
+
     fun getById(id: Id): UnitBase? {
         forEach { if (it.uniqueId == id) return it }
         return null

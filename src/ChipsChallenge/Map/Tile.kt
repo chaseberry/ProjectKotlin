@@ -1,9 +1,6 @@
 package ChipsChallenge.Map
 
-import ChipsChallenge.Engine.EngineObjectBase
-import ChipsChallenge.Engine.Id
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.idFromJson
+import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tiles.*
 import java.awt.image.BufferedImage
@@ -82,4 +79,7 @@ data abstract class Tile(val image: BufferedImage, val  tileId: Int, location: P
         return JSONObject().put("typeId", tileId).put("id", uniqueId.getJson())
     }
 
+    abstract fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine);
+
+    abstract fun onExit(interactor: UnitBase, direction: Direction, engine: Engine);
 }

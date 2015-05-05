@@ -10,6 +10,7 @@ val PINK_BALL_TYPE_ID = 0
 class PinkBall(location: Point, direction: Direction, moveSpeed: Int,
                uniqueId: Id) : DirectionalUnit(PINK_BALL_TYPE_ID, location, direction, moveSpeed, uniqueId) {
 
+
     override fun setImage() {
         image = pinkBallImage
     }
@@ -20,6 +21,14 @@ class PinkBall(location: Point, direction: Direction, moveSpeed: Int,
 
     init {
         image = pinkBallImage
+    }
+
+    override fun canSurviveInWater(): Boolean {
+        return false
+    }
+
+    override fun canSurviveInFire(): Boolean {
+        return false
     }
 
     override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {

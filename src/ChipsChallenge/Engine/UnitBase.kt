@@ -114,5 +114,7 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
         }
     }
 
+    abstract fun canSurviveInWater(): Boolean;
 
+    abstract fun canSurviveInFire(): Boolean;
 }

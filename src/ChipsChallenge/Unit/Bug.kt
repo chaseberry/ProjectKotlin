@@ -12,6 +12,14 @@ val BUG_TYPE_ID = 1
 class Bug(location: Point, direction: Direction, moveSpeed: Int,
           uniqueId: Id) : DirectionalUnit(BUG_TYPE_ID, location, direction, moveSpeed, uniqueId) {
 
+    override fun canSurviveInWater(): Boolean {
+        return false
+    }
+
+    override fun canSurviveInFire(): Boolean {
+        return true
+    }
+
     constructor(location: Point, direction: Direction) : this(location, direction,
             BUG_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
     }

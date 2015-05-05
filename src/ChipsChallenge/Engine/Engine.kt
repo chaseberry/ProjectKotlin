@@ -249,4 +249,13 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
         keyBindings.keyReleased(code)
     }
 
+    fun teleport(interactor: UnitBase, direction: Direction, teleStart: Teleport) {
+        val newTeleport = map.findNextTeleport(teleStart)
+        if (newTeleport != null && !teleStart.arriving) {
+            interactor.location = newTeleport.location.copy()
+            teleStart.onExit(interactor, direction, this)
+            newTeleport.onEnter(interactor, direction, this)
+        }
+    }
+
 }
