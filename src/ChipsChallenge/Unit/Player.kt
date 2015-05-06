@@ -1,9 +1,6 @@
 package ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Point
-import ChipsChallenge.Engine.UnitBase
-import ChipsChallenge.Engine.loadImage
+import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Tiles.ForceFloor
 
 class Player(location: Point) : UnitBase(-1, location) {
@@ -21,7 +18,25 @@ class Player(location: Point) : UnitBase(-1, location) {
     override fun onTick(engine: Engine) {
         if (engine.map.getTile(location) is ForceFloor && currentMove == 1) {
             if (engine.keyBindings.isKeyPressed) {
-                //override force floor
+                val tile = engine.map.getTile(location) as ForceFloor
+                when (true) {
+                    engine.keyBindings.up && (Direction.UP in tile.getAllowedOverrideDirections()) -> {
+                        moveUp(engine)
+                        return;
+                    }
+                    engine.keyBindings.down && (Direction.DOWN in tile.getAllowedOverrideDirections()) -> {
+                        moveDown(engine)
+                        return
+                    }
+                    engine.keyBindings.left && (Direction.LEFT in tile.getAllowedOverrideDirections()) -> {
+                        moveLeft(engine)
+                        return
+                    }
+                    engine.keyBindings.right && (Direction.RIGHT in tile.getAllowedOverrideDirections()) -> {
+                        moveRight(engine)
+                        return
+                    }
+                }
             }
         }
         super.onTick(engine)
