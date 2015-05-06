@@ -49,6 +49,16 @@ public class ForceFloor(typeId: Int, location: Point, uniqueId: Id) : IceBase(fo
         }
     }
 
+    fun getAllowedOverrideDirections(): Array<Direction> {
+        return when (tileId) {
+            FORCE_FLOOR_LEFT -> array(Direction.DOWN, Direction.UP)
+            FORCE_FLOOR_UP -> array(Direction.LEFT, Direction.RIGHT)
+            FORCE_FLOOR_RIGHT -> array(Direction.DOWN, Direction.UP)
+            FORCE_FLOOR_DOWN -> array(Direction.LEFT, Direction.RIGHT)
+            else -> array()
+        }
+    }
+
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
         interactor.forcedDirection = getNewDirection(direction)
     }

@@ -45,6 +45,8 @@ class Editor(x: Int, y: Int) {
 
     val unitManager = UnitManager(null)
 
+    var rotateMode = false
+
     fun start() {
         frame.image = buildFrameImage()
         frame.setVisible(true)
@@ -138,11 +140,12 @@ class Editor(x: Int, y: Int) {
         if (tile == null) {
             return
         }
-        if (tile is IceCorner && pallet.currentTile is IceCorner) {
+
+        if (rotateMode && tile is IceCorner && pallet.currentTile is IceCorner) {
             map.setTile(tileLocation, tileIdToTile(getNextIceCorner(tile.tileId), tileLocation))
             return
         }
-        if (tile is ForceFloor && pallet.currentTile is ForceFloor) {
+        if (rotateMode && tile is ForceFloor && pallet.currentTile is ForceFloor) {
             map.setTile(tileLocation, tileIdToTile(getNextForceFloor(tile.tileId), tileLocation))
             return
         }

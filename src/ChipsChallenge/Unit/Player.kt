@@ -4,9 +4,9 @@ import ChipsChallenge.Engine.Engine
 import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Engine.loadImage
+import ChipsChallenge.Map.Tiles.ForceFloor
 
 class Player(location: Point) : UnitBase(-1, location) {
-
 
     init {
         imageSet.put("up", loadImage("chip-north.gif"))
@@ -19,6 +19,11 @@ class Player(location: Point) : UnitBase(-1, location) {
     val inventory = PlayerInventory()
 
     override fun onTick(engine: Engine) {
+        if (engine.map.getTile(location) is ForceFloor && currentMove == 1) {
+            if (engine.keyBindings.isKeyPressed) {
+                //override force floor
+            }
+        }
         super.onTick(engine)
         if (currentMove == 0) {
             when (true) {

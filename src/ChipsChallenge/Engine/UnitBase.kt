@@ -75,7 +75,7 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
         }
     }
 
-    fun move(direction: Direction, engine: Engine, newLocation: Point) {
+    open fun move(direction: Direction, engine: Engine, newLocation: Point) {
         currentMove = moveSpeed
         engine.map.getTile(location)!!.onExit(this, direction, engine)
         location = newLocation

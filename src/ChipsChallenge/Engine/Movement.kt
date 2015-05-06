@@ -1,6 +1,7 @@
 package ChipsChallenge.Engine
 
 import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.ForceFloor
 import ChipsChallenge.Unit.DirectionalUnit
 
 /**
@@ -33,6 +34,10 @@ class Movement(val engine: Engine) {
 
         //Can they move to the next tile? (IE is it a wall)
         if (targetTile == null || !interactor.canMoveToTile(targetTile, direction)) {
+            if (engine.map.getTile(interactor.location)!! is ForceFloor) {
+                interactor.move(direction, engine, interactor.location)
+                return false
+            }
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
             when (interactor.forcedDirection) {
                 Direction.UP -> interactor.moveUp(engine)
@@ -51,7 +56,17 @@ class Movement(val engine: Engine) {
 
         //Is there an object in the next location? Is it resolved?
         if (!engine.objectManager.resolve(newLocation, direction, interactor)) {
+            if (engine.map.getTile(interactor.location)!! is ForceFloor) {
+                interactor.move(direction, engine, interactor.location)
+                return false
+            }
             interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
+            when (interactor.forcedDirection) {
+                Direction.UP -> interactor.moveUp(engine)
+                Direction.DOWN -> interactor.moveDown(engine)
+                Direction.LEFT -> interactor.moveLeft(engine)
+                Direction.RIGHT -> interactor.moveRight(engine)
+            }
             return false
         }
 
