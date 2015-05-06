@@ -2,8 +2,13 @@ package ChipsChallenge.Editor
 
 import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONArray
+import ChipsChallenge.Map.Tiles.ForceFloor
+import ChipsChallenge.Map.Tiles.IceCorner
+import ChipsChallenge.Map.Tiles.getNextForceFloor
+import ChipsChallenge.Map.Tiles.getNextIceCorner
 import ChipsChallenge.Map.blankMap
 import ChipsChallenge.Map.mapFromIds
+import ChipsChallenge.Map.tileIdToTile
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.BrownButton
 import ChipsChallenge.Object.Button
@@ -133,9 +138,16 @@ class Editor(x: Int, y: Int) {
         if (tile == null) {
             return
         }
+        if (tile is IceCorner && pallet.currentTile is IceCorner) {
+            map.setTile(tileLocation, tileIdToTile(getNextIceCorner(tile.tileId), tileLocation))
+            return
+        }
+        if (tile is ForceFloor && pallet.currentTile is ForceFloor) {
+            map.setTile(tileLocation, tileIdToTile(getNextForceFloor(tile.tileId), tileLocation))
+            return
+        }
         if (!tile.typeEquals(pallet.currentTile)) {
             map.setTile(tileLocation, pallet.currentTile)
-            
         }
     }
 

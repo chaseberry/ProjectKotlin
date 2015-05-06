@@ -22,6 +22,7 @@ val FORCE_FLOOR_LEFT = 13
 val FORCE_FLOOR_UP = 14
 val FORCE_FLOOR_RIGHT = 15
 val FORCE_FLOOR_DOWN = 16
+val FORCE_FLOOR_RANDOM = 17
 
 public fun tileIdToTile(typeId: Int, location: Point): Tile {
     return when (typeId) {
@@ -42,6 +43,7 @@ public fun tileIdToTile(typeId: Int, location: Point): Tile {
         FORCE_FLOOR_UP -> ForceFloor(typeId, location)
         FORCE_FLOOR_RIGHT -> ForceFloor(typeId, location)
         FORCE_FLOOR_DOWN -> ForceFloor(typeId, location)
+        FORCE_FLOOR_RANDOM -> ForceFloor(typeId, location)
         else -> Wall(location)
     }
 }

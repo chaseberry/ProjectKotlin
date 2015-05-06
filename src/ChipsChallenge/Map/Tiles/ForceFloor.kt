@@ -1,10 +1,7 @@
 package ChipsChallenge.Map.Tiles
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.FORCE_FLOOR_DOWN
-import ChipsChallenge.Map.FORCE_FLOOR_LEFT
-import ChipsChallenge.Map.FORCE_FLOOR_RIGHT
-import ChipsChallenge.Map.FORCE_FLOOR_UP
+import ChipsChallenge.Map.*
 import java.awt.image.BufferedImage
 
 fun forceFloorImage(typeId: Int): BufferedImage {
@@ -14,6 +11,16 @@ fun forceFloorImage(typeId: Int): BufferedImage {
         FORCE_FLOOR_RIGHT -> forceFloorEast
         FORCE_FLOOR_DOWN -> forceFloorSouth
         else -> forceFloorRandom
+    }
+}
+
+fun getNextForceFloor(typeId: Int): Int {
+    return when (typeId) {
+        FORCE_FLOOR_LEFT -> FORCE_FLOOR_UP
+        FORCE_FLOOR_UP -> FORCE_FLOOR_RIGHT
+        FORCE_FLOOR_RIGHT -> FORCE_FLOOR_DOWN
+        FORCE_FLOOR_DOWN -> FORCE_FLOOR_RANDOM
+        else -> FORCE_FLOOR_LEFT
     }
 }
 
@@ -28,7 +35,17 @@ public class ForceFloor(typeId: Int, location: Point, uniqueId: Id) : IceBase(fo
             FORCE_FLOOR_UP -> Direction.UP
             FORCE_FLOOR_RIGHT -> Direction.RIGHT
             FORCE_FLOOR_DOWN -> Direction.DOWN
+            FORCE_FLOOR_RANDOM -> getRandomDirection()
             else -> direction
+        }
+    }
+
+    fun getRandomDirection(): Direction {
+        return when ((Math.random() * 4).toInt()) {
+            0 -> Direction.UP
+            1 -> Direction.DOWN
+            2 -> Direction.LEFT
+            else -> Direction.RIGHT
         }
     }
 

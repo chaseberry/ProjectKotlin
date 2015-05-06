@@ -17,6 +17,15 @@ fun iceCornerImage(typeId: Int): BufferedImage {
     }
 }
 
+fun getNextIceCorner(typeId: Int): Int {
+    return when (typeId) {
+        ICE_CORNER_LEFT_DOWN_ID -> ICE_CORNER_RIGHT_DOWN_ID
+        ICE_CORNER_RIGHT_DOWN_ID -> ICE_CORNER_LEFT_UP_ID
+        ICE_CORNER_LEFT_UP_ID -> ICE_CORNER_RIGHT_UP_ID
+        else -> ICE_CORNER_LEFT_DOWN_ID
+    }
+}
+
 public class IceCorner(typeId: Int, location: Point, uniqueId: Id) : IceBase(iceCornerImage(typeId), typeId, location, uniqueId) {
 
     constructor(typeId: Int, location: Point) : this(typeId, location, Id(IdType.TILE)) {
