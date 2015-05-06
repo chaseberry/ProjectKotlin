@@ -2,7 +2,9 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Map
-import ChipsChallenge.Map.Tiles.*
+import ChipsChallenge.Map.Tiles.Floor
+import ChipsChallenge.Map.Tiles.Teleport
+import ChipsChallenge.Map.Tiles.Water
 import ChipsChallenge.Map.mapFromJSON
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
@@ -136,43 +138,6 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
     }
 
     fun checkCollisions() {
-        //check win/lose conditions
-        val tile = map.getTile(player.location)
-        when (tile) {
-            is Water -> if (!player.inventory.hasFlippers) {
-                lose(); return
-            }
-            is Fire -> if (!player.inventory.hasFireBoots) {
-                lose(); return
-            }
-            is Finish -> {
-                win(); return
-            }
-            is Teleport -> {
-                if (!tile.arriving) {
-                    val newTeleport = map.findNextTeleport(tile)
-                    if (newTeleport != null) {
-                        player.location = newTeleport.location.copy()
-                        tile.arriving = false
-                        newTeleport.arriving = true
-                    }
-                }
-
-            }
-        }
-
-        unitManager.forEach {
-            val tile = map.getTile(it.location)
-            if (tile != null && tile is Teleport && !tile.arriving) {
-                val newTeleport = map.findNextTeleport(tile)
-                if (newTeleport != null) {
-                    it.location = newTeleport.location.copy()
-                    tile.arriving = false
-                    newTeleport.arriving = true
-                }
-            }
-        }
-
         if (unitManager.isUnitOnPoint(player.location)) {
             lose()
             return
@@ -254,7 +219,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
         if (newTeleport != null && !teleStart.arriving) {
             interactor.location = newTeleport.location.copy()
             teleStart.onExit(interactor, direction, this)
-            newTeleport.onEnter(interactor, direction, this)
+            newTeleport.onTeleportEnter(interactor, direction, this)
         }
     }
 

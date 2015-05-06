@@ -135,6 +135,7 @@ class Editor(x: Int, y: Int) {
         }
         if (!tile.typeEquals(pallet.currentTile)) {
             map.setTile(tileLocation, pallet.currentTile)
+            
         }
     }
 

@@ -24,13 +24,8 @@ class Movement(val engine: Engine) {
         if (obj != null && !obj.canInteractorMove(engine, interactor)) {
             return false
         }
-        if (engine.objectManager.resolve(newLocation, direction, interactor)) {
-            engine.map.getTile(interactor.location)!!.onExit(interactor, direction, engine)
-            targetTile.onEnter(interactor, direction, engine)
-            return true
-        } else {
-            return false
-        }
+        return engine.objectManager.resolve(newLocation, direction, interactor)
+
 
     }
 
@@ -65,8 +60,6 @@ class Movement(val engine: Engine) {
             interactor.direction = interactor.forcedDirection as Direction
             interactor.setImage()
         }
-        engine.map.getTile(interactor.location)!!.onExit(interactor, direction, engine)
-        targetTile.onEnter(interactor, direction, engine)
         return true
     }
 

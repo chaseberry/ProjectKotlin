@@ -10,8 +10,11 @@ import ChipsChallenge.Map.Tile
 class Teleport(location: Point, uniqueId: Id) : Tile(teleportImage, TELEPORT_TYPE_ID, location, uniqueId) {
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-        arriving = true
         engine.teleport(interactor, direction, this)
+    }
+
+    fun onTeleportEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
+        arriving = true
     }
 
     override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {

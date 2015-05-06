@@ -55,8 +55,7 @@ abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Dire
 
     override fun moveUp(engine: Engine) {
         if (engine.movement.moveUp(this)) {
-            location.y -= 1
-            move(Direction.UP, engine)
+            move(Direction.UP, engine, location.copy(y = location.y - 1))
         } else {
             changeDirection()
         }
@@ -64,8 +63,7 @@ abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Dire
 
     override fun moveDown(engine: Engine) {
         if (engine.movement.moveDown(this)) {
-            location.y += 1
-            move(Direction.DOWN, engine)
+            move(Direction.DOWN, engine, location.copy(y = location.y + 1))
         } else {
             changeDirection()
         }
@@ -73,8 +71,7 @@ abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Dire
 
     override fun moveLeft(engine: Engine) {
         if (engine.movement.moveLeft(this)) {
-            location.x -= 1
-            move(Direction.LEFT, engine)
+            move(Direction.LEFT, engine, location.copy(x = location.x - 1))
         } else {
             changeDirection()
         }
@@ -82,8 +79,7 @@ abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Dire
 
     override fun moveRight(engine: Engine) {
         if (engine.movement.moveRight(this)) {
-            location.x += 1
-            move(Direction.RIGHT, engine)
+            move(Direction.RIGHT, engine, location.copy(x = location.x + 1))
         } else {
             changeDirection()
         }

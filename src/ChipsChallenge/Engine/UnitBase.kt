@@ -75,35 +75,34 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
         }
     }
 
-    fun move(direction: Direction, engine: Engine) {
+    fun move(direction: Direction, engine: Engine, newLocation: Point) {
         currentMove = moveSpeed
+        engine.map.getTile(location)!!.onExit(this, direction, engine)
+        location = newLocation
+        engine.map.getTile(location)!!.onEnter(this, direction, engine)
     }
 
     open fun moveUp(engine: Engine) {
         if (engine.movement.moveUp(this)) {
-            location.y -= 1
-            move(Direction.UP, engine)
+            move(Direction.UP, engine, location.copy(y = location.y - 1))
         }
     }
 
     open fun moveDown(engine: Engine) {
         if (engine.movement.moveDown(this)) {
-            location.y += 1
-            move(Direction.DOWN, engine)
+            move(Direction.DOWN, engine, location.copy(y = location.y + 1))
         }
     }
 
     open fun moveLeft(engine: Engine) {
         if (engine.movement.moveLeft(this)) {
-            location.x -= 1
-            move(Direction.LEFT, engine)
+            move(Direction.LEFT, engine, location.copy(x = location.x - 1))
         }
     }
 
     open fun moveRight(engine: Engine) {
         if (engine.movement.moveRight(this)) {
-            location.x += 1
-            move(Direction.RIGHT, engine)
+            move(Direction.RIGHT, engine, location.copy(x = location.x + 1))
         }
     }
 
