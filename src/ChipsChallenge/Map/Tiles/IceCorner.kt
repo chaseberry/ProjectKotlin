@@ -23,10 +23,11 @@ public class IceCorner(typeId: Int, location: Point, uniqueId: Id) : IceBase(ima
     }
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-
+        interactor.forcedDirection = getNewDirection(direction)
     }
 
     override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
+        interactor.forcedDirection = null
     }
 
     override fun getNewDirection(direction: Direction): Direction {

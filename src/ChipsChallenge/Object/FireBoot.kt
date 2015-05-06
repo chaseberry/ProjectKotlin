@@ -20,7 +20,6 @@ class FireBoot(location: Point, uniqueId: Id) : ObjectBase(FIRE_BOOT_TYPE_ID, lo
     }
 
     override fun onTick(engine: Engine) {
-        throw UnsupportedOperationException()
     }
 
 }

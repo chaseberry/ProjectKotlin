@@ -12,6 +12,7 @@ import java.util.HashMap
  * Created by chase on 2/27/15.
  */
 
+
 class ObjectManager(val engine: Engine?) : Tickable {
 
     override fun onTick(engine: Engine) {
@@ -23,7 +24,7 @@ class ObjectManager(val engine: Engine?) : Tickable {
     val objects = HashMap<Point, ObjectBase>()
 
     fun add(obj: ObjectBase, location: Point) {
-        objects.put(location, obj)
+        objects[location] = obj
     }
 
     fun remove(newLocation: Point): ObjectBase? {
@@ -82,7 +83,7 @@ class ObjectManager(val engine: Engine?) : Tickable {
             }
             obj.location = newObjLocation
             if (objects.get(newObjLocation) != null) {
-                obj.cover(objects.get(newObjLocation), engine)
+                obj.cover(objects[newObjLocation], engine)
             }
             add(obj, newObjLocation)
             if (engine.map.getTile(newObjLocation) is IceBase) {

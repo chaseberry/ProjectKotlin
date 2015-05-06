@@ -4,7 +4,10 @@ import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Map.Tiles.Wall
-import ChipsChallenge.Unit.*
+import ChipsChallenge.Unit.BUG_TYPE_ID
+import ChipsChallenge.Unit.Bug
+import ChipsChallenge.Unit.PINK_BALL_TYPE_ID
+import ChipsChallenge.Unit.PinkBall
 import java.awt.image.BufferedImage
 import java.util.HashMap
 
@@ -75,15 +78,6 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
 
     fun move(direction: Direction, engine: Engine) {
         currentMove = moveSpeed
-        val currentTile = engine.map.getTile(location)
-        if (currentTile is IceBase) {
-            if ((this is Player && this.inventory.hasIceSkates)) {
-                return
-            }
-            forcedDirection = currentTile.getNewDirection(direction)
-        } else {
-            forcedDirection = null
-        }
     }
 
     open fun moveUp(engine: Engine) {

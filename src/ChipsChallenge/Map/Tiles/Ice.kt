@@ -14,9 +14,11 @@ open class Ice(location: Point, uniqueId: Id) : IceBase(iceImage, ICE_TYPE_ID, l
     }
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
+        interactor.forcedDirection = getNewDirection(direction)
     }
 
     override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
+        interactor.forcedDirection = null
     }
 
     override fun getNewDirection(direction: Direction): Direction {
