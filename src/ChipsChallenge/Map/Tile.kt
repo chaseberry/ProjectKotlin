@@ -18,6 +18,10 @@ val ICE_CORNER_LEFT_DOWN_ID = 9
 val ICE_CORNER_RIGHT_DOWN_ID = 10
 val TELEPORT_TYPE_ID = 11
 val GRAVEL_TYPE_ID = 12
+val FORCE_FLOOR_LEFT = 13
+val FORCE_FLOOR_UP = 14
+val FORCE_FLOOR_RIGHT = 15
+val FORCE_FLOOR_DOWN = 16
 
 public fun tileIdToTile(typeId: Int, location: Point): Tile {
     return when (typeId) {
@@ -34,6 +38,10 @@ public fun tileIdToTile(typeId: Int, location: Point): Tile {
         ICE_CORNER_RIGHT_DOWN_ID -> IceCorner(ICE_CORNER_RIGHT_DOWN_ID, location)
         TELEPORT_TYPE_ID -> Teleport(location)
         GRAVEL_TYPE_ID -> Gravel(location)
+        FORCE_FLOOR_LEFT -> ForceFloor(typeId, location)
+        FORCE_FLOOR_UP -> ForceFloor(typeId, location)
+        FORCE_FLOOR_RIGHT -> ForceFloor(typeId, location)
+        FORCE_FLOOR_DOWN -> ForceFloor(typeId, location)
         else -> Wall(location)
     }
 }

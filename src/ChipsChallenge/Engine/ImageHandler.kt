@@ -77,6 +77,24 @@ val gravelImage: BufferedImage by Delegates.lazy {
     loadImage("gravel.gif") as BufferedImage
 }
 
+val forceFloorEast: BufferedImage by Delegates.lazy {
+    loadImage("forcefloor-east.gif") as BufferedImage
+}
+
+val forceFloorNorth: BufferedImage by Delegates.lazy {
+    loadImage("forcefloor-north.gif") as BufferedImage
+}
+val forceFloorSouth: BufferedImage by Delegates.lazy {
+    loadImage("forcefloor-south.gif") as BufferedImage
+}
+val forceFloorWest: BufferedImage by Delegates.lazy {
+    loadImage("forcefloor-west.gif") as BufferedImage
+}
+
+val forceFloorRandom: BufferedImage by Delegates.lazy {
+    loadImage("forcefloor-random.gif") as BufferedImage
+}
+
 val blueKeyImage: BufferedImage by Delegates.lazy {
     loadImage("blue_key.gif") as BufferedImage
 }
