@@ -2,7 +2,6 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Map.Tiles.Wall
 import ChipsChallenge.Unit.BUG_TYPE_ID
 import ChipsChallenge.Unit.Bug
@@ -66,7 +65,7 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
         if (currentMove > 0) {
             currentMove -= 1
         }
-        if (currentMove == 0 && engine.map.getTile(location) is IceBase && forcedDirection != null) {
+        if (currentMove == 0 && forcedDirection != null) {
             when (forcedDirection) {
                 Direction.UP -> moveUp(engine)
                 Direction.DOWN -> moveDown(engine)

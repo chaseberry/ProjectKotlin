@@ -15,7 +15,7 @@ class Movement(val engine: Engine) {
     fun move(newLocation: Point, direction: Direction, interactor: UnitBase): Boolean {
         val targetTile = engine.map.getTile(newLocation)
         if (interactor.forcedDirection != null) {
-            return moveIce(newLocation, direction, interactor, targetTile)
+            return moveForce(newLocation, direction, interactor, targetTile)
         }
         if (targetTile == null || !interactor.canMoveToTile(targetTile, direction)) {
             return false
@@ -34,7 +34,7 @@ class Movement(val engine: Engine) {
 
     }
 
-    fun moveIce(newLocation: Point, direction: Direction, interactor: UnitBase, targetTile: Tile?): Boolean {
+    fun moveForce(newLocation: Point, direction: Direction, interactor: UnitBase, targetTile: Tile?): Boolean {
 
         //Can they move to the next tile? (IE is it a wall)
         if (targetTile == null || !interactor.canMoveToTile(targetTile, direction)) {
