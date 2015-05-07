@@ -23,8 +23,9 @@ val FORCE_FLOOR_UP = 14
 val FORCE_FLOOR_RIGHT = 15
 val FORCE_FLOOR_DOWN = 16
 val FORCE_FLOOR_RANDOM = 17
+val TOGGLE_WALL_TYPE_ID = 18
 
-public fun tileIdToTile(typeId: Int, location: Point): Tile {
+public fun tileIdToTile(typeId: Int, location: Point, open: Boolean = false): Tile {
     return when (typeId) {
         FLOOR_TYPE_ID -> Floor(location)
         WALL_TYPE_ID -> Wall(location)
@@ -44,11 +45,12 @@ public fun tileIdToTile(typeId: Int, location: Point): Tile {
         FORCE_FLOOR_RIGHT -> ForceFloor(typeId, location)
         FORCE_FLOOR_DOWN -> ForceFloor(typeId, location)
         FORCE_FLOOR_RANDOM -> ForceFloor(typeId, location)
+        TOGGLE_WALL_TYPE_ID -> ToggleWall(location, open)
         else -> Wall(location)
     }
 }
 
-public fun tileFromJson(obj: JSONObject, location: Point): Tile {
+public fun tileFromJson(obj: JSONObject, location: Point, open: Boolean = false): Tile {
 
     val typeId = obj.getInt("typeId")
     val id = idFromJson(obj.getJSONObject("id"))
@@ -67,11 +69,17 @@ public fun tileFromJson(obj: JSONObject, location: Point): Tile {
         ICE_CORNER_RIGHT_DOWN_ID -> IceCorner(ICE_CORNER_RIGHT_DOWN_ID, location, id)
         TELEPORT_TYPE_ID -> Teleport(location, id)
         GRAVEL_TYPE_ID -> Gravel(location, id)
+        FORCE_FLOOR_LEFT -> ForceFloor(typeId, location, id)
+        FORCE_FLOOR_UP -> ForceFloor(typeId, location, id)
+        FORCE_FLOOR_RIGHT -> ForceFloor(typeId, location, id)
+        FORCE_FLOOR_DOWN -> ForceFloor(typeId, location, id)
+        FORCE_FLOOR_RANDOM -> ForceFloor(typeId, location, id)
+        TOGGLE_WALL_TYPE_ID -> ToggleWall(location, id, open)
         else -> Wall(location)
     }
 }
 
-data abstract class Tile(val image: BufferedImage, val  tileId: Int, location: Point,
+data abstract class Tile(open val image: BufferedImage, val  tileId: Int, location: Point,
                          val uniqueId: Id) : EngineObjectBase(location) {
 
     fun typeEquals(tile: Tile): Boolean {

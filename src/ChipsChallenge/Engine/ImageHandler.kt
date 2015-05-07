@@ -95,6 +95,14 @@ val forceFloorRandom: BufferedImage by Delegates.lazy {
     loadImage("forcefloor-random.gif") as BufferedImage
 }
 
+val toggleWallOpenImage: BufferedImage by Delegates.lazy {
+    loadImage("toggle-off.gif") as BufferedImage
+}
+
+val toggleWallClosedImage: BufferedImage by Delegates.lazy {
+    loadImage("toggle-on.gif") as BufferedImage
+}
+
 val blueKeyImage: BufferedImage by Delegates.lazy {
     loadImage("blue_key.gif") as BufferedImage
 }

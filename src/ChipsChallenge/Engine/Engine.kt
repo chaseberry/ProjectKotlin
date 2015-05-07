@@ -28,6 +28,10 @@ public enum class Direction {
     RIGHT
 }
 
+//
+//TODO implemenet levels 1-9 http://strategywiki.org/wiki/Chip%27s_Challenge/Levels_1-20#Level_1:_LESSON_1
+//
+
 fun directionFromString(str: String?): Direction {
     return when (str) {
         "UP" -> Direction.UP

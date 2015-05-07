@@ -5,6 +5,7 @@ import ChipsChallenge.Map.Tiles.ForceFloor
 
 class Player(location: Point) : UnitBase(-1, location) {
 
+
     init {
         imageSet.put("up", loadImage("chip-north.gif"))
         imageSet.put("down", loadImage("chip-south.gif"))
@@ -16,13 +17,14 @@ class Player(location: Point) : UnitBase(-1, location) {
     val inventory = PlayerInventory()
 
     override fun onTick(engine: Engine) {
+        //Force an override when on force floor
         if (engine.map.getTile(location) is ForceFloor && currentMove == 1) {
             if (engine.keyBindings.isKeyPressed) {
                 val tile = engine.map.getTile(location) as ForceFloor
                 when (true) {
                     engine.keyBindings.up && (Direction.UP in tile.getAllowedOverrideDirections()) -> {
                         moveUp(engine)
-                        return;
+                        return
                     }
                     engine.keyBindings.down && (Direction.DOWN in tile.getAllowedOverrideDirections()) -> {
                         moveDown(engine)

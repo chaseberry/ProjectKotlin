@@ -2,6 +2,7 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.ToggleWall
 import ChipsChallenge.Map.Tiles.Wall
 import ChipsChallenge.Unit.BUG_TYPE_ID
 import ChipsChallenge.Unit.Bug
@@ -49,7 +50,9 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
     var image: BufferedImage? = null
 
     open fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
-        return tile !is Wall
+        return tile !is Wall && (if (tile is ToggleWall) tile.open else true)
+
+
     }
 
     override fun getSaveObject(): JSONObject {

@@ -18,7 +18,7 @@ abstract class Button(typeId: Int, location: Point, image: BufferedImage,
         return obj
     }
 
-    fun trigger(engine: Engine) {
+    open fun trigger(engine: Engine) {
         if (!triggered && target != null) {
             val tgt = engine.getEngineObjectBase(target!!)
             if (tgt != null && tgt is Triggerable) {
@@ -28,7 +28,7 @@ abstract class Button(typeId: Int, location: Point, image: BufferedImage,
         }
     }
 
-    fun offTrigger(engine: Engine) {
+    open fun offTrigger(engine: Engine) {
         if (triggered && target != null) {
             val tgt = engine.getEngineObjectBase(target!!)
             if (tgt != null && tgt is Triggerable) {

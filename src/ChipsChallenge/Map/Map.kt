@@ -7,8 +7,10 @@ import ChipsChallenge.Engine.Point
 import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tiles.Teleport
+import ChipsChallenge.Map.Tiles.ToggleWall
 import ChipsChallenge.UI.Viewport
 import java.awt.image.BufferedImage
+import java.util.ArrayList
 import kotlin.properties.Delegates
 
 /**
@@ -48,6 +50,13 @@ fun mapFromJSON(mapData: JSONObject): Map? {
     }
 
 }
+
+//**Test
+fun ArrayList<ToggleWall>.invoke(tw: ToggleWall) {
+    this.add(tw)
+}
+
+//**
 
 data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation: Point,
                          var chipTotal: Int) : EngineObjectBase(Point(0, 0)) {
@@ -141,6 +150,12 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
                 tile.onTick(engine)
             }
         }
+    }
+
+    fun getAllToggleWalls(): ArrayList<ToggleWall> {
+        val walls = ArrayList<ToggleWall>()
+        map.forEach { it.forEach { if (it is ToggleWall) walls(it) } }
+        return walls
     }
 
     fun findNextTeleport(entrance: Teleport): Teleport? {
