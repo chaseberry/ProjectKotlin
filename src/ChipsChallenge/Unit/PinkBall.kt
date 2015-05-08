@@ -35,7 +35,7 @@ class PinkBall(location: Point, direction: Direction, moveSpeed: Int,
         return super.canMoveToTile(tile, direction) && tile !is Gravel
     }
 
-    override fun changeDirection() {
+    override fun changeDirection(engine: Engine) {
         direction = when (direction) {
             Direction.DOWN -> Direction.UP
             Direction.UP -> Direction.DOWN

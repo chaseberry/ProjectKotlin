@@ -1,7 +1,6 @@
 package ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Map
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Fire
 import ChipsChallenge.Map.Tiles.Gravel
@@ -28,28 +27,20 @@ class Bug(location: Point, direction: Direction, moveSpeed: Int,
         image = bugUpImage
     }
 
-    override fun changeDirection() {
-    }
-
-    override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
-        return super.canMoveToTile(tile, direction) && tile !is Fire && tile !is Gravel
-    }
-
     override fun onTick(engine: Engine) {
-        //Calculate the new direction
         if (currentMove == 1) {
             var newTile = getTileLeftOfCurrent(engine.map)
-            if (newTile != null && canMoveToTile(newTile!!, getLeftOfCurrent())) {
+            if (newTile != null && canMoveToTile(newTile!!, getLeftOfCurrent(), engine)) {
                 direction = getLeftOfCurrent()
             } else {
                 newTile = getTileAheadOfCurrent(engine.map)
-                if (newTile == null || !canMoveToTile(newTile!!, direction)) {
+                if (newTile == null || !canMoveToTile(newTile!!, direction, engine)) {
                     newTile = getTileRightOfCurrent(engine.map)
-                    if (newTile != null && canMoveToTile(newTile!!, getRightOfCurrent())) {
+                    if (newTile != null && canMoveToTile(newTile!!, getRightOfCurrent(), engine)) {
                         direction = getRightOfCurrent()
                     } else {
                         newTile = getTileBehindCurrent(engine.map)
-                        if (newTile != null && canMoveToTile(newTile!!, getBehindOfCurrent())) {
+                        if (newTile != null && canMoveToTile(newTile!!, getBehindOfCurrent(), engine)) {
                             direction = getBehindOfCurrent()
                         }
                     }
@@ -60,67 +51,11 @@ class Bug(location: Point, direction: Direction, moveSpeed: Int,
         super.onTick(engine)
     }
 
-    fun getTileRightOfCurrent(map: Map): Tile? {
-        return when (direction) {
-            Direction.UP -> map.getRight(location)
-            Direction.LEFT -> map.getUp(location)
-            Direction.DOWN -> map.getLeft(location)
-            Direction.RIGHT -> map.getDown(location)
-        }
+    override fun changeDirection(engine: Engine) {
     }
 
-    fun getTileLeftOfCurrent(map: Map): Tile? {
-        return when (direction) {
-            Direction.UP -> map.getLeft(location)
-            Direction.LEFT -> map.getDown(location)
-            Direction.DOWN -> map.getRight(location)
-            Direction.RIGHT -> map.getUp(location)
-        }
-    }
-
-    fun getTileAheadOfCurrent(map: Map): Tile ? {
-        return when (direction) {
-            Direction.UP -> map.getUp(location)
-            Direction.LEFT -> map.getLeft(location)
-            Direction.DOWN -> map.getDown(location)
-            Direction.RIGHT -> map.getRight(location)
-        }
-    }
-
-    fun getTileBehindCurrent(map: Map): Tile? {
-        return when (direction) {
-            Direction.UP -> map.getDown(location)
-            Direction.LEFT -> map.getRight(location)
-            Direction.DOWN -> map.getUp(location)
-            Direction.RIGHT -> map.getLeft(location)
-        }
-    }
-
-    fun getLeftOfCurrent(): Direction {
-        return when (direction) {
-            Direction.UP -> Direction.LEFT
-            Direction.LEFT -> Direction.DOWN
-            Direction.DOWN -> Direction.RIGHT
-            Direction.RIGHT -> Direction.UP
-        }
-    }
-
-    fun getRightOfCurrent(): Direction {
-        return when (direction) {
-            Direction.UP -> Direction.RIGHT
-            Direction.LEFT -> Direction.UP
-            Direction.DOWN -> Direction.LEFT
-            Direction.RIGHT -> Direction.DOWN
-        }
-    }
-
-    fun getBehindOfCurrent(): Direction {
-        return when (direction) {
-            Direction.DOWN -> Direction.UP
-            Direction.UP -> Direction.DOWN
-            Direction.LEFT -> Direction.RIGHT
-            Direction.RIGHT -> Direction.LEFT
-        }
+    override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
+        return super.canMoveToTile(tile, direction) && tile !is Fire && tile !is Gravel
     }
 
     override fun setImage() {
@@ -131,4 +66,5 @@ class Bug(location: Point, direction: Direction, moveSpeed: Int,
             Direction.DOWN -> bugDownImage
         }
     }
+
 }

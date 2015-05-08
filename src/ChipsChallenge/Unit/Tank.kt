@@ -43,7 +43,7 @@ class Tank(location: Point, direction: Direction, moveSpeed: Int,
 
     override fun onTick(engine: Engine) {
         if (currentStatus == TANKSTATUS.TURN && currentMove == 1) {
-            changeDirection()
+            changeDirection(engine)
             setImage()
             currentMove = moveSpeed
             currentStatus = TANKSTATUS.MOVE
@@ -56,7 +56,7 @@ class Tank(location: Point, direction: Direction, moveSpeed: Int,
         }
     }
 
-    override fun changeDirection() {
+    override fun changeDirection(engine: Engine) {
         if (currentStatus != TANKSTATUS.TURN) {
             currentStatus = TANKSTATUS.STOP
         }
