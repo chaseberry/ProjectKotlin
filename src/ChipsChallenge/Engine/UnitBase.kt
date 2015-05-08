@@ -43,15 +43,13 @@ fun unitFromJson(obj: JSONObject): UnitBase? {
 }
 
 abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5,
-                        val uniqueId: Id = Id(IdType.UNIT)) : EngineObjectBase(location) {
+                        val uniqueId: Id = Id(IdType.UNIT)) : EngineObjectBase(location, null) {
 
     var forcedDirection: Direction? = null
 
     var currentMove: Int = moveSpeed
 
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()
-
-    var image: BufferedImage? = null
 
     open fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
         return tile !is Wall && (if (tile is ToggleWall) tile.open else true)
@@ -116,4 +114,8 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
     abstract fun canSurviveInWater(): Boolean;
 
     abstract fun canSurviveInFire(): Boolean;
+
+    override fun equals(obj: Any?): Boolean {
+        return obj is UnitBase && (obj.typeId == typeId)
+    }
 }

@@ -2,14 +2,26 @@ package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONObject
+import java.awt.image.BufferedImage
 
 /**
  * Created by chase on 3/2/15.
  */
-class Cloner(location: Point, uniqueId: Id, val template: EngineObjectBase, val direction: Direction) :
+class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var direction: Direction?) :
         ObjectBase(CLONER_TYPE_ID, location, clonerImage, uniqueId), Triggerable {
 
-    constructor(location: Point, template: EngineObjectBase, direction: Direction) :
+    override var image: BufferedImage? = null
+        get():BufferedImage? {
+            val img = BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB)
+            val g = img.getGraphics()
+            g.drawImage(clonerImage, 0, 0, null)
+            if (template != null) {
+                g.drawImage(template!!.image, 0, 0, null)
+            }
+            return img
+        }
+
+    constructor(location: Point, template: EngineObjectBase?, direction: Direction?) :
     this(location, Id(IdType.OBJECT), template, direction) {
     }
 
@@ -22,7 +34,11 @@ class Cloner(location: Point, uniqueId: Id, val template: EngineObjectBase, val 
 
     override fun getSaveObject(): JSONObject {
         val obj = super<ObjectBase>.getSaveObject()
-        obj.put("template", template.getSaveObject())
+        if (template == null) {
+            obj.put("template", "null")
+        } else {
+            obj.put("template", template!!.getSaveObject())
+        }
         return obj
     }
 

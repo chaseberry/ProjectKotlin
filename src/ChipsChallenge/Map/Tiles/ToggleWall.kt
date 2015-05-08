@@ -29,8 +29,8 @@ class ToggleWall(location: Point, uniqueId: Id, var open: Boolean = false) :
     }
 
 
-    override val image: BufferedImage
-        get():BufferedImage {
+    override var image: BufferedImage? = null
+        get():BufferedImage? {
             return if (open) {
                 toggleWallOpenImage
             } else {

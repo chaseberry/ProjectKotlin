@@ -89,8 +89,8 @@ fun objectFromJSON(obj: JSONObject): ObjectBase? {
     return objectFromTypeIdWithId(typeId, location, id)
 }
 
-data abstract class ObjectBase(val typeId: Int, location: Point, val image: BufferedImage,
-                               val uniqueId: Id) : EngineObjectBase(location) {
+data abstract class ObjectBase(val typeId: Int, location: Point, image: BufferedImage,
+                               val uniqueId: Id) : EngineObjectBase(location, image) {
 
     abstract fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution
 

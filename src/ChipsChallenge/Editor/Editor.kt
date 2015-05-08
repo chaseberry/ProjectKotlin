@@ -6,9 +6,7 @@ import ChipsChallenge.Map.Tiles.*
 import ChipsChallenge.Map.blankMap
 import ChipsChallenge.Map.mapFromIds
 import ChipsChallenge.Map.tileIdToTile
-import ChipsChallenge.Object.Block
-import ChipsChallenge.Object.BrownButton
-import ChipsChallenge.Object.Button
+import ChipsChallenge.Object.*
 import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Unit.DirectionalUnit
 import java.awt.image.BufferedImage
@@ -107,7 +105,21 @@ class Editor(x: Int, y: Int) {
     }
 
     fun addUnit(tileLocation: Point) {
+        val obj = objects.objects.get(tileLocation)
+        if (obj != null && obj is Cloner) {
+            val tempUnit = unitFromId(pallet.currentUnit!!.typeId, tileLocation, Direction.UP)!!
+            if (obj.template != null && tempUnit == obj.template) {
+                if (obj.template is DirectionalUnit) {
+                    (obj.template!! as DirectionalUnit).rotateDirection()
+                }
+            } else {
+                obj.template = tempUnit
+            }
+            return
+        }
+
         val unit = unitManager.unitOnPoint(tileLocation)
+
         if (unit == null) {
             unitManager.add(unitFromId(pallet.currentUnit!!.typeId, tileLocation, Direction.UP))
             return
@@ -175,16 +187,22 @@ class Editor(x: Int, y: Int) {
     }
 
     fun addObject(tileLocation: Point) {
-        if (objects.objects.containsKey(tileLocation) || pallet.currentObject == null) {
+        if (pallet.currentObject == null) {
+            return
+        }
+        if (objects.objects.containsKey(tileLocation)) {
             val obj = objects.objects.get(tileLocation)
             if (obj is Block && pallet.currentObject !is Block) {
                 obj.cover(objectFromTypeId(pallet.currentObject!!.typeId, tileLocation)!!, null)
+            }
+            if (obj is Cloner && pallet.currentObject is Block) {
+                obj.template = objectFromTypeId(pallet.currentObject!!.typeId, tileLocation)!!
             }
             return
         }
         val obj = (objectFromTypeId((pallet.currentObject!!).typeId, tileLocation)!!)
         objects.add(obj, tileLocation)
-        if (pallet.currentObject is BrownButton) {
+        if (pallet.currentObject is BrownButton || pallet.currentObject is RedButton) {
             pallet.palletStatus = PalletStatus.TRIGGER
             pallet.buttonObject = obj
         }

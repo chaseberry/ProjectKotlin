@@ -79,8 +79,8 @@ public fun tileFromJson(obj: JSONObject, location: Point, open: Boolean = false)
     }
 }
 
-data abstract class Tile(open val image: BufferedImage, val  tileId: Int, location: Point,
-                         val uniqueId: Id) : EngineObjectBase(location) {
+data abstract class Tile(image: BufferedImage, val  tileId: Int, location: Point,
+                         val uniqueId: Id) : EngineObjectBase(location, image) {
 
     fun typeEquals(tile: Tile): Boolean {
         return tile.tileId == tileId

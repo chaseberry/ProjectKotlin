@@ -59,7 +59,7 @@ fun ArrayList<ToggleWall>.invoke(tw: ToggleWall) {
 //**
 
 data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation: Point,
-                         var chipTotal: Int) : EngineObjectBase(Point(0, 0)) {
+                         var chipTotal: Int) : EngineObjectBase(Point(0, 0), null) {
 
     override fun getSaveObject(): JSONObject {
         val mapArray = JSONArray()
