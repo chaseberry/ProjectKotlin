@@ -261,3 +261,11 @@ val fireballImage: BufferedImage by Delegates.lazy {
     loadImage("fireball.gif") as BufferedImage
 
 }
+
+val clonerImage: BufferedImage by Delegates.lazy {
+    loadImage("cloner.gif") as BufferedImage
+}
+
+val redButtonImage: BufferedImage by Delegates.lazy {
+    loadImage("red_button.gif") as BufferedImage
+}

@@ -25,6 +25,8 @@ val ICE_SKATE_TYPE_ID = 17
 val SUCTION_BOOT_TYPE_ID = 18
 val BLUE_BUTTON_TYPE_ID = 19
 val BOMB_TYPE_ID = 20
+val CLONER_TYPE_ID = 21
+val RED_BUTTON_TYPE_ID = 22
 
 fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
     return when (typeId) {
