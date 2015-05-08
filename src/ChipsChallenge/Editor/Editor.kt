@@ -2,10 +2,7 @@ package ChipsChallenge.Editor
 
 import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONArray
-import ChipsChallenge.Map.Tiles.ForceFloor
-import ChipsChallenge.Map.Tiles.IceCorner
-import ChipsChallenge.Map.Tiles.getNextForceFloor
-import ChipsChallenge.Map.Tiles.getNextIceCorner
+import ChipsChallenge.Map.Tiles.*
 import ChipsChallenge.Map.blankMap
 import ChipsChallenge.Map.mapFromIds
 import ChipsChallenge.Map.tileIdToTile
@@ -149,6 +146,11 @@ class Editor(x: Int, y: Int) {
             map.setTile(tileLocation, tileIdToTile(getNextForceFloor(tile.tileId), tileLocation))
             return
         }
+
+        if (rotateMode && tile is ToggleWall && pallet.currentTile is ToggleWall) {
+            tile.onTrigger()
+        }
+
         if (!tile.typeEquals(pallet.currentTile)) {
             map.setTile(tileLocation, pallet.currentTile)
         }

@@ -242,3 +242,17 @@ val blueButtonImage: BufferedImage by Delegates.lazy {
 val bombImage: BufferedImage by Delegates.lazy {
     loadImage("bomb.gif") as BufferedImage
 }
+
+val gliderUpImage: BufferedImage by Delegates.lazy {
+    loadImage("gliderUp.gif") as BufferedImage
+}
+
+val gliderDownImage: BufferedImage by Delegates.lazy {
+    loadImage("gliderDown.gif") as BufferedImage
+}
+val gliderLeftImage: BufferedImage by Delegates.lazy {
+    loadImage("gliderLeft.gif") as BufferedImage
+}
+val gliderRightImage: BufferedImage by Delegates.lazy {
+    loadImage("gliderRight.gif") as BufferedImage
+}

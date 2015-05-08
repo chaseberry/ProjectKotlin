@@ -1,6 +1,7 @@
 package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
+import ChipsChallenge.Unit.Player
 
 /**
  * Created by chase on 2/27/15.
@@ -11,6 +12,9 @@ class BlueKey(location: Point, uniqueId: Id) : ObjectBase(BLUE_KEY_TYPE_ID, loca
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
+        if (interactor !is Player) {
+            return ObjectResolution.NOTHING
+        }
         engine.player.inventory.blueKeys++
         return ObjectResolution.REMOVE
     }
