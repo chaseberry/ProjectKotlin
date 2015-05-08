@@ -24,6 +24,7 @@ val FLIPPER_TYPE_ID = 16
 val ICE_SKATE_TYPE_ID = 17
 val SUCTION_BOOT_TYPE_ID = 18
 val BLUE_BUTTON_TYPE_ID = 19
+val BOMB_TYPE_ID = 20
 
 fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
     return when (typeId) {
@@ -47,6 +48,7 @@ fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
         ICE_SKATE_TYPE_ID -> IceSkate(location)
         SUCTION_BOOT_TYPE_ID -> SuctionBoot(location)
         BLUE_BUTTON_TYPE_ID -> BlueButton(location)
+        BOMB_TYPE_ID -> Bomb(location)
         else -> null
     }
 }
@@ -73,6 +75,7 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id): ObjectBase? {
         ICE_SKATE_TYPE_ID -> IceSkate(location, id)
         SUCTION_BOOT_TYPE_ID -> SuctionBoot(location, id)
         BLUE_BUTTON_TYPE_ID -> BlueButton(location, id)
+        BOMB_TYPE_ID -> Bomb(location, id)
         else -> null
     }
 }
@@ -113,5 +116,5 @@ public enum class ObjectResolution {
     REMOVE
     NOTHING
     PASSOVER
-    TRIGGER
+    KILL
 }

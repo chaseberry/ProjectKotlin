@@ -238,3 +238,7 @@ val fireBootImage: BufferedImage by Delegates.lazy {
 val blueButtonImage: BufferedImage by Delegates.lazy {
     loadImage("blue_button.gif") as BufferedImage
 }
+
+val bombImage: BufferedImage by Delegates.lazy {
+    loadImage("bomb.gif") as BufferedImage
+}

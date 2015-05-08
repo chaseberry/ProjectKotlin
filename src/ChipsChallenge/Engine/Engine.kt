@@ -123,9 +123,9 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
 
         gameTimer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
+                unitManager.copyToArray().forEach { it.onTick(engine) }
                 map.onTick(engine)
                 player.onTick(engine)
-                unitManager.onTick(engine)
                 objectManager.onTick(engine)
                 frame.image = buildFrameImage()
                 checkCollisions()

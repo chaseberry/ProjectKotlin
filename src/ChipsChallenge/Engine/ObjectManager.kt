@@ -5,6 +5,7 @@ import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
 import ChipsChallenge.UI.Viewport
 import ChipsChallenge.UI.pointInViewport
+import ChipsChallenge.Unit.Player
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -61,6 +62,17 @@ class ObjectManager(val engine: Engine?) : Tickable {
         if (resolution == ObjectResolution.NOTHING) {
             return false
         }
+
+        if (resolution == ObjectResolution.KILL) {
+            if (interactor is Player) {
+                engine.lose()
+            } else {
+                engine.unitManager.kill(interactor)
+                remove(obj.location)
+            }
+            return true
+        }
+
         if (resolution == ObjectResolution.REMOVE) {
             remove(obj.location)
         }

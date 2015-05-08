@@ -12,7 +12,7 @@ import javax.swing.JPanel
  */
 class ObjectPanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(20) { objectFromTypeIdWithId(it, Point(0, 0), Id(IdType.OBJECT, -1)) };
+    val buttons = Array(21) { objectFromTypeIdWithId(it, Point(0, 0), Id(IdType.OBJECT, -1)) };
 
     init {
         setLayout(null)
