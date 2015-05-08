@@ -15,7 +15,7 @@ import javax.swing.JPanel
  */
 class UnitPanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(4) { unitFromId(it, Point(0, 0), Direction.UP) };
+    val buttons = Array(5) { unitFromId(it, Point(0, 0), Direction.UP) };
 
     init {
         setLayout(null)

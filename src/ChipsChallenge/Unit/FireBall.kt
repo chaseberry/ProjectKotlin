@@ -4,47 +4,46 @@ import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Gravel
 
-val GLIDER_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
-val GLIDER_TYPE_ID = 3
+val FIREBALL_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
+val FIREBALL_TYPE_ID = 4
 
-class Glider(location: Point, direction: Direction, moveSpeed: Int,
-             uniqueId: Id) : DirectionalUnit(GLIDER_TYPE_ID, location, direction, moveSpeed, uniqueId) {
+class Fireball(location: Point, direction: Direction, moveSpeed: Int,
+               uniqueId: Id) : DirectionalUnit(FIREBALL_TYPE_ID, location, direction, moveSpeed, uniqueId) {
 
     override fun canSurviveInWater(): Boolean {
-        return true
-    }
-
-    override fun canSurviveInFire(): Boolean {
         return false
     }
 
+    override fun canSurviveInFire(): Boolean {
+        return true
+    }
+
     constructor(location: Point, direction: Direction) : this(location, direction,
-            GLIDER_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
+            FIREBALL_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
     }
 
     init {
-        image = gliderUpImage
+        image = fireballImage
     }
 
     override fun changeDirection(engine: Engine) {
         var newTile = getTileAheadOfCurrent(engine.map)
         if (newTile == null || !canMoveToTile(newTile!!, direction, engine)) {
-            newTile = getTileLeftOfCurrent(engine.map)
-            if (newTile == null || !canMoveToTile(newTile!!, getLeftOfCurrent(), engine)) {
-                newTile = getTileRightOfCurrent(engine.map)
-                if (newTile == null || !canMoveToTile(newTile!!, getRightOfCurrent(), engine)) {
+            newTile = getTileRightOfCurrent(engine.map)
+            if (newTile == null || !canMoveToTile(newTile!!, getRightOfCurrent(), engine)) {
+                newTile = getTileLeftOfCurrent(engine.map)
+                if (newTile == null || !canMoveToTile(newTile!!, getLeftOfCurrent(), engine)) {
                     newTile = getTileBehindCurrent(engine.map)
                     if (newTile != null && canMoveToTile(newTile!!, getBehindOfCurrent(), engine)) {
                         direction = getBehindOfCurrent()
                     }
                 } else {
-                    direction = getRightOfCurrent()
+                    direction = getLeftOfCurrent()
                 }
             } else {
-                direction = getLeftOfCurrent()
+                direction = getRightOfCurrent()
             }
         }
-        setImage()
     }
 
     override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
@@ -52,11 +51,5 @@ class Glider(location: Point, direction: Direction, moveSpeed: Int,
     }
 
     override fun setImage() {
-        image = when (direction) {
-            Direction.UP -> gliderUpImage
-            Direction.LEFT -> gliderLeftImage
-            Direction.RIGHT -> gliderRightImage
-            Direction.DOWN -> gliderDownImage
-        }
     }
 }

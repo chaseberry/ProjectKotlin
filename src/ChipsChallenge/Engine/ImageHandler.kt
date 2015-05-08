@@ -256,3 +256,8 @@ val gliderLeftImage: BufferedImage by Delegates.lazy {
 val gliderRightImage: BufferedImage by Delegates.lazy {
     loadImage("gliderRight.gif") as BufferedImage
 }
+
+val fireballImage: BufferedImage by Delegates.lazy {
+    loadImage("fireball.gif") as BufferedImage
+
+}
