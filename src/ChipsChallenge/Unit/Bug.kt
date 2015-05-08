@@ -24,7 +24,7 @@ class Bug(location: Point, direction: Direction, moveSpeed: Int,
     }
 
     init {
-        image = bugUpImage
+        setImage()
     }
 
     override fun onTick(engine: Engine) {

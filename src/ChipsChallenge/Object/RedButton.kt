@@ -16,9 +16,16 @@ class RedButton(location: Point, uniqueId: Id) : Button(RED_BUTTON_TYPE_ID, loca
     }
 
     override fun trigger(engine: Engine) {
+        if (target == null) {
+            return
+        }
         if (!triggered) {
             triggered = true
-            engine.unitManager.getAllTanks().forEach { it.startMove() }
+            val cloner = engine.getEngineObjectBase(target!!)
+            if (cloner == null || cloner !is Cloner) {
+                return
+            }
+            cloner.clone(engine)
         }
     }
 

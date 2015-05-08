@@ -2,6 +2,7 @@ package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Unit.DirectionalUnit
 import java.awt.image.BufferedImage
 
 /**
@@ -47,7 +48,7 @@ class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var
     }
 
     override fun clone(): Triggerable {
-        return objectFromTypeId(typeId, location) as Triggerable
+        return Cloner(location.copy(), uniqueId.copy(), template, direction)
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
@@ -55,6 +56,34 @@ class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var
     }
 
     override fun onTick(engine: Engine) {
+    }
+
+    fun clone(engine: Engine) {
+        if (template == null) {
+            return
+        }
+        val targetTile = when (direction) {
+            Direction.UP -> engine.map.getUp(location)
+            Direction.LEFT -> engine.map.getLeft(location)
+            Direction.RIGHT -> engine.map.getRight(location)
+            Direction.DOWN -> engine.map.getDown(location)
+        }
+        if (targetTile == null) {
+            return
+        }
+        if (template is Block) {
+            val temp = Block(targetTile.location.copy())
+            if (temp.canMoveToLocation(engine, targetTile.location)) {
+                engine.objectManager.objects[targetTile.location] = temp
+            }
+        } else {
+            val t = (template as UnitBase)
+            val temp = unitFromId(t.typeId, targetTile.location, if (t is DirectionalUnit) t.direction else Direction.UP)!!
+            if (temp.canMoveToTile(targetTile, direction, engine)) {
+                engine.unitManager.add(temp)
+            }
+        }
+
     }
 
 }

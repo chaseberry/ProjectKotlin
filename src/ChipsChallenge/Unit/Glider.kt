@@ -23,7 +23,7 @@ class Glider(location: Point, direction: Direction, moveSpeed: Int,
     }
 
     init {
-        image = gliderUpImage
+        setImage()
     }
 
     override fun changeDirection(engine: Engine) {

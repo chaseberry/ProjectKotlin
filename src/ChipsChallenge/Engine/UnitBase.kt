@@ -57,6 +57,16 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
 
     }
 
+    fun canMoveToTile(tile: Tile, direction: Direction, engine: Engine): Boolean {
+        val obj = engine.objectManager.objects[tile.location]
+        if (obj != null) {
+            if (obj.interact(engine, direction, this) == ObjectResolution.NOTHING) {
+                return false
+            }
+        }
+        return canMoveToTile(tile, direction)
+    }
+
     override fun getSaveObject(): JSONObject {
         val obj = JSONObject()
         obj.put("location", location.saveObject)

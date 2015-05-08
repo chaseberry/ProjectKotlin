@@ -3,6 +3,7 @@ package ChipsChallenge.Engine
 import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
+import ChipsChallenge.Object.Cloner
 import ChipsChallenge.UI.Viewport
 import ChipsChallenge.UI.pointInViewport
 import ChipsChallenge.Unit.Player
@@ -121,13 +122,16 @@ class ObjectManager(val engine: Engine?) : Tickable {
     fun clone(): ObjectManager {
         val objManager = ObjectManager(engine)
         for ((key, value) in objects) {
-            val newObj = objectFromTypeIdWithId(value.typeId, key, value.uniqueId.copy())!!
+            var newObj = objectFromTypeIdWithId(value.typeId, key, value.uniqueId.copy())!!
             if (newObj is Block && (value as Block).objectUnder != null) {
                 val objUnder = (value as Block).objectUnder!!
-                newObj.cover(objectFromTypeIdWithId(objUnder.typeId, key, objUnder.uniqueId.copy())!!, engine)
+                (newObj as Block).cover(objectFromTypeIdWithId(objUnder.typeId, key, objUnder.uniqueId.copy())!!, engine)
             }
             if (value is Button) {
                 (newObj as Button).target = value.target
+            }
+            if (value is Cloner && newObj is Cloner) {
+                newObj = value.clone() as ObjectBase
             }
             objManager.add(newObj, key)
         }

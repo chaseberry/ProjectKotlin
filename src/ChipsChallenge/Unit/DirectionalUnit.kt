@@ -88,19 +88,7 @@ abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Dire
     }
 
     abstract fun changeDirection(engine: Engine)
-
-
-    fun canMoveToTile(tile: Tile, direction: Direction, engine: Engine): Boolean {
-        val obj = engine.objectManager.objects[tile.location]
-        if (obj != null) {
-            if (obj.interact(engine, direction, this) == ObjectResolution.NOTHING) {
-                return false
-            }
-        }
-        return canMoveToTile(tile, direction)
-    }
-
-
+    
     fun getTileRightOfCurrent(map: ChipsChallenge.Map.Map): Tile? {
         return when (direction) {
             Direction.UP -> map.getRight(location)
