@@ -13,7 +13,7 @@ class RedKey(location: Point, uniqueId: Id) : ObjectBase(RED_KEY_TYPE_ID, locati
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         if (interactor !is Player) {
-            return ObjectResolution.NOTHING
+            return ObjectResolution.PASSOVER
         }
         engine.player.inventory.redKeys++
         return ObjectResolution.REMOVE

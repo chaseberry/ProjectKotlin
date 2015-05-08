@@ -13,7 +13,7 @@ class BlueKey(location: Point, uniqueId: Id) : ObjectBase(BLUE_KEY_TYPE_ID, loca
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         if (interactor !is Player) {
-            return ObjectResolution.NOTHING
+            return ObjectResolution.PASSOVER
         }
         engine.player.inventory.blueKeys++
         return ObjectResolution.REMOVE
