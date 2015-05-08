@@ -4,10 +4,7 @@ import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.ToggleWall
 import ChipsChallenge.Map.Tiles.Wall
-import ChipsChallenge.Unit.BUG_TYPE_ID
-import ChipsChallenge.Unit.Bug
-import ChipsChallenge.Unit.PINK_BALL_TYPE_ID
-import ChipsChallenge.Unit.PinkBall
+import ChipsChallenge.Unit.*
 import java.awt.image.BufferedImage
 import java.util.HashMap
 
@@ -19,8 +16,9 @@ val DEFAULT_MOVE_SPEED = 5
 
 fun unitFromId(id: Int, location: Point, direction: Direction = Direction.UP): UnitBase? {
     return when (id) {
-        0 -> PinkBall(location, direction)
-        1 -> Bug(location, direction)
+        PINK_BALL_TYPE_ID -> PinkBall(location, direction)
+        BUG_TYPE_ID -> Bug(location, direction)
+        TANK_TYPE_ID -> Tank(location, direction)
         else -> null
     }
 }
@@ -34,6 +32,7 @@ fun unitFromJson(obj: JSONObject): UnitBase? {
     return when (typeId) {
         PINK_BALL_TYPE_ID -> PinkBall(location, direction, moveSpeed, uniqueId)
         BUG_TYPE_ID -> Bug(location, direction, moveSpeed, uniqueId)
+        TANK_TYPE_ID -> Tank(location, direction, moveSpeed, uniqueId)
         else -> null
     }
 }

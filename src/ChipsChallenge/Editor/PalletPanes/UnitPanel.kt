@@ -1,21 +1,21 @@
 package ChipsChallenge.Editor.PalletPanes
 
-import javax.swing.JPanel
-import javax.swing.JButton
-import javax.swing.ImageIcon
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
-import ChipsChallenge.Engine.unitFromId
-import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.Direction
+import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.UnitBase
+import ChipsChallenge.Engine.unitFromId
+import javax.swing.ImageIcon
+import javax.swing.JButton
+import javax.swing.JPanel
 
 /**
  * Created by chase on 2/27/15.
  */
 class UnitPanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(2) { unitFromId(it, Point(0, 0), Direction.UP) };
+    val buttons = Array(3) { unitFromId(it, Point(0, 0), Direction.UP) };
 
     init {
         setLayout(null)

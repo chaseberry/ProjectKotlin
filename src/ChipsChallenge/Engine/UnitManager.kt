@@ -4,6 +4,7 @@ import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.UI.Viewport
 import ChipsChallenge.UI.pointInViewport
 import ChipsChallenge.Unit.DirectionalUnit
+import ChipsChallenge.Unit.Tank
 import java.util.ArrayList
 
 /**
@@ -51,6 +52,16 @@ class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), Tickable {
     fun unitOnPoint(location: Point): UnitBase? {
         forEach { if (it.location == location) return it }
         return null
+    }
+
+    fun getAllTanks(): ArrayList<Tank> {
+        val tanks = ArrayList<Tank>()
+        forEach {
+            if (it is Tank) {
+                tanks.add(it)
+            }
+        }
+        return tanks
     }
 
     override fun clone(): UnitManager {

@@ -199,6 +199,22 @@ val bugRightImage: BufferedImage by Delegates.lazy {
     loadImage("bug-right.gif") as BufferedImage
 }
 
+val tankUpImage: BufferedImage by Delegates.lazy {
+    loadImage("tank-north.gif") as BufferedImage
+}
+
+val tankLeftImage: BufferedImage by Delegates.lazy {
+    loadImage("tank-west.gif") as BufferedImage
+}
+
+val tankRightImage: BufferedImage by Delegates.lazy {
+    loadImage("tank-east.gif") as BufferedImage
+}
+
+val tankDownImage: BufferedImage by Delegates.lazy {
+    loadImage("tank-south.gif") as BufferedImage
+}
+
 val fireImage: BufferedImage by Delegates.lazy {
     loadImage("fire.gif") as BufferedImage
 }
@@ -217,4 +233,8 @@ val flippersImage: BufferedImage by Delegates.lazy {
 
 val fireBootImage: BufferedImage by Delegates.lazy {
     loadImage("fireboots.gif") as BufferedImage
+}
+
+val blueButtonImage: BufferedImage by Delegates.lazy {
+    loadImage("blue_button.gif") as BufferedImage
 }

@@ -23,6 +23,7 @@ val FIRE_BOOT_TYPE_ID = 15
 val FLIPPER_TYPE_ID = 16
 val ICE_SKATE_TYPE_ID = 17
 val SUCTION_BOOT_TYPE_ID = 18
+val BLUE_BUTTON_TYPE_ID = 19
 
 fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
     return when (typeId) {
@@ -45,6 +46,7 @@ fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
         FLIPPER_TYPE_ID -> Flipper(location)
         ICE_SKATE_TYPE_ID -> IceSkate(location)
         SUCTION_BOOT_TYPE_ID -> SuctionBoot(location)
+        BLUE_BUTTON_TYPE_ID -> BlueButton(location)
         else -> null
     }
 }
@@ -70,6 +72,7 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id): ObjectBase? {
         FLIPPER_TYPE_ID -> Flipper(location, id)
         ICE_SKATE_TYPE_ID -> IceSkate(location, id)
         SUCTION_BOOT_TYPE_ID -> SuctionBoot(location, id)
+        BLUE_BUTTON_TYPE_ID -> BlueButton(location, id)
         else -> null
     }
 }
