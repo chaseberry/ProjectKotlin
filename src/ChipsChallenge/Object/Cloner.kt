@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage
 /**
  * Created by chase on 3/2/15.
  */
-class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var direction: Direction?) :
+class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var direction: Direction) :
         ObjectBase(CLONER_TYPE_ID, location, clonerImage, uniqueId), Triggerable {
 
     override var image: BufferedImage? = null
@@ -21,7 +21,7 @@ class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var
             return img
         }
 
-    constructor(location: Point, template: EngineObjectBase?, direction: Direction?) :
+    constructor(location: Point, template: EngineObjectBase?, direction: Direction) :
     this(location, Id(IdType.OBJECT), template, direction) {
     }
 

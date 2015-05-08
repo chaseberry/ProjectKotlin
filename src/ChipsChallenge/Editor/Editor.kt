@@ -60,6 +60,16 @@ class Editor(x: Int, y: Int) {
         //Draw objects
         for (obj in objects.objectsInViewport(viewport)) {
             g.drawImage(obj.image, (obj.location.x - viewport.xStart) * 32, (obj.location.y - viewport.yStart) * 32, null)
+            if (obj is Cloner) {
+                g.drawImage(
+                        when (obj.direction) {
+                            Direction.UP -> upArrowImage
+                            Direction.DOWN -> downArrowImage
+                            Direction.LEFT -> leftArrowImage
+                            Direction.RIGHT -> rightArrowImage
+                        }, (obj.location.x - viewport.xStart) * 32, (obj.location.y - viewport.yStart) * 32, null
+                )
+            }
         }
 
         for (unit in unitManager.unitsInViewPort(viewport)) {
@@ -111,6 +121,12 @@ class Editor(x: Int, y: Int) {
             if (obj.template != null && tempUnit == obj.template) {
                 if (obj.template is DirectionalUnit) {
                     (obj.template!! as DirectionalUnit).rotateDirection()
+                    obj.direction = when (obj.direction) {
+                        Direction.UP -> Direction.RIGHT
+                        Direction.RIGHT -> Direction.DOWN
+                        Direction.DOWN -> Direction.LEFT
+                        Direction.LEFT -> Direction.UP
+                    }
                 }
             } else {
                 obj.template = tempUnit
@@ -196,6 +212,15 @@ class Editor(x: Int, y: Int) {
                 obj.cover(objectFromTypeId(pallet.currentObject!!.typeId, tileLocation)!!, null)
             }
             if (obj is Cloner && pallet.currentObject is Block) {
+                if (obj.template != null) {
+                    obj.direction = when (obj.direction) {
+                        Direction.UP -> Direction.RIGHT
+                        Direction.RIGHT -> Direction.DOWN
+                        Direction.DOWN -> Direction.LEFT
+                        Direction.LEFT -> Direction.UP
+                    }
+                    return
+                }
                 obj.template = objectFromTypeId(pallet.currentObject!!.typeId, tileLocation)!!
             }
             return
@@ -218,7 +243,12 @@ class Editor(x: Int, y: Int) {
         if (triggeredObject == null || triggeredObject !is Triggerable) {
             return
         }
-        (pallet.buttonObject as Button).target = triggeredObject.uniqueId
+        if (pallet.buttonObject is RedButton && triggeredObject is Cloner) {
+            (pallet.buttonObject as Button).target = triggeredObject.uniqueId
+
+        } else if (pallet.buttonObject is BrownButton && triggeredObject is BearTrap) {
+            (pallet.buttonObject as Button).target = triggeredObject.uniqueId
+        }
         println((pallet.buttonObject as Button).target)
     }
 

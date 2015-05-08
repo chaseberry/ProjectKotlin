@@ -51,6 +51,8 @@ fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
         SUCTION_BOOT_TYPE_ID -> SuctionBoot(location)
         BLUE_BUTTON_TYPE_ID -> BlueButton(location)
         BOMB_TYPE_ID -> Bomb(location)
+        RED_BUTTON_TYPE_ID -> RedButton(location)
+        CLONER_TYPE_ID -> Cloner(location, null, Direction.UP)
         else -> null
     }
 }
@@ -78,6 +80,8 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id): ObjectBase? {
         SUCTION_BOOT_TYPE_ID -> SuctionBoot(location, id)
         BLUE_BUTTON_TYPE_ID -> BlueButton(location, id)
         BOMB_TYPE_ID -> Bomb(location, id)
+        CLONER_TYPE_ID -> Cloner(location, null, Direction.UP)
+        RED_BUTTON_TYPE_ID -> RedButton(location, id)
         else -> null
     }
 }

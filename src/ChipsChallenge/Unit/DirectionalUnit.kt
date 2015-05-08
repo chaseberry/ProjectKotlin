@@ -45,6 +45,7 @@ abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Dire
             Direction.DOWN -> Direction.LEFT
             Direction.LEFT -> Direction.UP
         }
+        setImage()
     }
 
     override fun getSaveObject(): JSONObject {
