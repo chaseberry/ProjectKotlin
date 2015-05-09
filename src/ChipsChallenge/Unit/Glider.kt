@@ -47,10 +47,6 @@ class Glider(location: Point, direction: Direction, moveSpeed: Int,
         setImage()
     }
 
-    override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
-        return super.canMoveToTile(tile, direction) && tile !is Gravel
-    }
-
     override fun setImage() {
         image = when (direction) {
             Direction.UP -> gliderUpImage

@@ -15,7 +15,7 @@ import javax.swing.JPanel
  */
 class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(24) { tileIdToTile(it, Point(0, 0)) };
+    val buttons = Array(25) { tileIdToTile(it, Point(0, 0)) };
 
     init {
         setLayout(null)

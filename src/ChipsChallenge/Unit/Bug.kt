@@ -3,7 +3,6 @@ package ChipsChallenge.Unit
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Fire
-import ChipsChallenge.Map.Tiles.Gravel
 
 val BUG_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val BUG_TYPE_ID = 1
@@ -55,7 +54,7 @@ class Bug(location: Point, direction: Direction, moveSpeed: Int,
     }
 
     override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
-        return super.canMoveToTile(tile, direction) && tile !is Fire && tile !is Gravel
+        return super.canMoveToTile(tile, direction) && tile !is Fire
     }
 
     override fun setImage() {

@@ -1,8 +1,6 @@
 package ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Gravel
 
 val FIREBALL_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val FIREBALL_TYPE_ID = 4
@@ -44,10 +42,6 @@ class Fireball(location: Point, direction: Direction, moveSpeed: Int,
                 direction = getRightOfCurrent()
             }
         }
-    }
-
-    override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
-        return super.canMoveToTile(tile, direction) && tile !is Gravel
     }
 
     override fun setImage() {

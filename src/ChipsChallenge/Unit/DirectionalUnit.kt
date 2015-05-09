@@ -3,6 +3,8 @@ package ChipsChallenge.Unit
 import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.Gravel
+import ChipsChallenge.Map.Tiles.RecessedWall
 
 abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Direction, moveSpeed: Int,
                                uniqueId: Id) : UnitBase(typeId, location, moveSpeed, uniqueId) {
@@ -88,7 +90,11 @@ abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Dire
     }
 
     abstract fun changeDirection(engine: Engine)
-    
+
+    override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
+        return super.canMoveToTile(tile, direction) && tile !is Gravel && tile !is RecessedWall
+    }
+
     fun getTileRightOfCurrent(map: ChipsChallenge.Map.Map): Tile? {
         return when (direction) {
             Direction.UP -> map.getRight(location)

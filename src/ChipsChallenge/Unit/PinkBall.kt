@@ -31,10 +31,6 @@ class PinkBall(location: Point, direction: Direction, moveSpeed: Int,
         return false
     }
 
-    override fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
-        return super.canMoveToTile(tile, direction) && tile !is Gravel
-    }
-
     override fun changeDirection(engine: Engine) {
         direction = when (direction) {
             Direction.DOWN -> Direction.UP

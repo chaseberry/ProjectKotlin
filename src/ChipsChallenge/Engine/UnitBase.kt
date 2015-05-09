@@ -53,6 +53,7 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
     open fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
         return tile !is Wall && tile !is InvisibleWall &&
                 tile !is RevealableWall && tile !is BlueWall &&
+                (if (tile is RecessedWall) tile.open else true) &&
                 (if (tile is ToggleWall) tile.open else true)
 
 

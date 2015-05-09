@@ -29,6 +29,7 @@ val REVEALABLE_WALL_TYPE_ID = 20
 val BLUE_WALL_TYPE_ID = 21
 val BLUE_FLOOR_TYPE_ID = 22
 val THIEF_TYPE_ID = 23
+val RECESSED_WALL_TYPE_ID = 24
 
 public fun tileIdToTile(typeId: Int, location: Point, open: Boolean = false): Tile {
     return when (typeId) {
@@ -56,6 +57,7 @@ public fun tileIdToTile(typeId: Int, location: Point, open: Boolean = false): Ti
         BLUE_WALL_TYPE_ID -> BlueWall(location)
         BLUE_FLOOR_TYPE_ID -> BlueFloor(location)
         THIEF_TYPE_ID -> Thief(location)
+        RECESSED_WALL_TYPE_ID -> RecessedWall(location)
         else -> Wall(location)
     }
 }
@@ -90,6 +92,7 @@ public fun tileFromJson(obj: JSONObject, location: Point, open: Boolean = false)
         BLUE_WALL_TYPE_ID -> BlueWall(location, id)
         BLUE_FLOOR_TYPE_ID -> BlueFloor(location, id)
         THIEF_TYPE_ID -> Thief(location, id)
+        RECESSED_WALL_TYPE_ID -> RecessedWall(location, id)
         else -> Wall(location)
     }
 }
