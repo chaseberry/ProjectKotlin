@@ -40,6 +40,7 @@ class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var
         } else {
             obj.put("template", template!!.getSaveObject())
         }
+        obj.put("direction", direction)
         return obj
     }
 
