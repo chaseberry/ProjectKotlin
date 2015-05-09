@@ -22,6 +22,7 @@ fun unitFromId(id: Int, location: Point, direction: Direction = Direction.UP): U
         FIREBALL_TYPE_ID -> Fireball(location, direction)
         WALKER_TYPE_ID -> Walker(location, direction)
         PARAMECIUM_TYPE_ID -> Paramecium(location, direction)
+        BLOB_TYPE_ID -> Blob(location)
         else -> null
     }
 }
@@ -40,6 +41,7 @@ fun unitFromJson(obj: JSONObject): UnitBase? {
         FIREBALL_TYPE_ID -> Fireball(location, direction, moveSpeed, uniqueId)
         WALKER_TYPE_ID -> Walker(location, direction, moveSpeed, uniqueId)
         PARAMECIUM_TYPE_ID -> Paramecium(location, direction, moveSpeed, uniqueId)
+        BLOB_TYPE_ID -> Blob(location, moveSpeed, uniqueId)
         else -> null
     }
 }

@@ -297,3 +297,7 @@ val parameciumUpImage: BufferedImage by Delegates.lazy {
 val parameciumLeftImage: BufferedImage by Delegates.lazy {
     loadImage("parameciumLeft.gif") as BufferedImage
 }
+
+val blobImage: BufferedImage by Delegates.lazy {
+    loadImage("blob.gif") as BufferedImage
+}
