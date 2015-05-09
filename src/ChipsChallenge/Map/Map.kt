@@ -6,12 +6,10 @@ import ChipsChallenge.Engine.Id
 import ChipsChallenge.Engine.Point
 import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.JSON.JSONObject
-import ChipsChallenge.Map.Tiles.InvisibleWall
-import ChipsChallenge.Map.Tiles.RevealableWall
+import ChipsChallenge.Map.Tiles.Revealable
 import ChipsChallenge.Map.Tiles.Teleport
 import ChipsChallenge.Map.Tiles.ToggleWall
 import ChipsChallenge.UI.Viewport
-import java.awt.Color
 import java.awt.image.BufferedImage
 import java.util.ArrayList
 import kotlin.properties.Delegates
@@ -107,14 +105,10 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
         for ( x in viewport.xStart..viewport.xEnd) {
             var yDraw = 0
             for (y in viewport.yStart..viewport.yEnd) {
-                g.drawImage(map[x][y].image, xDraw * 32, yDraw * 32, null)
-                if (map[x][y] is InvisibleWall) {
-                    g.setColor(Color.BLACK)
-                    g.drawString("X", xDraw * 32 + 16, yDraw * 32 + 16)
-                }
-                if (map[x][y] is RevealableWall) {
-                    g.setColor(Color.BLACK)
-                    g.drawString("R", xDraw * 32 + 16, yDraw * 32 + 16)
+                if (map[x][y] is Revealable) {
+                    g.drawImage((map[x][y] as Revealable).getEditorImage(), xDraw * 32, yDraw * 32, null)
+                } else {
+                    g.drawImage(map[x][y].image, xDraw * 32, yDraw * 32, null)
                 }
                 yDraw++
             }

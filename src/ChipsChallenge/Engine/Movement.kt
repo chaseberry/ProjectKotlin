@@ -1,9 +1,8 @@
 package ChipsChallenge.Engine
 
 import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.BlueWall
 import ChipsChallenge.Map.Tiles.ForceFloor
-import ChipsChallenge.Map.Tiles.RevealableWall
+import ChipsChallenge.Map.Tiles.Revealable
 import ChipsChallenge.Unit.DirectionalUnit
 
 /**
@@ -20,11 +19,8 @@ class Movement(val engine: Engine) {
         if (interactor.forcedDirection != null) {
             return moveForce(newLocation, direction, interactor, targetTile)
         }
-        if (targetTile is RevealableWall) {
-            targetTile.reveal()
-        }
 
-        if (targetTile is BlueWall) {
+        if (targetTile is Revealable) {
             targetTile.reveal()
         }
 
@@ -42,11 +38,7 @@ class Movement(val engine: Engine) {
 
     fun moveForce(newLocation: Point, direction: Direction, interactor: UnitBase, targetTile: Tile?): Boolean {
 
-        if (targetTile is RevealableWall) {
-            targetTile.reveal()
-        }
-
-        if (targetTile is BlueWall) {
+        if (targetTile is Revealable) {
             targetTile.reveal()
         }
 

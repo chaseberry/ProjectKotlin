@@ -2,29 +2,25 @@ package ChipsChallenge.Map.Tiles
 
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.REVEALABLE_WALL_TYPE_ID
-import ChipsChallenge.Map.Tile
+import java.awt.Color
 import java.awt.image.BufferedImage
 
 
-class RevealableWall(location: Point, uniqueId: Id, var revealed: Boolean = false) :
-        Tile(floorImage, REVEALABLE_WALL_TYPE_ID, location, uniqueId) {
+class RevealableWall(location: Point, uniqueId: Id) :
+        Revealable(floorImage, wallImage, REVEALABLE_WALL_TYPE_ID, location, uniqueId) {
 
-    constructor(location: Point, open: Boolean = false) : this(location, Id(IdType.TILE), open) {
-
+    override fun getEditorImage(): BufferedImage {
+        val img = BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB)
+        val g = img.getGraphics()
+        g.drawImage(imageBase, 0, 0, null)
+        g.setColor(Color.BLACK)
+        g.drawString("W", 16, 16)
+        return img
     }
 
-    fun reveal() {
-        revealed = true
-    }
+    constructor(location: Point, open: Boolean = false) : this(location, Id(IdType.TILE)) {
 
-    override var image: BufferedImage? = null
-        get():BufferedImage? {
-            if (revealed) {
-                return wallImage
-            } else {
-                return floorImage
-            }
-        }
+    }
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
 
