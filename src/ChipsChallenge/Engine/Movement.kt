@@ -2,6 +2,7 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.ForceFloor
+import ChipsChallenge.Map.Tiles.RevealableWall
 import ChipsChallenge.Unit.DirectionalUnit
 
 /**
@@ -18,6 +19,9 @@ class Movement(val engine: Engine) {
         if (interactor.forcedDirection != null) {
             return moveForce(newLocation, direction, interactor, targetTile)
         }
+        if (targetTile is RevealableWall) {
+            targetTile.reveal()
+        }
         if (targetTile == null || !interactor.canMoveToTile(targetTile, direction)) {
             return false
         }
@@ -31,6 +35,10 @@ class Movement(val engine: Engine) {
     }
 
     fun moveForce(newLocation: Point, direction: Direction, interactor: UnitBase, targetTile: Tile?): Boolean {
+
+        if (targetTile is RevealableWall) {
+            targetTile.reveal()
+        }
 
         //Can they move to the next tile? (IE is it a wall)
         if (targetTile == null || !interactor.canMoveToTile(targetTile, direction)) {

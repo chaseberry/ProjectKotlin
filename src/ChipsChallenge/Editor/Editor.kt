@@ -51,7 +51,7 @@ class Editor(x: Int, y: Int) {
     fun buildFrameImage(): BufferedImage {
         val image = BufferedImage(9 * 32, 9 * 32, BufferedImage.TYPE_INT_ARGB)
         val viewport = getViewport(currentCenter, map)
-        val mapImage = map.getImage(viewport)
+        val mapImage = map.getEditorImage(viewport)
         val g = image.getGraphics()
 
         //Draw the map

@@ -14,6 +14,7 @@ class ToggleWall(location: Point, uniqueId: Id, var open: Boolean = false) :
 
     }
 
+
     //button is pressed
     override fun onTrigger() {
         open = !open

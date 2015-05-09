@@ -269,3 +269,7 @@ val clonerImage: BufferedImage by Delegates.lazy {
 val redButtonImage: BufferedImage by Delegates.lazy {
     loadImage("red_button.gif") as BufferedImage
 }
+
+val wallBlueImage: BufferedImage by Delegates.lazy {
+    loadImage("wall-blue.gif") as BufferedImage
+}

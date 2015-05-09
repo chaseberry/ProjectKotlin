@@ -2,6 +2,8 @@ package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.InvisibleWall
+import ChipsChallenge.Map.Tiles.RevealableWall
 import ChipsChallenge.Map.Tiles.ToggleWall
 import ChipsChallenge.Map.Tiles.Wall
 import ChipsChallenge.Unit.*
@@ -52,7 +54,8 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
     protected val imageSet: HashMap<String, BufferedImage> = HashMap()
 
     open fun canMoveToTile(tile: Tile, direction: Direction): Boolean {
-        return tile !is Wall && (if (tile is ToggleWall) tile.open else true)
+        return tile !is Wall && tile !is InvisibleWall &&
+                tile !is RevealableWall && (if (tile is ToggleWall) tile.open else true)
 
 
     }

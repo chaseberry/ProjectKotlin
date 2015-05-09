@@ -14,7 +14,7 @@ import javax.swing.JPanel
  */
 class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
-    val buttons = Array(19) { tileIdToTile(it, Point(0, 0)) };
+    val buttons = Array(21) { tileIdToTile(it, Point(0, 0)) };
 
     init {
         setLayout(null)
@@ -31,7 +31,7 @@ class TilePanel(val editorPallet: EditorPallet) : JPanel() {
         button.setSize(32, 32)
         button.setContentAreaFilled(false)
         button.setBorder(null)
-        button.setIcon(ImageIcon(tile.image))
+        button.setIcon(ImageIcon(tile.image!!))
         button.addActionListener {
             editorPallet.currentTile = tile
             editorPallet.palletStatus = PalletStatus.TILE
