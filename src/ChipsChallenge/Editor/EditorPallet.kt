@@ -23,7 +23,7 @@ class EditorPallet : JFrame() {
 
     init {
         pack()
-        setSize(getInsets().left + (32 * 6) + getInsets().right + 32, getInsets().top + (32 * 5) + getInsets().bottom + 32)
+        setSize(getInsets().left + (32 * 6) + getInsets().right + 32, getInsets().top + (32 * 6) + getInsets().bottom + 32)
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE)
         setLocation(400, 200)
         val tabs = JTabbedPane()
