@@ -26,6 +26,7 @@ val FORCE_FLOOR_RANDOM = 17
 val TOGGLE_WALL_TYPE_ID = 18
 val INVISIBLE_WALL_ID = 19
 val REVEALABLE_WALL_TYPE_ID = 20
+val BLUE_WALL_TYPE_ID = 21
 
 public fun tileIdToTile(typeId: Int, location: Point, open: Boolean = false): Tile {
     return when (typeId) {
@@ -50,6 +51,7 @@ public fun tileIdToTile(typeId: Int, location: Point, open: Boolean = false): Ti
         TOGGLE_WALL_TYPE_ID -> ToggleWall(location, open)
         INVISIBLE_WALL_ID -> InvisibleWall(location)
         REVEALABLE_WALL_TYPE_ID -> RevealableWall(location)
+        BLUE_WALL_TYPE_ID -> BlueWall(location)
         else -> Wall(location)
     }
 }
@@ -81,6 +83,7 @@ public fun tileFromJson(obj: JSONObject, location: Point, open: Boolean = false)
         TOGGLE_WALL_TYPE_ID -> ToggleWall(location, id, open)
         INVISIBLE_WALL_ID -> InvisibleWall(location, id)
         REVEALABLE_WALL_TYPE_ID -> RevealableWall(location, id)
+        BLUE_WALL_TYPE_ID -> BlueWall(location, id)
         else -> Wall(location)
     }
 }
