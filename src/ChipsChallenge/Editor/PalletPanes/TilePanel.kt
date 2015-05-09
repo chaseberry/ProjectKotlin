@@ -4,6 +4,7 @@ import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
 import ChipsChallenge.Engine.Point
 import ChipsChallenge.Map.Tile
+import ChipsChallenge.Map.Tiles.Revealable
 import ChipsChallenge.Map.tileIdToTile
 import javax.swing.ImageIcon
 import javax.swing.JButton
@@ -31,7 +32,11 @@ class TilePanel(val editorPallet: EditorPallet) : JPanel() {
         button.setSize(32, 32)
         button.setContentAreaFilled(false)
         button.setBorder(null)
-        button.setIcon(ImageIcon(tile.image!!))
+        if (tile is Revealable) {
+            button.setIcon(ImageIcon(tile.getEditorImage()))
+        } else {
+            button.setIcon(ImageIcon(tile.image!!))
+        }
         button.addActionListener {
             editorPallet.currentTile = tile
             editorPallet.palletStatus = PalletStatus.TILE
