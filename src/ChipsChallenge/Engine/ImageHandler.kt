@@ -281,3 +281,11 @@ val thiefImage: BufferedImage by Delegates.lazy {
 val recessedWallImage: BufferedImage by Delegates.lazy {
     loadImage("wall-recessed.gif") as BufferedImage
 }
+
+val walkerUpImage: BufferedImage by Delegates.lazy {
+    loadImage("walkerUp.gif") as BufferedImage
+}
+
+val walkerLeftImage: BufferedImage by Delegates.lazy {
+    loadImage("walkerLeft.gif") as BufferedImage
+}

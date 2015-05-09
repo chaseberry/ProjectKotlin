@@ -20,6 +20,7 @@ fun unitFromId(id: Int, location: Point, direction: Direction = Direction.UP): U
         TANK_TYPE_ID -> Tank(location, direction)
         GLIDER_TYPE_ID -> Glider(location, direction)
         FIREBALL_TYPE_ID -> Fireball(location, direction)
+        WALKER_TYPE_ID -> Walker(location, direction)
         else -> null
     }
 }
@@ -36,7 +37,7 @@ fun unitFromJson(obj: JSONObject): UnitBase? {
         TANK_TYPE_ID -> Tank(location, direction, moveSpeed, uniqueId)
         GLIDER_TYPE_ID -> Glider(location, direction, moveSpeed, uniqueId)
         FIREBALL_TYPE_ID -> Fireball(location, direction, moveSpeed, uniqueId)
-
+        WALKER_TYPE_ID -> Walker(location, direction, moveSpeed, uniqueId)
         else -> null
     }
 }
