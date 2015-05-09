@@ -289,3 +289,11 @@ val walkerUpImage: BufferedImage by Delegates.lazy {
 val walkerLeftImage: BufferedImage by Delegates.lazy {
     loadImage("walkerLeft.gif") as BufferedImage
 }
+
+val parameciumUpImage: BufferedImage by Delegates.lazy {
+    loadImage("parameciumUp.gif") as BufferedImage
+}
+
+val parameciumLeftImage: BufferedImage by Delegates.lazy {
+    loadImage("parameciumLeft.gif") as BufferedImage
+}
