@@ -9,7 +9,7 @@ import ChipsChallenge.Unit.Player
  * Created by chase on 2/25/15.
  */
 
-class Thief(location: Point, uniqueId: Id) : Tile(floorImage, THIEF_TYPE_ID, location, uniqueId) {
+class Thief(location: Point, uniqueId: Id) : Tile(thiefImage, THIEF_TYPE_ID, location, uniqueId) {
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
         if (interactor is Player) {
