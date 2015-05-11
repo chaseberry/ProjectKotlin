@@ -57,7 +57,8 @@ fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
     }
 }
 
-fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id): ObjectBase? {
+fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
+                           template: EngineObjectBase? = null, direction: Direction = Direction.UP): ObjectBase? {
     return when (typeId) {
         CHIP_TYPE_ID -> Chip(location, id)
         SOCKET_TYPE_ID -> Socket(location, id)
@@ -80,7 +81,7 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id): ObjectBase? {
         SUCTION_BOOT_TYPE_ID -> SuctionBoot(location, id)
         BLUE_BUTTON_TYPE_ID -> BlueButton(location, id)
         BOMB_TYPE_ID -> Bomb(location, id)
-        CLONER_TYPE_ID -> Cloner(location, null, Direction.UP)
+        CLONER_TYPE_ID -> Cloner(location, template, direction)
         RED_BUTTON_TYPE_ID -> RedButton(location, id)
         else -> null
     }
@@ -90,6 +91,7 @@ fun objectFromJSON(obj: JSONObject): ObjectBase? {
     val typeId = obj.getInt("typeId")
     val location = pointFromJson(obj.getJSONObject("location"))
     val id = idFromJson(obj.getJSONObject("id"))
+    val template: EngineObjectBase?
     return objectFromTypeIdWithId(typeId, location, id)
 }
 

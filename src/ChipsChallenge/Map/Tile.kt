@@ -62,11 +62,11 @@ public fun tileIdToTile(typeId: Int, location: Point, open: Boolean = false): Ti
     }
 }
 
-public fun tileFromJson(obj: JSONObject, location: Point, open: Boolean = false): Tile {
+public fun tileFromJson(obj: JSONObject, location: Point): Tile {
 
     val typeId = obj.getInt("typeId")
     val id = idFromJson(obj.getJSONObject("id"))
-
+    val open = if (obj.has("open")) obj.getBoolean("open") else false
     return when (typeId) {
         FLOOR_TYPE_ID -> Floor(location, id)
         WALL_TYPE_ID -> Wall(location, id)

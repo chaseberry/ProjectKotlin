@@ -57,28 +57,30 @@ fun engineFromFile(file: File): Engine? {
         val fileContents = reader.readLine()
         reader.close()
         val levelData = JSONObject(fileContents)
-        val map = mapFromJSON(levelData)
-        val objs = levelData.getJSONArray("objects")
-        val objects = ArrayList<ObjectBase>(objs.length())
-        for (z in 0..objs.length() - 1) {
-            //TODO null check
-            objects.add(objectFromJSON(objs.getJSONObject(z)))
-        }
-        val uns = levelData.getJSONArray("units")
-        val units = ArrayList<UnitBase>(uns.length())
-        for ( z in 0..uns.length() - 1) {
-            //TODO null check
-            units.add(unitFromJson(uns.getJSONObject(z)))
-        }
-        if (map == null) {
-            return null
-        }
-        return Engine(map, objects, units)
+        return engineFromJson(levelData)
     } catch(e: Exception) {
-        e.printStackTrace()
+        return null
     }
+}
 
-    return null
+fun engineFromJson(obj: JSONObject): Engine? {
+    val map = mapFromJSON(obj)
+    val objs = obj.getJSONArray("objects")
+    val objects = ArrayList<ObjectBase>(objs.length())
+    for (z in 0..objs.length() - 1) {
+        objects.add(objectFromJSON(objs.getJSONObject(z)))
+    }
+    val uns = obj.getJSONArray("units")
+    val units = ArrayList<UnitBase>(uns.length())
+    for ( z in 0..uns.length() - 1) {
+        //TODO null check
+        units.add(unitFromJson(uns.getJSONObject(z)))
+    }
+    if (map == null) {
+        return null
+    }
+    return Engine(map, objects, units)
+
 }
 
 fun loadLevel(name: String): File {
