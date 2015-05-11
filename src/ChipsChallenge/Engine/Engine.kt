@@ -63,6 +63,14 @@ fun engineFromFile(file: File): Engine? {
     }
 }
 
+fun loadTemplate(obj: JSONObject): EngineObjectBase? {
+    val id = idFromJson(obj.getJSONObject("id"))
+    if (id.type == IdType.OBJECT) {
+        return objectFromJSON(obj)
+    }
+    return unitFromJson(obj)
+}
+
 fun engineFromJson(obj: JSONObject): Engine? {
     val map = mapFromJSON(obj)
     val objs = obj.getJSONArray("objects")

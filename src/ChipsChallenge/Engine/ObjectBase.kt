@@ -29,32 +29,7 @@ val CLONER_TYPE_ID = 21
 val RED_BUTTON_TYPE_ID = 22
 
 fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
-    return when (typeId) {
-        CHIP_TYPE_ID -> Chip(location)
-        SOCKET_TYPE_ID -> Socket(location)
-        BLUE_KEY_TYPE_ID -> BlueKey(location)
-        BLUE_LOCK_TYPE_ID -> BlueLock(location)
-        RED_KEY_TYPE_ID -> RedKey(location)
-        RED_LOCK_TYPE_ID -> RedLock(location)
-        YELLOW_KEY_TYPE_ID -> YellowKey(location)
-        YELLOW_LOCK_TYPE_ID -> YellowLock(location)
-        GREEN_KEY_TYPE_ID -> GreenKey(location)
-        GREEN_LOCK_TYPE_ID -> GreenLock(location)
-        DIRT_TYPE_ID -> Dirt(location)
-        BLOCK_TYPE_ID -> Block(location)
-        GREEN_BUTTON_TYPE_ID -> GreenButton(location)
-        BROWN_BUTTON_TYPE_ID -> BrownButton(location)
-        BEAR_TRAP_TYPE_ID -> BearTrap(location)
-        FIRE_BOOT_TYPE_ID -> FireBoot(location)
-        FLIPPER_TYPE_ID -> Flipper(location)
-        ICE_SKATE_TYPE_ID -> IceSkate(location)
-        SUCTION_BOOT_TYPE_ID -> SuctionBoot(location)
-        BLUE_BUTTON_TYPE_ID -> BlueButton(location)
-        BOMB_TYPE_ID -> Bomb(location)
-        RED_BUTTON_TYPE_ID -> RedButton(location)
-        CLONER_TYPE_ID -> Cloner(location, null, Direction.UP)
-        else -> null
-    }
+    return objectFromTypeIdWithId(typeId, location, Id(IdType.OBJECT))
 }
 
 fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
@@ -91,8 +66,8 @@ fun objectFromJSON(obj: JSONObject): ObjectBase? {
     val typeId = obj.getInt("typeId")
     val location = pointFromJson(obj.getJSONObject("location"))
     val id = idFromJson(obj.getJSONObject("id"))
-    val template: EngineObjectBase?
-    return objectFromTypeIdWithId(typeId, location, id)
+    val template: EngineObjectBase? = if (obj.has("template")) loadTemplate(obj.getJSONObject("template")) else null
+    return objectFromTypeIdWithId(typeId, location, id, template = template)
 }
 
 data abstract class ObjectBase(val typeId: Int, location: Point, image: BufferedImage,

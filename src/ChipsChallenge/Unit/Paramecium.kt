@@ -6,8 +6,8 @@ import ChipsChallenge.Map.Tile
 val PARAMECIUM_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val PARAMECIUM_TYPE_ID = 6
 
-class Paramecium(location: Point, direction: Direction, moveSpeed: Int,
-                 uniqueId: Id) : DirectionalUnit(PARAMECIUM_TYPE_ID, location, direction, moveSpeed, uniqueId) {
+class Paramecium(location: Point, direction: Direction,
+                 uniqueId: Id) : DirectionalUnit(PARAMECIUM_TYPE_ID, location, direction, PARAMECIUM_DEFAULT_MOVE_SPEED, uniqueId) {
 
     override fun canSurviveInWater(): Boolean {
         return false
@@ -17,8 +17,7 @@ class Paramecium(location: Point, direction: Direction, moveSpeed: Int,
         return false
     }
 
-    constructor(location: Point, direction: Direction) : this(location, direction,
-            PARAMECIUM_TYPE_ID, Id(IdType.UNIT)) {
+    constructor(location: Point, direction: Direction) : this(location, direction, Id(IdType.UNIT)) {
     }
 
     init {

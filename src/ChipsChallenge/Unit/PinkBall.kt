@@ -1,22 +1,19 @@
 package ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Gravel
 
 val PINK_BALL_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val PINK_BALL_TYPE_ID = 0
 
-class PinkBall(location: Point, direction: Direction, moveSpeed: Int,
-               uniqueId: Id) : DirectionalUnit(PINK_BALL_TYPE_ID, location, direction, moveSpeed, uniqueId) {
+class PinkBall(location: Point, direction: Direction,
+               uniqueId: Id) : DirectionalUnit(PINK_BALL_TYPE_ID, location, direction, PINK_BALL_DEFAULT_MOVE_SPEED, uniqueId) {
 
 
     override fun setImage() {
         image = pinkBallImage
     }
 
-    constructor(location: Point, direction: Direction) : this(location, direction,
-            PINK_BALL_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
+    constructor(location: Point, direction: Direction) : this(location, direction, Id(IdType.UNIT)) {
     }
 
     init {

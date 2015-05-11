@@ -14,11 +14,10 @@ public enum class TANKSTATUS {
     MOVE
 }
 
-class Tank(location: Point, direction: Direction, moveSpeed: Int,
-           uniqueId: Id) : DirectionalUnit(TANK_TYPE_ID, location, direction, moveSpeed, uniqueId) {
+class Tank(location: Point, direction: Direction,
+           uniqueId: Id) : DirectionalUnit(TANK_TYPE_ID, location, direction, TANK_DEFAULT_MOVE_SPEED, uniqueId) {
 
-    constructor(location: Point, direction: Direction) : this(location, direction,
-            TANK_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
+    constructor(location: Point, direction: Direction) : this(location, direction, Id(IdType.UNIT)) {
     }
 
 

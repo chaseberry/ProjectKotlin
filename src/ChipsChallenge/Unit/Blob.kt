@@ -8,15 +8,13 @@ import ChipsChallenge.Map.Tiles.RecessedWall
 val BLOB_TYPE_ID = 7
 val BLOB_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED * 2
 
-class Blob(location: Point, moveSpeed: Int,
-           uniqueId: Id) : UnitBase(BLOB_TYPE_ID, location, moveSpeed, uniqueId) {
+class Blob(location: Point, uniqueId: Id) : UnitBase(BLOB_TYPE_ID, location, BLOB_DEFAULT_MOVE_SPEED, uniqueId) {
 
     init {
         image = blobImage
     }
 
-    constructor(location: Point) : this(location,
-            BLOB_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
+    constructor(location: Point) : this(location, Id(IdType.UNIT)) {
     }
 
     override fun onTick(engine: Engine) {

@@ -1,14 +1,12 @@
 package ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Gravel
 
 val GLIDER_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val GLIDER_TYPE_ID = 3
 
-class Glider(location: Point, direction: Direction, moveSpeed: Int,
-             uniqueId: Id) : DirectionalUnit(GLIDER_TYPE_ID, location, direction, moveSpeed, uniqueId) {
+class Glider(location: Point, direction: Direction,
+             uniqueId: Id) : DirectionalUnit(GLIDER_TYPE_ID, location, direction, GLIDER_DEFAULT_MOVE_SPEED, uniqueId) {
 
     override fun canSurviveInWater(): Boolean {
         return true
@@ -18,8 +16,7 @@ class Glider(location: Point, direction: Direction, moveSpeed: Int,
         return false
     }
 
-    constructor(location: Point, direction: Direction) : this(location, direction,
-            GLIDER_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
+    constructor(location: Point, direction: Direction) : this(location, direction, Id(IdType.UNIT)) {
     }
 
     init {

@@ -32,16 +32,15 @@ fun unitFromJson(obj: JSONObject): UnitBase? {
     val location = pointFromJson(obj.getJSONObject("location"))
     val direction = directionFromString(obj.getString("direction"))//Might not always be here, specifically for teeth/blob
     val uniqueId = idFromJson(obj.getJSONObject("id"))
-    val moveSpeed = obj.getInt("moveSpeed")
     return when (typeId) {
-        PINK_BALL_TYPE_ID -> PinkBall(location, direction, moveSpeed, uniqueId)
-        BUG_TYPE_ID -> Bug(location, direction, moveSpeed, uniqueId)
-        TANK_TYPE_ID -> Tank(location, direction, moveSpeed, uniqueId)
-        GLIDER_TYPE_ID -> Glider(location, direction, moveSpeed, uniqueId)
-        FIREBALL_TYPE_ID -> Fireball(location, direction, moveSpeed, uniqueId)
-        WALKER_TYPE_ID -> Walker(location, direction, moveSpeed, uniqueId)
-        PARAMECIUM_TYPE_ID -> Paramecium(location, direction, moveSpeed, uniqueId)
-        BLOB_TYPE_ID -> Blob(location, moveSpeed, uniqueId)
+        PINK_BALL_TYPE_ID -> PinkBall(location, direction, uniqueId)
+        BUG_TYPE_ID -> Bug(location, direction, uniqueId)
+        TANK_TYPE_ID -> Tank(location, direction, uniqueId)
+        GLIDER_TYPE_ID -> Glider(location, direction, uniqueId)
+        FIREBALL_TYPE_ID -> Fireball(location, direction, uniqueId)
+        WALKER_TYPE_ID -> Walker(location, direction, uniqueId)
+        PARAMECIUM_TYPE_ID -> Paramecium(location, direction, uniqueId)
+        BLOB_TYPE_ID -> Blob(location, uniqueId)
         else -> null
     }
 }

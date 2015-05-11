@@ -8,8 +8,8 @@ import java.util.ArrayList
 val WALKER_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val WALKER_TYPE_ID = 5
 
-class Walker(location: Point, direction: Direction, moveSpeed: Int,
-             uniqueId: Id) : DirectionalUnit(WALKER_TYPE_ID, location, direction, moveSpeed, uniqueId) {
+class Walker(location: Point, direction: Direction,
+             uniqueId: Id) : DirectionalUnit(WALKER_TYPE_ID, location, direction, WALKER_DEFAULT_MOVE_SPEED, uniqueId) {
 
     override fun canSurviveInWater(): Boolean {
         return false
@@ -19,8 +19,7 @@ class Walker(location: Point, direction: Direction, moveSpeed: Int,
         return true
     }
 
-    constructor(location: Point, direction: Direction) : this(location, direction,
-            WALKER_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
+    constructor(location: Point, direction: Direction) : this(location, direction, Id(IdType.UNIT)) {
     }
 
     init {

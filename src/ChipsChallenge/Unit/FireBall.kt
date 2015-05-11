@@ -5,8 +5,8 @@ import ChipsChallenge.Engine.*
 val FIREBALL_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val FIREBALL_TYPE_ID = 4
 
-class Fireball(location: Point, direction: Direction, moveSpeed: Int,
-               uniqueId: Id) : DirectionalUnit(FIREBALL_TYPE_ID, location, direction, moveSpeed, uniqueId) {
+class Fireball(location: Point, direction: Direction,
+               uniqueId: Id) : DirectionalUnit(FIREBALL_TYPE_ID, location, direction, FIREBALL_DEFAULT_MOVE_SPEED, uniqueId) {
 
     override fun canSurviveInWater(): Boolean {
         return false
@@ -16,8 +16,7 @@ class Fireball(location: Point, direction: Direction, moveSpeed: Int,
         return true
     }
 
-    constructor(location: Point, direction: Direction) : this(location, direction,
-            FIREBALL_DEFAULT_MOVE_SPEED, Id(IdType.UNIT)) {
+    constructor(location: Point, direction: Direction) : this(location, direction, Id(IdType.UNIT)) {
     }
 
     init {
