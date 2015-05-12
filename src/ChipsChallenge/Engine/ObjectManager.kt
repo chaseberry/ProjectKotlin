@@ -76,16 +76,16 @@ class ObjectManager(val engine: Engine?) : Tickable {
 
         if (resolution == ObjectResolution.REMOVE) {
             remove(obj.location)
+            return true
         }
         //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
         if (resolution == ObjectResolution.MOVE && obj is Block) {
             if (obj.objectUnder != null) {
-                if (!resolveObject(obj.objectUnder!!, direction, interactor)) {
+                val objUnder = obj.objectUnder!!
+                if (!resolveObject(objUnder, direction, interactor)) {
                     return false
-                } else {
-                    add(obj.unCover(engine)!!, obj.location)
-                    resolveObject(obj.unCover(engine)!!, direction, interactor)
                 }
+                obj.unCover(engine)
             } else {
                 remove(obj.location)
             }

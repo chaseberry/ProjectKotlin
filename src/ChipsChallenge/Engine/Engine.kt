@@ -54,7 +54,7 @@ fun flipDirection(direction: Direction): Direction {
 fun engineFromFile(file: File): Engine? {
     try {
         val reader = BufferedReader(FileReader(file))
-        val fileContents = reader.readLine()
+        val fileContents = reader.readText()
         reader.close()
         val levelData = JSONObject(fileContents)
         return engineFromJson(levelData)
