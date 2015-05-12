@@ -1,16 +1,12 @@
 package ChipsChallenge.Editor
 
-import javax.swing.JFrame
-import java.awt.image.BufferedImage
 import java.awt.Graphics
-import java.awt.event.MouseListener
-import java.awt.event.MouseEvent
-import java.awt.event.MouseMotionListener
-import java.awt.event.KeyListener
-import java.awt.event.KeyEvent
+import java.awt.event.*
+import java.awt.image.BufferedImage
 import javax.swing.JButton
-import javax.swing.WindowConstants
+import javax.swing.JFrame
 import javax.swing.JTextField
+import javax.swing.WindowConstants
 
 /**
  * Created by chase on 2/27/15.
@@ -70,7 +66,9 @@ class EditorFrame(val editor: Editor) : JFrame() {
         }
 
         override fun keyTyped(e: KeyEvent) {
-
+            if (e.getKeyCode() == KeyEvent.VK_R) {
+                editor.rotateMode = !editor.rotateMode
+            }
         }
 
     }

@@ -84,6 +84,7 @@ class ObjectManager(val engine: Engine?) : Tickable {
                     return false
                 } else {
                     add(obj.unCover(engine)!!, obj.location)
+                    resolveObject(obj.unCover(engine)!!, direction, interactor)
                 }
             } else {
                 remove(obj.location)

@@ -5,6 +5,7 @@ import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.Map.Tiles.*
 import ChipsChallenge.Map.blankMap
 import ChipsChallenge.Map.mapFromIds
+import ChipsChallenge.Map.tileFromId
 import ChipsChallenge.Map.tileIdToTile
 import ChipsChallenge.Object.*
 import ChipsChallenge.UI.getViewport
@@ -180,7 +181,7 @@ class Editor(x: Int, y: Int) {
         }
 
         if (!tile.typeEquals(pallet.currentTile)) {
-            map.setTile(tileLocation, pallet.currentTile)
+            map.setTile(tileLocation, tileFromId(pallet.currentTile.tileId, tileLocation))
         }
     }
 
