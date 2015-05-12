@@ -20,7 +20,6 @@ class Flipper(location: Point, uniqueId: Id) : ObjectBase(FLIPPER_TYPE_ID, locat
     }
 
     override fun onTick(engine: Engine) {
-        throw UnsupportedOperationException()
     }
 
 }
