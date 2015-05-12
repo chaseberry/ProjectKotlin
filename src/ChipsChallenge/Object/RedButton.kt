@@ -3,9 +3,10 @@ package ChipsChallenge.Object
 import ChipsChallenge.Engine.*
 
 
-class RedButton(location: Point, uniqueId: Id) : Button(RED_BUTTON_TYPE_ID, location, redButtonImage, null, uniqueId) {
+class RedButton(location: Point, uniqueId: Id, target: Id?) :
+        Button(RED_BUTTON_TYPE_ID, location, redButtonImage, target, uniqueId) {
 
-    constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
+    constructor(location: Point) : this(location, Id(IdType.OBJECT), null) {
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {

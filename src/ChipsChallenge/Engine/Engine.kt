@@ -59,6 +59,7 @@ fun engineFromFile(file: File): Engine? {
         val levelData = JSONObject(fileContents)
         return engineFromJson(levelData)
     } catch(e: Exception) {
+        e.printStackTrace()
         return null
     }
 }

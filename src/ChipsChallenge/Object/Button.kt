@@ -14,7 +14,9 @@ abstract class Button(typeId: Int, location: Point, image: BufferedImage,
 
     override fun getSaveObject(): JSONObject {
         val obj = super.getSaveObject()
-        obj.put("targetId", if (target != null) target!!.getJson() else null)
+        if (target != null) {
+            obj.put("targetId", target!!.getJson())
+        }
         return obj
     }
 

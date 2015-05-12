@@ -32,41 +32,10 @@ val THIEF_TYPE_ID = 23
 val RECESSED_WALL_TYPE_ID = 24
 
 public fun tileIdToTile(typeId: Int, location: Point, open: Boolean = false): Tile {
-    return when (typeId) {
-        FLOOR_TYPE_ID -> Floor(location)
-        WALL_TYPE_ID -> Wall(location)
-        FINISH_TYPE_ID -> Finish(location)
-        HELP_TYPE_ID -> Help(location)
-        WATER_TYPE_ID -> Water(location)
-        FIRE_TYPE_ID -> Fire(location)
-        ICE_TYPE_ID -> Ice(location)
-        ICE_CORNER_LEFT_UP_ID -> IceCorner(ICE_CORNER_LEFT_UP_ID, location)
-        ICE_CORNER_LEFT_DOWN_ID -> IceCorner(ICE_CORNER_LEFT_DOWN_ID, location)
-        ICE_CORNER_RIGHT_UP_ID -> IceCorner(ICE_CORNER_RIGHT_UP_ID, location)
-        ICE_CORNER_RIGHT_DOWN_ID -> IceCorner(ICE_CORNER_RIGHT_DOWN_ID, location)
-        TELEPORT_TYPE_ID -> Teleport(location)
-        GRAVEL_TYPE_ID -> Gravel(location)
-        FORCE_FLOOR_LEFT -> ForceFloor(typeId, location)
-        FORCE_FLOOR_UP -> ForceFloor(typeId, location)
-        FORCE_FLOOR_RIGHT -> ForceFloor(typeId, location)
-        FORCE_FLOOR_DOWN -> ForceFloor(typeId, location)
-        FORCE_FLOOR_RANDOM -> ForceFloor(typeId, location)
-        TOGGLE_WALL_TYPE_ID -> ToggleWall(location, open)
-        INVISIBLE_WALL_ID -> InvisibleWall(location)
-        REVEALABLE_WALL_TYPE_ID -> RevealableWall(location)
-        BLUE_WALL_TYPE_ID -> BlueWall(location)
-        BLUE_FLOOR_TYPE_ID -> BlueFloor(location)
-        THIEF_TYPE_ID -> Thief(location)
-        RECESSED_WALL_TYPE_ID -> RecessedWall(location)
-        else -> Wall(location)
-    }
+    return tileFromId(typeId, location, open = open)
 }
 
-public fun tileFromJson(obj: JSONObject, location: Point): Tile {
-
-    val typeId = obj.getInt("typeId")
-    val id = idFromJson(obj.getJSONObject("id"))
-    val open = if (obj.has("open")) obj.getBoolean("open") else false
+public fun tileFromId(typeId: Int, location: Point, id: Id = Id(IdType.TILE), open: Boolean = false): Tile {
     return when (typeId) {
         FLOOR_TYPE_ID -> Floor(location, id)
         WALL_TYPE_ID -> Wall(location, id)
@@ -95,6 +64,14 @@ public fun tileFromJson(obj: JSONObject, location: Point): Tile {
         RECESSED_WALL_TYPE_ID -> RecessedWall(location, id)
         else -> Wall(location)
     }
+}
+
+public fun tileFromJson(obj: JSONObject, location: Point): Tile {
+    val typeId = obj.getInt("typeId")
+    val id = idFromJson(obj.getJSONObject("id"))
+    val open = if (obj.has("open")) obj.getBoolean("open") else false
+    return tileFromId(typeId, location, id, open)
+
 }
 
 data abstract class Tile(image: BufferedImage, val  tileId: Int, location: Point,

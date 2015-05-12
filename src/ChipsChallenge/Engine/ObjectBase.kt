@@ -33,7 +33,8 @@ fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
 }
 
 fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
-                           template: EngineObjectBase? = null, direction: Direction = Direction.UP): ObjectBase? {
+                           template: EngineObjectBase? = null, direction: Direction = Direction.UP,
+                           target: Id? = null): ObjectBase? {
     return when (typeId) {
         CHIP_TYPE_ID -> Chip(location, id)
         SOCKET_TYPE_ID -> Socket(location, id)
@@ -48,7 +49,7 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
         DIRT_TYPE_ID -> Dirt(location, id)
         BLOCK_TYPE_ID -> Block(location, id)
         GREEN_BUTTON_TYPE_ID -> GreenButton(location, id)
-        BROWN_BUTTON_TYPE_ID -> BrownButton(location, id)
+        BROWN_BUTTON_TYPE_ID -> BrownButton(location, id, target)
         BEAR_TRAP_TYPE_ID -> BearTrap(location, false, id)
         FIRE_BOOT_TYPE_ID -> FireBoot(location, id)
         FLIPPER_TYPE_ID -> Flipper(location, id)
@@ -57,17 +58,23 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
         BLUE_BUTTON_TYPE_ID -> BlueButton(location, id)
         BOMB_TYPE_ID -> Bomb(location, id)
         CLONER_TYPE_ID -> Cloner(location, template, direction)
-        RED_BUTTON_TYPE_ID -> RedButton(location, id)
+        RED_BUTTON_TYPE_ID -> RedButton(location, id, target)
         else -> null
     }
 }
 
 fun objectFromJSON(obj: JSONObject): ObjectBase? {
-    val typeId = obj.getInt("typeId")
-    val location = pointFromJson(obj.getJSONObject("location"))
-    val id = idFromJson(obj.getJSONObject("id"))
-    val template: EngineObjectBase? = if (obj.has("template")) loadTemplate(obj.getJSONObject("template")) else null
-    return objectFromTypeIdWithId(typeId, location, id, template = template)
+    try {
+        val typeId = obj.getInt("typeId")
+        val location = pointFromJson(obj.getJSONObject("location"))
+        val id = idFromJson(obj.getJSONObject("id"))
+        val template: EngineObjectBase? = if (obj.has("template")) loadTemplate(obj.getJSONObject("template")) else null
+        val targetId: Id? = if (obj.has("targetId")) idFromJson(obj.getJSONObject("targetId")) else null
+        return objectFromTypeIdWithId(typeId, location, id, template = template, target = targetId)
+    } catch(e: Exception) {
+        e.printStackTrace()
+        return null
+    }
 }
 
 data abstract class ObjectBase(val typeId: Int, location: Point, image: BufferedImage,
