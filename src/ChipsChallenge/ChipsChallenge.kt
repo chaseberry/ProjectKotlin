@@ -10,6 +10,6 @@ import java.net.URI
 
 
 fun main(args: Array<String>) {
-    Editor(16, 17).start()
-    //(engineFromFile(File(URI("${fileUrl}Levels/level2.ccl"))))!!.start()
+    //Editor(16, 17).start()
+    (engineFromFile(File(URI("${fileUrl}Levels/level3.ccl"))))!!.start()
 }

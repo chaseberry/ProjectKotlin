@@ -59,14 +59,6 @@ public class ForceFloor(typeId: Int, location: Point, uniqueId: Id) : IceBase(fo
         }
     }
 
-    override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-        interactor.forcedDirection = getNewDirection(direction)
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
-        interactor.forcedDirection = null
-    }
-
     override fun onTick(engine: Engine) {
     }
 

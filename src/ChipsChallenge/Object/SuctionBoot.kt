@@ -20,7 +20,6 @@ class SuctionBoot(location: Point, uniqueId: Id) : ObjectBase(SUCTION_BOOT_TYPE_
     }
 
     override fun onTick(engine: Engine) {
-        throw UnsupportedOperationException()
     }
 
 }

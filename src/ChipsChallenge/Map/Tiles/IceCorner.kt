@@ -31,14 +31,6 @@ public class IceCorner(typeId: Int, location: Point, uniqueId: Id) : IceBase(ice
     constructor(typeId: Int, location: Point) : this(typeId, location, Id(IdType.TILE)) {
     }
 
-    override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-        interactor.forcedDirection = getNewDirection(direction)
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
-        interactor.forcedDirection = null
-    }
-
     override fun getNewDirection(direction: Direction): Direction {
         return when (tileId) {
         //note - the ID tells what the OPENINGS are
