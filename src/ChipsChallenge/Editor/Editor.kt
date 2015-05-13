@@ -263,6 +263,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun save() {
+        syncLevel()
         val saveData = level.getSaveObject().toString()
         val fileChooser = JFileChooser()
         fileChooser.setFileFilter(object : FileFilter() {
@@ -302,6 +303,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun testMap() {
+        syncLevel()
         try {
             level.requiredChips = Integer.parseInt(frame.chipCountTextField.getText())
         } catch(e: Exception) {
@@ -309,6 +311,13 @@ class Editor(x: Int, y: Int) {
         }
 
         Engine(level.clone()).start()
+    }
+
+    fun syncLevel() {
+        level.units.clear()
+        level.objects.clear()
+        level.units.addAll(unitManager)
+        level.objects.addAll(objects.objects.values())
     }
 
 }

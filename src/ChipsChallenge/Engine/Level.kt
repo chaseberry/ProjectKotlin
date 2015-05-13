@@ -103,7 +103,7 @@ class Level(val map: ChipsChallenge.Map.Map, val objects: ArrayList<ObjectBase>,
         val newMap = map.copy()
         val newUnits = ArrayList<UnitBase>(units.size())
         units.forEach {
-            units.add(unitFromId(it.typeId, it.location.copy(), if (it is DirectionalUnit) {
+            newUnits.add(unitFromId(it.typeId, it.location.copy(), if (it is DirectionalUnit) {
                 it.direction
             } else {
                 Direction.UP
