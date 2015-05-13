@@ -16,10 +16,18 @@ import java.util.ArrayList
 import javax.swing.JFileChooser
 import javax.swing.filechooser.FileFilter
 
+public enum class Mode {
+    DRAW
+    ROTATE
+    INSPECT
+}
+
 /**
  * Created by chase on 2/27/15.
  */
 class Editor(x: Int, y: Int) {
+
+    var mode = Mode.DRAW
 
     val level = Level(blankMap(x, y), ArrayList<ObjectBase>(), ArrayList<UnitBase>(), 0, 0, Point(0, 0), "", "", 0)
 
@@ -41,7 +49,20 @@ class Editor(x: Int, y: Int) {
 
     val unitManager = UnitManager(null)
 
-    var rotateMode = false
+    val drawMode: Boolean
+        get():Boolean {
+            return mode == Mode.DRAW
+        }
+
+    val rotateMode: Boolean
+        get(): Boolean {
+            return mode == Mode.ROTATE
+        }
+
+    val inspectMode: Boolean
+        get(): Boolean {
+            return mode == Mode.INSPECT
+        }
 
     val playerLocation = level.playerStart
 
@@ -99,6 +120,12 @@ class Editor(x: Int, y: Int) {
     fun triggerUpdate() {
         val viewport = getViewport(currentCenter, map)
         val tileLocation = mouseBindings.mouseLocation + Point(viewport.xStart, viewport.yStart)
+
+        if (inspectMode) {
+            //Take tile/object/unit to inspection
+            return
+        }
+
         when (pallet.palletStatus) {
             PalletStatus.TILE -> updateTile(tileLocation)
             PalletStatus.OBJECT -> updateObject(tileLocation)
@@ -141,13 +168,14 @@ class Editor(x: Int, y: Int) {
         }
 
         val unit = unitManager.unitOnPoint(tileLocation)
+        
+        if (rotateMode && unit is DirectionalUnit) {
+            unit.rotateDirection()
+        }
 
         if (unit == null) {
             unitManager.add(unitFromId(pallet.currentUnit!!.typeId, tileLocation, Direction.UP))
             return
-        }
-        if (rotateMode && unit is DirectionalUnit) {
-            unit.rotateDirection()
         }
     }
 
@@ -321,6 +349,14 @@ class Editor(x: Int, y: Int) {
         level.objects.clear()
         level.units.addAll(unitManager)
         level.objects.addAll(objects.objects.values())
+    }
+
+    fun cycleMode() {
+        mode = when (mode) {
+            Mode.DRAW -> Mode.ROTATE
+            Mode.ROTATE -> Mode.INSPECT
+            else -> Mode.DRAW
+        }
     }
 
 }

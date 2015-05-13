@@ -48,7 +48,9 @@ class EditorFrame(val editor: Editor) : JFrame() {
             editor.mouseBindings.mouseLocation.x = (e.getX() - getInsets().left) / 32
             editor.mouseBindings.mouseLocation.y = (e.getY() - getInsets().top) / 32
             if (editor.mouseBindings.mouseButtonIsPressed) {
-                editor.triggerUpdate()
+                if (editor.drawMode) {
+                    editor.triggerUpdate()
+                }
             }
         }
 
@@ -59,8 +61,8 @@ class EditorFrame(val editor: Editor) : JFrame() {
             requestFocus()
             editor.keyBindings.keyPressed(e.getKeyCode())
             editor.triggerScreenMove()
-            if (e.getKeyCode() == KeyEvent.VK_R) {
-                editor.rotateMode = !editor.rotateMode
+            if (e.getKeyCode() == KeyEvent.VK_M) {
+                editor.cycleMode()
             }
         }
 

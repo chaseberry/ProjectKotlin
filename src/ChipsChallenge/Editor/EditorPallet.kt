@@ -1,9 +1,6 @@
 package ChipsChallenge.Editor
 
-import ChipsChallenge.Editor.PalletPanes.ObjectPanel
-import ChipsChallenge.Editor.PalletPanes.PlayerLocationPanel
-import ChipsChallenge.Editor.PalletPanes.TilePanel
-import ChipsChallenge.Editor.PalletPanes.UnitPanel
+import ChipsChallenge.Editor.PalletPanes.*
 import ChipsChallenge.Engine.ObjectBase
 import ChipsChallenge.Engine.Point
 import ChipsChallenge.Engine.UnitBase
@@ -33,6 +30,7 @@ class EditorPallet : JFrame() {
         tabs.add("Objects", ObjectPanel(this))
         tabs.add("Player", PlayerLocationPanel(this))
         tabs.add("Enemies", UnitPanel(this))
+        tabs.add("Inspect", InspectionPanel(this))
         tabs.addChangeListener() {
             if (tabs.getSelectedIndex() == 0) {
                 palletStatus = PalletStatus.TILE
