@@ -34,7 +34,7 @@ fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
 
 fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
                            template: EngineObjectBase? = null, direction: Direction = Direction.UP,
-                           target: Id? = null): ObjectBase? {
+                           target: Id? = null, objUnder: ObjectBase? = null): ObjectBase? {
     return when (typeId) {
         CHIP_TYPE_ID -> Chip(location, id)
         SOCKET_TYPE_ID -> Socket(location, id)
@@ -47,7 +47,7 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
         GREEN_KEY_TYPE_ID -> GreenKey(location, id)
         GREEN_LOCK_TYPE_ID -> GreenLock(location, id)
         DIRT_TYPE_ID -> Dirt(location, id)
-        BLOCK_TYPE_ID -> Block(location, id)
+        BLOCK_TYPE_ID -> Block(location, id, objUnder)
         GREEN_BUTTON_TYPE_ID -> GreenButton(location, id)
         BROWN_BUTTON_TYPE_ID -> BrownButton(location, id, target)
         BEAR_TRAP_TYPE_ID -> BearTrap(location, false, id)
@@ -70,7 +70,9 @@ fun objectFromJSON(obj: JSONObject): ObjectBase? {
         val id = idFromJson(obj.getJSONObject("id"))
         val template: EngineObjectBase? = if (obj.has("template")) loadTemplate(obj.getJSONObject("template")) else null
         val targetId: Id? = if (obj.has("targetId")) idFromJson(obj.getJSONObject("targetId")) else null
-        return objectFromTypeIdWithId(typeId, location, id, template = template, target = targetId)
+        val objUnder: ObjectBase? = (if (obj.has("objectUnder")) objectFromJSON(obj.getJSONObject("objectUnder")) else null)
+        return objectFromTypeIdWithId(typeId, location, id, template = template, target = targetId,
+                objUnder = objUnder)
     } catch(e: Exception) {
         e.printStackTrace()
         return null

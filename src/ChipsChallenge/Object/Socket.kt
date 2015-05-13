@@ -12,7 +12,7 @@ class Socket(location: Point, uniqueId: Id) : ObjectBase(SOCKET_TYPE_ID, locatio
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
-        if (interactor is Player && engine.player.inventory.chipsCollected >= engine.map.chipTotal) {
+        if (interactor is Player && engine.player.inventory.chipsCollected >= engine.level.requiredChips) {
             return ObjectResolution.REMOVE
         }
         return ObjectResolution.NOTHING

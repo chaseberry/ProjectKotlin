@@ -1,5 +1,6 @@
 package ChipsChallenge.Engine
 
+import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
@@ -138,6 +139,14 @@ class ObjectManager(val engine: Engine?) : Tickable {
         }
 
         return objManager
+    }
+
+    fun getSaveObject(): JSONArray {
+        val objArray = JSONArray()
+        for (obj in objects.values()) {
+            objArray.put(obj.getSaveObject())
+        }
+        return objArray
     }
 
     fun forceMoveUp(obj: ObjectBase) {

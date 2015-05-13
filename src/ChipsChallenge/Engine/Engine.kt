@@ -1,11 +1,9 @@
 package ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
-import ChipsChallenge.Map.Map
 import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Map.Tiles.Teleport
 import ChipsChallenge.Map.Tiles.Water
-import ChipsChallenge.Map.mapFromJSON
 import ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
 import ChipsChallenge.Object.Dirt
@@ -17,7 +15,6 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
 import java.net.URI
-import java.util.ArrayList
 import java.util.Timer
 import java.util.TimerTask
 
@@ -27,10 +24,6 @@ public enum class Direction {
     LEFT
     RIGHT
 }
-
-//
-//TODO implemenet levels 1-9 http://strategywiki.org/wiki/Chip%27s_Challenge/Levels_1-20#Level_1:_LESSON_1
-//
 
 fun directionFromString(str: String?): Direction {
     return when (str) {
@@ -73,22 +66,11 @@ fun loadTemplate(obj: JSONObject): EngineObjectBase? {
 }
 
 fun engineFromJson(obj: JSONObject): Engine? {
-    val map = mapFromJSON(obj)
-    val objs = obj.getJSONArray("objects")
-    val objects = ArrayList<ObjectBase>(objs.length())
-    for (z in 0..objs.length() - 1) {
-        objects.add(objectFromJSON(objs.getJSONObject(z)))
-    }
-    val uns = obj.getJSONArray("units")
-    val units = ArrayList<UnitBase>(uns.length())
-    for ( z in 0..uns.length() - 1) {
-        //TODO null check
-        units.add(unitFromJson(uns.getJSONObject(z)))
-    }
-    if (map == null) {
+    val level = levelFromJson(obj)
+    if (level == null) {
         return null
     }
-    return Engine(map, objects, units)
+    return Engine(level)
 
 }
 
@@ -96,7 +78,9 @@ fun loadLevel(name: String): File {
     return File(URI(fileUrl + "Levels/${name}.ccl"))
 }
 
-class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<UnitBase>) {
+class Engine(val level: Level) {
+
+    val map: ChipsChallenge.Map.Map//shortcut to level.map
 
     val gameTime: Long = 30
 
@@ -110,7 +94,7 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
 
     val gameTimer = Timer()
 
-    val player = Player(map.defaultPlayerLocation.copy())
+    val player = Player(level.playerStart)
 
     //Done so this can be passed around in the onTick method
     val engine = this
@@ -120,11 +104,12 @@ class Engine(val map: Map, objects: ArrayList<ObjectBase>, units: ArrayList<Unit
     val unitManager = UnitManager(this);
 
     init {
-        for (obj in objects) {
+        map = level.map
+        for (obj in level.objects) {
             objectManager.objects.put(obj.location, obj)
         }
 
-        unitManager.addAll(units)
+        unitManager.addAll(level.units)
 
     }
 

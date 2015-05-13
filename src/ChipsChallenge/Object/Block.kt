@@ -1,6 +1,7 @@
 package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
+import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Map.Tiles.Wall
 import ChipsChallenge.Unit.Player
@@ -8,7 +9,7 @@ import ChipsChallenge.Unit.Player
 /**
  * Created by chase on 3/1/15.
  */
-class Block(location: Point, uniqueId: Id) : ObjectBase(BLOCK_TYPE_ID, location, blockImage, uniqueId) {
+class Block(location: Point, uniqueId: Id, var objectUnder: ObjectBase? = null) : ObjectBase(BLOCK_TYPE_ID, location, blockImage, uniqueId) {
 
     var currentMove = 5
     val moveSpeed = 5
@@ -17,7 +18,13 @@ class Block(location: Point, uniqueId: Id) : ObjectBase(BLOCK_TYPE_ID, location,
     constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
     }
 
-    var objectUnder: ObjectBase? = null
+    override fun getSaveObject(): JSONObject {
+        val obj = super.getSaveObject()
+        if (objectUnder != null) {
+            obj.put("objectUnder", objectUnder!!.getSaveObject())
+        }
+        return obj
+    }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         if (interactor !is Player) {

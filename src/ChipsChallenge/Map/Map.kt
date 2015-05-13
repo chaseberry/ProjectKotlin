@@ -1,11 +1,9 @@
 package ChipsChallenge.Map
 
 import ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.EngineObjectBase
 import ChipsChallenge.Engine.Id
 import ChipsChallenge.Engine.Point
 import ChipsChallenge.JSON.JSONArray
-import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tiles.Revealable
 import ChipsChallenge.Map.Tiles.Teleport
 import ChipsChallenge.Map.Tiles.ToggleWall
@@ -19,31 +17,25 @@ import kotlin.properties.Delegates
  */
 
 fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point, chipTotal: Int): Map {
-    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y], Point(x, y)) }) }), playerStart, chipTotal)
+    return Map(Array(mapIds.size(), { x -> Array(mapIds[x].size(), { y -> tileIdToTile(mapIds[x][y], Point(x, y)) }) }))
 }
 
 fun blankMap(x: Int, y: Int): Map {
-    return Map(Array(x) { Array(y) { tileIdToTile(0, Point(x, y)) } }, Point(0, 0), 0)
+    return Map(Array(x) { Array(y) { tileIdToTile(0, Point(x, y)) } })
 }
 
-fun mapFromJSON(mapData: JSONObject): Map? {
+fun mapFromJSON(mapData: JSONArray): Map? {
     try {
-        val mapArray = mapData.getJSONArray("map")
-        val tileArray = Array(mapArray.length()) { x ->
-            Array(mapArray.getJSONArray(x).length()) { y ->
+        val tileArray = Array(mapData.length()) { x ->
+            Array(mapData.getJSONArray(x).length()) { y ->
                 tileFromJson(
-                        mapArray.getJSONArray(x).getJSONObject(y),
+                        mapData.getJSONArray(x).getJSONObject(y),
                         Point(x, y)
                 )
             }
         }
 
-        val defaultLocation = Point(mapData.getJSONArray("playerStartLocation").getInt(0),
-                mapData.getJSONArray("playerStartLocation").getInt(1))
-
-        val chipCount = mapData.getInt("chipCount")
-
-        return Map(tileArray, defaultLocation, chipCount)
+        return Map(tileArray)
 
     } catch(except: Exception) {
         except.printStackTrace()
@@ -59,10 +51,9 @@ fun ArrayList<ToggleWall>.invoke(tw: ToggleWall) {
 
 //**
 
-data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation: Point,
-                         var chipTotal: Int) : EngineObjectBase(Point(0, 0), null) {
+data class Map internal (val map: Array<Array<Tile>>) {
 
-    override fun getSaveObject(): JSONObject {
+    fun getSaveObject(): JSONArray {
         val mapArray = JSONArray()
         for (x in map) {
             val mapSection = JSONArray()
@@ -71,7 +62,7 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
             }
             mapArray.put(mapSection)
         }
-        return JSONObject().put("map", mapArray)
+        return mapArray
     }
 
     val x: Int by Delegates.lazy {
@@ -164,7 +155,7 @@ data class Map internal (val map: Array<Array<Tile>>, var defaultPlayerLocation:
         map[location.x][location.y] = tile
     }
 
-    override fun onTick(engine: Engine) {
+    fun onTick(engine: Engine) {
         for (x in map) {
             for (tile in x) {
                 tile.onTick(engine)

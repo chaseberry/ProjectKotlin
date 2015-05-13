@@ -43,6 +43,8 @@ class Editor(x: Int, y: Int) {
 
     var rotateMode = false
 
+    val playerLocation = Point(0, 0)
+
     fun start() {
         frame.image = buildFrameImage()
         frame.setVisible(true)
@@ -88,8 +90,8 @@ class Editor(x: Int, y: Int) {
             }
         }
 
-        g.drawImage(playerImage, (map.defaultPlayerLocation.x - viewport.xStart) * 32,
-                (map.defaultPlayerLocation.y - viewport.yStart) * 32, null)
+        g.drawImage(playerImage, (playerLocation.x - viewport.xStart) * 32,
+                (playerLocation.y - viewport.yStart) * 32, null)
 
         return image
     }
@@ -255,7 +257,8 @@ class Editor(x: Int, y: Int) {
 
     fun addPlayer(tileLocation: Point) {
         if (mouseBindings.mouseOne) {
-            map.defaultPlayerLocation = tileLocation
+            playerLocation.x = tileLocation.x
+            playerLocation.y = tileLocation.y
         }
     }
 
@@ -289,6 +292,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun generateSave(): String {
+        
         val saveObj = map.getSaveObject()
 
         val objArray = JSONArray()
