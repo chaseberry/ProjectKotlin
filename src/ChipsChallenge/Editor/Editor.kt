@@ -1,10 +1,8 @@
 package ChipsChallenge.Editor
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.Map.Tiles.*
 import ChipsChallenge.Map.blankMap
-import ChipsChallenge.Map.mapFromIds
 import ChipsChallenge.Map.tileFromId
 import ChipsChallenge.Map.tileIdToTile
 import ChipsChallenge.Object.*
@@ -23,7 +21,9 @@ import javax.swing.filechooser.FileFilter
  */
 class Editor(x: Int, y: Int) {
 
-    val map = blankMap(x, y)
+    val level = Level(blankMap(x, y), ArrayList<ObjectBase>(), ArrayList<UnitBase>(), 0, 0, Point(0, 0), "", "", 0)
+
+    val map = level.map
 
     val frame = EditorFrame(this)
 
@@ -43,7 +43,7 @@ class Editor(x: Int, y: Int) {
 
     var rotateMode = false
 
-    val playerLocation = Point(0, 0)
+    val playerLocation = level.playerStart
 
     fun start() {
         frame.image = buildFrameImage()
@@ -211,7 +211,7 @@ class Editor(x: Int, y: Int) {
         }
         if (objects.objects.containsKey(tileLocation)) {
             val obj = objects.objects.get(tileLocation)
-            if (obj is Block && pallet.currentObject !is Block) {
+            if (obj is Block && pallet.currentObject !is Block && pallet.currentObject !is Cloner) {
                 obj.cover(objectFromTypeId(pallet.currentObject!!.typeId, tileLocation)!!, null)
             }
             if (obj is Cloner && pallet.currentObject is Block) {
@@ -263,7 +263,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun save() {
-        val saveData = generateSave()
+        val saveData = level.getSaveObject().toString()
         val fileChooser = JFileChooser()
         fileChooser.setFileFilter(object : FileFilter() {
             override fun accept(f: File?): Boolean {
@@ -291,26 +291,6 @@ class Editor(x: Int, y: Int) {
         writer.close()
     }
 
-    fun generateSave(): String {
-        
-        val saveObj = map.getSaveObject()
-
-        val objArray = JSONArray()
-        for (obj in objects.objects.values()) {
-            objArray.put(obj.getSaveObject())
-        }
-
-        saveObj.put("units", unitManager.getSaveObject())
-        saveObj.put("objects", objArray)
-        saveObj.put("playerStartLocation", JSONArray().put(map.defaultPlayerLocation.x).put(map.defaultPlayerLocation.y))
-        try {
-            saveObj.put("chipCount", Integer.parseInt(frame.chipCountTextField.getText()))
-        } catch(e: NumberFormatException) {
-            saveObj.put("chipCount", 0)
-        }
-        return saveObj.toString()
-    }
-
     fun triggerScreenMove() {
         when {
             keyBindings.up -> if (currentCenter.y != 0 ) currentCenter.y--
@@ -323,13 +303,12 @@ class Editor(x: Int, y: Int) {
 
     fun testMap() {
         try {
-            map.chipTotal = Integer.parseInt(frame.chipCountTextField.getText())
+            level.requiredChips = Integer.parseInt(frame.chipCountTextField.getText())
         } catch(e: Exception) {
 
         }
-        val objs = objects.clone()
-        Engine(mapFromIds(Array(map.x) { x -> Array(map.y) { y -> map.map[x][y].tileId } }, map.defaultPlayerLocation, map.chipTotal),
-                ArrayList(objs.objects.values()), unitManager.clone()).start()
+
+        Engine(level.clone()).start()
     }
 
 }

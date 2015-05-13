@@ -203,4 +203,17 @@ data class Map internal (val map: Array<Array<Tile>>) {
         return null
     }
 
+    fun copy(): ChipsChallenge.Map.Map {
+        return Map(Array(x) { newX ->
+            Array(y) { newY ->
+                val tile = map[newX][newY]
+                var open = false
+                if (tile is ToggleWall) {
+                    open = tile.open
+                }
+                tileFromId(tile.tileId, Point(newX, newY), open = open)
+            }
+        })
+    }
+
 }

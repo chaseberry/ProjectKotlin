@@ -3,6 +3,10 @@ package ChipsChallenge.Engine
 import ChipsChallenge.JSON.JSONArray
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.mapFromJSON
+import ChipsChallenge.Object.Block
+import ChipsChallenge.Object.Button
+import ChipsChallenge.Object.Cloner
+import ChipsChallenge.Unit.DirectionalUnit
 import java.util.ArrayList
 
 fun JSONObject.set(name: String, obj: Any) {
@@ -71,8 +75,8 @@ fun anyNull(vararg args: Any?): Boolean {
 }
 
 class Level(val map: ChipsChallenge.Map.Map, val objects: ArrayList<ObjectBase>, val units: ArrayList<UnitBase>,
-            val chipCount: Int, val requiredChips: Int, val playerStart: Point, val  title: String, val hintText: String,
-            val timeLimit: Int) {
+            var chipCount: Int, var requiredChips: Int, val playerStart: Point, var  title: String, var hintText: String,
+            var timeLimit: Int) {
 
     fun getSaveObject(): JSONObject {
         val obj = JSONObject()
@@ -93,6 +97,43 @@ class Level(val map: ChipsChallenge.Map.Map, val objects: ArrayList<ObjectBase>,
         obj["units"] = unitArray
         obj["objects"] = objectArray
         return obj
+    }
+
+    fun clone(): Level {
+        val newMap = map.copy()
+        val newUnits = ArrayList<UnitBase>(units.size())
+        units.forEach {
+            units.add(unitFromId(it.typeId, it.location.copy(), if (it is DirectionalUnit) {
+                it.direction
+            } else {
+                Direction.UP
+            }
+            ))
+        }
+        val newObjects = ArrayList<ObjectBase>(objects.size())
+        objects.forEach {
+            var objUnder: ObjectBase? = null
+            var template: EngineObjectBase? = null
+            var direction = Direction.UP
+            var targetId: Id? = null
+            if (it is Block && it.objectUnder != null) {
+                if (it.objectUnder!! is Button) {
+                    targetId = (it.objectUnder!! as Button).target
+                }
+                objUnder = objectFromTypeIdWithId(it.objectUnder!!.typeId, it.objectUnder!!.location.copy(),
+                        it.objectUnder!!.uniqueId, target = targetId)
+            }
+            if (it is Button) {
+                targetId = it.target
+            }
+            if (it is Cloner) {
+                template = it.template
+                direction = it.direction
+            }
+            newObjects.add(objectFromTypeIdWithId(it.typeId, it.location.copy(), it.uniqueId.copy(), target = targetId,
+                    template = template, direction = direction, objUnder = objUnder)!!)
+        }
+        return Level(newMap, newObjects, newUnits, chipCount, requiredChips, playerStart.copy(), title, hintText, timeLimit)
     }
 
 }

@@ -87,4 +87,5 @@ class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var
 
     }
 
+
 }
