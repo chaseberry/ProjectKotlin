@@ -118,6 +118,9 @@ class Editor(x: Int, y: Int) {
     }
 
     fun addUnit(tileLocation: Point) {
+        if (pallet.currentUnit == null) {
+            return
+        }
         val obj = objects.objects.get(tileLocation)
         if (obj != null && obj is Cloner) {
             val tempUnit = unitFromId(pallet.currentUnit!!.typeId, tileLocation, Direction.UP)!!
@@ -143,7 +146,7 @@ class Editor(x: Int, y: Int) {
             unitManager.add(unitFromId(pallet.currentUnit!!.typeId, tileLocation, Direction.UP))
             return
         }
-        if (unit is DirectionalUnit) {
+        if (rotateMode && unit is DirectionalUnit) {
             unit.rotateDirection()
         }
     }

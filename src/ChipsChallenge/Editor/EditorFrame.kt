@@ -59,6 +59,9 @@ class EditorFrame(val editor: Editor) : JFrame() {
             requestFocus()
             editor.keyBindings.keyPressed(e.getKeyCode())
             editor.triggerScreenMove()
+            if (e.getKeyCode() == KeyEvent.VK_R) {
+                editor.rotateMode = !editor.rotateMode
+            }
         }
 
         override fun keyReleased(e: KeyEvent) {
@@ -66,9 +69,7 @@ class EditorFrame(val editor: Editor) : JFrame() {
         }
 
         override fun keyTyped(e: KeyEvent) {
-            if (e.getKeyCode() == KeyEvent.VK_R) {
-                editor.rotateMode = !editor.rotateMode
-            }
+
         }
 
     }
