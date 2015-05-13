@@ -57,7 +57,7 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
         SUCTION_BOOT_TYPE_ID -> SuctionBoot(location, id)
         BLUE_BUTTON_TYPE_ID -> BlueButton(location, id)
         BOMB_TYPE_ID -> Bomb(location, id)
-        CLONER_TYPE_ID -> Cloner(location, template, direction)
+        CLONER_TYPE_ID -> Cloner(location, id, template, direction)
         RED_BUTTON_TYPE_ID -> RedButton(location, id, target)
         else -> null
     }
