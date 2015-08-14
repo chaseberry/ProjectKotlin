@@ -64,4 +64,9 @@ public class IceCorner(typeId: Int, location: Point, uniqueId: Id) : IceBase(ice
 
     override fun onTick(engine: Engine) {
     }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

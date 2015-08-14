@@ -62,4 +62,8 @@ public class ForceFloor(typeId: Int, location: Point, uniqueId: Id) : IceBase(fo
     override fun onTick(engine: Engine) {
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

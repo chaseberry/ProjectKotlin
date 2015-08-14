@@ -5,10 +5,6 @@ import ChipsChallenge.Map.THIEF_TYPE_ID
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 2/25/15.
- */
-
 class Thief(location: Point, uniqueId: Id) : Tile(thiefImage, THIEF_TYPE_ID, location, uniqueId) {
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
@@ -26,6 +22,10 @@ class Thief(location: Point, uniqueId: Id) : Tile(thiefImage, THIEF_TYPE_ID, loc
 
     override fun onTick(engine: Engine) {
 
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

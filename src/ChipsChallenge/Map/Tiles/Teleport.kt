@@ -4,9 +4,6 @@ import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.TELEPORT_TYPE_ID
 import ChipsChallenge.Map.Tile
 
-/**
- * Created by chase on 5/3/15.
- */
 class Teleport(location: Point, uniqueId: Id) : Tile(teleportImage, TELEPORT_TYPE_ID, location, uniqueId) {
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
@@ -30,6 +27,10 @@ class Teleport(location: Point, uniqueId: Id) : Tile(teleportImage, TELEPORT_TYP
 
     override fun onTick(engine: Engine) {
 
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

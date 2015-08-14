@@ -6,9 +6,6 @@ import ChipsChallenge.Map.Tile
 import ChipsChallenge.Unit.Player
 import java.awt.image.BufferedImage
 
-/**
- * Created by chase on 2/25/15.
- */
 class RecessedWall(location: Point, uniqueId: Id) : Tile(recessedWallImage, RECESSED_WALL_TYPE_ID, location, uniqueId) {
 
     var open = true
@@ -38,4 +35,9 @@ class RecessedWall(location: Point, uniqueId: Id) : Tile(recessedWallImage, RECE
 
     override fun onTick(engine: Engine) {
     }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

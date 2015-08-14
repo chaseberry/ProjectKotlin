@@ -55,5 +55,8 @@ class ToggleWall(location: Point, uniqueId: Id, var open: Boolean = false) :
     override fun onTick(engine: Engine) {
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
 
 }

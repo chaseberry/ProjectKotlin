@@ -25,4 +25,8 @@ class Help(location: Point, uniqueId: Id) : Tile(helpImage, HELP_TYPE_ID, locati
     override fun onTick(engine: Engine) {
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

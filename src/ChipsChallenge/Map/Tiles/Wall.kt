@@ -4,9 +4,6 @@ import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.WALL_TYPE_ID
 
-/**
- * Created by chase on 2/25/15.
- */
 class Wall(location: Point, uniqueId: Id) : Tile(wallImage, WALL_TYPE_ID, location, uniqueId) {
 
     override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
@@ -22,4 +19,9 @@ class Wall(location: Point, uniqueId: Id) : Tile(wallImage, WALL_TYPE_ID, locati
 
     override fun onTick(engine: Engine) {
     }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

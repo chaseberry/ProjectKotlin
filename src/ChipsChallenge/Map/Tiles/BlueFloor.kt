@@ -4,17 +4,13 @@ import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.BLUE_FLOOR_TYPE_ID
 import java.awt.Color
 import java.awt.image.BufferedImage
-import java.util.HashMap
 
 
 class BlueFloor(location: Point, uniqueId: Id) :
         Revealable(wallBlueImage, floorImage, BLUE_FLOOR_TYPE_ID, location, uniqueId) {
 
-    override fun getInspectionData(): HashMap<String, String> {
-        val map = HashMap<String, String>()
-        map["Name"] = "Blue Floor"
-        map["Description"]
-        return map
+    override fun getInspectionData(): Inspection {
+        return Inspection("Blue Floor", "A floor that appears as a Blue Wall, but turns into a floor on contact")
     }
 
     override fun getEditorImage(): BufferedImage {

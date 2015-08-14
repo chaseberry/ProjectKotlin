@@ -29,4 +29,8 @@ class Fire(location: Point, uniqueId: Id) : Tile(fireImage, FIRE_TYPE_ID, locati
     override fun onTick(engine: Engine) {
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

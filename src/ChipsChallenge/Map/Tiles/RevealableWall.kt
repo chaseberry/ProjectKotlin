@@ -32,5 +32,8 @@ class RevealableWall(location: Point, uniqueId: Id) :
     override fun onTick(engine: Engine) {
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
 
 }

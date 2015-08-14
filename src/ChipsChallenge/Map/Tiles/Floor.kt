@@ -25,4 +25,8 @@ class Floor(location: Point, uniqueId: Id) : Tile(floorImage, FLOOR_TYPE_ID, loc
 
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

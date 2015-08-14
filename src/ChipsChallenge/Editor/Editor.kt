@@ -17,14 +17,11 @@ import javax.swing.JFileChooser
 import javax.swing.filechooser.FileFilter
 
 public enum class Mode {
-    DRAW
-    ROTATE
+    DRAW,
+    ROTATE,
     INSPECT
 }
 
-/**
- * Created by chase on 2/27/15.
- */
 class Editor(x: Int, y: Int) {
 
     var mode = Mode.DRAW

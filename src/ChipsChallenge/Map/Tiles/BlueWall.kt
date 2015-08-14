@@ -9,10 +9,7 @@ import java.awt.image.BufferedImage
 class BlueWall(location: Point, uniqueId: Id) :
         Revealable(wallBlueImage, wallImage, BLUE_WALL_TYPE_ID, location, uniqueId) {
 
-
-    constructor(location: Point) : this(location, Id(IdType.TILE)) {
-
-    }
+    constructor(location: Point) : this(location, Id(IdType.TILE))
 
     override fun getEditorImage(): BufferedImage {
         val img = BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB)
@@ -31,6 +28,10 @@ class BlueWall(location: Point, uniqueId: Id) :
     }
 
     override fun onTick(engine: Engine) {
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Blue Wall", "A wall that appears blue, but turns to a normal wall upon contact.")
     }
 
 

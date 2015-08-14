@@ -21,4 +21,8 @@ open class Ice(location: Point, uniqueId: Id) : IceBase(iceImage, ICE_TYPE_ID, l
 
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }
