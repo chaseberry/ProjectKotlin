@@ -122,6 +122,7 @@ class Editor(x: Int, y: Int) {
         val tileLocation = mouseBindings.mouseLocation + Point(viewport.xStart, viewport.yStart)
 
         if (inspectMode) {
+            pallet.inspectPanel.inspect(tileLocation, this)
             //Take tile/object/unit to inspection
             return
         }
@@ -168,7 +169,7 @@ class Editor(x: Int, y: Int) {
         }
 
         val unit = unitManager.unitOnPoint(tileLocation)
-        
+
         if (rotateMode && unit is DirectionalUnit) {
             unit.rotateDirection()
         }

@@ -14,10 +14,7 @@ data class Point(var x: Int, var y: Int) {
         }
 
     override fun equals(other: Any?): Boolean {
-        if (other != null && other is Point) {
-            return x == other.x && y == other.y
-        }
-        return false
+        return other != null && other is Point && other.x == x && other.y == y
     }
 
     fun minus(point: Point): Point {
@@ -27,7 +24,5 @@ data class Point(var x: Int, var y: Int) {
     fun plus(point: Point): Point {
         return Point(x + point.x, y + point.y)
     }
-
-
 
 }

@@ -18,6 +18,8 @@ class EditorPallet : JFrame() {
 
     val gridSize = 6
 
+    val inspectPanel = InspectionPanel(this)
+
     init {
         pack()
         setSize(getInsets().left + (32 * 6) + getInsets().right + 32, getInsets().top + (32 * 6) + getInsets().bottom + 32)
@@ -30,7 +32,7 @@ class EditorPallet : JFrame() {
         tabs.add("Objects", ObjectPanel(this))
         tabs.add("Player", PlayerLocationPanel(this))
         tabs.add("Enemies", UnitPanel(this))
-        tabs.add("Inspect", InspectionPanel(this))
+        tabs.add("Inspect", inspectPanel)
         tabs.addChangeListener() {
             if (tabs.getSelectedIndex() == 0) {
                 palletStatus = PalletStatus.TILE
