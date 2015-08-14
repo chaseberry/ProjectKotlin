@@ -92,4 +92,8 @@ class Player(location: Point) : UnitBase(-1, location) {
         return inventory.hasFireBoots
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

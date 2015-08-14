@@ -3,9 +3,6 @@ package ChipsChallenge.Object
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 2/27/15.
- */
 class Socket(location: Point, uniqueId: Id) : ObjectBase(SOCKET_TYPE_ID, location, socketImage, uniqueId) {
 
     constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
@@ -20,6 +17,10 @@ class Socket(location: Point, uniqueId: Id) : ObjectBase(SOCKET_TYPE_ID, locatio
     }
 
     override fun onTick(engine: Engine) {
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

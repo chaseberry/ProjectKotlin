@@ -23,4 +23,8 @@ class RedKey(location: Point, uniqueId: Id) : ObjectBase(RED_KEY_TYPE_ID, locati
 
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

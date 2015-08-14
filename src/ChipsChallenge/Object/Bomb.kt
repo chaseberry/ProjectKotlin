@@ -15,4 +15,8 @@ class Bomb(location: Point, uniqueId: Id) : ObjectBase(BOMB_TYPE_ID, location, b
 
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

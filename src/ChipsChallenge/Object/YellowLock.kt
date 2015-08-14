@@ -3,9 +3,6 @@ package ChipsChallenge.Object
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 2/27/15.
- */
 class YellowLock(location: Point, uniqueId: Id) : ObjectBase(YELLOW_LOCK_TYPE_ID, location, yellowLockImage, uniqueId) {
 
     constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
@@ -21,6 +18,10 @@ class YellowLock(location: Point, uniqueId: Id) : ObjectBase(YELLOW_LOCK_TYPE_ID
             return ObjectResolution.REMOVE
         }
         return ObjectResolution.NOTHING
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

@@ -23,4 +23,8 @@ class BlueLock(location: Point, uniqueId: Id) : ObjectBase(BLUE_LOCK_TYPE_ID, lo
 
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

@@ -23,4 +23,8 @@ class GreenKey(location: Point, uniqueId: Id) : ObjectBase(GREEN_KEY_TYPE_ID, lo
 
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

@@ -26,4 +26,8 @@ class BlueButton(location: Point, uniqueId: Id) : Button(BLUE_BUTTON_TYPE_ID, lo
         triggered = false
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

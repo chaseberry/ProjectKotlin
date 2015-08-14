@@ -65,5 +65,8 @@ class Walker(location: Point, direction: Direction,
         return super.canMoveToTile(tile, direction) && tile !is Fire
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
 
 }

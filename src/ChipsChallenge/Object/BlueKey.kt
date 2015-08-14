@@ -23,4 +23,8 @@ class BlueKey(location: Point, uniqueId: Id) : ObjectBase(BLUE_KEY_TYPE_ID, loca
 
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

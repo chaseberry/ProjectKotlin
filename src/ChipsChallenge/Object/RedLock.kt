@@ -3,9 +3,6 @@ package ChipsChallenge.Object
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 2/26/15.
- */
 class RedLock(location: Point, uniqueId: Id) : ObjectBase(RED_LOCK_TYPE_ID, location, redLockImage, uniqueId) {
 
     constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
@@ -21,6 +18,10 @@ class RedLock(location: Point, uniqueId: Id) : ObjectBase(RED_LOCK_TYPE_ID, loca
 
     override fun onTick(engine: Engine) {
 
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

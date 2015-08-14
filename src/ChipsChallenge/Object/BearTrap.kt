@@ -2,9 +2,6 @@ package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
 
-/**
- * Created by chase on 3/2/15.
- */
 class BearTrap(location: Point, var isActive: Boolean = false, uniqueId: Id) : ObjectBase(BEAR_TRAP_TYPE_ID, location, bearTrapImage, uniqueId), Triggerable {
 
     constructor(location: Point) : this(location, true, Id(IdType.OBJECT)) {
@@ -31,6 +28,10 @@ class BearTrap(location: Point, var isActive: Boolean = false, uniqueId: Id) : O
     }
 
     override fun onTick(engine: Engine) {
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

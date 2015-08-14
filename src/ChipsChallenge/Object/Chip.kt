@@ -20,4 +20,8 @@ class Chip(location: Point, uniqueId: Id) : ObjectBase(CHIP_TYPE_ID, location, c
     override fun onTick(engine: Engine) {
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

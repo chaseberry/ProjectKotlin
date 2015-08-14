@@ -53,4 +53,8 @@ class Blob(location: Point, uniqueId: Id) : UnitBase(BLOB_TYPE_ID, location, BLO
         return super.canMoveToTile(tile, direction) && tile !is Gravel && tile !is RecessedWall
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

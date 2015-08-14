@@ -6,9 +6,6 @@ import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Map.Tiles.Wall
 import ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 3/1/15.
- */
 class Block(location: Point, uniqueId: Id, var objectUnder: ObjectBase? = null) : ObjectBase(BLOCK_TYPE_ID, location, blockImage, uniqueId) {
 
     var currentMove = 5
@@ -117,6 +114,10 @@ class Block(location: Point, uniqueId: Id, var objectUnder: ObjectBase? = null) 
         } else {
             forcedDirection = null
         }
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

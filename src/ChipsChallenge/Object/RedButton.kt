@@ -34,4 +34,8 @@ class RedButton(location: Point, uniqueId: Id, target: Id?) :
         triggered = false
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

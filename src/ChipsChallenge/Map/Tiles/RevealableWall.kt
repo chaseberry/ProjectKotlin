@@ -18,9 +18,7 @@ class RevealableWall(location: Point, uniqueId: Id) :
         return img
     }
 
-    constructor(location: Point, open: Boolean = false) : this(location, Id(IdType.TILE)) {
-
-    }
+    constructor(location: Point, open: Boolean = false) : this(location, Id(IdType.TILE))
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
 

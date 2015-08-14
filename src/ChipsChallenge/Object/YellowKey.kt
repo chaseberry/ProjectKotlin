@@ -3,9 +3,6 @@ package ChipsChallenge.Object
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 2/27/15.
- */
 class YellowKey(location: Point, uniqueId: Id) : ObjectBase(YELLOW_KEY_TYPE_ID, location, yellowKeyImage, uniqueId) {
 
     constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
@@ -20,6 +17,10 @@ class YellowKey(location: Point, uniqueId: Id) : ObjectBase(YELLOW_KEY_TYPE_ID, 
     }
 
     override fun onTick(engine: Engine) {
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

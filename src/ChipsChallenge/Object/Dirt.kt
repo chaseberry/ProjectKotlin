@@ -21,4 +21,8 @@ class Dirt(location: Point, uniqueId: Id) : ObjectBase(DIRT_TYPE_ID, location, d
     override fun onTick(engine: Engine) {
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

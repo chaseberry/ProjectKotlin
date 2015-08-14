@@ -23,7 +23,7 @@ public fun pointInViewport(point: Point, viewport: Viewport): Boolean {
     return point.x in viewport.xStart..viewport.xEnd && point.y in viewport.yStart..viewport.yEnd
 }
 
-data class Viewport internal (val xStart: Int, val yStart: Int, val xMod: Int, val yMod: Int) {
+data class Viewport internal constructor(val xStart: Int, val yStart: Int, val xMod: Int, val yMod: Int) {
 
     val xEnd: Int
         get() {

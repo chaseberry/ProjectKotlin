@@ -37,4 +37,8 @@ class PinkBall(location: Point, direction: Direction,
         }
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
+
 }

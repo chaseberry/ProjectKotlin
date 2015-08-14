@@ -3,9 +3,6 @@ package ChipsChallenge.Object
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 2/27/15.
- */
 class GreenLock(location: Point, uniqueId: Id) : ObjectBase(GREEN_LOCK_TYPE_ID, location, greenLockImage, uniqueId) {
 
     constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
@@ -20,6 +17,10 @@ class GreenLock(location: Point, uniqueId: Id) : ObjectBase(GREEN_LOCK_TYPE_ID, 
 
     override fun onTick(engine: Engine) {
 
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

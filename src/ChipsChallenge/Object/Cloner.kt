@@ -87,5 +87,8 @@ class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var
 
     }
 
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
+    }
 
 }

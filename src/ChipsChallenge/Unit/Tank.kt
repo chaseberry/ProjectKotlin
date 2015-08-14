@@ -9,8 +9,8 @@ val TANK_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val TANK_TYPE_ID = 2
 
 public enum class TANKSTATUS {
-    STOP
-    TURN
+    STOP,
+    TURN,
     MOVE
 }
 
@@ -105,6 +105,10 @@ class Tank(location: Point, direction: Direction,
 
     override fun canSurviveInFire(): Boolean {
         return false
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

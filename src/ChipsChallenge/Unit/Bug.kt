@@ -28,17 +28,17 @@ class Bug(location: Point, direction: Direction,
     override fun onTick(engine: Engine) {
         if (currentMove == 1) {
             var newTile = getTileLeftOfCurrent(engine.map)
-            if (newTile != null && canMoveToTile(newTile!!, getLeftOfCurrent(), engine)) {
+            if (newTile != null && canMoveToTile(newTile, getLeftOfCurrent(), engine)) {
                 direction = getLeftOfCurrent()
             } else {
                 newTile = getTileAheadOfCurrent(engine.map)
-                if (newTile == null || !canMoveToTile(newTile!!, direction, engine)) {
+                if (newTile == null || !canMoveToTile(newTile, direction, engine)) {
                     newTile = getTileRightOfCurrent(engine.map)
-                    if (newTile != null && canMoveToTile(newTile!!, getRightOfCurrent(), engine)) {
+                    if (newTile != null && canMoveToTile(newTile, getRightOfCurrent(), engine)) {
                         direction = getRightOfCurrent()
                     } else {
                         newTile = getTileBehindCurrent(engine.map)
-                        if (newTile != null && canMoveToTile(newTile!!, getBehindOfCurrent(), engine)) {
+                        if (newTile != null && canMoveToTile(newTile, getBehindOfCurrent(), engine)) {
                             direction = getBehindOfCurrent()
                         }
                     }
@@ -63,6 +63,10 @@ class Bug(location: Point, direction: Direction,
             Direction.RIGHT -> bugRightImage
             Direction.DOWN -> bugDownImage
         }
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }

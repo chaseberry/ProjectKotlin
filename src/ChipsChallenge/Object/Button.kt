@@ -4,9 +4,6 @@ import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONObject
 import java.awt.image.BufferedImage
 
-/**
- * Created by chase on 3/2/15.
- */
 abstract class Button(typeId: Int, location: Point, image: BufferedImage,
                       var target: Id?, uniqueId: Id) : ObjectBase(typeId, location, image, uniqueId) {
 
@@ -38,6 +35,10 @@ abstract class Button(typeId: Int, location: Point, image: BufferedImage,
                 tgt.offTrigger()
             }
         }
+    }
+
+    override fun getInspectionData(): Inspection {
+        return Inspection("Finish", "The game ends here.")
     }
 
 }
