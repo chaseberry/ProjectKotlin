@@ -11,12 +11,32 @@ import javax.swing.JPanel
 class InspectionPanel(val editorPallet: EditorPallet) : JPanel() {
 
     val locationLabel = JLabel()
+    val nameLabel = JLabel()
+    val descriptionLabel = JLabel()
+
+    var tileName: String
+        set(name) {
+            nameLabel.setText(name)
+        }
+        get() {
+            return nameLabel.getText()
+        }
+
+    var tileDescription: String
+        set(desc) {
+            descriptionLabel.setText(desc)
+        }
+        get() {
+            return descriptionLabel.getText()
+        }
 
     init {
         setLayout(null)
         setSize(6 * 32, 6 * 32)
         setVisible(true)
         initComponent(locationLabel, 0, 0, 32 * 3, 16)
+        initComponent(nameLabel, 0, 15, 32 * 6, 16)
+        initComponent(descriptionLabel, 0, 30, 32 * 6, 16)
     }
 
     fun initComponent(comp: JComponent = JLabel(), x: Int, y: Int, width: Int, height: Int) {
@@ -36,9 +56,7 @@ class InspectionPanel(val editorPallet: EditorPallet) : JPanel() {
 
         locationLabel.setText("Location: (${location.x}, ${location.y})")
         val inspection = tile.getInspectionData()
-        for (z in inspection.indices) {
-            println("Hererere")
-            initComponent(JLabel("${inspection[z].first}: ${inspection[z].second}"), 0, (z + 1) * 15, 32 * 3, 16)
-        }
+        tileName = inspection[0].second
+        tileDescription = inspection[1].second
     }
 }
