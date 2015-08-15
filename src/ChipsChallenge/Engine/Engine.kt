@@ -19,9 +19,9 @@ import java.util.Timer
 import java.util.TimerTask
 
 public enum class Direction {
-    UP
-    DOWN
-    LEFT
+    UP,
+    DOWN,
+    LEFT,
     RIGHT
 }
 
@@ -119,7 +119,7 @@ class Engine(val level: Level) {
 
         gameTimer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                unitManager.copyToArray().forEach { it.onTick(engine) }
+                unitManager.toTypedArray().forEach { it.onTick(engine) }
                 map.onTick(engine)
                 player.onTick(engine)
                 objectManager.onTick(engine)

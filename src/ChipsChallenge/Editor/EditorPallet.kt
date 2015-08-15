@@ -11,9 +11,6 @@ import javax.swing.JFrame
 import javax.swing.JTabbedPane
 import javax.swing.WindowConstants
 
-/**
- * Created by chase on 2/27/15.
- */
 class EditorPallet : JFrame() {
 
     val gridSize = 6
@@ -60,9 +57,9 @@ class EditorPallet : JFrame() {
 }
 
 public enum class PalletStatus {
-    TILE
-    OBJECT
-    PLAYER
-    TRIGGER
+    TILE,
+    OBJECT,
+    PLAYER,
+    TRIGGER,
     UNIT
 }

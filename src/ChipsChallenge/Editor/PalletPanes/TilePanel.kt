@@ -10,9 +10,6 @@ import javax.swing.ImageIcon
 import javax.swing.JButton
 import javax.swing.JPanel
 
-/**
- * Created by chase on 2/27/15.
- */
 class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
     val buttons = Array(25) { tileIdToTile(it, Point(0, 0)) };

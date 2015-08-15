@@ -11,9 +11,9 @@ fun idTypeFromInt(i: Int): IdType {
 }
 
 public enum class IdType(val typeInt: Int) {
-    UNIT : IdType(0)
-    OBJECT : IdType(1)
-    TILE : IdType(2)
+    UNIT(0),
+    OBJECT(1),
+    TILE(2)
 }
 
 fun idFromJson(obj: JSONObject): Id {

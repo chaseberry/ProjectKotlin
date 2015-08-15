@@ -104,9 +104,9 @@ data abstract class ObjectBase(val typeId: Int, location: Point, image: Buffered
 }
 
 public enum class ObjectResolution {
-    MOVE
-    REMOVE
-    NOTHING
-    PASSOVER
+    MOVE,
+    REMOVE,
+    NOTHING,
+    PASSOVER,
     KILL
 }
