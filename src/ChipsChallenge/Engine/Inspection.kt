@@ -7,7 +7,10 @@ data class Inspection(name: String, description: String, map: ArrayList<Pair<Str
 
     private val inspectionList: ArrayList<Pair<String, String>> = ArrayList(2)
 
-    val indices = inspectionList.indices
+    val indices: IntRange
+        get() {
+            return inspectionList.indices
+        }
 
     override fun iterator(): MutableIterator<Pair<String, String>> {
         return inspectionList.iterator()

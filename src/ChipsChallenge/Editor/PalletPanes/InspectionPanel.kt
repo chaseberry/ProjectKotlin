@@ -37,6 +37,7 @@ class InspectionPanel(val editorPallet: EditorPallet) : JPanel() {
         locationLabel.setText("Location: (${location.x}, ${location.y})")
         val inspection = tile.getInspectionData()
         for (z in inspection.indices) {
+            println("Hererere")
             initComponent(JLabel("${inspection[z].first}: ${inspection[z].second}"), 0, (z + 1) * 15, 32 * 3, 16)
         }
     }

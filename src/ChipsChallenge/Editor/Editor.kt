@@ -126,7 +126,6 @@ class Editor(x: Int, y: Int) {
 
         if (inspectMode) {
             pallet.inspectPanel.inspect(tileLocation, this)
-            //Take tile/object/unit to inspection
             return
         }
 
@@ -199,10 +198,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun addTile(tileLocation: Point) {
-        val tile = map.getTile(tileLocation)
-        if (tile == null) {
-            return
-        }
+        val tile = map.getTile(tileLocation) ?: return
 
         if (rotateMode && tile is IceCorner && pallet.currentTile is IceCorner) {
             map.setTile(tileLocation, tileIdToTile(getNextIceCorner(tile.tileId), tileLocation))
@@ -223,10 +219,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun removeTile(tileLocation: Point) {
-        val tile = map.getTile(tileLocation)
-        if (tile == null) {
-            return
-        }
+        val tile = map.getTile(tileLocation) ?: return
         if (!tile.typeEquals(pallet.deleteTile)) {
             map.setTile(tileLocation, pallet.deleteTile)
         }
@@ -361,6 +354,8 @@ class Editor(x: Int, y: Int) {
             Mode.ROTATE -> Mode.INSPECT
             else -> Mode.DRAW
         }
+        frame.image = buildFrameImage()
+
     }
 
 }

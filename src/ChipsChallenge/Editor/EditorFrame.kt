@@ -8,9 +8,6 @@ import javax.swing.JFrame
 import javax.swing.JTextField
 import javax.swing.WindowConstants
 
-/**
- * Created by chase on 2/27/15.
- */
 class EditorFrame(val editor: Editor) : JFrame() {
 
     val chipCountTextField = JTextField()
