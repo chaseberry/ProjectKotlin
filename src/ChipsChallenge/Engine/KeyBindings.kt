@@ -1,15 +1,9 @@
 package ChipsChallenge.Engine
 
-/**
- * Created by chase on 2/25/15.
- */
-
-data class KeyBindings {
-
-    val KEY_CODE_UP = 38
-    val KEY_CODE_DOWN = 40
-    val KEY_CODE_LEFT = 37
-    val KEY_CODE_RIGHT = 39
+data class KeyBindings(val KEY_CODE_UP: Int = 38,
+                       val KEY_CODE_DOWN: Int = 40,
+                       val KEY_CODE_LEFT: Int = 37,
+                       val KEY_CODE_RIGHT: Int = 39) {
 
     var up = false
     var down = false

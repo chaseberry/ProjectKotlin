@@ -5,9 +5,6 @@ import ChipsChallenge.Map.FIRE_TYPE_ID
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 3/6/15.
- */
 class Fire(location: Point, uniqueId: Id) : Tile(fireImage, FIRE_TYPE_ID, location, uniqueId) {
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
         if (!interactor.canSurviveInFire()) {

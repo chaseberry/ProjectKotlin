@@ -17,6 +17,7 @@ import java.io.FileReader
 import java.net.URI
 import java.util.Timer
 import java.util.TimerTask
+import kotlin.properties.Delegates
 
 public enum class Direction {
     UP,
@@ -66,10 +67,7 @@ fun loadTemplate(obj: JSONObject): EngineObjectBase? {
 }
 
 fun engineFromJson(obj: JSONObject): Engine? {
-    val level = levelFromJson(obj)
-    if (level == null) {
-        return null
-    }
+    val level = levelFromJson(obj) ?: return null
     return Engine(level)
 
 }
@@ -80,13 +78,15 @@ fun loadLevel(name: String): File {
 
 class Engine(val level: Level) {
 
+    var result: EngineResult by Delegates.vetoable(EngineResult.InProgress) { desc, old, new ->
+        old == EngineResult.InProgress
+    }
+
     val map: ChipsChallenge.Map.Map//shortcut to level.map
 
     val gameTime: Long = 30
 
     val frame = Frame(this)
-
-    //Current test map is just a test
 
     val objectManager = ObjectManager(this)
 
@@ -97,7 +97,10 @@ class Engine(val level: Level) {
     val player = Player(level.playerStart)
 
     //Done so this can be passed around in the onTick method
-    val engine = this
+    val engine: Engine
+        get() {
+            return this
+        }
 
     val movement = Movement(this)
 
@@ -167,15 +170,22 @@ class Engine(val level: Level) {
     }
 
     fun lose() {
+        result = EngineResult.Defeat
         gameOver()
     }
 
     fun win() {
+        result = EngineResult.Victory
         gameOver()
     }
 
     fun gameOver() {
         gameTimer.cancel()
+    }
+
+    fun aborted() {
+        result = EngineResult.Aborted
+        gameOver()
     }
 
     fun buildFrameImage(): BufferedImage {

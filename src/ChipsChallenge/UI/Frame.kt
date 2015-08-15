@@ -1,14 +1,13 @@
 package ChipsChallenge.UI
 
-import javax.swing.JFrame
-import java.awt.Graphics
-import java.awt.image.BufferedImage
 import ChipsChallenge.Engine.Engine
+import java.awt.Graphics
+import java.awt.event.WindowAdapter
+import java.awt.event.WindowEvent
+import java.awt.image.BufferedImage
+import javax.swing.JFrame
 import javax.swing.WindowConstants
 
-/**
- * Created by chase on 2/25/15.
- */
 class Frame(val engine: Engine) : JFrame() {
 
     val keyListener = KeyListener(this);
@@ -18,6 +17,12 @@ class Frame(val engine: Engine) : JFrame() {
         setSize(getInsets().left + (32 * 9) + getInsets().right, getInsets().top + (32 * 9) + getInsets().bottom)
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE)
         addKeyListener(keyListener)
+        addWindowListener(object : WindowAdapter() {
+            override fun windowClosing(e: WindowEvent) {
+                println("Closed")
+                engine.gameOver()
+            }
+        });
     }
 
     public var image: BufferedImage? = null
