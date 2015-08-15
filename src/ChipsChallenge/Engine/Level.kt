@@ -40,29 +40,19 @@ fun levelFromJson(obj: JSONObject): Level? {
         return null
     }
 
-    val map = mapFromJSON(mapObj)
-
-    if (map == null) {
-        return null
-    }
+    val map = mapFromJSON(mapObj) ?: return null
 
     val playerStart = pointFromJson(playerStartObj)
 
     val objects = ArrayList<ObjectBase>(unitObj.length())
     for (z in 0..unitObj.length() - 1) {
-        val obj = objectFromJSON(unitObj.getJSONObject(z))
-        if (obj == null) {
-            continue
-        }
+        val obj = objectFromJSON(unitObj.getJSONObject(z)) ?: continue
         objects.add(obj)
     }
 
     val units = ArrayList<UnitBase>(unitObj.length())
     for ( z in 0..unitObj.length() - 1) {
-        val unit = unitFromJson(unitObj.getJSONObject(z))
-        if (unit == null) {
-            continue
-        }
+        val unit = unitFromJson(unitObj.getJSONObject(z)) ?: continue
         units.add(unit)
     }
 

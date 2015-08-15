@@ -8,6 +8,7 @@ import ChipsChallenge.Map.tileIdToTile
 import ChipsChallenge.Object.*
 import ChipsChallenge.UI.getViewport
 import ChipsChallenge.Unit.DirectionalUnit
+import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.BufferedWriter
 import java.io.File
@@ -110,11 +111,12 @@ class Editor(x: Int, y: Int) {
 
         g.drawImage(playerImage, (playerLocation.x - viewport.xStart) * 32,
                 (playerLocation.y - viewport.yStart) * 32, null)
+        g.setColor(Color.BLACK)
         g.drawString(when (mode) {
             Mode.DRAW -> "D"
             Mode.INSPECT -> "I"
             Mode.ROTATE -> "R"
-        }, 15, 15)
+        }, 0, 15)
         return image
     }
 
