@@ -3,11 +3,10 @@ package ChipsChallenge.Map
 import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tiles.*
-import edu.csh.chase.ChipsChallenge.Engine.Direction
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import edu.csh.chase.ChipsChallenge.Engine.UnitBase
+import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Map.Tiles.BlueFloor
+import edu.csh.chase.kjson.Json
+import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
 
 val FLOOR_TYPE_ID = 0
@@ -79,7 +78,7 @@ fun tileFromJson(obj: JSONObject, location: Point): Tile {
 
 }
 
-data abstract class Tile(image: BufferedImage, val  tileId: Int, location: Point,
+data abstract class Tile(image: BufferedImage, val tileId: Int, location: Point,
                          val uniqueId: Id) : EngineObjectBase(location, image) {
 
     fun typeEquals(tile: Tile): Boolean {
@@ -93,8 +92,8 @@ data abstract class Tile(image: BufferedImage, val  tileId: Int, location: Point
         return false;
     }
 
-    override fun getSaveObject(): JSONObject {
-        return JSONObject().put("typeId", tileId).put("id", uniqueId.getJson())
+    override fun getSaveObject(): JsonObject {
+        return Json("typeId" to tileId, "id" to uniqueId.getJson())
     }
 
     abstract fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine);

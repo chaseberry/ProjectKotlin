@@ -2,9 +2,7 @@ package ChipsChallenge.Map.Tiles
 
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.ICE_TYPE_ID
-import edu.csh.chase.ChipsChallenge.Engine.Direction
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
+import edu.csh.chase.ChipsChallenge.Engine.*
 
 /**
  * Created by chase on 3/8/15.

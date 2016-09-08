@@ -1,11 +1,8 @@
 package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Unit.Player
-import edu.csh.chase.ChipsChallenge.Engine.Direction
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import edu.csh.chase.ChipsChallenge.Engine.UnitBase
+import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Unit.Player
 
 class Socket(location: Point, uniqueId: Id) : ObjectBase(SOCKET_TYPE_ID, location, socketImage, uniqueId) {
 

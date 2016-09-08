@@ -1,5 +1,6 @@
-package ChipsChallenge.UI
+package edu.csh.chase.ChipsChallenge.UI
 
+import edu.csh.chase.ChipsChallenge.UI.KeyListener
 import edu.csh.chase.ChipsChallenge.Engine.Engine
 import java.awt.Graphics
 import java.awt.event.WindowAdapter
@@ -27,7 +28,7 @@ class Frame(val engine: Engine) : JFrame() {
 
     var image: BufferedImage? = null
         set(newImage) {
-            $image = newImage
+            field = newImage
             repaint()
         }
 

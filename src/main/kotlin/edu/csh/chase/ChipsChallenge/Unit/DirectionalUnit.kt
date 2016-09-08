@@ -1,15 +1,12 @@
-package ChipsChallenge.Unit
+package edu.csh.chase.ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Gravel
 import ChipsChallenge.Map.Tiles.RecessedWall
-import edu.csh.chase.ChipsChallenge.Engine.Direction
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import edu.csh.chase.ChipsChallenge.Engine.UnitBase
+import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Map.Map
+import edu.csh.chase.kjson.JsonObject
 
 abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Direction, moveSpeed: Int,
                                uniqueId: Id) : UnitBase(typeId, location, moveSpeed, uniqueId) {
@@ -55,7 +52,7 @@ abstract class DirectionalUnit(typeId: Int, location: Point, var direction: Dire
         setImage()
     }
 
-    override fun getSaveObject(): JSONObject {
+    override fun getSaveObject(): JsonObject {
         val saveObj = super.getSaveObject()
         saveObj.put("direction", direction)
         return saveObj

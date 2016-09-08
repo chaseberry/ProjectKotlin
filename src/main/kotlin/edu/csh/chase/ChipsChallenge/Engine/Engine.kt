@@ -6,12 +6,12 @@ import edu.csh.chase.ChipsChallenge.Map.Map
 import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Map.Tiles.Teleport
 import ChipsChallenge.Map.Tiles.Water
-import ChipsChallenge.Object.Block
+import edu.csh.chase.ChipsChallenge.Object.Block
 import ChipsChallenge.Object.Button
 import ChipsChallenge.Object.Dirt
-import ChipsChallenge.UI.Frame
-import ChipsChallenge.UI.getViewport
-import ChipsChallenge.Unit.Player
+import edu.csh.chase.ChipsChallenge.UI.Frame
+import edu.csh.chase.ChipsChallenge.UI.getViewport
+import edu.csh.chase.ChipsChallenge.Unit.Player
 import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
 import java.io.BufferedReader

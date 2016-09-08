@@ -1,32 +1,24 @@
-package ChipsChallenge.Engine
+package edu.csh.chase.ChipsChallenge.Engine
 
-import ChipsChallenge.JSON.JSONArray
+import ChipsChallenge.Engine.EngineObjectBase
 import ChipsChallenge.Map.Tiles.IceBase
-import ChipsChallenge.Object.Block
-import ChipsChallenge.UI.Viewport
-import ChipsChallenge.UI.pointInViewport
-import ChipsChallenge.Unit.Player
-import edu.csh.chase.ChipsChallenge.Engine.Direction
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import edu.csh.chase.ChipsChallenge.Engine.UnitBase
-import java.util.ArrayList
-import java.util.HashMap
-
-/**
- * Created by chase on 2/27/15.
- */
+import edu.csh.chase.ChipsChallenge.Object.Block
+import edu.csh.chase.ChipsChallenge.UI.Viewport
+import edu.csh.chase.ChipsChallenge.UI.pointInViewport
+import edu.csh.chase.ChipsChallenge.Unit.Player
+import edu.csh.chase.kjson.JsonArray
+import java.util.*
 
 
 class ObjectManager(val engine: Engine?) : Tickable {
 
+    val objects = HashMap<Point, ObjectBase>()
+
     override fun onTick(engine: Engine) {
-        val array = ArrayList<EngineObjectBase>(objects.values())
+        val array = ArrayList<EngineObjectBase>(objects.values)
         array.forEach { it.onTick(engine) }
 
     }
-
-    val objects = HashMap<Point, ObjectBase>()
 
     fun add(obj: ObjectBase, location: Point) {
         objects[location] = obj
@@ -123,9 +115,9 @@ class ObjectManager(val engine: Engine?) : Tickable {
 
     }
 
-    fun getSaveObject(): JSONArray {
-        val objArray = JSONArray()
-        for (obj in objects.values()) {
+    fun getSaveObject(): JsonArray {
+        val objArray = JsonArray()
+        for (obj in objects.values) {
             objArray.put(obj.getSaveObject())
         }
         return objArray

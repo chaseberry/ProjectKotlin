@@ -1,11 +1,13 @@
-package ChipsChallenge.UI
+package edu.csh.chase.ChipsChallenge.UI
 
+import edu.csh.chase.ChipsChallenge.UI.Frame
 import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
 
 /**
  * Created by chase on 2/25/15.
  */
-class KeyListener(val frame: Frame) : java.awt.event.KeyListener {
+class KeyListener(val frame: Frame) : KeyListener {
 
 
     override fun keyPressed(e: KeyEvent) {

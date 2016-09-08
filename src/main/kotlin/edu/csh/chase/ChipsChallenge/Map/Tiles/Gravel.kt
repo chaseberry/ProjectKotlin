@@ -3,10 +3,7 @@ package ChipsChallenge.Map.Tiles
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.GRAVEL_TYPE_ID
 import ChipsChallenge.Map.Tile
-import edu.csh.chase.ChipsChallenge.Engine.Direction
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import edu.csh.chase.ChipsChallenge.Engine.UnitBase
+import edu.csh.chase.ChipsChallenge.Engine.*
 
 /**
  * Created by chase on 5/4/15.

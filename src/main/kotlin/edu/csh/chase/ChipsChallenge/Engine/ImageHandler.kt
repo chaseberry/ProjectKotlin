@@ -1,5 +1,6 @@
-package ChipsChallenge.Engine
+package edu.csh.chase.ChipsChallenge.Engine
 
+import ChipsChallenge.Engine.BaseObject
 import java.awt.image.BufferedImage
 import java.net.URL
 import javax.imageio.ImageIO
@@ -11,7 +12,7 @@ import kotlin.properties.Delegates
 
 val fileUrl: String by lazy {
     var fileName = ""
-    for (filePart in (BaseObject() as java.lang.Object).`class`.getResource("").toString().split("/")) {
+    for (filePart in (BaseObject() as Object).`class`.getResource("").toString().split("/")) {
         if (filePart == "ChipsChallenge") {
             fileName += "$filePart/"
             break;

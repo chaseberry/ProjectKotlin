@@ -1,11 +1,14 @@
-package ChipsChallenge.Engine
+package edu.csh.chase.ChipsChallenge.Engine
 
+import edu.csh.chase.ChipsChallenge.Engine.Id
+import edu.csh.chase.ChipsChallenge.Engine.Tickable
 import ChipsChallenge.JSON.JSONArray
-import ChipsChallenge.UI.Viewport
-import ChipsChallenge.UI.pointInViewport
-import ChipsChallenge.Unit.DirectionalUnit
+import edu.csh.chase.ChipsChallenge.UI.Viewport
+import edu.csh.chase.ChipsChallenge.UI.pointInViewport
+import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
 import edu.csh.chase.ChipsChallenge.Unit.Tank
 import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.kjson.JsonArray
 import java.util.ArrayList
 
 /**
@@ -13,8 +16,8 @@ import java.util.ArrayList
  */
 class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), Tickable {
 
-    fun getSaveObject(): JSONArray {
-        val unitArray = JSONArray()
+    fun getSaveObject(): JsonArray {
+        val unitArray = JsonArray()
 
         forEach { unit ->
             unitArray.put(unit.getSaveObject())
@@ -40,7 +43,7 @@ class UnitManager(val engine: Engine?) : ArrayList<UnitBase>(), Tickable {
     }
 
     fun unitOnPointIndex(location: Point): Int? {
-        forEachIndexed {(i, unitBase) -> if (unitBase != null && unitBase.location == location) return i }
+        forEachIndexed { i, unitBase -> if ( unitBase.location == location) return i }
         return null;
     }
 

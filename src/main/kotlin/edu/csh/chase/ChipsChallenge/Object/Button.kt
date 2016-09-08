@@ -2,9 +2,8 @@ package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
 import ChipsChallenge.JSON.JSONObject
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import edu.csh.chase.ChipsChallenge.Engine.Triggerable
+import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
 
 abstract class Button(typeId: Int, location: Point, image: BufferedImage,
@@ -12,7 +11,7 @@ abstract class Button(typeId: Int, location: Point, image: BufferedImage,
 
     var triggered = false
 
-    override fun getSaveObject(): JSONObject {
+    override fun getSaveObject(): JsonObject {
         val obj = super.getSaveObject()
         if (target != null) {
             obj.put("targetId", target!!.getJson())

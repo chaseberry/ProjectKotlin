@@ -1,7 +1,9 @@
-package ChipsChallenge.Engine
+package edu.csh.chase.ChipsChallenge.Engine
 
 import ChipsChallenge.JSON.JSONObject
 import edu.csh.chase.ChipsChallenge.Engine.CounterDelegate
+import edu.csh.chase.kjson.Json
+import edu.csh.chase.kjson.JsonObject
 
 fun idTypeFromInt(i: Int): IdType {
     return when (i) {
@@ -17,7 +19,7 @@ enum class IdType(val typeInt: Int) {
     TILE(2)
 }
 
-fun idFromJson(obj: JSONObject): Id {
+fun idFromJson(obj: JsonObject): Id {
     return Id(idTypeFromInt(obj.getInt("type")), obj.getInt("id"))
 }
 
@@ -34,8 +36,8 @@ data class Id(val type: IdType, val id: Int = if (type == IdType.UNIT) uCounter 
         return false;
     }
 
-    fun getJson(): JSONObject {
-        return JSONObject().put("type", type.typeInt).put("id", id)
+    fun getJson(): JsonObject {
+        return Json("type" to type.typeInt, "id" to id)
     }
 
     fun equals(id: Id): Boolean {

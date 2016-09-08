@@ -1,9 +1,16 @@
-package ChipsChallenge.Engine
+package edu.csh.chase.ChipsChallenge.Engine
 
+import ChipsChallenge.Engine.EngineObjectBase
+import edu.csh.chase.ChipsChallenge.Engine.Id
+import edu.csh.chase.ChipsChallenge.Engine.IdType
+import edu.csh.chase.ChipsChallenge.Engine.idFromJson
 import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Object.*
 import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Object.Block
 import edu.csh.chase.ChipsChallenge.Object.BlueKey
+import edu.csh.chase.ChipsChallenge.Object.Cloner
+import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
 
 val CHIP_TYPE_ID = 0
@@ -94,7 +101,7 @@ data abstract class ObjectBase(val typeId: Int, location: Point, image: Buffered
         return true
     }
 
-    override fun getSaveObject(): JSONObject {
+    override fun getSaveObject(): JsonObject {
         val obj = JSONObject()
         obj.put("typeId", typeId)
         obj.put("location", location.saveObject)

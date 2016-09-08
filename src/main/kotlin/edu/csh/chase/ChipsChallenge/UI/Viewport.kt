@@ -1,4 +1,4 @@
-package ChipsChallenge.UI
+package edu.csh.chase.ChipsChallenge.UI
 
 import edu.csh.chase.ChipsChallenge.Engine.Point
 import edu.csh.chase.ChipsChallenge.Map.Map

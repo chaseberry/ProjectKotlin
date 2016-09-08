@@ -1,9 +1,9 @@
-package ChipsChallenge.Engine
+package edu.csh.chase.ChipsChallenge.Engine
 
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.ForceFloor
 import ChipsChallenge.Map.Tiles.Revealable
-import ChipsChallenge.Unit.DirectionalUnit
+import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
 import edu.csh.chase.ChipsChallenge.Engine.*
 
 /**

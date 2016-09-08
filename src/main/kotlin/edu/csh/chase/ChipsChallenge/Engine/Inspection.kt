@@ -1,4 +1,4 @@
-package ChipsChallenge.Engine
+package edu.csh.chase.ChipsChallenge.Engine
 
 import java.util.ArrayList
 

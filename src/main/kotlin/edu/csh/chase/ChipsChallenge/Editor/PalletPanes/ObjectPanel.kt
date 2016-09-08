@@ -3,7 +3,7 @@ package ChipsChallenge.Editor.PalletPanes
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
 import ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Engine.Point
+import edu.csh.chase.ChipsChallenge.Engine.*
 import javax.swing.ImageIcon
 import javax.swing.JButton
 import javax.swing.JPanel

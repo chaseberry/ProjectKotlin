@@ -1,9 +1,10 @@
-package ChipsChallenge.Object
+package edu.csh.chase.ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.JSON.JSONObject
-import ChipsChallenge.Unit.DirectionalUnit
+import edu.csh.chase.ChipsChallenge.Object.Block
+import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
 import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
 
 /**
@@ -34,8 +35,8 @@ class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var
     override fun offTrigger() {
     }
 
-    override fun getSaveObject(): JSONObject {
-        val obj = super<ObjectBase>.getSaveObject()
+    override fun getSaveObject(): JsonObject {
+        val obj = super.getSaveObject()
         if (template == null) {
             obj.put("template", "null")
         } else {

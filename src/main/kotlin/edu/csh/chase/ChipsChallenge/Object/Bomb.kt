@@ -1,10 +1,7 @@
 package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Engine.Direction
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import edu.csh.chase.ChipsChallenge.Engine.UnitBase
+import edu.csh.chase.ChipsChallenge.Engine.*
 
 class Bomb(location: Point, uniqueId: Id) : ObjectBase(BOMB_TYPE_ID, location, bombImage, uniqueId) {
 

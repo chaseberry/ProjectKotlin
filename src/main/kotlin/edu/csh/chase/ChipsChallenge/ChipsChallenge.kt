@@ -1,6 +1,6 @@
 import edu.csh.chase.ChipsChallenge.Editor.Editor
 import edu.csh.chase.ChipsChallenge.Engine.engineFromFile
-import ChipsChallenge.Engine.fileUrl
+import edu.csh.chase.ChipsChallenge.Engine.fileUrl
 import java.io.File
 import java.net.URI
 

@@ -1,10 +1,7 @@
 package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Engine.Direction
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import edu.csh.chase.ChipsChallenge.Engine.UnitBase
+import edu.csh.chase.ChipsChallenge.Engine.*
 
 class GreenButton(location: Point, uniqueId: Id) : Button(GREEN_BUTTON_TYPE_ID, location, greenButtonImage, null, uniqueId) {
 

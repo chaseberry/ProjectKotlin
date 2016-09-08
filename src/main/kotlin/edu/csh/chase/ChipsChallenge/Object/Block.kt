@@ -1,11 +1,13 @@
-package ChipsChallenge.Object
+package edu.csh.chase.ChipsChallenge.Object
 
-import ChipsChallenge.Engine.*
-import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Map.Tiles.Wall
-import ChipsChallenge.Unit.Player
+import ChipsChallenge.Object.BearTrap
+import ChipsChallenge.Object.Button
+import edu.csh.chase.ChipsChallenge.Unit.Player
 import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.kjson.JsonObject
 
 class Block(location: Point, uniqueId: Id, var objectUnder: ObjectBase? = null) : ObjectBase(BLOCK_TYPE_ID, location, blockImage, uniqueId) {
 
@@ -16,7 +18,7 @@ class Block(location: Point, uniqueId: Id, var objectUnder: ObjectBase? = null) 
     constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
     }
 
-    override fun getSaveObject(): JSONObject {
+    override fun getSaveObject(): JsonObject {
         val obj = super.getSaveObject()
         if (objectUnder != null) {
             obj.put("objectUnder", objectUnder!!.getSaveObject())
@@ -98,7 +100,7 @@ class Block(location: Point, uniqueId: Id, var objectUnder: ObjectBase? = null) 
             forcedDirection = flipDirection(forcedDirection as Direction)
             return
         }
-        val obj = engine.objectManager.objects.get(targetTile)
+        val obj = engine.objectManager.objects[targetTile.location]
         if (obj != null ) {
             return
         }

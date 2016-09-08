@@ -77,7 +77,7 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
         return canMoveToTile(tile, direction)
     }
 
-    override fun getSaveObject(): JSONObject {
+    override fun getSaveObject(): JsonObject {
         val obj = JSONObject()
         obj.put("location", location.saveObject)
         obj.put("typeId", typeId)

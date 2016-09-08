@@ -1,7 +1,7 @@
 package ChipsChallenge.Editor
 
 import ChipsChallenge.Editor.PalletPanes.*
-import ChipsChallenge.Engine.ObjectBase
+import edu.csh.chase.ChipsChallenge.Engine.ObjectBase
 import edu.csh.chase.ChipsChallenge.Engine.Point
 import edu.csh.chase.ChipsChallenge.Engine.UnitBase
 import ChipsChallenge.Map.Tile

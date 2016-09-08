@@ -1,7 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Map
 
 import edu.csh.chase.ChipsChallenge.Engine.Engine
-import ChipsChallenge.Engine.Id
+import edu.csh.chase.ChipsChallenge.Engine.Id
 import edu.csh.chase.ChipsChallenge.Engine.Point
 import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Revealable
@@ -10,7 +10,7 @@ import ChipsChallenge.Map.Tiles.ToggleWall
 import ChipsChallenge.Map.tileFromId
 import ChipsChallenge.Map.tileFromJson
 import ChipsChallenge.Map.tileIdToTile
-import ChipsChallenge.UI.Viewport
+import edu.csh.chase.ChipsChallenge.UI.Viewport
 import edu.csh.chase.kjson.JsonArray
 import java.awt.image.BufferedImage
 import java.util.ArrayList

@@ -1,4 +1,4 @@
-package ChipsChallenge.Engine
+package edu.csh.chase.ChipsChallenge.Engine
 
 enum class EngineResult {
     InProgress,

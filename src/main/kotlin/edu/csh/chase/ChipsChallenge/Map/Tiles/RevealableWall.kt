@@ -2,10 +2,7 @@ package ChipsChallenge.Map.Tiles
 
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.REVEALABLE_WALL_TYPE_ID
-import edu.csh.chase.ChipsChallenge.Engine.Direction
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import edu.csh.chase.ChipsChallenge.Engine.UnitBase
+import edu.csh.chase.ChipsChallenge.Engine.*
 import java.awt.Color
 import java.awt.image.BufferedImage
 

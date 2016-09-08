@@ -5,7 +5,7 @@ import javax.swing.JButton
 import javax.swing.ImageIcon
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
-import ChipsChallenge.Engine.loadImage
+import edu.csh.chase.ChipsChallenge.Engine.loadImage
 
 /**
  * Created by chase on 2/27/15.

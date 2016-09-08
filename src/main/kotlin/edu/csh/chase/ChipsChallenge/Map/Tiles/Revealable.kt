@@ -1,6 +1,6 @@
 package ChipsChallenge.Map.Tiles
 
-import ChipsChallenge.Engine.Id
+import edu.csh.chase.ChipsChallenge.Engine.Id
 import edu.csh.chase.ChipsChallenge.Engine.Point
 import ChipsChallenge.Map.Tile
 import java.awt.image.BufferedImage

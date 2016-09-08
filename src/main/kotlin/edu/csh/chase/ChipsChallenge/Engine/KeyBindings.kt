@@ -1,4 +1,4 @@
-package ChipsChallenge.Engine
+package edu.csh.chase.ChipsChallenge.Engine
 
 data class KeyBindings(val KEY_CODE_UP: Int = 38,
                        val KEY_CODE_DOWN: Int = 40,
