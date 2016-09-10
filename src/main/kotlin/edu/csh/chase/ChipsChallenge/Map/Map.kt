@@ -1,8 +1,8 @@
 package edu.csh.chase.ChipsChallenge.Map
 
-import ChipsChallenge.Map.Tiles.Revealable
-import ChipsChallenge.Map.Tiles.Teleport
-import ChipsChallenge.Map.Tiles.ToggleWall
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Revealable
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Teleport
+import edu.csh.chase.ChipsChallenge.Map.Tiles.ToggleWall
 import edu.csh.chase.ChipsChallenge.Engine.Engine
 import edu.csh.chase.ChipsChallenge.Engine.Id
 import edu.csh.chase.ChipsChallenge.Engine.Point
@@ -17,26 +17,6 @@ fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point, chipTotal: Int): M
 
 fun blankMap(x: Int, y: Int): Map {
     return Map(Array(x) { Array(y) { tileIdToTile(0, Point(x, y)) } })
-}
-
-fun mapFromJSON(mapData: JsonArray): Map? {
-    try {
-        val tileArray = Array(mapData.size) { x ->
-            Array(mapData.getJsonArray(x).size) { y ->
-                tileFromJson(
-                        mapData.getJsonArray(x).getJsonObject(y),
-                        Point(x, y)
-                )
-            }
-        }
-
-        return Map(tileArray)
-
-    } catch(except: Exception) {
-        except.printStackTrace()
-        return null
-    }
-
 }
 
 //**Test

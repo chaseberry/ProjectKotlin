@@ -1,4 +1,4 @@
-package ChipsChallenge.Map.Tiles
+package edu.csh.chase.ChipsChallenge.Map.Tiles
 
 import edu.csh.chase.ChipsChallenge.Engine.Id
 import edu.csh.chase.ChipsChallenge.Engine.Point

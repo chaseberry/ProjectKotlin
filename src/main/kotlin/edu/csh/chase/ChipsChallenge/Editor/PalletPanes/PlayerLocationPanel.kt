@@ -1,10 +1,10 @@
-package ChipsChallenge.Editor.PalletPanes
+package edu.csh.chase.ChipsChallenge.Editor.PalletPanes
 
 import javax.swing.JPanel
 import javax.swing.JButton
 import javax.swing.ImageIcon
-import ChipsChallenge.Editor.EditorPallet
-import ChipsChallenge.Editor.PalletStatus
+import edu.csh.chase.ChipsChallenge.Editor.EditorPallet
+import edu.csh.chase.ChipsChallenge.Editor.PalletStatus
 import edu.csh.chase.ChipsChallenge.Engine.loadImage
 
 /**

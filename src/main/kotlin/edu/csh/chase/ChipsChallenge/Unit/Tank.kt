@@ -1,12 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
 
-/**
- * Created by chase on 5/6/15.
- */
 val TANK_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val TANK_TYPE_ID = 2
 
@@ -19,9 +14,7 @@ enum class TANKSTATUS {
 class Tank(location: Point, direction: Direction,
            uniqueId: Id) : DirectionalUnit(TANK_TYPE_ID, location, direction, TANK_DEFAULT_MOVE_SPEED, uniqueId) {
 
-    constructor(location: Point, direction: Direction) : this(location, direction, Id(IdType.UNIT)) {
-    }
-
+    constructor(location: Point, direction: Direction) : this(location, direction, Id(IdType.UNIT))
 
     init {
         setImage()

@@ -1,8 +1,8 @@
-package ChipsChallenge.Map.Tiles
+package edu.csh.chase.ChipsChallenge.Map.Tiles
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Map.ICE_TYPE_ID
 import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Map.Tiles.IceBase
 
 /**
  * Created by chase on 3/8/15.

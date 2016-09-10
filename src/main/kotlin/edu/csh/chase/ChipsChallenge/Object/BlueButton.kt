@@ -1,7 +1,7 @@
-package ChipsChallenge.Object
+package edu.csh.chase.ChipsChallenge.Object
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Object.Button
 
 
 class BlueButton(location: Point, uniqueId: Id) : Button(BLUE_BUTTON_TYPE_ID, location, blueButtonImage, null, uniqueId) {

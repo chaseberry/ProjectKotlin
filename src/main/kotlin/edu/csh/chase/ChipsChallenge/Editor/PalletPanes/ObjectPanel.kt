@@ -1,8 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Editor.PalletPanes
 
-import ChipsChallenge.Editor.EditorPallet
-import ChipsChallenge.Editor.PalletStatus
-import ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Editor.EditorPallet
+import edu.csh.chase.ChipsChallenge.Editor.PalletStatus
 import edu.csh.chase.ChipsChallenge.Engine.*
 import javax.swing.ImageIcon
 import javax.swing.JButton

@@ -1,7 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Editor.PalletPanes
 
-import ChipsChallenge.Editor.EditorPallet
-import ChipsChallenge.Editor.PalletStatus
+import edu.csh.chase.ChipsChallenge.Editor.EditorPallet
+import edu.csh.chase.ChipsChallenge.Editor.PalletStatus
 import edu.csh.chase.ChipsChallenge.Engine.Direction
 import edu.csh.chase.ChipsChallenge.Engine.Point
 import edu.csh.chase.ChipsChallenge.Engine.UnitBase

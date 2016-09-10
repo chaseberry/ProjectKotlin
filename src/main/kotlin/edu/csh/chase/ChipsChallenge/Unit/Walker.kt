@@ -1,8 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Fire
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Fire
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
 import java.util.ArrayList

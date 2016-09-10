@@ -1,6 +1,5 @@
-package ChipsChallenge.Object
+package edu.csh.chase.ChipsChallenge.Object
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Engine.*
 
 class BearTrap(location: Point, var isActive: Boolean = false, uniqueId: Id) : ObjectBase(BEAR_TRAP_TYPE_ID, location, bearTrapImage, uniqueId), Triggerable {

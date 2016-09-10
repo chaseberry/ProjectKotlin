@@ -1,26 +1,19 @@
 package edu.csh.chase.ChipsChallenge.Editor
 
-import edu.csh.chase.ChipsChallenge.Editor.EditorFrame
-import ChipsChallenge.Editor.EditorPallet
-import ChipsChallenge.Editor.MouseBindings
-import ChipsChallenge.Editor.PalletStatus
-import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Tiles.*
+import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Map.Tiles.*
 import edu.csh.chase.ChipsChallenge.Map.blankMap
 import edu.csh.chase.ChipsChallenge.Map.tileFromId
 import edu.csh.chase.ChipsChallenge.Map.tileIdToTile
-import ChipsChallenge.Object.*
+import edu.csh.chase.ChipsChallenge.Object.*
 import edu.csh.chase.ChipsChallenge.UI.getViewport
 import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
-import edu.csh.chase.ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Object.Block
-import edu.csh.chase.ChipsChallenge.Object.Cloner
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
-import java.util.ArrayList
+import java.util.*
 import javax.swing.JFileChooser
 import javax.swing.filechooser.FileFilter
 
@@ -192,7 +185,7 @@ class Editor(x: Int, y: Int) {
     fun removeUnit(tileLocation: Point) {
         val index = unitManager.unitOnPointIndex(tileLocation)
         if (index != null) {
-            unitManager.remove(index)
+            unitManager.removeAt(index)
         }
     }
 

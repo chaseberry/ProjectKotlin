@@ -1,10 +1,10 @@
 package edu.csh.chase.ChipsChallenge.Editor.PalletPanes
 
-import ChipsChallenge.Editor.EditorPallet
-import ChipsChallenge.Editor.PalletStatus
+import edu.csh.chase.ChipsChallenge.Editor.EditorPallet
+import edu.csh.chase.ChipsChallenge.Editor.PalletStatus
 import edu.csh.chase.ChipsChallenge.Engine.Point
 import edu.csh.chase.ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Revealable
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Revealable
 import edu.csh.chase.ChipsChallenge.Map.tileIdToTile
 import javax.swing.ImageIcon
 import javax.swing.JButton

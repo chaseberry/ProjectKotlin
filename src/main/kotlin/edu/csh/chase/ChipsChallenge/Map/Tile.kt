@@ -1,9 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Map
 
-import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Tiles.*
 import edu.csh.chase.ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Map.Tiles.BlueFloor
+import edu.csh.chase.ChipsChallenge.Map.Tiles.*
 import edu.csh.chase.kjson.Json
 import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
@@ -67,14 +65,6 @@ fun tileFromId(typeId: Int, location: Point, id: Id = Id(IdType.TILE), open: Boo
         RECESSED_WALL_TYPE_ID -> RecessedWall(location, id)
         else -> Wall(location)
     }
-}
-
-fun tileFromJson(obj: JsonObject, location: Point): Tile {
-    val typeId = obj.getInt("typeId")
-    val id = idFromJson(obj.getJsonObject("id"))
-    val open = obj.getBoolean("open", false)
-    return tileFromId(typeId, location, id, open)
-
 }
 
 abstract class Tile(image: BufferedImage, val tileId: Int, location: Point,

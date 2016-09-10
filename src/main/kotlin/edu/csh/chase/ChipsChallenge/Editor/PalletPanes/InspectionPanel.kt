@@ -1,7 +1,7 @@
-package ChipsChallenge.Editor.PalletPanes
+package edu.csh.chase.ChipsChallenge.Editor.PalletPanes
 
 import edu.csh.chase.ChipsChallenge.Editor.Editor
-import ChipsChallenge.Editor.EditorPallet
+import edu.csh.chase.ChipsChallenge.Editor.EditorPallet
 import edu.csh.chase.ChipsChallenge.Engine.Point
 import javax.swing.JComponent
 import javax.swing.JLabel
@@ -55,8 +55,8 @@ class InspectionPanel(val editorPallet: EditorPallet) : JPanel() {
         }
 
         locationLabel.text = "Location: (${location.x}, ${location.y})"
-        val inspection = tile.getInspectionData()
-        tileName = inspection[0].second
-        tileDescription = inspection[1].second
+        /* val inspection = tile.getInspectionData()
+         tileName = inspection[0].second
+         tileDescription = inspection[1].second*/
     }
 }

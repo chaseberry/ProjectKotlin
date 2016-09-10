@@ -1,4 +1,4 @@
-package ChipsChallenge.Unit
+package edu.csh.chase.ChipsChallenge.Unit
 
 /**
  * Created by chase on 2/27/15.

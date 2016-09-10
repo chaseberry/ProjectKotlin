@@ -1,8 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Tiles.ForceFloor
-import ChipsChallenge.Unit.PlayerInventory
+import edu.csh.chase.ChipsChallenge.Map.Tiles.ForceFloor
+import edu.csh.chase.ChipsChallenge.Unit.PlayerInventory
 import edu.csh.chase.ChipsChallenge.Engine.*
 
 class Player(location: Point) : UnitBase(-1, location) {

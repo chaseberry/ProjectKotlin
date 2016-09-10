@@ -1,14 +1,9 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
-import ChipsChallenge.Engine.BaseObject
+import edu.csh.chase.ChipsChallenge.Engine.BaseObject
 import java.awt.image.BufferedImage
 import java.net.URL
 import javax.imageio.ImageIO
-import kotlin.properties.Delegates
-
-/**
- * Created by chase on 2/28/15.
- */
 
 val fileUrl: String by lazy {
     var fileName = ""
@@ -23,282 +18,279 @@ val fileUrl: String by lazy {
 }
 
 
-fun loadImage(imageSource: String?): BufferedImage? {
-    if (imageSource == null) {
-        return null
-    }
+fun loadImage(imageSource: String): BufferedImage {
     return ImageIO.read(URL("${fileUrl}Images/$imageSource"));
 }
 
 val floorImage: BufferedImage by lazy {
-    loadImage("floor.gif") as BufferedImage
+    loadImage("floor.gif") 
 }
 
 val wallImage: BufferedImage by lazy {
-    loadImage("wall.gif") as BufferedImage
+    loadImage("wall.gif") 
 }
 
 val waterImage: BufferedImage by lazy {
-    loadImage("water.gif") as BufferedImage
+    loadImage("water.gif") 
 }
 
 val finishImage: BufferedImage by lazy {
-    loadImage("finish.gif") as BufferedImage
+    loadImage("finish.gif") 
 }
 
 val helpImage: BufferedImage by lazy {
-    loadImage("hint.gif") as BufferedImage
+    loadImage("hint.gif") 
 }
 
 val iceImage: BufferedImage by lazy {
-    loadImage("ice.gif") as BufferedImage
+    loadImage("ice.gif") 
 }
 
 val iceLeftUpImage: BufferedImage by lazy {
-    loadImage("curve-4-ice.gif") as BufferedImage
+    loadImage("curve-4-ice.gif") 
 }
 
 val iceRightUpImage: BufferedImage by lazy {
-    loadImage("curve-3-ice.gif") as BufferedImage
+    loadImage("curve-3-ice.gif") 
 }
 
 val iceLeftDownImage: BufferedImage by lazy {
-    loadImage("curve-1-ice.gif") as BufferedImage
+    loadImage("curve-1-ice.gif") 
 }
 
 val iceRightDownImage: BufferedImage by lazy {
-    loadImage("curve-2-ice.gif") as BufferedImage
+    loadImage("curve-2-ice.gif") 
 }
 
 val teleportImage: BufferedImage by lazy {
-    loadImage("teleporter.gif") as BufferedImage
+    loadImage("teleporter.gif") 
 }
 
 val gravelImage: BufferedImage by lazy {
-    loadImage("gravel.gif") as BufferedImage
+    loadImage("gravel.gif") 
 }
 
 val forceFloorEast: BufferedImage by lazy {
-    loadImage("forcefloor-east.gif") as BufferedImage
+    loadImage("forcefloor-east.gif") 
 }
 
 val forceFloorNorth: BufferedImage by lazy {
-    loadImage("forcefloor-north.gif") as BufferedImage
+    loadImage("forcefloor-north.gif") 
 }
 val forceFloorSouth: BufferedImage by lazy {
-    loadImage("forcefloor-south.gif") as BufferedImage
+    loadImage("forcefloor-south.gif") 
 }
 val forceFloorWest: BufferedImage by lazy {
-    loadImage("forcefloor-west.gif") as BufferedImage
+    loadImage("forcefloor-west.gif") 
 }
 
 val forceFloorRandom: BufferedImage by lazy {
-    loadImage("forcefloor-random.gif") as BufferedImage
+    loadImage("forcefloor-random.gif") 
 }
 
 val toggleWallOpenImage: BufferedImage by lazy {
-    loadImage("toggle-off.gif") as BufferedImage
+    loadImage("toggle-off.gif") 
 }
 
 val toggleWallClosedImage: BufferedImage by lazy {
-    loadImage("toggle-on.gif") as BufferedImage
+    loadImage("toggle-on.gif") 
 }
 
 val blueKeyImage: BufferedImage by lazy {
-    loadImage("blue_key.gif") as BufferedImage
+    loadImage("blue_key.gif") 
 }
 
 val redKeyImage: BufferedImage by lazy {
-    loadImage("red_key.gif") as BufferedImage
+    loadImage("red_key.gif") 
 }
 
 val yellowKeyImage: BufferedImage by lazy {
-    loadImage("yellow_key.gif") as BufferedImage
+    loadImage("yellow_key.gif") 
 }
 
 val greenKeyImage: BufferedImage by lazy {
-    loadImage("green_key.gif") as BufferedImage
+    loadImage("green_key.gif") 
 }
 
 val blueKLockImage: BufferedImage by lazy {
-    loadImage("blue_lock.gif") as BufferedImage
+    loadImage("blue_lock.gif") 
 }
 
 val redLockImage: BufferedImage by lazy {
-    loadImage("red_lock.gif") as BufferedImage
+    loadImage("red_lock.gif") 
 }
 
 val yellowLockImage: BufferedImage by lazy {
-    loadImage("yellow_lock.gif") as BufferedImage
+    loadImage("yellow_lock.gif") 
 }
 
 val greenLockImage: BufferedImage by lazy {
-    loadImage("green_lock.gif") as BufferedImage
+    loadImage("green_lock.gif") 
 }
 
 val chipImage: BufferedImage by lazy {
-    loadImage("chip.gif") as BufferedImage
+    loadImage("chip.gif") 
 }
 
 val dirtImage: BufferedImage by lazy {
-    loadImage("dirt.gif") as BufferedImage
+    loadImage("dirt.gif") 
 }
 
 val socketImage: BufferedImage by lazy {
-    loadImage("socket.gif") as BufferedImage
+    loadImage("socket.gif") 
 }
 
 val blockImage: BufferedImage by lazy {
-    loadImage("block.gif") as BufferedImage
+    loadImage("block.gif") 
 }
 
 val greenButtonImage: BufferedImage by lazy {
-    loadImage("green_button.gif") as BufferedImage
+    loadImage("green_button.gif") 
 }
 
 val brownButtonImage: BufferedImage by lazy {
-    loadImage("brown_button.gif") as BufferedImage
+    loadImage("brown_button.gif") 
 }
 
 val bearTrapImage: BufferedImage by lazy {
-    loadImage("beartrap.gif") as BufferedImage
+    loadImage("beartrap.gif") 
 }
 
 val pinkBallImage: BufferedImage by lazy {
-    loadImage("ball.gif") as BufferedImage
+    loadImage("ball.gif") 
 }
 
 val upArrowImage: BufferedImage by lazy {
-    loadImage("up_arrow.gif") as BufferedImage
+    loadImage("up_arrow.gif") 
 }
 
 val leftArrowImage: BufferedImage by lazy {
-    loadImage("left_arrow.gif") as BufferedImage
+    loadImage("left_arrow.gif") 
 }
 
 val downArrowImage: BufferedImage by lazy {
-    loadImage("down_arrow.gif") as BufferedImage
+    loadImage("down_arrow.gif") 
 }
 
 val rightArrowImage: BufferedImage by lazy {
-    loadImage("right_arrow.gif") as BufferedImage
+    loadImage("right_arrow.gif") 
 }
 
 val bugUpImage: BufferedImage by lazy {
-    loadImage("bug-up.gif") as BufferedImage
+    loadImage("bug-up.gif") 
 }
 
 val bugDownImage: BufferedImage by lazy {
-    loadImage("bug-down.gif") as BufferedImage
+    loadImage("bug-down.gif") 
 }
 
 val bugLeftImage: BufferedImage by lazy {
-    loadImage("bug-left.gif") as BufferedImage
+    loadImage("bug-left.gif") 
 }
 
 val bugRightImage: BufferedImage by lazy {
-    loadImage("bug-right.gif") as BufferedImage
+    loadImage("bug-right.gif") 
 }
 
 val tankUpImage: BufferedImage by lazy {
-    loadImage("tank-north.gif") as BufferedImage
+    loadImage("tank-north.gif") 
 }
 
 val tankLeftImage: BufferedImage by lazy {
-    loadImage("tank-west.gif") as BufferedImage
+    loadImage("tank-west.gif") 
 }
 
 val tankRightImage: BufferedImage by lazy {
-    loadImage("tank-east.gif") as BufferedImage
+    loadImage("tank-east.gif") 
 }
 
 val tankDownImage: BufferedImage by lazy {
-    loadImage("tank-south.gif") as BufferedImage
+    loadImage("tank-south.gif") 
 }
 
 val fireImage: BufferedImage by lazy {
-    loadImage("fire.gif") as BufferedImage
+    loadImage("fire.gif") 
 }
 
 val suctionBootImage: BufferedImage by lazy {
-    loadImage("suction.gif") as BufferedImage
+    loadImage("suction.gif") 
 }
 
 val iceSkatesImage: BufferedImage by lazy {
-    loadImage("skate.gif") as BufferedImage
+    loadImage("skate.gif") 
 }
 
 val flippersImage: BufferedImage by lazy {
-    loadImage("flipper.gif") as BufferedImage
+    loadImage("flipper.gif") 
 }
 
 val fireBootImage: BufferedImage by lazy {
-    loadImage("fireboots.gif") as BufferedImage
+    loadImage("fireboots.gif") 
 }
 
 val blueButtonImage: BufferedImage by lazy {
-    loadImage("blue_button.gif") as BufferedImage
+    loadImage("blue_button.gif") 
 }
 
 val bombImage: BufferedImage by lazy {
-    loadImage("bomb.gif") as BufferedImage
+    loadImage("bomb.gif") 
 }
 
 val gliderUpImage: BufferedImage by lazy {
-    loadImage("gliderUp.gif") as BufferedImage
+    loadImage("gliderUp.gif") 
 }
 
 val gliderDownImage: BufferedImage by lazy {
-    loadImage("gliderDown.gif") as BufferedImage
+    loadImage("gliderDown.gif") 
 }
 val gliderLeftImage: BufferedImage by lazy {
-    loadImage("gliderLeft.gif") as BufferedImage
+    loadImage("gliderLeft.gif") 
 }
 val gliderRightImage: BufferedImage by lazy {
-    loadImage("gliderRight.gif") as BufferedImage
+    loadImage("gliderRight.gif") 
 }
 
 val fireballImage: BufferedImage by lazy {
-    loadImage("fireball.gif") as BufferedImage
+    loadImage("fireball.gif") 
 
 }
 
 val clonerImage: BufferedImage by lazy {
-    loadImage("cloner.gif") as BufferedImage
+    loadImage("cloner.gif") 
 }
 
 val redButtonImage: BufferedImage by lazy {
-    loadImage("red_button.gif") as BufferedImage
+    loadImage("red_button.gif") 
 }
 
 val wallBlueImage: BufferedImage by lazy {
-    loadImage("wall-blue.gif") as BufferedImage
+    loadImage("wall-blue.gif") 
 }
 
 val thiefImage: BufferedImage by lazy {
-    loadImage("thief.gif") as BufferedImage
+    loadImage("thief.gif") 
 }
 
 val recessedWallImage: BufferedImage by lazy {
-    loadImage("wall-recessed.gif") as BufferedImage
+    loadImage("wall-recessed.gif") 
 }
 
 val walkerUpImage: BufferedImage by lazy {
-    loadImage("walkerUp.gif") as BufferedImage
+    loadImage("walkerUp.gif") 
 }
 
 val walkerLeftImage: BufferedImage by lazy {
-    loadImage("walkerLeft.gif") as BufferedImage
+    loadImage("walkerLeft.gif") 
 }
 
 val parameciumUpImage: BufferedImage by lazy {
-    loadImage("parameciumUp.gif") as BufferedImage
+    loadImage("parameciumUp.gif") 
 }
 
 val parameciumLeftImage: BufferedImage by lazy {
-    loadImage("parameciumLeft.gif") as BufferedImage
+    loadImage("parameciumLeft.gif") 
 }
 
 val blobImage: BufferedImage by lazy {
-    loadImage("blob.gif") as BufferedImage
+    loadImage("blob.gif") 
 }

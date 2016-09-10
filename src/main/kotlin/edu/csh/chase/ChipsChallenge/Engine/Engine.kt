@@ -1,82 +1,35 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
-import ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Floor
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Teleport
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Water
+import edu.csh.chase.ChipsChallenge.Object.Button
+import edu.csh.chase.ChipsChallenge.Object.Dirt
 import edu.csh.chase.ChipsChallenge.Map.Map
-import ChipsChallenge.Map.Tiles.Floor
-import ChipsChallenge.Map.Tiles.Teleport
-import ChipsChallenge.Map.Tiles.Water
 import edu.csh.chase.ChipsChallenge.Object.Block
-import ChipsChallenge.Object.Button
-import ChipsChallenge.Object.Dirt
 import edu.csh.chase.ChipsChallenge.UI.Frame
 import edu.csh.chase.ChipsChallenge.UI.getViewport
 import edu.csh.chase.ChipsChallenge.Unit.Player
-import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
-import java.io.BufferedReader
-import java.io.File
-import java.io.FileReader
-import java.net.URI
-import java.util.Timer
-import java.util.TimerTask
+import java.util.*
 import kotlin.properties.Delegates
 
 enum class Direction {
     UP,
     DOWN,
     LEFT,
-    RIGHT
-}
+    RIGHT;
 
-fun directionFromString(str: String?): Direction {
-    return when (str) {
-        "UP" -> Direction.UP
-        "DOWN" -> Direction.DOWN
-        "LEFT" -> Direction.LEFT
-        "RIGHT" -> Direction.RIGHT
-        else -> Direction.UP
+    fun flip(): Direction {
+        return when (this) {
+            Direction.UP -> Direction.DOWN
+            Direction.DOWN -> Direction.UP
+            Direction.LEFT -> Direction.RIGHT
+            Direction.RIGHT -> Direction.LEFT
+        }
     }
 }
 
-fun flipDirection(direction: Direction): Direction {
-    return when (direction) {
-        Direction.UP -> Direction.DOWN
-        Direction.DOWN -> Direction.UP
-        Direction.LEFT -> Direction.RIGHT
-        Direction.RIGHT -> Direction.LEFT
-    }
-}
-
-fun engineFromFile(file: File): Engine? {
-    try {
-        val reader = BufferedReader(FileReader(file))
-        val fileContents = reader.readText()
-        reader.close()
-        val levelData = JsonObject(fileContents)
-        return engineFromJson(levelData)
-    } catch(e: Exception) {
-        e.printStackTrace()
-        return null
-    }
-}
-
-fun loadTemplate(obj: JsonObject): EngineObjectBase? {
-    val id = idFromJson(obj.getJsonObject("id"))
-    if (id.type == IdType.OBJECT) {
-        return objectFromJSON(obj)
-    }
-    return unitFromJson(obj)
-}
-
-fun engineFromJson(obj: JsonObject): Engine? {
-    val level = levelFromJson(obj) ?: return null
-    return Engine(level)
-
-}
-
-fun loadLevel(name: String): File {
-    return File(URI(fileUrl + "Levels/${name}.ccl"))
-}
 
 class Engine(val level: Level) {
 

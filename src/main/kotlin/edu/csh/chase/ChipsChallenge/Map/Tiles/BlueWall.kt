@@ -1,6 +1,6 @@
-package ChipsChallenge.Map.Tiles
+package edu.csh.chase.ChipsChallenge.Map.Tiles
 
-import ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Revealable
 import edu.csh.chase.ChipsChallenge.Map.BLUE_WALL_TYPE_ID
 import edu.csh.chase.ChipsChallenge.Engine.*
 import java.awt.Color

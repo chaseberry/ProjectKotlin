@@ -1,8 +1,6 @@
 package edu.csh.chase.ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
 
 val GLIDER_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val GLIDER_TYPE_ID = 3

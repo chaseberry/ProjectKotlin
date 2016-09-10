@@ -4,7 +4,10 @@ import edu.csh.chase.kjson.Json
 import edu.csh.chase.kjson.JsonObject
 
 fun pointFromJson(obj: JsonObject): Point {
-    return Point(obj.getInt("x"), obj.getInt("y"))
+    val x = obj.getInt("x") ?: throw LevelException("Failed to load `x` for point in $obj")
+    val y = obj.getInt("y") ?: throw LevelException("Failed to load `y` for point in $obj")
+
+    return Point(x, y)
 }
 
 data class Point(var x: Int, var y: Int) {

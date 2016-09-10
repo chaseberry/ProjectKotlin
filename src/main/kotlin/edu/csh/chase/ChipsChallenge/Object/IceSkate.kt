@@ -1,6 +1,5 @@
-package ChipsChallenge.Object
+package edu.csh.chase.ChipsChallenge.Object
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Unit.Player
 

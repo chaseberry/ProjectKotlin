@@ -1,6 +1,5 @@
-package ChipsChallenge.Map.Tiles
+package edu.csh.chase.ChipsChallenge.Map.Tiles
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Map.Tile
 import edu.csh.chase.ChipsChallenge.Map.WATER_TYPE_ID
 import edu.csh.chase.ChipsChallenge.Engine.*

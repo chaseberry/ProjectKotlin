@@ -1,8 +1,4 @@
 import edu.csh.chase.ChipsChallenge.Editor.Editor
-import edu.csh.chase.ChipsChallenge.Engine.engineFromFile
-import edu.csh.chase.ChipsChallenge.Engine.fileUrl
-import java.io.File
-import java.net.URI
 
 fun main(args: Array<String>) {
     Editor(9, 9).start()

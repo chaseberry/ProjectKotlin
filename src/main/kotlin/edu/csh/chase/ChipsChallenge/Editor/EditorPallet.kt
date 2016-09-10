@@ -1,15 +1,12 @@
-package ChipsChallenge.Editor
+package edu.csh.chase.ChipsChallenge.Editor
 
-import ChipsChallenge.Editor.PalletPanes.*
+import edu.csh.chase.ChipsChallenge.Editor.PalletPanes.*
 import edu.csh.chase.ChipsChallenge.Engine.ObjectBase
 import edu.csh.chase.ChipsChallenge.Engine.Point
 import edu.csh.chase.ChipsChallenge.Engine.UnitBase
 import edu.csh.chase.ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.Floor
-import ChipsChallenge.Map.Tiles.Wall
-import edu.csh.chase.ChipsChallenge.Editor.PalletPanes.ObjectPanel
-import edu.csh.chase.ChipsChallenge.Editor.PalletPanes.TilePanel
-import edu.csh.chase.ChipsChallenge.Editor.PalletPanes.UnitPanel
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Floor
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Wall
 import javax.swing.JFrame
 import javax.swing.JTabbedPane
 import javax.swing.WindowConstants

@@ -1,10 +1,10 @@
 package edu.csh.chase.ChipsChallenge.Object
 
 import edu.csh.chase.ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.IceBase
-import ChipsChallenge.Map.Tiles.Wall
-import ChipsChallenge.Object.BearTrap
-import ChipsChallenge.Object.Button
+import edu.csh.chase.ChipsChallenge.Map.Tiles.IceBase
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Wall
+import edu.csh.chase.ChipsChallenge.Object.BearTrap
+import edu.csh.chase.ChipsChallenge.Object.Button
 import edu.csh.chase.ChipsChallenge.Unit.Player
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.kjson.JsonObject
@@ -97,7 +97,7 @@ class Block(location: Point, uniqueId: Id, var objectUnder: ObjectBase? = null) 
             else -> location
         })
         if (targetTile == null || !canMoveToLocation(engine, targetTile.location)) {
-            forcedDirection = flipDirection(forcedDirection as Direction)
+            forcedDirection = forcedDirection!!.flip()
             return
         }
         val obj = engine.objectManager.objects[targetTile.location]

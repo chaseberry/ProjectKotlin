@@ -1,8 +1,6 @@
-package ChipsChallenge.Unit
+package edu.csh.chase.ChipsChallenge.Unit
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
 
 val FIREBALL_DEFAULT_MOVE_SPEED = DEFAULT_MOVE_SPEED
 val FIREBALL_TYPE_ID = 4

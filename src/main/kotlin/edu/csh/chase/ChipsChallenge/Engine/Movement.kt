@@ -1,8 +1,8 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
 import edu.csh.chase.ChipsChallenge.Map.Tile
-import ChipsChallenge.Map.Tiles.ForceFloor
-import ChipsChallenge.Map.Tiles.Revealable
+import edu.csh.chase.ChipsChallenge.Map.Tiles.ForceFloor
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Revealable
 import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
 import edu.csh.chase.ChipsChallenge.Engine.*
 
@@ -49,7 +49,7 @@ class Movement(val engine: Engine) {
                 interactor.move(direction, engine, interactor.location)
                 return false
             }
-            interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
+            interactor.forcedDirection = interactor.forcedDirection!!.flip()
             when (interactor.forcedDirection) {
                 Direction.UP -> interactor.moveUp(engine)
                 Direction.DOWN -> interactor.moveDown(engine)
@@ -71,7 +71,7 @@ class Movement(val engine: Engine) {
                 interactor.move(direction, engine, interactor.location)
                 return false
             }
-            interactor.forcedDirection = flipDirection(interactor.forcedDirection as Direction)
+            interactor.forcedDirection = interactor.forcedDirection!!.flip()
             when (interactor.forcedDirection) {
                 Direction.UP -> interactor.moveUp(engine)
                 Direction.DOWN -> interactor.moveDown(engine)

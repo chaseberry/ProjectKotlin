@@ -1,7 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
-import ChipsChallenge.Engine.EngineObjectBase
-import ChipsChallenge.Map.Tiles.IceBase
+import edu.csh.chase.ChipsChallenge.Engine.EngineObjectBase
+import edu.csh.chase.ChipsChallenge.Map.Tiles.IceBase
 import edu.csh.chase.ChipsChallenge.Object.Block
 import edu.csh.chase.ChipsChallenge.UI.Viewport
 import edu.csh.chase.ChipsChallenge.UI.pointInViewport
@@ -92,7 +92,7 @@ class ObjectManager(val engine: Engine?) : Tickable {
             }
             obj.location = newObjLocation
             if (objects[newObjLocation] != null) {
-                obj.cover(objects[newObjLocation], engine)
+                obj.cover(objects[newObjLocation]!!, engine)
             }
             add(obj, newObjLocation)
             if (engine.map.getTile(newObjLocation) is IceBase) {
@@ -108,10 +108,10 @@ class ObjectManager(val engine: Engine?) : Tickable {
         if (engine == null) {
             return false
         }
-        if (!objects.containsKey(newLocation)) {
-            return true
-        }
-        return resolveObject(objects[newLocation], direction, interactor)
+
+        val obj = objects[newLocation] ?: return true
+
+        return resolveObject(obj, direction, interactor)
 
     }
 

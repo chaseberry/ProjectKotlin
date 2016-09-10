@@ -1,6 +1,6 @@
-package ChipsChallenge.Map.Tiles;
+package edu.csh.chase.ChipsChallenge.Map.Tiles
 
-import ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Map.Tiles.IceBase
 import edu.csh.chase.ChipsChallenge.Map.ICE_CORNER_LEFT_DOWN_ID
 import edu.csh.chase.ChipsChallenge.Map.ICE_CORNER_LEFT_UP_ID
 import edu.csh.chase.ChipsChallenge.Map.ICE_CORNER_RIGHT_DOWN_ID

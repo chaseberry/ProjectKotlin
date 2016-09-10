@@ -1,6 +1,5 @@
-package ChipsChallenge.Object
+package edu.csh.chase.ChipsChallenge.Object
 
-import ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Engine.*
 
 class BrownButton(location: Point, uniqueId: Id, target: Id?) :

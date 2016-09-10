@@ -1,4 +1,4 @@
-package ChipsChallenge.Editor
+package edu.csh.chase.ChipsChallenge.Editor
 
 import edu.csh.chase.ChipsChallenge.Engine.Point
 

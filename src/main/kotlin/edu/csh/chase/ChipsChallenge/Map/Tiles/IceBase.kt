@@ -1,6 +1,7 @@
-package ChipsChallenge.Map.Tiles
+package edu.csh.chase.ChipsChallenge.Map.Tiles
 
-import ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Map.Tiles.ForceFloor
+import edu.csh.chase.ChipsChallenge.Map.Tiles.Ice
 import edu.csh.chase.ChipsChallenge.Map.Tile
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Unit.Player

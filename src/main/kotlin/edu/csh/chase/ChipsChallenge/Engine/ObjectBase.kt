@@ -1,15 +1,6 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
-import ChipsChallenge.Engine.EngineObjectBase
-import edu.csh.chase.ChipsChallenge.Engine.Id
-import edu.csh.chase.ChipsChallenge.Engine.IdType
-import edu.csh.chase.ChipsChallenge.Engine.idFromJson
-import ChipsChallenge.JSON.JSONObject
-import ChipsChallenge.Object.*
-import edu.csh.chase.ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Object.Block
-import edu.csh.chase.ChipsChallenge.Object.BlueKey
-import edu.csh.chase.ChipsChallenge.Object.Cloner
+import edu.csh.chase.ChipsChallenge.Object.*
 import edu.csh.chase.kjson.Json
 import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
@@ -42,9 +33,13 @@ fun objectFromTypeId(typeId: Int, location: Point): ObjectBase? {
     return objectFromTypeIdWithId(typeId, location, Id(IdType.OBJECT))
 }
 
-fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
-                           template: EngineObjectBase? = null, direction: Direction = Direction.UP,
-                           target: Id? = null, objUnder: ObjectBase? = null): ObjectBase? {
+fun objectFromTypeIdWithId(typeId: Int,
+                           location: Point,
+                           id: Id,
+                           template: EngineObjectBase? = null,
+                           direction: Direction = Direction.UP,
+                           target: Id? = null,
+                           objUnder: ObjectBase? = null): ObjectBase? {
     return when (typeId) {
         CHIP_TYPE_ID -> Chip(location, id)
         SOCKET_TYPE_ID -> Socket(location, id)
@@ -73,22 +68,6 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
     }
 }
 
-fun objectFromJSON(obj: JsonObject): ObjectBase? {
-    try {
-        val typeId = obj.getInt("typeId")
-        val location = pointFromJson(obj.getJsonObject("location"))
-        val id = idFromJson(obj.getJsonObject("id"))
-        val template: EngineObjectBase? = if (obj.contains("template")) loadTemplate(obj.getJsonObject("template")) else null
-        val targetId: Id? = if (obj.contains("targetId")) idFromJson(obj.getJsonObject("targetId")) else null
-        val objUnder: ObjectBase? = (if (obj.contains("objectUnder")) objectFromJSON(obj.getJsonObject("objectUnder")) else null)
-        return objectFromTypeIdWithId(typeId, location, id, template = template, target = targetId,
-                objUnder = objUnder)
-    } catch(e: Exception) {
-        e.printStackTrace()
-        return null
-    }
-}
-
 abstract class ObjectBase(val typeId: Int, location: Point, image: BufferedImage,
                           val uniqueId: Id) : EngineObjectBase(location, image) {
 
@@ -108,7 +87,6 @@ abstract class ObjectBase(val typeId: Int, location: Point, image: BufferedImage
                 "location" to location.saveObject,
                 "id" to uniqueId.getJson()
         )
-
     }
 
 }
