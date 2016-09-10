@@ -1,7 +1,6 @@
 package ChipsChallenge.Object
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.JSON.JSONObject
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage

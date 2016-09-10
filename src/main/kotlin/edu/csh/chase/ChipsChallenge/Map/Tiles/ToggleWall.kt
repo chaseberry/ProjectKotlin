@@ -1,9 +1,8 @@
 package ChipsChallenge.Map.Tiles
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.JSON.JSONObject
-import ChipsChallenge.Map.TOGGLE_WALL_TYPE_ID
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.TOGGLE_WALL_TYPE_ID
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
@@ -42,7 +41,7 @@ class ToggleWall(location: Point, uniqueId: Id, var open: Boolean = false) :
         }
 
     override fun getSaveObject(): JsonObject {
-        val obj = super<Tile>.getSaveObject()
+        val obj = super.getSaveObject()
         obj.put("open", open)
         return obj
     }

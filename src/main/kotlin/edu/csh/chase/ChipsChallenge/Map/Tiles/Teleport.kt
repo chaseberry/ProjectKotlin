@@ -1,8 +1,8 @@
 package ChipsChallenge.Map.Tiles
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.TELEPORT_TYPE_ID
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.TELEPORT_TYPE_ID
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import edu.csh.chase.ChipsChallenge.Engine.*
 
 class Teleport(location: Point, uniqueId: Id) : Tile(teleportImage, TELEPORT_TYPE_ID, location, uniqueId) {

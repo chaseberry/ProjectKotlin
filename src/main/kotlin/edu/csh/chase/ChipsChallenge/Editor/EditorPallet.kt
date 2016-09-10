@@ -4,9 +4,12 @@ import ChipsChallenge.Editor.PalletPanes.*
 import edu.csh.chase.ChipsChallenge.Engine.ObjectBase
 import edu.csh.chase.ChipsChallenge.Engine.Point
 import edu.csh.chase.ChipsChallenge.Engine.UnitBase
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Map.Tiles.Wall
+import edu.csh.chase.ChipsChallenge.Editor.PalletPanes.ObjectPanel
+import edu.csh.chase.ChipsChallenge.Editor.PalletPanes.TilePanel
+import edu.csh.chase.ChipsChallenge.Editor.PalletPanes.UnitPanel
 import javax.swing.JFrame
 import javax.swing.JTabbedPane
 import javax.swing.WindowConstants

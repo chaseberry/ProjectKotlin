@@ -1,20 +1,15 @@
 package edu.csh.chase.ChipsChallenge.Map
 
-import edu.csh.chase.ChipsChallenge.Engine.Engine
-import edu.csh.chase.ChipsChallenge.Engine.Id
-import edu.csh.chase.ChipsChallenge.Engine.Point
-import ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Revealable
 import ChipsChallenge.Map.Tiles.Teleport
 import ChipsChallenge.Map.Tiles.ToggleWall
-import ChipsChallenge.Map.tileFromId
-import ChipsChallenge.Map.tileFromJson
-import ChipsChallenge.Map.tileIdToTile
+import edu.csh.chase.ChipsChallenge.Engine.Engine
+import edu.csh.chase.ChipsChallenge.Engine.Id
+import edu.csh.chase.ChipsChallenge.Engine.Point
 import edu.csh.chase.ChipsChallenge.UI.Viewport
 import edu.csh.chase.kjson.JsonArray
 import java.awt.image.BufferedImage
-import java.util.ArrayList
-import kotlin.properties.Delegates
+import java.util.*
 
 fun mapFromIds(mapIds: Array<Array<Int>>, playerStart: Point, chipTotal: Int): Map {
     return Map(Array(mapIds.size, { x -> Array(mapIds[x].size, { y -> tileIdToTile(mapIds[x][y], Point(x, y)) }) }))
@@ -53,10 +48,10 @@ fun ArrayList<ToggleWall>.invoke(tw: ToggleWall) {
 
 data class Map(val map: Array<Array<Tile>>) {
 
-    fun getSaveObject(): JSONArray {
-        val mapArray = JSONArray()
+    fun getSaveObject(): JsonArray {
+        val mapArray = JsonArray()
         for (x in map) {
-            val mapSection = JSONArray()
+            val mapSection = JsonArray()
             for (tile in x) {
                 mapSection.put(tile.getSaveObject())
             }
@@ -65,12 +60,12 @@ data class Map(val map: Array<Array<Tile>>) {
         return mapArray
     }
 
-    val x: Int by Delegates.lazy {
-        map.size()
+    val x: Int by lazy {
+        map.size
     }
 
-    val y: Int by Delegates.lazy {
-        map[0].size()
+    val y: Int by lazy {
+        map[0].size
     }
 
 
@@ -165,7 +160,7 @@ data class Map(val map: Array<Array<Tile>>) {
 
     fun getAllToggleWalls(): ArrayList<ToggleWall> {
         val walls = ArrayList<ToggleWall>()
-        map.forEach { it.forEach { if (it is ToggleWall) walls(it) } }
+        map.forEach { it.forEach { if (it is ToggleWall) walls.add(it) } }
         return walls
     }
 

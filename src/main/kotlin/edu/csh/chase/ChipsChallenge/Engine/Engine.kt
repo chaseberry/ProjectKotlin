@@ -1,7 +1,6 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.JSON.JSONObject
 import edu.csh.chase.ChipsChallenge.Map.Map
 import ChipsChallenge.Map.Tiles.Floor
 import ChipsChallenge.Map.Tiles.Teleport
@@ -62,14 +61,14 @@ fun engineFromFile(file: File): Engine? {
 }
 
 fun loadTemplate(obj: JsonObject): EngineObjectBase? {
-    val id = idFromJson(obj.getJSONObject("id"))
+    val id = idFromJson(obj.getJsonObject("id"))
     if (id.type == IdType.OBJECT) {
         return objectFromJSON(obj)
     }
     return unitFromJson(obj)
 }
 
-fun engineFromJson(obj: JSONObject): Engine? {
+fun engineFromJson(obj: JsonObject): Engine? {
     val level = levelFromJson(obj) ?: return null
     return Engine(level)
 
@@ -150,8 +149,8 @@ class Engine(val level: Level) {
         }
 
         objectManager.objects.forEach {
-            val location = it.getKey()
-            val obj = it.getValue()
+            val location = it.key
+            val obj = it.value
             if (obj is Block && engine.map.getTile(location) is Water) {
                 objectManager.objects.put(location, Dirt(location, obj.uniqueId))
                 val waterTile = engine.map.getTile(location)!!
@@ -161,11 +160,11 @@ class Engine(val level: Level) {
                 lose()
                 return
             }
-            if (it.getValue() is Button) {
-                if (player.location == it.getKey() || unitManager.isUnitOnPoint(it.getKey())) {
-                    (it.getValue() as Button).trigger(this)
+            if (it.value is Button) {
+                if (player.location == it.key || unitManager.isUnitOnPoint(it.key)) {
+                    (it.value as Button).trigger(this)
                 } else {
-                    (it.getValue() as Button).offTrigger(this)
+                    (it.value as Button).offTrigger(this)
                 }
             }
 

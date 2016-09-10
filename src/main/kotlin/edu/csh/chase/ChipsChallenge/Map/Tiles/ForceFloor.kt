@@ -3,6 +3,7 @@ package ChipsChallenge.Map.Tiles
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.*
 import edu.csh.chase.ChipsChallenge.Engine.*
+import edu.csh.chase.ChipsChallenge.Map.*
 import java.awt.image.BufferedImage
 
 fun forceFloorImage(typeId: Int): BufferedImage {

@@ -1,7 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Map.Tiles
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.BLUE_FLOOR_TYPE_ID
+import edu.csh.chase.ChipsChallenge.Map.BLUE_FLOOR_TYPE_ID
 import ChipsChallenge.Map.Tiles.Revealable
 import edu.csh.chase.ChipsChallenge.Engine.*
 import java.awt.Color

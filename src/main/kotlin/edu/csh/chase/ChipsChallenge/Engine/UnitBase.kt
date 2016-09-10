@@ -1,19 +1,14 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.JSON.JSONObject
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.*
 import ChipsChallenge.Unit.*
-import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Unit.*
+import edu.csh.chase.kjson.Json
 import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
 import java.util.HashMap
-
-/**
- * Created by chase on 2/25/15.
- */
 
 val DEFAULT_MOVE_SPEED = 5
 
@@ -33,9 +28,9 @@ fun unitFromId(id: Int, location: Point, direction: Direction = Direction.UP): U
 
 fun unitFromJson(obj: JsonObject): UnitBase? {
     val typeId = obj.getInt("typeId")
-    val location = pointFromJson(obj.getJSONObject("location"))
+    val location = pointFromJson(obj.getJsonObject("location"))
     val direction = directionFromString(obj.getString("direction"))//Might not always be here, specifically for teeth/blob
-    val uniqueId = idFromJson(obj.getJSONObject("id"))
+    val uniqueId = idFromJson(obj.getJsonObject("id"))
     return when (typeId) {
         PINK_BALL_TYPE_ID -> PinkBall(location, direction, uniqueId)
         BUG_TYPE_ID -> Bug(location, direction, uniqueId)
@@ -78,12 +73,12 @@ abstract class UnitBase(val typeId: Int, location: Point, val moveSpeed: Int = 5
     }
 
     override fun getSaveObject(): JsonObject {
-        val obj = JSONObject()
-        obj.put("location", location.saveObject)
-        obj.put("typeId", typeId)
-        obj.put("id", uniqueId.getJson())
-        obj.put("moveSpeed", moveSpeed)
-        return obj
+        return Json(
+                "location" to location.saveObject,
+                "typeId" to typeId,
+                "id" to uniqueId.getJson(),
+                "moveSpeed" to moveSpeed
+        )
     }
 
     override fun onTick(engine: Engine) {

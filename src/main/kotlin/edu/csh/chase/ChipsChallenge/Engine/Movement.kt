@@ -1,6 +1,6 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.ForceFloor
 import ChipsChallenge.Map.Tiles.Revealable
 import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit

@@ -1,4 +1,4 @@
-package ChipsChallenge.Editor.PalletPanes
+package edu.csh.chase.ChipsChallenge.Editor.PalletPanes
 
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
@@ -17,8 +17,8 @@ class ObjectPanel(val editorPallet: EditorPallet) : JPanel() {
 
     init {
         layout = null
-        setSize(buttons.size() % editorPallet.gridSize * 32, buttons.size() / editorPallet.gridSize * 32)
-        for (z in 0..buttons.size() - 1) {
+        setSize(buttons.size % editorPallet.gridSize * 32, buttons.size / editorPallet.gridSize * 32)
+        for (z in 0..buttons.size - 1) {
             if (buttons[z] != null) {
                 add(createButton(buttons[z] as ObjectBase, z))
             }

@@ -1,14 +1,15 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
-/**
- * Created by chase on 4/27/15.
- */
-class CounterDelegate {
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
-    var counter = 0;
+class CounterDelegate : ReadOnlyProperty<Any?, Int> {
 
-    fun get(ref: Any?, property: PropertyMetadata): Int {
-        counter++;
-        return counter - 1;
+    var counter = 0
+
+    override fun getValue(thisRef: Any?, property: KProperty<*>): Int {
+        counter++
+        return counter - 1
     }
+
 }

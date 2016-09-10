@@ -10,6 +10,7 @@ import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Object.Block
 import edu.csh.chase.ChipsChallenge.Object.BlueKey
 import edu.csh.chase.ChipsChallenge.Object.Cloner
+import edu.csh.chase.kjson.Json
 import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
 
@@ -72,14 +73,14 @@ fun objectFromTypeIdWithId(typeId: Int, location: Point, id: Id,
     }
 }
 
-fun objectFromJSON(obj: JSONObject): ObjectBase? {
+fun objectFromJSON(obj: JsonObject): ObjectBase? {
     try {
         val typeId = obj.getInt("typeId")
-        val location = pointFromJson(obj.getJSONObject("location"))
-        val id = idFromJson(obj.getJSONObject("id"))
-        val template: EngineObjectBase? = if (obj.has("template")) loadTemplate(obj.getJSONObject("template")) else null
-        val targetId: Id? = if (obj.has("targetId")) idFromJson(obj.getJSONObject("targetId")) else null
-        val objUnder: ObjectBase? = (if (obj.has("objectUnder")) objectFromJSON(obj.getJSONObject("objectUnder")) else null)
+        val location = pointFromJson(obj.getJsonObject("location"))
+        val id = idFromJson(obj.getJsonObject("id"))
+        val template: EngineObjectBase? = if (obj.contains("template")) loadTemplate(obj.getJsonObject("template")) else null
+        val targetId: Id? = if (obj.contains("targetId")) idFromJson(obj.getJsonObject("targetId")) else null
+        val objUnder: ObjectBase? = (if (obj.contains("objectUnder")) objectFromJSON(obj.getJsonObject("objectUnder")) else null)
         return objectFromTypeIdWithId(typeId, location, id, template = template, target = targetId,
                 objUnder = objUnder)
     } catch(e: Exception) {
@@ -88,8 +89,8 @@ fun objectFromJSON(obj: JSONObject): ObjectBase? {
     }
 }
 
-data abstract class ObjectBase(val typeId: Int, location: Point, image: BufferedImage,
-                               val uniqueId: Id) : EngineObjectBase(location, image) {
+abstract class ObjectBase(val typeId: Int, location: Point, image: BufferedImage,
+                          val uniqueId: Id) : EngineObjectBase(location, image) {
 
     abstract fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution
 
@@ -102,13 +103,13 @@ data abstract class ObjectBase(val typeId: Int, location: Point, image: Buffered
     }
 
     override fun getSaveObject(): JsonObject {
-        val obj = JSONObject()
-        obj.put("typeId", typeId)
-        obj.put("location", location.saveObject)
-        obj.put("id", uniqueId.getJson())
-        return obj
-    }
+        return Json(
+                "typeId" to typeId,
+                "location" to location.saveObject,
+                "id" to uniqueId.getJson()
+        )
 
+    }
 
 }
 

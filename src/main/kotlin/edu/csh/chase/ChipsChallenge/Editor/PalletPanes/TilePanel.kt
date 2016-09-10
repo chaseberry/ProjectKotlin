@@ -1,11 +1,11 @@
-package ChipsChallenge.Editor.PalletPanes
+package edu.csh.chase.ChipsChallenge.Editor.PalletPanes
 
 import ChipsChallenge.Editor.EditorPallet
 import ChipsChallenge.Editor.PalletStatus
 import edu.csh.chase.ChipsChallenge.Engine.Point
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Revealable
-import ChipsChallenge.Map.tileIdToTile
+import edu.csh.chase.ChipsChallenge.Map.tileIdToTile
 import javax.swing.ImageIcon
 import javax.swing.JButton
 import javax.swing.JPanel
@@ -16,8 +16,8 @@ class TilePanel(val editorPallet: EditorPallet) : JPanel() {
 
     init {
         layout = null
-        setSize(buttons.size() % editorPallet.gridSize * 32, buttons.size() / editorPallet.gridSize * 32)
-        for (z in 0..buttons.size() - 1) {
+        setSize(buttons.size % editorPallet.gridSize * 32, buttons.size / editorPallet.gridSize * 32)
+        for (z in 0..buttons.size - 1) {
             add(createButton(buttons[z], z))
         }
         isVisible = true

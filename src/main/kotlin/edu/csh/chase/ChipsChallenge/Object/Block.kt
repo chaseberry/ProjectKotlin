@@ -1,6 +1,6 @@
 package edu.csh.chase.ChipsChallenge.Object
 
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.IceBase
 import ChipsChallenge.Map.Tiles.Wall
 import ChipsChallenge.Object.BearTrap

@@ -1,7 +1,7 @@
 package edu.csh.chase.ChipsChallenge.Unit
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import ChipsChallenge.Map.Tiles.Gravel
 import ChipsChallenge.Map.Tiles.RecessedWall
 import edu.csh.chase.ChipsChallenge.Engine.*

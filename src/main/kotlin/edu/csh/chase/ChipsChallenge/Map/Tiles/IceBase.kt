@@ -1,7 +1,7 @@
 package ChipsChallenge.Map.Tiles
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Unit.Player
 import java.awt.image.BufferedImage

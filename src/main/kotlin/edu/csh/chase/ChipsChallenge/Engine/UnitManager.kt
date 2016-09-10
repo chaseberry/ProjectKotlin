@@ -1,15 +1,11 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
-import edu.csh.chase.ChipsChallenge.Engine.Id
-import edu.csh.chase.ChipsChallenge.Engine.Tickable
-import ChipsChallenge.JSON.JSONArray
 import edu.csh.chase.ChipsChallenge.UI.Viewport
 import edu.csh.chase.ChipsChallenge.UI.pointInViewport
 import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
 import edu.csh.chase.ChipsChallenge.Unit.Tank
-import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.kjson.JsonArray
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by chase on 3/5/15.

@@ -7,8 +7,8 @@ import ChipsChallenge.Editor.PalletStatus
 import ChipsChallenge.Engine.*
 import ChipsChallenge.Map.Tiles.*
 import edu.csh.chase.ChipsChallenge.Map.blankMap
-import ChipsChallenge.Map.tileFromId
-import ChipsChallenge.Map.tileIdToTile
+import edu.csh.chase.ChipsChallenge.Map.tileFromId
+import edu.csh.chase.ChipsChallenge.Map.tileIdToTile
 import ChipsChallenge.Object.*
 import edu.csh.chase.ChipsChallenge.UI.getViewport
 import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
@@ -352,7 +352,7 @@ class Editor(x: Int, y: Int) {
         level.units.clear()
         level.objects.clear()
         level.units.addAll(unitManager)
-        level.objects.addAll(objects.objects.values())
+        level.objects.addAll(objects.objects.values)
     }
 
     fun cycleMode() {

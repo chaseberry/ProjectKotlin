@@ -1,7 +1,6 @@
-package ChipsChallenge.Map
+package edu.csh.chase.ChipsChallenge.Map
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.JSON.JSONObject
 import ChipsChallenge.Map.Tiles.*
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Map.Tiles.BlueFloor
@@ -70,16 +69,16 @@ fun tileFromId(typeId: Int, location: Point, id: Id = Id(IdType.TILE), open: Boo
     }
 }
 
-fun tileFromJson(obj: JSONObject, location: Point): Tile {
+fun tileFromJson(obj: JsonObject, location: Point): Tile {
     val typeId = obj.getInt("typeId")
-    val id = idFromJson(obj.getJSONObject("id"))
-    val open = if (obj.has("open")) obj.getBoolean("open") else false
+    val id = idFromJson(obj.getJsonObject("id"))
+    val open = obj.getBoolean("open", false)
     return tileFromId(typeId, location, id, open)
 
 }
 
-data abstract class Tile(image: BufferedImage, val tileId: Int, location: Point,
-                         val uniqueId: Id) : EngineObjectBase(location, image) {
+abstract class Tile(image: BufferedImage, val tileId: Int, location: Point,
+                    val uniqueId: Id) : EngineObjectBase(location, image) {
 
     fun typeEquals(tile: Tile): Boolean {
         return tile.tileId == tileId

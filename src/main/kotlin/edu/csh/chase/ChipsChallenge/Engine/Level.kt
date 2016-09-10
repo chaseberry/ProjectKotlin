@@ -1,35 +1,29 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
 import ChipsChallenge.Engine.EngineObjectBase
-import edu.csh.chase.ChipsChallenge.Engine.Id
-import ChipsChallenge.JSON.JSONArray
-import ChipsChallenge.JSON.JSONObject
+import ChipsChallenge.Object.Button
+import edu.csh.chase.ChipsChallenge.Map.Map
 import edu.csh.chase.ChipsChallenge.Map.mapFromJSON
 import edu.csh.chase.ChipsChallenge.Object.Block
-import ChipsChallenge.Object.Button
 import edu.csh.chase.ChipsChallenge.Object.Cloner
 import edu.csh.chase.ChipsChallenge.Unit.DirectionalUnit
-import edu.csh.chase.ChipsChallenge.Engine.*
-import edu.csh.chase.ChipsChallenge.Map.Map
-import java.util.ArrayList
+import edu.csh.chase.kjson.JsonArray
+import edu.csh.chase.kjson.JsonObject
+import java.util.*
 
-fun levelFromJson(obj: JSONObject): Level? {
-    val title = obj["title"]
-    val mapObj = obj["map"]
-    val hintText = obj["hintText"]
-    val timeLimit = obj["timeLimit"]
-    val chipCount = obj["chipCount"]
-    val requiredChips = obj["requiredChips"]
-    val playerStartObj = obj["playerStart"]
-    val unitObj = obj["units"]
-    val objectObj = obj["objects"]
-
-    if (anyNull(title, mapObj, hintText, timeLimit, chipCount, requiredChips, playerStartObj, unitObj, objectObj)) {
-        return null
-    }
+fun levelFromJson(obj: JsonObject): Level? {
+    val title = obj.getString("title") ?: return null
+    val mapObj = obj.getJsonArray("map") ?: return null
+    val hintText = obj.getString("hintText") ?: return null
+    val timeLimit = obj.getInt("timeLimit") ?: return null
+    val chipCount = obj.getInt("chipCount") ?: return null
+    val requiredChips = obj.getInt("requiredChips") ?: return null
+    val playerStartObj = obj.getJsonObject("playerStart") ?: return null
+    val unitObj = obj.getJsonArray("units") ?: return null
+    val objectObj = obj.getJsonArray("objects") ?: return null
 
     if (title !is String || hintText !is String || timeLimit !is Int || requiredChips !is Int || chipCount !is Int ||
-            playerStartObj !is JSONObject || unitObj !is JSONArray || objectObj !is JSONArray || mapObj !is JSONArray) {
+            playerStartObj !is JsonObject || unitObj !is JsonArray || objectObj !is JsonArray || mapObj !is JsonArray) {
         return null
     }
 
@@ -37,15 +31,15 @@ fun levelFromJson(obj: JSONObject): Level? {
 
     val playerStart = pointFromJson(playerStartObj)
 
-    val objects = ArrayList<ObjectBase>(unitObj.length())
-    for (z in 0..unitObj.length() - 1) {
-        val obj = objectFromJSON(unitObj.getJSONObject(z)) ?: continue
+    val objects = ArrayList<ObjectBase>(objectObj.size)
+    for (z in 0..unitObj.size - 1) {
+        val obj = objectFromJSON(objectObj.getJsonObject(z)) ?: continue
         objects.add(obj)
     }
 
-    val units = ArrayList<UnitBase>(unitObj.length())
-    for ( z in 0..unitObj.length() - 1) {
-        val unit = unitFromJson(unitObj.getJSONObject(z)) ?: continue
+    val units = ArrayList<UnitBase>(unitObj.size)
+    for (z in 0..unitObj.size - 1) {
+        val unit = unitFromJson(unitObj.getJsonObject(z)) ?: continue
         units.add(unit)
     }
 
@@ -58,16 +52,16 @@ fun anyNull(vararg args: Any?): Boolean {
 }
 
 class Level(val map: Map, val objects: ArrayList<ObjectBase>, val units: ArrayList<UnitBase>,
-            var chipCount: Int, var requiredChips: Int, val playerStart: Point, var  title: String, var hintText: String,
+            var chipCount: Int, var requiredChips: Int, val playerStart: Point, var title: String, var hintText: String,
             var timeLimit: Int) {
 
-    fun getSaveObject(): JSONObject {
-        val obj = JSONObject()
+    fun getSaveObject(): JsonObject {
+        val obj = JsonObject()
 
-        val unitArray = JSONArray()
+        val unitArray = JsonArray()
         units.forEach { unitArray.put(it.getSaveObject()) }
 
-        val objectArray = JSONArray()
+        val objectArray = JsonArray()
         objects.forEach { objectArray.put(it.getSaveObject()) }
 
         obj["title"] = title
@@ -84,7 +78,7 @@ class Level(val map: Map, val objects: ArrayList<ObjectBase>, val units: ArrayLi
 
     fun clone(): Level {
         val newMap = map.copy()
-        val newUnits = ArrayList<UnitBase>(units.size())
+        val newUnits = ArrayList<UnitBase>(units.size)
         units.forEach {
             newUnits.add(unitFromId(it.typeId, it.location.copy(), if (it is DirectionalUnit) {
                 it.direction
@@ -93,7 +87,7 @@ class Level(val map: Map, val objects: ArrayList<ObjectBase>, val units: ArrayLi
             }
             ))
         }
-        val newObjects = ArrayList<ObjectBase>(objects.size())
+        val newObjects = ArrayList<ObjectBase>(objects.size)
         objects.forEach {
             var objUnder: ObjectBase? = null
             var template: EngineObjectBase? = null

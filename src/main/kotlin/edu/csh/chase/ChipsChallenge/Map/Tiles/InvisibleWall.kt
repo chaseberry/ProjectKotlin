@@ -1,7 +1,7 @@
 package ChipsChallenge.Map.Tiles
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.INVISIBLE_WALL_ID
+import edu.csh.chase.ChipsChallenge.Map.INVISIBLE_WALL_ID
 import edu.csh.chase.ChipsChallenge.Engine.*
 import java.awt.Color
 import java.awt.image.BufferedImage

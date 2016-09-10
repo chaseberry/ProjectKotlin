@@ -2,7 +2,7 @@ package ChipsChallenge.Map.Tiles
 
 import edu.csh.chase.ChipsChallenge.Engine.Id
 import edu.csh.chase.ChipsChallenge.Engine.Point
-import ChipsChallenge.Map.Tile
+import edu.csh.chase.ChipsChallenge.Map.Tile
 import java.awt.image.BufferedImage
 
 /**

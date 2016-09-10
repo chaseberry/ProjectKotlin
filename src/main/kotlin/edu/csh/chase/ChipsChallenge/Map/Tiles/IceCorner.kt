@@ -1,10 +1,10 @@
 package ChipsChallenge.Map.Tiles;
 
 import ChipsChallenge.Engine.*
-import ChipsChallenge.Map.ICE_CORNER_LEFT_DOWN_ID
-import ChipsChallenge.Map.ICE_CORNER_LEFT_UP_ID
-import ChipsChallenge.Map.ICE_CORNER_RIGHT_DOWN_ID
-import ChipsChallenge.Map.ICE_CORNER_RIGHT_UP_ID
+import edu.csh.chase.ChipsChallenge.Map.ICE_CORNER_LEFT_DOWN_ID
+import edu.csh.chase.ChipsChallenge.Map.ICE_CORNER_LEFT_UP_ID
+import edu.csh.chase.ChipsChallenge.Map.ICE_CORNER_RIGHT_DOWN_ID
+import edu.csh.chase.ChipsChallenge.Map.ICE_CORNER_RIGHT_UP_ID
 import edu.csh.chase.ChipsChallenge.Engine.*
 import java.awt.image.BufferedImage
 
