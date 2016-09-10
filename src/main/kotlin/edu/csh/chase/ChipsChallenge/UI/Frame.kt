@@ -1,6 +1,6 @@
 package edu.csh.chase.ChipsChallenge.UI
 
-import edu.csh.chase.ChipsChallenge.UI.KeyListener
+import edu.csh.chase.ChipsChallenge.Engine.DisplayPanel
 import edu.csh.chase.ChipsChallenge.Engine.Engine
 import java.awt.Graphics
 import java.awt.event.WindowAdapter
@@ -13,6 +13,8 @@ class Frame(val engine: Engine) : JFrame() {
 
     val keyListener = KeyListener(this);
 
+    val panel = DisplayPanel()
+
     init {
         pack()
         setSize(insets.left + (32 * 9) + insets.right, insets.top + (32 * 9) + insets.bottom)
@@ -23,12 +25,13 @@ class Frame(val engine: Engine) : JFrame() {
                 println("Closed")
                 engine.gameOver()
             }
-        });
+        })
+        add(panel)
     }
 
     var image: BufferedImage? = null
         set(newImage) {
-            field = newImage
+            panel.image = newImage
             repaint()
         }
 
@@ -39,15 +42,5 @@ class Frame(val engine: Engine) : JFrame() {
     fun keyReleased(keyCode: Int) {
         engine.keyReleased(keyCode)
     }
-
-    override fun paint(graphics: Graphics) {
-        super.paint(graphics)
-        graphics.clearRect(0, 0, width, height)
-        if (image != null) {
-            graphics.drawImage(image, insets.left, insets.top, null)
-        }
-
-    }
-
 
 }
