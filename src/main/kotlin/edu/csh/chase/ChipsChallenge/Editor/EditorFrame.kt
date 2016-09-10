@@ -1,17 +1,16 @@
 package edu.csh.chase.ChipsChallenge.Editor
 
-import edu.csh.chase.ChipsChallenge.Editor.Editor
+import java.awt.Color
 import java.awt.Graphics
 import java.awt.event.*
 import java.awt.image.BufferedImage
-import javax.swing.JButton
-import javax.swing.JFrame
-import javax.swing.JTextField
-import javax.swing.WindowConstants
+import javax.swing.*
 
 class EditorFrame(val editor: Editor) : JFrame() {
 
     val chipCountTextField = JTextField()
+
+    val panel = EditorPanel()
 
     val mouseListener = object : MouseListener {
         override fun mousePressed(e: MouseEvent) {
@@ -102,22 +101,26 @@ class EditorFrame(val editor: Editor) : JFrame() {
         chipCountTextField.toolTipText = "Number of chips required to open the socket"
 
         add(chipCountTextField)
-    }
 
+        panel.setLocation(0, 0)
+        panel.setSize(9 * 32, 9 * 32)
+        panel.isVisible = true
+        add(panel)
+    }
 
     var image: BufferedImage? = null
         set(newImage) {
-            field = newImage
+            panel.image = newImage
             repaint()
         }
-
-    override fun paint(graphics: Graphics) {
-        super.paint(graphics)
-        graphics.clearRect(0, 0, 9 * 32, 9 * 32)
-        if (image != null) {
-            graphics.drawImage(image, insets.left, insets.top, null)
+    /*
+        override fun paint(graphics: Graphics) {
+            super.paint(graphics)
+            graphics.clearRect(0, 0, 9 * 32, 9 * 32)
+            if (image != null) {
+                graphics.drawImage(image, insets.left, insets.top, null)
+            }
         }
-    }
 
-
+    */
 }

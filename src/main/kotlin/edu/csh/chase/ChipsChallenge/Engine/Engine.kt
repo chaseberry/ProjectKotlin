@@ -30,7 +30,6 @@ enum class Direction {
     }
 }
 
-
 class Engine(val level: Level) {
 
     var result: EngineResult by Delegates.vetoable(EngineResult.InProgress) { desc, old, new ->
