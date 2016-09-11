@@ -72,12 +72,12 @@ class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var
         if (template is ObjectBase) {
             val temp = objectFromTypeId((template as ObjectBase).typeId, targetTile.location.copy()) ?: return
             if (temp is Block && temp.canMoveToLocation(engine, targetTile.location)) {
-                engine.objectManager.objects[targetTile.location] = temp
+                engine.objectManager.add(temp, targetTile.location)
             } else {
                 if (!engine.objectManager.isObjectAt(targetTile.location)) {
                     //TODO check to make sure chip can enter said tile
                     //TODO Disallow certain objects
-                    engine.objectManager.objects[targetTile.location] = temp
+                    engine.objectManager.add(temp, targetTile.location)
                 }
             }
         } else {
