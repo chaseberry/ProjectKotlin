@@ -154,7 +154,7 @@ class Editor(x: Int, y: Int) {
         val unit = unitManager.unitOnPoint(tileLocation)
 
         if (rotateMode ) {
-            if(unit is DirectionalUnit){
+            if (unit is DirectionalUnit) {
                 unit.rotateDirection()
             }
             return
