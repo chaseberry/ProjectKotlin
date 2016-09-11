@@ -5,9 +5,6 @@ import edu.csh.chase.ChipsChallenge.Map.Tile
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 2/28/15.
- */
 class Help(location: Point, uniqueId: Id) : Tile(helpImage, HELP_TYPE_ID, location, uniqueId) {
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
         if (interactor is Player) {

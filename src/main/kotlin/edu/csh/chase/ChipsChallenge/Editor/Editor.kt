@@ -153,16 +153,11 @@ class Editor(x: Int, y: Int) {
         }
         val obj = objects.objects[tileLocation]
         if (obj != null && obj is Cloner) {
-            val tempUnit = unitFromId(pallet.currentUnit!!.typeId, tileLocation, Direction.UP)!!
+            val tempUnit = unitFromId(pallet.currentUnit!!.typeId, tileLocation, Direction.UP)
             if (obj.template != null && tempUnit == obj.template) {
                 if (obj.template is DirectionalUnit) {
                     (obj.template!! as DirectionalUnit).rotateDirection()
-                    obj.direction = when (obj.direction) {
-                        Direction.UP -> Direction.RIGHT
-                        Direction.RIGHT -> Direction.DOWN
-                        Direction.DOWN -> Direction.LEFT
-                        Direction.LEFT -> Direction.UP
-                    }
+                    obj.direction = obj.direction.rotateRight()
                 }
             } else {
                 obj.template = tempUnit
@@ -234,6 +229,12 @@ class Editor(x: Int, y: Int) {
     }
 
     fun addObject(tileLocation: Point) {
+        if (mode == Mode.ROTATE ) {
+            val obj = objects.objects[tileLocation] ?: return
+            if (obj is Cloner) {
+                obj.direction = obj.direction.rotateRight()
+            }
+        }
         if (pallet.currentObject == null) {
             return
         }
@@ -242,16 +243,7 @@ class Editor(x: Int, y: Int) {
             if (obj is Block && pallet.currentObject !is Block && pallet.currentObject !is Cloner) {
                 obj.cover(objectFromTypeId(pallet.currentObject!!.typeId, tileLocation)!!, null)
             }
-            if (obj is Cloner && pallet.currentObject is Block) {
-                if (obj.template != null) {
-                    obj.direction = when (obj.direction) {
-                        Direction.UP -> Direction.RIGHT
-                        Direction.RIGHT -> Direction.DOWN
-                        Direction.DOWN -> Direction.LEFT
-                        Direction.LEFT -> Direction.UP
-                    }
-                    return
-                }
+            if (obj is Cloner) {
                 obj.template = objectFromTypeId(pallet.currentObject!!.typeId, tileLocation)!!
             }
             return

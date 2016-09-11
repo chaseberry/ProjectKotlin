@@ -1,6 +1,5 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
-import edu.csh.chase.ChipsChallenge.Engine.CounterDelegate
 import edu.csh.chase.kjson.Json
 import edu.csh.chase.kjson.JsonObject
 
@@ -17,13 +16,6 @@ enum class IdType(val typeInt: Int) {
         }
     }
 
-}
-
-fun idFromJson(obj: JsonObject): Id {
-    val type = obj.getInt("type") ?: throw LevelException("Invalid type parsing id $obj")
-    val id = obj.getInt("id") ?: throw LevelException("Invalid id parsing id $obj")
-
-    return Id(IdType.fromInt(type), id)
 }
 
 val uCounter: Int by CounterDelegate();

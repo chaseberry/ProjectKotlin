@@ -28,6 +28,15 @@ enum class Direction {
             Direction.RIGHT -> Direction.LEFT
         }
     }
+
+    fun rotateRight(): Direction {
+        return when (this) {
+            Direction.UP -> Direction.RIGHT
+            Direction.RIGHT -> Direction.DOWN
+            Direction.DOWN -> Direction.LEFT
+            Direction.LEFT -> Direction.UP
+        }
+    }
 }
 
 class Engine(val level: Level) {
@@ -76,7 +85,7 @@ class Engine(val level: Level) {
 
         gameTimer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                unitManager.toTypedArray().forEach { it.onTick(engine) }
+                unitManager.forEach { it.onTick(engine) }
                 map.onTick(engine)
                 player.onTick(engine)
                 objectManager.onTick(engine)

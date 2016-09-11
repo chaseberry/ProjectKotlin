@@ -69,14 +69,20 @@ class Cloner(location: Point, uniqueId: Id, var template: EngineObjectBase?, var
             Direction.RIGHT -> engine.map.getRight(location)
             Direction.DOWN -> engine.map.getDown(location)
         } ?: return
-        if (template is Block) {
-            val temp = Block(targetTile.location.copy())
-            if (temp.canMoveToLocation(engine, targetTile.location)) {
+        if (template is ObjectBase) {
+            val temp = objectFromTypeId((template as ObjectBase).typeId, targetTile.location.copy()) ?: return
+            if (temp is Block && temp.canMoveToLocation(engine, targetTile.location)) {
                 engine.objectManager.objects[targetTile.location] = temp
+            } else {
+                if (!engine.objectManager.isObjectAt(targetTile.location)) {
+                    //TODO check to make sure chip can enter said tile
+                    //TODO Disallow certain objects
+                    engine.objectManager.objects[targetTile.location] = temp
+                }
             }
         } else {
             val t = (template as UnitBase)
-            val temp = unitFromId(t.typeId, targetTile.location, if (t is DirectionalUnit) t.direction else Direction.UP)!!
+            val temp = unitFromId(t.typeId, targetTile.location, if (t is DirectionalUnit) t.direction else Direction.UP)
             if (temp.canMoveToTile(targetTile, direction, engine)) {
                 engine.unitManager.add(temp)
             }
