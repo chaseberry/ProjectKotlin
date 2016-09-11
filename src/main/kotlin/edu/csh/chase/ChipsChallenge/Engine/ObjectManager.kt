@@ -1,6 +1,5 @@
 package edu.csh.chase.ChipsChallenge.Engine
 
-import edu.csh.chase.ChipsChallenge.Engine.EngineObjectBase
 import edu.csh.chase.ChipsChallenge.Map.Tiles.IceBase
 import edu.csh.chase.ChipsChallenge.Object.Block
 import edu.csh.chase.ChipsChallenge.UI.Viewport
@@ -9,10 +8,11 @@ import edu.csh.chase.ChipsChallenge.Unit.Player
 import edu.csh.chase.kjson.JsonArray
 import java.util.*
 
-
 class ObjectManager(val engine: Engine?) : Tickable {
 
     val objects = HashMap<Point, ObjectBase>()
+
+    val addList = ArrayList<Pair<Point, ObjectBase>>()
 
     override fun onTick(engine: Engine) {
         val array = ArrayList<EngineObjectBase>(objects.values)
@@ -20,8 +20,16 @@ class ObjectManager(val engine: Engine?) : Tickable {
 
     }
 
+    fun applyChanges() {
+        addList.removeAll {
+            objects[it.first] = it.second
+            true
+        }
+
+    }
+
     fun add(obj: ObjectBase, location: Point) {
-        objects[location] = obj
+        addList.add(location to obj)
     }
 
     fun remove(newLocation: Point): ObjectBase? {

@@ -91,6 +91,11 @@ class Engine(val level: Level) {
                 objectManager.onTick(engine)
                 frame.image = buildFrameImage()
                 checkCollisions()
+
+                //
+                objectManager.applyChanges()
+                //
+
             }
         }, gameTime, gameTime)
     }

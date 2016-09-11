@@ -136,6 +136,9 @@ class Editor(x: Int, y: Int) {
             PalletStatus.TRIGGER -> applyTrigger(tileLocation)
             PalletStatus.UNIT -> updateUnit(tileLocation)
         }
+
+        objects.applyChanges()
+
         frame.image = buildFrameImage()
     }
 
