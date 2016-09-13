@@ -2,6 +2,7 @@ package edu.csh.chase.ChipsChallenge.Engine
 
 import edu.csh.chase.ChipsChallenge.Map.Tiles.IceBase
 import edu.csh.chase.ChipsChallenge.Object.Block
+import edu.csh.chase.ChipsChallenge.Object.Bomb
 import edu.csh.chase.ChipsChallenge.UI.Viewport
 import edu.csh.chase.ChipsChallenge.UI.pointInViewport
 import edu.csh.chase.ChipsChallenge.Unit.Player
@@ -84,6 +85,7 @@ class ObjectManager(val engine: Engine?) : Tickable {
         }
         //For blocks add 1 to block space, if block goes onto ice begin ice calc stuff?
         if (resolution == ObjectResolution.MOVE && obj is Block) {
+
             if (obj.objectUnder != null) {
                 val objUnder = obj.objectUnder!!
                 if (!resolveObject(objUnder, direction, interactor)) {
@@ -93,16 +95,25 @@ class ObjectManager(val engine: Engine?) : Tickable {
             } else {
                 remove(obj.location)
             }
+
             val newObjLocation = when (direction) {
                 Direction.UP -> obj.location.copy(y = obj.location.y - 1)
                 Direction.DOWN -> obj.location.copy(y = obj.location.y + 1)
                 Direction.LEFT -> obj.location.copy(x = obj.location.x - 1)
                 Direction.RIGHT -> obj.location.copy(x = obj.location.x + 1)
             }
+
+            if (objects[newObjLocation] is Bomb) {
+                remove(newObjLocation)
+                remove(obj.location)
+                return true
+            }
+
             obj.location = newObjLocation
             if (objects[newObjLocation] != null) {
                 obj.cover(objects[newObjLocation]!!, engine)
             }
+
             add(obj, newObjLocation)
             if (engine.map.getTile(newObjLocation) is IceBase) {
                 obj.forcedDirection = direction

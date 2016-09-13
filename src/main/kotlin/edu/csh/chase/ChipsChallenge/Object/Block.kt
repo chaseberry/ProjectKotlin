@@ -80,7 +80,7 @@ class Block(location: Point, uniqueId: Id, var objectUnder: ObjectBase? = null) 
     fun canMoveToLocation(engine: Engine, location: Point): Boolean {
         val tile = engine.map.getTile(location)
         val objectInSpace = engine.objectManager.objects[location]
-        if (objectInSpace != null && objectInSpace !is Button && objectInSpace !is BearTrap ||
+        if (objectInSpace != null && objectInSpace !is Button && objectInSpace !is Bomb && objectInSpace !is BearTrap ||
                 (objectUnder is BearTrap && !(objectUnder as BearTrap).isActive)) {
             return false
         }
