@@ -47,7 +47,7 @@ class Player(location: Point) : UnitBase(-1, location) {
             when (true) {
                 engine.keyBindings.up -> {
                     moveUp(engine)
-                    return;
+                    return
                 }
                 engine.keyBindings.down -> {
                     moveDown(engine)

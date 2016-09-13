@@ -12,31 +12,32 @@ class ObjectManager(val engine: Engine?) : Tickable {
 
     val objects = HashMap<Point, ObjectBase>()
 
-    val addList = ArrayList<Pair<Point, ObjectBase>>()
+    val modList = ArrayList<Modification<ObjectBase>>()
 
     override fun onTick(engine: Engine) {
         val array = ArrayList<EngineObjectBase>(objects.values)
         array.forEach { it.onTick(engine) }
-
     }
 
     fun applyChanges() {
-        addList.removeAll {
-            objects[it.first] = it.second
+        modList.removeAll {
+            if (it.type == Modification.Type.add) {
+                objects[it.item.location] = it.item
+            } else {
+                objects.remove(it.item.location)
+            }
             true
         }
 
     }
 
     fun add(obj: ObjectBase, location: Point) {
-        addList.add(location to obj)
+        modList.add(Modification(Modification.Type.add, obj))
     }
 
     fun remove(newLocation: Point): ObjectBase? {
-        if (objects.containsKey(newLocation)) {
-            return objects.remove(newLocation)
-        }
-        return null
+        return objects.remove(newLocation)
+
     }
 
     fun getById(id: Id): ObjectBase? {

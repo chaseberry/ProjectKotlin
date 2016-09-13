@@ -231,6 +231,7 @@ class Editor(x: Int, y: Int) {
         } else if (mouseBindings.mouseTwo) {
             removeObject(tileLocation)
         }
+        objects.applyChanges()
     }
 
     fun addObject(tileLocation: Point) {
@@ -263,7 +264,7 @@ class Editor(x: Int, y: Int) {
     }
 
     fun removeObject(tileLocation: Point) {
-        objects.objects.remove(tileLocation)
+        objects.remove(tileLocation)
     }
 
     fun applyTrigger(tileLocation: Point) {
