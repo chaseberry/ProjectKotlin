@@ -88,14 +88,17 @@ class Engine(val level: Level) {
                 unitManager.forEach { it.onTick(engine) }
                 map.onTick(engine)
                 player.onTick(engine)
+
                 objectManager.onTick(engine)
-                frame.image = buildFrameImage()
+                objectManager.applyChanges()
+
                 checkCollisions()
 
                 //
                 objectManager.applyChanges()
                 //
 
+                frame.image = buildFrameImage()
             }
         }, gameTime, gameTime)
     }
