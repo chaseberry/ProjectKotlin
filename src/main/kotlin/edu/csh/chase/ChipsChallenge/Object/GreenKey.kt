@@ -12,7 +12,7 @@ class GreenKey(location: Point, uniqueId: Id) : ObjectBase(GREEN_KEY_TYPE_ID, lo
         if (interactor !is Player) {
             return ObjectResolution.PASSOVER
         }
-        engine.player.inventory.hasGreenKey = true
+        interactor.inventory.hasGreenKey = true
         return ObjectResolution.REMOVE
     }
 

@@ -10,6 +10,7 @@ import edu.csh.chase.ChipsChallenge.Object.Block
 import edu.csh.chase.ChipsChallenge.UI.Frame
 import edu.csh.chase.ChipsChallenge.UI.getViewport
 import edu.csh.chase.ChipsChallenge.Unit.Player
+import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage
 import java.util.*
 import kotlin.properties.Delegates
@@ -53,11 +54,16 @@ class Engine(val level: Level) {
 
     val objectManager = ObjectManager(this)
 
-    val keyBindings = KeyBindings()
-
     val gameTimer = Timer()
 
-    val player = Player(level.playerStart)
+    //val player = Player(level.playerStart, KeyBindings())
+
+    val players = listOf(Player(level.playerStart, KeyBindings()), Player(level.playerStart, KeyBindings(
+            keyCodeDown = KeyEvent.VK_S,
+            keyCodeLeft = KeyEvent.VK_A,
+            keyCodeRight = KeyEvent.VK_D,
+            keyCodeUp = KeyEvent.VK_W
+    )))
 
     //Done so this can be passed around in the onTick method
     val engine: Engine
@@ -87,7 +93,7 @@ class Engine(val level: Level) {
             override fun run() {
                 unitManager.forEach { it.onTick(engine) }
                 map.onTick(engine)
-                player.onTick(engine)
+                players.forEach { it.onTick(engine) }
 
                 objectManager.onTick(engine)
                 objectManager.applyChanges()
@@ -112,9 +118,10 @@ class Engine(val level: Level) {
     }
 
     fun checkCollisions() {
-        if (unitManager.isUnitOnPoint(player.location)) {
-            lose()
-            return
+        players.forEach {
+            if (unitManager.isUnitOnPoint(it.location)) {
+                lose(it)
+            }
         }
 
         objectManager.objects.forEach {
@@ -125,22 +132,11 @@ class Engine(val level: Level) {
                 val waterTile = engine.map.getTile(location)!!
                 engine.map.setTile(location, Floor(location, waterTile.uniqueId))
             }
-            if (location == player.location && obj is Block) {
-                lose()
-                return
-            }
-            if (it.value is Button) {
-                if (player.location == it.key || unitManager.isUnitOnPoint(it.key)) {
-                    (it.value as Button).trigger(this)
-                } else {
-                    (it.value as Button).offTrigger(this)
-                }
-            }
-
         }
     }
 
-    fun lose() {
+    fun lose(player: Player) {
+        player.dead = true
         result = EngineResult.Defeat
         gameOver()
     }
@@ -161,7 +157,7 @@ class Engine(val level: Level) {
 
     fun buildFrameImage(): BufferedImage {
         val image = BufferedImage(9 * 32, 9 * 32, BufferedImage.TYPE_INT_ARGB)
-        val viewport = getViewport(player.location, map)
+        val viewport = getViewport(players[0].location, map)
         val mapImage = map.getImage(viewport)
         val g = image.graphics
 
@@ -179,20 +175,27 @@ class Engine(val level: Level) {
         }
 
         //Draw the player
-        val playerX = if (player.location.x <= 4 ) player.location.x else
-            if (player.location.x in (map.x - 4)..(map.x)) 9 - (map.x - player.location.x) else 4
-        val playerY = if (player.location.y <= 4 ) player.location.y else
-            if (player.location.y in (map.y - 4)..(map.y)) 9 - (map.y - player.location.y) else 4
-        g.drawImage(player.image, playerX * 32, playerY * 32, null)
+        players.forEach { player ->
+            val playerX = if (player.location.x <= 4 ) player.location.x else
+                if (player.location.x in (map.x - 4)..(map.x)) 9 - (map.x - player.location.x) else 4
+            val playerY = if (player.location.y <= 4 ) player.location.y else
+                if (player.location.y in (map.y - 4)..(map.y)) 9 - (map.y - player.location.y) else 4
+            g.drawImage(player.image, playerX * 32, playerY * 32, null)
+        }
+
         return image
     }
 
     fun keyPressed(code: Int) {
-        keyBindings.keyPressed(code)
+        players.forEach {
+            it.keyBindings.keyPressed(code)
+        }
     }
 
     fun keyReleased(code: Int) {
-        keyBindings.keyReleased(code)
+        players.forEach {
+            it.keyBindings.keyReleased(code)
+        }
     }
 
     fun teleport(interactor: UnitBase, direction: Direction, teleStart: Teleport) {

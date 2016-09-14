@@ -29,7 +29,6 @@ class ToggleWall(location: Point, uniqueId: Id, var open: Boolean = false) :
         return ToggleWall(location, uniqueId, open)
     }
 
-
     override var image: BufferedImage? = null
         get():BufferedImage? {
             return if (open) {
@@ -43,13 +42,6 @@ class ToggleWall(location: Point, uniqueId: Id, var open: Boolean = false) :
         val obj = super.getSaveObject()
         obj.put("open", open)
         return obj
-    }
-
-    override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
     }
 
     override fun onTick(engine: Engine) {

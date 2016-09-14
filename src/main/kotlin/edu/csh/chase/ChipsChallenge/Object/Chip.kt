@@ -11,7 +11,7 @@ class Chip(location: Point, uniqueId: Id) : ObjectBase(CHIP_TYPE_ID, location, c
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
         if (interactor is Player) {
-            engine.player.inventory.chipsCollected++
+            interactor.inventory.chipsCollected++
             return ObjectResolution.REMOVE
         }
         return ObjectResolution.NOTHING

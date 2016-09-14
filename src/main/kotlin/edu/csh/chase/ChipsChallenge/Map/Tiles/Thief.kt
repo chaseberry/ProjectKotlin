@@ -8,12 +8,10 @@ import edu.csh.chase.ChipsChallenge.Unit.Player
 class Thief(location: Point, uniqueId: Id) : Tile(thiefImage, THIEF_TYPE_ID, location, uniqueId) {
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
+        super.onEnter(interactor, direction, engine)
         if (interactor is Player) {
             interactor.inventory.removeBoots()
         }
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
     }
 
     constructor(location: Point) : this(location, Id(IdType.TILE)) {

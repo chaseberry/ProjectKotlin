@@ -4,8 +4,7 @@ import edu.csh.chase.ChipsChallenge.Map.Tiles.ForceFloor
 import edu.csh.chase.ChipsChallenge.Unit.PlayerInventory
 import edu.csh.chase.ChipsChallenge.Engine.*
 
-class Player(location: Point) : UnitBase(-1, location) {
-
+class Player(location: Point, val keyBindings: KeyBindings) : UnitBase(-1, location) {
 
     init {
         imageSet.put("up", loadImage("chip-north.gif"))
@@ -17,25 +16,30 @@ class Player(location: Point) : UnitBase(-1, location) {
 
     val inventory = PlayerInventory()
 
+    var dead = false
+
     override fun onTick(engine: Engine) {
+        if (dead) {
+            return
+        }
         //Force an override when on force floor
         if (engine.map.getTile(location) is ForceFloor && currentMove == 1) {
-            if (engine.keyBindings.isKeyPressed) {
+            if (keyBindings.isKeyPressed) {
                 val tile = engine.map.getTile(location) as ForceFloor
                 when (true) {
-                    engine.keyBindings.up && (Direction.UP in tile.getAllowedOverrideDirections()) -> {
+                    keyBindings.up && (Direction.UP in tile.getAllowedOverrideDirections()) -> {
                         moveUp(engine)
                         return
                     }
-                    engine.keyBindings.down && (Direction.DOWN in tile.getAllowedOverrideDirections()) -> {
+                    keyBindings.down && (Direction.DOWN in tile.getAllowedOverrideDirections()) -> {
                         moveDown(engine)
                         return
                     }
-                    engine.keyBindings.left && (Direction.LEFT in tile.getAllowedOverrideDirections()) -> {
+                    keyBindings.left && (Direction.LEFT in tile.getAllowedOverrideDirections()) -> {
                         moveLeft(engine)
                         return
                     }
-                    engine.keyBindings.right && (Direction.RIGHT in tile.getAllowedOverrideDirections()) -> {
+                    keyBindings.right && (Direction.RIGHT in tile.getAllowedOverrideDirections()) -> {
                         moveRight(engine)
                         return
                     }
@@ -45,19 +49,19 @@ class Player(location: Point) : UnitBase(-1, location) {
         super.onTick(engine)
         if (currentMove == 0) {
             when (true) {
-                engine.keyBindings.up -> {
+                keyBindings.up -> {
                     moveUp(engine)
                     return
                 }
-                engine.keyBindings.down -> {
+                keyBindings.down -> {
                     moveDown(engine)
                     return
                 }
-                engine.keyBindings.left -> {
+                keyBindings.left -> {
                     moveLeft(engine)
                     return
                 }
-                engine.keyBindings.right -> {
+                keyBindings.right -> {
                     moveRight(engine)
                     return
                 }

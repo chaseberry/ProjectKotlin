@@ -12,7 +12,7 @@ class YellowKey(location: Point, uniqueId: Id) : ObjectBase(YELLOW_KEY_TYPE_ID, 
         if (interactor !is Player) {
             return ObjectResolution.PASSOVER
         }
-        engine.player.inventory.yellowKeys++
+        interactor.inventory.yellowKeys++
         return ObjectResolution.REMOVE
     }
 

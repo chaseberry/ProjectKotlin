@@ -2,6 +2,7 @@ package edu.csh.chase.ChipsChallenge.Map
 
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Map.Tiles.*
+import edu.csh.chase.ChipsChallenge.Object.Button
 import edu.csh.chase.kjson.Json
 import edu.csh.chase.kjson.JsonObject
 import java.awt.image.BufferedImage
@@ -85,7 +86,17 @@ abstract class Tile(image: BufferedImage, val tileId: Int, location: Point,
         return Json("typeId" to tileId, "id" to uniqueId.getJson())
     }
 
-    abstract fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine);
+    open fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
+        val obj = engine.objectManager.objects[location] ?: return
+        if (obj is Button) {
+            obj.trigger(engine)
+        }
+    }
 
-    abstract fun onExit(interactor: UnitBase, direction: Direction, engine: Engine);
+    open fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
+        val obj = engine.objectManager.objects[location] ?: return
+        if (obj is Button) {
+            obj.offTrigger(engine)
+        }
+    }
 }

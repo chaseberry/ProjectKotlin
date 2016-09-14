@@ -21,13 +21,6 @@ class BlueWall(location: Point, uniqueId: Id) :
         return img
     }
 
-    override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
-    }
-
     override fun onTick(engine: Engine) {
     }
 

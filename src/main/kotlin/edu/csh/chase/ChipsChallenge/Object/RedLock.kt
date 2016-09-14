@@ -9,8 +9,8 @@ class RedLock(location: Point, uniqueId: Id) : ObjectBase(RED_LOCK_TYPE_ID, loca
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
-        if (interactor is Player && engine.player.inventory.redKeys > 0) {
-            engine.player.inventory.redKeys--
+        if (interactor is Player && interactor.inventory.redKeys > 0) {
+            interactor.inventory.redKeys--
             return ObjectResolution.REMOVE
         }
         return ObjectResolution.NOTHING

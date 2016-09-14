@@ -10,13 +10,6 @@ import edu.csh.chase.ChipsChallenge.Engine.*
 
 class Floor(location: Point, uniqueId: Id) : Tile(floorImage, FLOOR_TYPE_ID, location, uniqueId) {
 
-    override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
-    }
-
     constructor(location: Point) : this(location, Id(IdType.TILE)) {
 
     }

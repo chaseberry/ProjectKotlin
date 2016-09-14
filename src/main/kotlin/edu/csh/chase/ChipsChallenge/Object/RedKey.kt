@@ -12,7 +12,7 @@ class RedKey(location: Point, uniqueId: Id) : ObjectBase(RED_KEY_TYPE_ID, locati
         if (interactor !is Player) {
             return ObjectResolution.PASSOVER
         }
-        engine.player.inventory.redKeys++
+        interactor.inventory.redKeys++
         return ObjectResolution.REMOVE
     }
 

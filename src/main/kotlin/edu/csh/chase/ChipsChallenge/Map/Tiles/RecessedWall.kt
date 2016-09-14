@@ -19,11 +19,8 @@ class RecessedWall(location: Point, uniqueId: Id) : Tile(recessedWallImage, RECE
             }
         }
 
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
-
-    }
-
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
+        super.onEnter(interactor, direction, engine)
         if (interactor is Player) {
             open = false
         }

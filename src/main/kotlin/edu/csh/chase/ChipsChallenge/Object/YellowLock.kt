@@ -13,8 +13,8 @@ class YellowLock(location: Point, uniqueId: Id) : ObjectBase(YELLOW_LOCK_TYPE_ID
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
-        if (interactor is Player && engine.player.inventory.yellowKeys > 0) {
-            engine.player.inventory.yellowKeys--
+        if (interactor is Player && interactor.inventory.yellowKeys > 0) {
+            interactor.inventory.yellowKeys--
             return ObjectResolution.REMOVE
         }
         return ObjectResolution.NOTHING

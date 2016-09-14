@@ -3,9 +3,6 @@ package edu.csh.chase.ChipsChallenge.Object
 import edu.csh.chase.ChipsChallenge.Engine.*
 import edu.csh.chase.ChipsChallenge.Unit.Player
 
-/**
- * Created by chase on 2/27/15.
- */
 class BlueKey(location: Point, uniqueId: Id) : ObjectBase(BLUE_KEY_TYPE_ID, location, blueKeyImage, uniqueId) {
 
     constructor(location: Point) : this(location, Id(IdType.OBJECT)) {
@@ -15,7 +12,7 @@ class BlueKey(location: Point, uniqueId: Id) : ObjectBase(BLUE_KEY_TYPE_ID, loca
         if (interactor !is Player) {
             return ObjectResolution.PASSOVER
         }
-        engine.player.inventory.blueKeys++
+       interactor.inventory.blueKeys++
         return ObjectResolution.REMOVE
     }
 

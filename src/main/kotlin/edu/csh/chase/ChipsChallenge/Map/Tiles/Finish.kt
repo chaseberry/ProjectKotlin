@@ -13,9 +13,6 @@ class Finish(location: Point, uniqueId: Id) : Tile(finishImage, FINISH_TYPE_ID, 
         }
     }
 
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
-    }
-
     constructor(location: Point) : this(location, Id(IdType.TILE)) {
 
     }

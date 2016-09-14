@@ -9,14 +9,11 @@ class Fire(location: Point, uniqueId: Id) : Tile(fireImage, FIRE_TYPE_ID, locati
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
         if (!interactor.canSurviveInFire()) {
             if (interactor is Player) {
-                engine.lose()
+                engine.lose(interactor)
             } else {
                 engine.unitManager.kill(interactor)
             }
         }
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
     }
 
     constructor(location: Point) : this(location, Id(IdType.TILE)) {

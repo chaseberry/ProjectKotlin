@@ -8,16 +8,14 @@ import edu.csh.chase.ChipsChallenge.Unit.Player
 class Water(location: Point, uniqueId: Id) : Tile(waterImage, WATER_TYPE_ID, location, uniqueId) {
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
+        super.onEnter(interactor, direction, engine)
         if (!interactor.canSurviveInWater()) {
             if (interactor is Player) {
-                engine.lose()
+                engine.lose(interactor)
             } else {
                 engine.unitManager.kill(interactor)
             }
         }
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
     }
 
     constructor(location: Point) : this(location, Id(IdType.TILE)) {

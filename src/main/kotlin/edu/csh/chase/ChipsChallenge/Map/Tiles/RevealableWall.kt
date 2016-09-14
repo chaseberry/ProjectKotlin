@@ -21,13 +21,6 @@ class RevealableWall(location: Point, uniqueId: Id) :
 
     constructor(location: Point, open: Boolean = false) : this(location, Id(IdType.TILE))
 
-    override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
-    }
-
     override fun onTick(engine: Engine) {
     }
 

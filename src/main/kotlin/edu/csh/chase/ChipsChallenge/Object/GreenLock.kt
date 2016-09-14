@@ -9,7 +9,7 @@ class GreenLock(location: Point, uniqueId: Id) : ObjectBase(GREEN_LOCK_TYPE_ID, 
     }
 
     override fun interact(engine: Engine, direction: Direction, interactor: UnitBase): ObjectResolution {
-        if (interactor is Player && engine.player.inventory.hasGreenKey) {
+        if (interactor is Player && interactor.inventory.hasGreenKey) {
             return ObjectResolution.REMOVE
         }
         return ObjectResolution.NOTHING

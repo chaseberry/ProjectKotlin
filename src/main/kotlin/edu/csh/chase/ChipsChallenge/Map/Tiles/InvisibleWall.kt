@@ -19,13 +19,6 @@ class InvisibleWall(location: Point, uniqueId: Id) :
         return img
     }
 
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
-
-    }
-
-    override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-    }
-
     constructor(location: Point) : this(location, Id(IdType.TILE)) {
 
     }

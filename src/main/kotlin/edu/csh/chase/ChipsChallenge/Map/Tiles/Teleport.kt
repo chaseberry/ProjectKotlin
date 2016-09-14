@@ -7,6 +7,7 @@ import edu.csh.chase.ChipsChallenge.Engine.*
 class Teleport(location: Point, uniqueId: Id) : Tile(teleportImage, TELEPORT_TYPE_ID, location, uniqueId) {
 
     override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
+        super.onEnter(interactor, direction, engine)
         engine.teleport(interactor, direction, this)
     }
 

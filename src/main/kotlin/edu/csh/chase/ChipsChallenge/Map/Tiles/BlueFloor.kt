@@ -23,13 +23,6 @@ class BlueFloor(location: Point, uniqueId: Id) :
 
     }
 
-    override fun onEnter(interactor: UnitBase, direction: Direction, engine: Engine) {
-
-    }
-
-    override fun onExit(interactor: UnitBase, direction: Direction, engine: Engine) {
-    }
-
     override fun onTick(engine: Engine) {
     }
 

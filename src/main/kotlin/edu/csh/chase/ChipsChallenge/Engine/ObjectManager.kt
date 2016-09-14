@@ -71,7 +71,7 @@ class ObjectManager(val engine: Engine?) : Tickable {
 
         if (resolution == ObjectResolution.KILL) {
             if (interactor is Player) {
-                engine.lose()
+                engine.lose(interactor)
             } else {
                 engine.unitManager.kill(interactor)
                 remove(obj.location)
