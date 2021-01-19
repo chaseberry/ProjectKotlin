@@ -1,0 +1,19 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.4.21"
+}
+
+group 'edu.csh.chase.ChipsChallenge'
+version '0.0.1'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url "https://dl.bintray.com/chaseberry/maven"
+    }
+}
+
+dependencies {
+    compile 'edu.csh.chase.kjson:kjson:0.0.22'
+}
+
